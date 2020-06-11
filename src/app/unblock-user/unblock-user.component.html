@@ -1,0 +1,78 @@
+<div class="col-md-12 loginbg">
+  <div class="row h-100 align-items-center">
+    <div class="col-lg-5 col-md-12 mx-auto ">
+      <div class="row row-eq-height login-wrapper my-5">
+        <div class="col-lg-5 col-md-12 col-xs-12 login-left p-5 text-center  ">
+          <div class="row h-100 botmargin">
+            <div class="col-lg-12 col-xs-12 align-self-end ">
+              <img src="assets/images/zebu.jpg" alt="image">
+            </div>
+            <div class="col-md-12 col-xs-12 align-self-center welcome">
+              <h1 class="font"> Welcome<br> to <br>
+                <b>Zebull</b> </h1>
+            </div>
+          </div>
+          <!-- Footer -->
+          <footer class="page-footer font-small blue ">
+            <div class="footer-copyright text-center py-3">
+              <a class="footer-3" href="http://coearn.zebuetrade.com" target="_blank">CoEarn</a> |
+              <a class="footer-3" href="https://zebull.in/#/ordergen" target="_blank">Order Generator</a> |
+              <a class="footer-3" href="https://zebull.in/zebullDoc/" target="_blank">API Documentation</a>
+            </div>
+            <div class="footer-copyright text-center py-3">
+              <a class="footer-3" href="https://www.nseindia.com/">NSE</a> |
+              <a class="footer-3" href="https://www.bseindia.com/">BSE</a> |
+              <a class="footer-3" href="https://www.mcxindia.com/">MCX</a> |
+              <!-- <a href="http://www.mcx-sx.com/Products/Equities/Pages/Trading.aspx">MCXSX</a> | -->
+              <a class="footer-3" href="https://www.sebi.gov.in/">SEBI</a>
+              <!-- <a href="https://input.zebuetrade.com/Nest3/Trade/SysReq.jsp">System Requirement</a>  -->
+            </div>
+
+            <div class="footer-copyright text-center ">
+              <a class="footer-3" href="http://www.zebuetrade.com/terms-conditions/">Terms and Conditions</a> |
+              <a class="footer-3" href="http://www.zebuetrade.com/privacy-policy/">Security</a> |
+              <a class="footer-3" href="http://www.zebuetrade.com/disclaimer/">Risk Disclosure</a>
+            </div>
+          </footer>
+        </div>
+        <div class="col-lg-7 col-md-12 col-xs-12 login-right  p-5">
+          <div class="row h-100 marginleft">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <form [formGroup]="unblock" (ngSubmit)="unblockUser()">
+                <h1 style="font-size: 30px;">Unblock User</h1>
+                <div *ngIf="msg" class="alert-danger margin10">
+                  {{msg}}
+                </div>
+                <div class="input-regist" style="margin-top: 56px;">
+                  <input type="text" class="form-control" formControlName="userId" minlength="1" maxlength="20"
+                    id="userId" placeholder="Client ID"
+                    (input)="this.unblock.patchValue({userId:$event.target.value.toUpperCase()});" required />
+                </div>
+
+                <div class="input-regist" style="margin-top: 30px;">
+                  <input type="text" class="form-control" formControlName="pan" minlength="1" maxlength="20" id="pan"
+                    placeholder="PAN NUMBER" (input)="this.unblock.patchValue({pan:$event.target.value.toUpperCase()});"
+                    required />
+                </div>
+
+                <div class="input-regist" style="margin-top: 30px;">
+                  <input type="text" class="form-control" formControlName="email" minlength="1" maxlength="100"
+                    id="email" placeholder="Email" required />
+                </div>
+
+                <div *ngIf="notOKstat" class="alert-danger margin10">
+                  {{notOKstat}}
+                </div>
+
+                <div class="container-login100-form-btn" style="margin-top: 30px">
+                  <input class="login100-form-btn" type="submit" value="Unblock" [disabled]="unblock.invalid">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

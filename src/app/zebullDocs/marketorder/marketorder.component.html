@@ -1,0 +1,224 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+
+<div class="row" style="background: black;">
+      <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <span class="titleText">Market Order</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt; <span class="base"> BASE URL </span>&gt; + v1/placeOrder/executePlaceOrder</p><br>
+            <span class="subTitle">Method</span><br>
+            <P class="title"> Post</P>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table>
+                <tr>
+                    <th style="width: 20%;">S.NO </th>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>discqty</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Quantity</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>trading_symbol</code>
+                        <span>String</span>
+                    </td>
+                    <td>Trading Symbol</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>exch</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange(NSE or BSE or NFO or MCX)</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <code>transtype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Transaction Type (BUY or SELL)</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <code>ret</code>
+                        <span>String</span>
+                    </td>
+                    <td>Retention Type(DAY or IOC)</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <code>prctyp</code>
+                        <span>String</span>
+                    </td>
+                    <td>Price Type(L or MKT)</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <code>qty</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Quantity</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <code>price</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Price</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>
+                        <code>pCode</code>
+                        <span>stirng</span>
+                    </td>
+                    <td>Product Code(MIS)</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>
+                        <code>symbol_id</code>
+                        <span>stirng</span>
+                    </td>
+                    <td>Token</td>
+                </tr>
+
+                <tr>
+                    <td>11</td>
+                    <td>
+                        <code>complexty</code>
+                        <span>stirng</span>
+                    </td>
+                    <td>Order Type (REGULAR or CO or AMO)</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>
+                        <code>trigPrice</code>
+                        <span>Int</span>
+                    </td>
+                    <td> Price</td>
+                </tr>
+            </table><br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="cls_sub">
+            {{'{'}}
+               "discqty":"0"
+               "trading_symbol":"CRUDEOIL19APR3600CE",
+               "exch":"MCX",
+               "transtype":"B", 
+               "ret":"DAY",  
+               "prctyp":"L",
+               "qty":"2",
+               "price":"3550.00",
+               "pCode":"MIS"
+               "symbol_id":"34567":
+               "trigPrice":"00.00",
+            {{'}'}}
+    </pre>
+            <br><br>
+            <span class="subTitle">Success Response</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>stirng</span>
+                    </td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>nestOrderNumber</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Nest order number</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    <td class="b"><li>Session Expired</li><br><li>Not able to Retrieve BO PlaceOrder</li><br><li>Error Occurred
+                        :
+                        < reason></li><br><li>Trailing Tick should be multiple of tick size : [tickValue in
+                            rupees]</li>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+    <span class="s2">var jsonObj = </span>{{'{'}}
+       <span class="s2">"discqty": <span class="s3">"0",</span>
+       "exch": "MCX",
+       "trading_symbol": "CRUDEOIL19APR3600CE",
+       "nestOrderNumber": <span class="s3">"190401000000031",</span>
+       "prctyp": "L",
+       "price": <span class="s3">"750.00",</span>
+       "qty": <span class="s3">"2",</span>
+       "trading_symbol": "COPPER19JULFUT",
+       "trigPrice": <span class="s3">"00.00",</span>
+       "filledQuantity": <span class="s3">"0"</span></span>
+  {{'}'}}; 
+    <span class="s2">var pUrl = "BASE URL + URL";
+    $.ajax</span>({{'{'}}
+        <span class="s2">url: pUrl,
+        contentType: 'application/json',
+        headers: </span>{{'{'}}
+        <span class="s2">'Authorization': "authorization token"</span>
+    {{'}'}},
+        <span class="s2">type: 'post',
+        data: JSON.stringify(jsonObj),
+        crossDomain:<span class="s3">true,</span>
+        success: <span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+        <span class="s2">error: <span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+    {{'}'}});
+{{'}'}}
+</pre>
+        </div>
+    </div>
+</div>

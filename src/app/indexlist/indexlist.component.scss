@@ -1,0 +1,46 @@
+.pointer {
+    cursor: pointer !important;
+    border-bottom: solid 1px #ccc;
+}
+
+mat-list mat-list-item.only-show-on-hover {
+    color: #000;
+}
+
+.index-scroller{
+    overflow: auto;
+    position: fixed;
+    height: 87%;
+    width: 396px;
+}
+
+// div.header{
+    // background: #1f3565;
+    // color: #fff;
+    // padding-bottom: 5px;
+    // padding-top: 1px;
+// }
+
+.fsize14{
+    font-size: 14px;
+}
+::-webkit-scrollbar { /* required, although an apparent no-op */
+    color: inherit;
+  }
+  
+  .hideThumb::-webkit-scrollbar-thumb { /* we apply the style to actually hide it*/
+    display: none; 
+  }       
+  .hideThumb { /* required, although an apparent no-op */
+    background-color: white;
+  }
+
+
+//   border-bottom: solid 1px #ccc;
+//   color: rgba(0, 0, 0, 0.87);
+//   overflow: hidden;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+//   box-sizing: border-box;
+//   background: white;

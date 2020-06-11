@@ -1,0 +1,111 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: #c7c4c440;">
+    <div class="col-sm-1 col-md-1 col-lg-1">
+    </div>
+    <div class="col-lg-7 col-xs-12 col-sm-12 col-md-12 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <div>
+                <span class="titleText">Save 2FA</span>
+                <br><br>
+                <span class="subTitle">URL</span><br>
+                <p>../MobullService/v1/customer/saveAns</p><br>
+                <span class="subTitle ">Method</span><br>
+                <P class="title "> Post</P>
+                <span class="subTitle">Input Parameters</span><br><br>
+                <table class="table">
+                    <tr>
+                        <th>S.NO</th>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <code>userId</code>
+                            <span>string</span>
+                        </td>
+                        <td>User Id</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">
+                            <p style="margin-top: -91%;">2</p>
+                        </td>
+                        <td rowspan="3" valign="top">
+                            <code>ques_Ans</code>
+                            <span>string</span>
+
+                        </td>
+                        <td rowspan="3">
+                            <p>Question index1|Answer1|</p>
+                            <p> Question index1|Answer1|</p>
+                            <p>Question index3|Answer 3|</p>
+                            <p> Question 4|Answer 4|</p>
+                            <p> Question index5| Answer 5" </p>
+                    </tr>
+                </table>
+                <span class="subTitle">Example</span><br><br>
+                <pre class="table cls_pre">
+        {{'{'}}
+          "ques_Ans":"46|a|36|a|13|a|25|a|49|a"
+        {{'}'}}
+        </pre>
+                <span class="subTitle">Success Response</span><br><br>
+                <table class="table">
+                    <tr>
+                        <th>S.NO</th>
+                        <th>PARAMETERS</th>
+                        <th>RESPONSE</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <code>stat</code>
+                            <span>string</span>
+                        </td>
+                        <td>Ok</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <code>message</code>
+                            <span>string</span>
+                        </td>
+                        <td>Task Successfully Completed</td>
+                    </tr>
+                </table>
+                <h5>Question and answers saved successfully, Re-login </h5>
+
+                <span class="subTitle">Error</span><br><br>
+                <table class="table">
+                    <tr>
+                        <th>S.NO</th>
+                        <th>PARAMETERS</th>
+                        <th>RESPONSE</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <code>stat</code>
+                            <span>string</span>
+                        </td>
+                        <td>Not_Ok</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <code>emsg </code>
+                            <span>string</span>
+                        </td>
+                        <td>1)Not able to Retrieve Save Answers<br>2) Not able to save Questions and
+                            Answers<br>3)Session Expired
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-12 col-sm-12 col-md-12">
+        <div class="subTitle height height1">Sample JS</div><br>
+        <pre class="cls_pre scrip backnew">WILL BE ADDED</pre>
+    </div>
+</div>

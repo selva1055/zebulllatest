@@ -1,0 +1,154 @@
+<!-- <nav>
+  INFORMATION
+</nav>
+<br>
+<mat-grid-list cols="2" rowHeight="7:1" *ngFor="let info of securityInfo">
+  <mat-grid-tile>Contract Symbol</mat-grid-tile>
+  <mat-grid-tile>{{idx['Symbol'] == 'undefined' ? 'NA' : idx['Symbol']}}</mat-grid-tile>
+
+  <mat-grid-tile>Expiry</mat-grid-tile>
+  <mat-grid-tile>{{idx['ExpiryDte'] == 'undefined' ? 'NA' : idx['ExpiryDte'].split('-')[0]}}</mat-grid-tile>
+
+  <mat-grid-tile>Tick Size</mat-grid-tile>
+  <mat-grid-tile>{{tikPrc}}</mat-grid-tile>
+
+  <mat-grid-tile>Price Range</mat-grid-tile>
+  <mat-grid-tile>{{idx['DPR1'] == 'undefined' ? 'NA' : idx['DPR1']}} -
+    {{idx['DPR2'] == 'undefined' ? 'NA' : idx['DPR2']}}</mat-grid-tile>
+
+  <mat-grid-tile>Min Lot</mat-grid-tile>
+  <mat-grid-tile>{{idx['Blq'] == 'undefined' ? 'NA' : idx['Blq'] }}
+    {{(idx['QuantityUnit'] != 'NA' ? idx['QuantityUnit'] : '')}}</mat-grid-tile>
+
+  <mat-grid-tile>Last Trading Date</mat-grid-tile>
+  <mat-grid-tile>{{idx['LastTradingDate'] == 'undefined' ? 'NA' : idx['LastTradingDate'].split('-')[0]}}</mat-grid-tile>
+
+  <mat-grid-tile>Start Date</mat-grid-tile>
+  <mat-grid-tile>{{idx['IsuStartDate']}}</mat-grid-tile>
+
+  <mat-grid-tile>End Date</mat-grid-tile>
+  <mat-grid-tile>{{idx['IsuMaturityDate']}}</mat-grid-tile>
+
+  <mat-grid-tile>Price Quatation</mat-grid-tile>
+  <mat-grid-tile>{{idx['PriceQuatation']}} {{(idx['PriceUnits'] != 'NA' ? idx['PriceUnits'] : '')}}</mat-grid-tile>
+
+  <mat-grid-tile>Max Quantity (in Lots)</mat-grid-tile>
+  <mat-grid-tile>{{idx['MaxOrderSize']}}</mat-grid-tile>
+</mat-grid-list>
+<br>
+<div class="closebtn">
+  <button mat-raised-button (click)="closeModelBox()">Close</button>
+</div> -->
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB15">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <span class="headerType">{{info['Symbol']}}<span class="subheader">&nbsp;{{info['Exchange']}}</span></span>
+    <span class="priceheader">Price Range<span class="priceheader">&nbsp;:&nbsp;{{info['DPR1']}} - {{info['DPR2']}}</span></span>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddLR30">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderBottom">
+    <!-- &nbsp; -->
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingTop15 overflow">
+  <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 borderRigth paddMLR0">
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+      <span class="leftSide">Expiry</span>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0 ">
+      <span class="rightSide fleft">{{info['ExpiryDte'] == 'undefined' ? 'NA' : info['ExpiryDte'].split('-')[0]}}</span>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+      <span class="leftSide">Spot Price</span>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+      <span class="rightSide fleft">{{info['Spotprc']  == 'undefined' ? 'NA' : info['Spotprc']}}</span>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+      <span class="leftSide">Tick Size</span>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+      <span class="rightSide fleft">{{info['TickSize']  == 'undefined' ? 'NA' : info['TickSize']}}</span>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+      <span class="leftSide">Min Lot</span>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+      <span class="rightSide fleft">{{info['Blq'] == 'undefined' ? 'NA' : info['Blq'] }}
+        {{(info['QuantityUnit'] != 'NA' ? info['QuantityUnit'] : '')}}</span>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+      <span class="leftSide">Last Trading Date</span>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+      <span
+        class="rightSide fleft">{{info['LastTradingDate'] == 'undefined' ? 'NA' : info['LastTradingDate'].split('-')[0]}}</span>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+      <span class="leftSide">Start Date</span>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+      <span class="rightSide fleft">{{info['IsuStartDate']}}</span>
+    </div>
+   
+  </div>
+
+  <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 paddL30 paddMLR0">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="leftSide">Price Quatation</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="rightSide fright">{{info['PriceQuatation']}}
+        {{(info['PriceUnits'] != 'NA' ? info['PriceUnits'] : '')}}</span>
+    </div>
+    <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="leftSide">Price Range</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="rightSide fright">{{info['DPR1']}} - {{info['DPR2']}}</span>
+    </div> -->
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="leftSide">Max Quantity (in Lots)</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="rightSide fright">{{info['MaxOrderSize']}}</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="leftSide">Time</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="rightSide fright">{{info['LTT'].replace("/","-").replace("/","-")}}</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="leftSide">Exchange time</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="rightSide fright">{{info['LTT'].replace("/","-").replace("/","-")}}</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="leftSide">End Date</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="rightSide fright">{{info['IsuMaturityDate']}}</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="leftSide">Placed by</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+      <span class="rightSide fright">{{userId}}</span>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddLR30 paddingTop15">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderBottom">
+    <!-- &nbsp; -->
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingTop15">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 txtend">
+    <!-- <button mat-stroked-button color="primary">Primary</button> &nbsp;&nbsp; -->
+    <button mat-stroked-button class="btnClose" (click)="closeModelBox()">Close</button>
+  </div>
+</div>

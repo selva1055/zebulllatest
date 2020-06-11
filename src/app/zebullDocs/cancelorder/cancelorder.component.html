@@ -1,0 +1,134 @@
+<div class="row" style="background: black;">
+       <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <span class="titleText">Cancel Order</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt; <span class="base"> BASE URL </span>&gt; + v1/placeOrder/cancelOrder</p><br>
+            <span class="subTitle ">Method</span><br>
+            <P class="title "> Post</P>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th style="width: 37%;">KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>Exchange</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>nestOrderNumber</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Number</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>trading_symbol</code>
+                        <span>String</span>
+                    </td>
+                    <td>Symbol</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="cls_pre max">
+   {{'{'}}   
+      "exch": "MCX",
+      "nestOrderNumber": "190000000000001",
+      "trading_symbol": "CRUDEOILM19JULFUT",
+   {{'}'}}
+
+
+            </pre>
+            <span class="subTitle">Success Response</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>Result</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Nest Order Number</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td class="b"><li>Session Expired</li><br><li>Not able to Retrieve CancelOrde</li><br><li>Error Occurred :
+                        < reason></li><br><li>Invalid Order Status</li><br><li>No Data</li>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+   <span class="s2">var jsonObj = {{'{'}}</span>
+       <span class="s2">"exch": "MCX",
+       "nestOrderNumber": <span class="s3">"1900000000001",</span>
+       "trading_symbol": "CRUDEOILM19JULFUT",</span>
+   {{'}'}}; 
+   <span class="s2">var pUrl = "BASE URL + URL";
+        $.ajax</span>({{'{'}}
+        <span class="s2">url: pUrl,
+        contentType: 'application/json',
+        headers: </span>{{'{'}}
+        <span class="s2">'Authorization': "authorization token"</span>
+        {{'}'}},
+        <span class="s2">type: 'post',
+        data: JSON.stringify(jsonObj),
+        crossDomain:<span class="s3">true,</span>
+        success:  <span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+        <span class="s2">error:  <span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+   {{'}'}});
+{{'}'}}
+</pre>
+        </div>
+    </div>
+</div>

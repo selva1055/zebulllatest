@@ -1,0 +1,39 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header">
+  <div class="pers-head">MARKET STATUS</div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="lef">NSE</span>
+  </div>
+  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 marginTop">
+    <span class="rig">
+      <ng-container *ngFor="let idxnse of nscarray">
+        {{idxnse['MarketMode'] == 'Normal Market' ? idxnse['MktStatus'] : ''}}
+      </ng-container>
+    </span>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="lef">BSE</span>
+  </div>
+  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 marginTop">
+    <span class="rig">
+      <ng-container *ngFor="let idxbse of bscarray">
+        {{idxbse['MarketMode'] == 'Normal Market' ? idxbse['MktStatus'] : ''}}
+      </ng-container>
+    </span>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="lef">MCX</span>
+  </div>
+  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 marginTop">
+    <span class="rig">
+      <ng-container *ngFor="let idxmcx of mcxarray">
+        {{idxmcx['MarketMode'] == 'Normal market' ? idxmcx['MktStatus'] : ''}}
+      </ng-container>
+    </span>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header">
+  <div class="pers-head">MARKET MESSAGES</div>
+</div>

@@ -1,0 +1,33 @@
+.conv-title {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 4px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 25px;
+}
+.blubtn {
+  background: #2196f3;
+  color: white;
+}
+.btngray {
+  background-color: gray;
+  color: #fff;
+}
+.brdrline {
+  border-top: solid 1px rgba(0, 0, 0, 0.12);
+  border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+}
+.graylabel {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: gray;
+}
+input[type="number"] {
+  position: relative;
+  margin: 0px 0 0rem;
+  border: 0.5px solid #bbb;
+  padding: 0.2rem;
+}

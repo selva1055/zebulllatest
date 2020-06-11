@@ -1,0 +1,298 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+       <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;">
+        <div class="height">
+            <span class="titleText">Scrips Details</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt; <span class="base"> BASE URL </span>&gt; + v1/ScripDetails/getScripQuoteDetails</p><br>
+            <span class="subTitle ">Method</span><br>
+            <P class="title "> Post</P>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table class="market">
+                <tr>
+                    <th>S.NO </th>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>exch</code>
+                        <span>String</span>
+                    </td>
+                    <td> Exchange Name</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>symbol</code>
+                        <span>String</span>
+                    </td>
+                    <td>Scrip Token</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="cls_pre low">
+          {{'{'}}
+            "exch": "nse",
+            "symbol": "212"
+          {{'}'}}
+   </pre>
+            <br>
+            <span class="subTitle">Success Response</span><br><br>
+            <table class="cls_sub">
+                <tr>
+                    <th style="width: 17%;">S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th style="width: 51%;">RESPONSE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>stat</td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Tsymbl</td>
+                    <td>Trading symbol</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Ltp</td>
+                    <td>Last traded price (in Rs)</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>PerChange</td>
+                    <td>Percentage change</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Series</td>
+                    <td>Series</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Exp</td>
+                    <td>Expiry date</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Bqty</td>
+                    <td>Buy quantity</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Sqty</td>
+                    <td>Sell quantity</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Brate</td>
+                    <td>Buy rate (in Rs)</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Srate </td>
+                    <td>Sell rate(in Rs)</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>LTP</td>
+                    <td>Last traded price</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>LTQ</td>
+                    <td>Last trade quantity</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>LTT</td>
+                    <td>Last traded time</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>PrvClose</td>
+                    <td> Previous close</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Change </td>
+                    <td>Change(in Rs)</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>High </td>
+                    <td>High price(in Rs)</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Low</td>
+                    <td>Low price (in Rs)</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>TotalBuy</td>
+                    <td>Total buy quantity</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>TotalSell</td>
+                    <td>Total sell quantity</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>Multiplier </td>
+                    <td>Multiplier of scrip</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>TickSize</td>
+                    <td>Tick size of scrip (in paisa)</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>BodLotQty</td>
+                    <td>Bod lot qty of scrip</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>DecimalPrecision</td>
+                    <td>Decimal Precision of scrip</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>TradeVolume</td>
+                    <td>Trade volume</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>yearlyHighPrice</td>
+                    <td>Yearly high price</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>yearlyLowPrice</td>
+                    <td>Yearly Low price</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>vwapAveragePrice</td>
+                    <td>Vwap average price</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>openPrice</td>
+                    <td>Open Price</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>exchFeedTime</td>
+                    <td>Exchange feed time</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>theoreticalPrice </td>
+                    <td>Theoretical price</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>marketorderBuySize</td>
+                    <td>Market order buy size</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>optionType</td>
+                    <td> Option Type</td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>marketorderSellSize </td>
+                    <td>Market order sell size</td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>strikeprice</td>
+                    <td>Strike Price</td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>companyname</td>
+                    <td>Company name/td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td>UniqueKey </td>
+                    <td>Unique key to send to server to get scrip keys from other exchanges/td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>symbolname</td>
+                    <td>Symbol name</td>
+                </tr>
+
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>RESPONSE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">
+                        <p class="cls_p">2</p>
+                    </td>
+                    <td rowspan="3" valign="top">
+
+                        <code>Emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td rowspan="3" class="b">
+                        <li>failure</li>
+                        <li>Not able to Retrieve Show Quote</li>
+                        <li>Please select any scrip</li>
+                        <li>No data available for selected scrip</li>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+   <span class="s2">var jsonObj = </span>{{'{'}}
+        <span class="s2">"exch": "nse",
+        "symbol":<span class="s3">"212"</span></span>
+   {{'}'}}; 
+   <span class="s2">var pUrl = "BASE URL + URL";
+   $.ajax</span>({{'{'}}
+        <span class="s2">url: pUrl,
+        contentType: 'application/json',
+        headers: </span>{{'{'}}
+        <span class="s2">'Authorization': "authorization token"</span>
+        {{'}'}},
+        <span class="s2">type: 'post',
+        data:JSON.stringify(jsonObj),
+        crossDomain:<span class="s3">true,</span>
+        success:  <span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+        <span class="s2">error:  <span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+     {{'}'}});
+{{'}'}}</pre>
+        </div>
+    </div>
+</div>

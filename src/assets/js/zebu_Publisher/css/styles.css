@@ -1,0 +1,38 @@
+  zebu-button[data-transaction_type="buy"] {
+    background: url(../img/logo_buy.png) no-repeat;
+	background-size: 75px 25px;
+    padding: 0;
+    display: inline-block;
+    width: 75px;
+    height: 25px;
+    border: 0!important;
+    cursor: pointer;
+    overflow: hidden;
+    text-indent: -800px;
+}
+
+zebu-button[data-transaction_type="sell"] {
+    background: url(../img/logo_sell.png) no-repeat;
+	background-size: 75px 25px;
+    padding: 0;
+    display: inline-block;
+    width: 75px;
+    height: 25px;
+    border: 0!important;
+    cursor: pointer;
+    overflow: hidden;
+    text-indent: -800px;
+}
+
+
+button.sas-trade-button,kite-button{
+    background:url(../img/trade-button.png) no-repeat;
+    padding:0;
+    display:inline-block;
+    width: 75px;
+    height: 26px;
+    border:0!important;
+    cursor:pointer;overflow:hidden;
+    text-indent:-800px
+}
+

@@ -1,0 +1,241 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar style="font-size: 1.3rem;" class="padd0right padd0left">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: left;padding-left: 15px;line-height: 24px;">
+        <span *ngIf="nifname" class="white-space">
+          <span class="white-txt2 text-uppercase pointer fSize12" (click)="openTickDataName(nifname,'0')"
+            style="float: left;">{{nifname}}&nbsp;&nbsp;&nbsp;{{nifindexVal}}</span><br>
+          <span class="liwhite-txt fSize12" style="padding-left: 0px;"
+            [style.color]="nifindexChange < 0 ? 'red' : 'rgb(49, 209, 32)'">{{nifPer}}
+            <span [style.color]="nifindexChange < 0 ? 'red' : 'rgb(49, 209, 32)'">({{nifindexChange}}%)</span>
+          </span>
+        </span>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: right;line-height: 24px;">
+        <span *ngIf="nifname" class="white-space">
+          <span class="white-txt2 text-uppercase pointer fSize12" (click)="openTickDataName(senxname,'1')"
+            style="float:right;">{{senxname}}&nbsp;&nbsp;&nbsp;{{senxindexVal}}</span><br>
+          <span class="liwhite-txt fSize12"
+            [style.color]="nifindexChange < 0 ? 'red' : 'rgb(49, 209, 32)'">&nbsp;&nbsp;&nbsp;{{senxPer}}
+            <span [style.color]="senxindexChange < 0 ? 'red' : 'rgb(49, 209, 32)'">({{senxindexChange}}%)</span>
+          </span>
+        </span>
+      </div>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <!-- sidebar -->
+      <!-- <div class="w3-sidebar w3-bar-block side-bar-color w3-xxlarge" style="width:30px">
+        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-home"></i></a>
+        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-trash"></i></a> -->
+
+      <!-- SEARCH  -->
+      <div class="container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <div style="text-align:center">
+            <label class="priceLable">{{cur_ltp}}</label>
+            <input class="input-group-addon bordr0" type="text" style="text-transform: uppercase;"
+              [(ngModel)]="searchstock" list="dynmicUserIds" value="NIFTY"
+              (change)="OnStockSelect($event.target.value)" />
+            <datalist id="dynmicUserIds">
+              <option *ngFor="let item of totalfutstk">{{item}}</option>
+            </datalist>
+          </div><br>
+
+          <!-- Expiry -->
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-left:0%">
+            <form [formGroup]="DateForm">
+              <div class="expiry" style="text-align: center">
+                <label class="priceLable">Expiry</label>
+                <select class="form-control" id="sel1" formControlName="countryControl"
+                  style="width:175px; margin-left: 55px;">
+                  <option *ngFor="let idx of ExpiryDate;" (click)="getExpiryDate(idx)"> {{idx.display}}</option>
+                </select>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <!-- Basket -->
+      <div class="container">
+        <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3 baskerBorder" *ngIf="basketLists.length>0">
+          <div class="txt">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center paddTB2">
+              <h5>BASKET ORDERS</h5>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 baskets sideHeadPadd"
+              *ngFor="let baskOrd of basketLists;let n=index" style="transition:0.5s">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 baskets" style="padding: 0.5% 0">
+                <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6 padd0 " style="padding-left: 4px;">
+                  <span class="fSize12 bcBtn text-uppercase padd0">{{baskOrd['trading_symbol']}}</span><br>
+                  <span class="fSize10 bcBtn text-uppercase ">({{baskOrd['exch']}})</span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 padd0 baskets text-right">
+                  <span class="fSize12 bcBtn "><span class="greylabel" title="Qty / Disclosed Qty">
+                      Qty:</span> {{baskOrd['qty']}}<span></span></span>&nbsp;&nbsp;
+                  <br>
+                  <span class="fSize12 bcBtn text-uppercase">
+                    <span class="greylabel" title="Price/Trigger Price"></span>
+                    {{baskOrd['price']}}</span>&nbsp;&nbsp;<br>
+                  <span class="glyphicon glyphicon-trash dlt" style="font-size:10px"
+                    (click)="deleteSelected(n)"></span>&nbsp;&nbsp;
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                  <span class="fSize12 bcBtn text-uppercase">
+                    &nbsp;<span
+                      [class]="baskOrd['transtype'] == 'buy' ? 'buydisp' : 'selldisp'">{{baskOrd['transtype']}}</span>
+                    <span class="fSize12 bcBtn text-uppercase complhead"
+                      *ngIf="baskOrd['complexty'] != 'regular'">{{baskOrd['complexty']}}</span> &nbsp; &nbsp;
+                    <span class="fSize12 bcBtn text-uppercase complhead"
+                      *ngIf="baskOrd['complexty'] == 'regular'">{{baskOrd['pCode']}}</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center marginT12 marginB12 marginRL"
+                *ngIf="basketLists.length>0">
+                <button type="button" class="btn btn-md placeBtn" *ngIf="!this.ordreStaus" [attr.disabled]="ordreStaus"
+                  (click)="orderAlreadyPlacedConformation()">Place</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <div style="margin-top: 15px;">
+        <span style="float: left;">Zebull</span>
+        <span style="padding-left: 170px;">Option Chain</span>
+        <span class="dropdown" style="float:right;">
+          <button mat-button [matMenuTriggerFor]="menu"><i class="glyphicon glyphicon-user"
+              style="color: #fff; margin-left: 575%;"></i>&nbsp;&nbsp;{{profileName}}
+            <span class="caret"></span></button>
+          <mat-menu #menu="matMenu">
+            <a mat-button routerLink="profile">Profile</a>
+            <a mat-button routerLink="settings">Settings</a>
+            <button mat-menu-item routerLink="profile">Profile</button>
+            <button mat-menu-item routerLink="settings">Settings</button>
+            <button mat-menu-item routerLink="notification">Information</button>
+            <button mat-menu-item (click)="openNewTabCoEarn()">CoEarn</button>
+            <button mat-menu-item routerLink="/zebuodrgen" data-target="_blank">Order Generator</button>
+            <button mat-menu-item (click)="openIronGatesDoc()">API Documentation</button>
+            <button mat-menu-item (click)="showMarketStatus()">Market Status</button>
+            <button mat-menu-item (click)="openCustomerSupportDialog()">Customer Support</button>
+            <button mat-menu-item (click)="logout()">Logout &nbsp;&nbsp;<i
+                class="glyphicon glyphicon-log-out"></i></button>
+          </mat-menu>
+        </span>
+      </div>
+    </mat-toolbar>
+    <div class="table-responsive">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xsm-12 borderBox" style="padding: 0px;">
+        <div class="white-box card-4 panel-body" id="chainTbl">
+          <table id="table1" class="table table-hover nowrap" width="150%">
+            <thead>
+              <tr class="fontStyle">
+                <th colspan="8" style="background: #cccccc70; text-align: center;">CALLS</th>
+                <th colspan="2" style="background: #cccccc70 "></th>
+                <th colspan="8" style="background: #cccccc70 ">PUTS</th>
+              </tr>
+              <tr>
+                <th>Volume</th>
+                <th>OI</th>
+                <th>IV</th>
+                <th>Delta</th>
+                <th>Theta</th>
+                <th>LTP</th>
+                <th style="background : #cccccc70 ">Strike Price</th>
+                <th>LTP</th>
+                <th>Theta</th>
+                <th>Delta</th>
+                <th>IV</th>
+                <th>OI</th>
+                <th>volume</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let idx of arr3;let i = index;">
+                <td [style.background]="idx.callsstrikeprice < nearvalue ? '#f5f5ae' : '#fff'">
+                  {{idx['callstradevolume']}}
+                </td>
+                <td [style.background]="idx.callsstrikeprice < nearvalue ? '#f5f5ae' : '#fff'">{{idx['callsopenprice']}}
+                </td>
+                <td [style.background]="idx.callsstrikeprice < nearvalue ? '#f5f5ae' : '#fff'">{{idx['callDelta']}}
+                </td>
+                <td [style.background]="idx.callsstrikeprice < nearvalue ? '#f5f5ae' : '#fff'">
+                  <div class="hide-total-value">
+                    {{idx['callDelta']}}
+                  </div>
+                  <div class="btn-group btn-group-xs hide-btn-group">
+                    <span>
+                      <button type="button" class="btn  btn-xs btnwidsq1 buybtn"
+                        (click)="scripsPOrd(idx,'buy','call')">B</button>
+                      <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                        data-backdrop="static" data-keyboard="false"></button>
+                    </span>
+                    <span>
+                      <button type="button" class="btn btn-xs btnwidsq1 sellbtn1 "
+                        (click)="scripsPOrd(idx,'sell','call')">S</button>
+                      <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                        data-backdrop="static" data-keyboard="false"></button>
+                    </span>
+                  </div>
+                </td>
+                <td [style.background]="idx.callsstrikeprice < nearvalue ? '#f5f5ae' : '#fff'">
+                  {{idx['callTheta']}}</td>
+                <td [style.background]="idx.callsstrikeprice < nearvalue ? '#f5f5ae' : '#fff'">
+                  <span>{{idx['callslasttradeprice']}} </span>&nbsp;&nbsp;
+                  <span style="color:red; font-size: 11px;">{{idx['callsnetchange']}}</span>
+
+                </td>
+                <td style="background : #cccccc70; text-align: center; ">{{idx['callsstrikeprice']}}</td>
+                <td [style.background]="idx.callsstrikeprice >= nearvalue ? '#f5f5ae' : '#fff'">
+                  <span>{{idx['putslasttradeprice']}}</span>&nbsp;&nbsp;
+                  <span style="color:red; font-size: 11px;">{{idx['putsnetchange']}}</span>
+                </td>
+                <td [style.background]="idx.callsstrikeprice >= nearvalue ? '#f5f5ae' : '#fff'">{{idx['putTheta']}}
+                </td>
+                <td [style.background]="idx.callsstrikeprice >= nearvalue ? '#f5f5ae' : '#fff'">
+                  <div class="hide-total-value">
+                    {{idx['putDelta']}}
+                  </div>
+                  <div class="btn-group btn-group-xs hide-btn-group">
+                    <span>
+                      <button type="button" class="btn  btn-xs btnwidsq1 buybtn"
+                        (click)="scripsPOrd(idx,'buy','put')">B</button>
+                      <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                        data-backdrop="static" data-keyboard="false"></button>
+                    </span>
+                    <span>
+                      <button type="button" class="btn btn-xs btnwidsq1 sellbtn1 "
+                        (click)="scripsPOrd(idx,'sell','put')">S</button>
+                      <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                        data-backdrop="static" data-keyboard="false"></button>
+                    </span>
+                  </div>
+                </td>
+                <td [style.background]="idx.callsstrikeprice >= nearvalue ? '#f5f5ae' : '#fff'">
+                  {{idx['putslasttradeprice']}}</td>
+                <td [style.background]="idx.callsstrikeprice >= nearvalue ? '#f5f5ae' : '#fff'">
+                  {{idx['putsbestbuysize']}}
+                </td>
+                <td [style.background]="idx.callsstrikeprice >= nearvalue ? '#f5f5ae' : '#fff'">
+                  {{idx['putstradevolume']}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

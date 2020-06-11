@@ -1,0 +1,205 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+       <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <span class="titleText">Search Scrips</span><br>
+            <br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt;<span class="base"> BASE URL </span>&gt; + v1/exchange/getSearchDetails</p><br>
+            <span class="subTitle ">Method</span><br>
+            <P class="title ">Post</P>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table class="input">
+                <tr>
+                    <th>
+                        S.NO
+                    </th>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Symbol</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="output cls_pre">
+          {{'{'}}
+          "Symbol": "IN"
+          {{'}'}}
+</pre>
+            <br>
+            <span class="subTitle">Success Response</span><br>
+            <h5>The sample response JSON object contains below parameters</h5>
+            <table class="object">
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>decimal_precision</code>
+                        <span>float</span>
+                    </td>
+                    <td>Decimal precision</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>exch</code>
+                        <span>String</span>
+                    </td>
+                    <td>NFO</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>exchange_segment</code>
+                        <span>String</span>
+                    </td>
+                    <td>nse_fo</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <code>expiry_date</code>
+                        <span>int</span>
+                    </td>
+                    <td>2019-04-25</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <code>group_name</code>
+                        <span>String</span>
+                    </td>
+                    <td>EQ</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <code>instrument_name</code>
+                        <span>String</span>
+                    </td>
+                    <td>INFY19APR560PE</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <code>instrument_type</code>
+                        <span>String</span>
+                    </td>
+                    <td>OPTSTK</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <code>lot_size</code>
+                        <span>int</span>
+                    </td>
+                    <td>1200</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>
+                        <code>multiplier</code>
+                        <span>int</span>
+                    </td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>
+                        <code>option_type</code>
+                        <span>String</span>
+                    </td>
+                    <td>PE</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>
+                        <code>price_range_from</code>
+                        <span>int</span>
+                    </td>
+                    <td>price_range_from</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>
+                        <code>price_range_to</code>
+                        <span>int</span>
+                    </td>
+                    <td>Price range to</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>
+                        <code>strike_price</code>
+                        <span>int</span>
+                    </td>
+                    <td>56000</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>
+                        <code>symbol</code>
+                        <span>String</span>
+                    </td>
+                    <td>INFY</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>
+                        <code>tick_size</code>
+                        <span>int</span>
+                    </td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>
+                        <code>token</code>
+                        <span>int</span>
+                    </td>
+                    <td>82393</td>
+                </tr>
+                <tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+    <span class="s2">var jsonObj = </span>{{'{'}}
+        <span class="s2">"Symbol": "IN"</span>
+    {{'}'}};
+    <span class="s2">var pUrl = "BASE URL + URL";
+    $.ajax</span>({{'{'}}
+       <span class="s2">url: pUrl,
+       contentType: 'application/json',
+       headers: </span>{{'{'}}
+        <span class="s2">'Authorization': "authorization token"</span>
+       {{'}'}},
+       <span class="s2">type: 'post',
+       data:JSON.stringify(jsonObj),
+       crossDomain:<span class="s3">true,</span>
+       success: <span class="s4">function</span>( data )</span>{{'{'}}
+       {{'}'}}
+       <span class="s2">error: <span class="s4">function</span>( errorThrown )</span>{{'{'}}
+     {{'}'}}
+   {{'}'}});
+{{'}'}}
+</pre>
+        </div>
+    </div>
+</div>

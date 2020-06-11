@@ -1,0 +1,1385 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Zebu",
+		"_postman_id": "b81cfef0-2dac-0c38-c80b-4cfd84ff9099",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Encryption key",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/customer/getAPIEncpkey",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\": \"ZEBULL2\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "cefbe973-98d5-4704-ad34-6f1bd9fb8811",
+					"name": "Get Encryption",
+					"originalRequest": {
+						"url": "https://www.zebull.in/rest/MobullService/v1/customer/getAPIEncpkey",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"ZEBULL2\"\r\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "access-control-allow-credentials",
+							"key": "access-control-allow-credentials",
+							"value": "true",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"name": "access-control-allow-origin",
+							"key": "access-control-allow-origin",
+							"value": "chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "access-control-expose-headers",
+							"key": "access-control-expose-headers",
+							"value": "X-Test-2, X-Test-1",
+							"description": "Lets a server whitelist headers that browsers are allowed to access."
+						},
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "Keep-Alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "126",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 04 Mar 2020 10:35:27 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5, max=100",
+							"description": "Custom header"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Apache/2.4.29 (Ubuntu)",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 123,
+					"body": "{\"userId\":null,\"userData\":null,\"encKey\":\"OA437NTWBIPMXMJXDU8UERVNX8GEXW06\",\"apikey\":null,\"stat\":\"Ok\",\"emsg\":null,\"login\":true}"
+				}
+			]
+		},
+		{
+			"name": "Get Session ID",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/customer/getUserSID",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userId\":\"ZEBULL2\",\n  \"userData\":\"d1b48492ec2830e781a594a5185322499a9eb621358ff3225f232f4a1d3f7aed\"\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "d462de50-afd7-4a90-9833-90804fde199b",
+					"name": "Get Session ID",
+					"originalRequest": {
+						"url": "https://www.zebull.in/rest/MobullService/v1/customer/getUserSID",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\":\"ZEBULL2\",\n  \"userData\":\"d1b48492ec2830e781a594a5185322499a9eb621358ff3225f232f4a1d3f7aed\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "access-control-allow-credentials",
+							"key": "access-control-allow-credentials",
+							"value": "true",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"name": "access-control-allow-origin",
+							"key": "access-control-allow-origin",
+							"value": "chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "access-control-expose-headers",
+							"key": "access-control-expose-headers",
+							"value": "X-Test-2, X-Test-1",
+							"description": "Lets a server whitelist headers that browsers are allowed to access."
+						},
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "Keep-Alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "40",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 04 Mar 2020 10:40:57 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5, max=100",
+							"description": "Custom header"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Apache/2.4.29 (Ubuntu)",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 142,
+					"body": "{\"stat\":\"Not_Ok\",\"emsg\":\"Invalid Input\"}"
+				}
+			]
+		},
+		{
+			"name": "Place Regular Order",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/placeOrder/executePlaceOrder",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n   \"complexty\": \"regular\",\r\n    \"discqty\": \"0\",\r\n    \"exch\": \"NSE\",\r\n    \"pCode\": \"mis\",\r\n    \"prctyp\": \"L\",\r\n    \"price\": \"68.70\",\r\n    \"qty\": 1,\r\n    \"ret\": \"DAY\",\r\n    \"symbol_id\": \"212\",\r\n    \"trading_symbol\": \"ASHOKLEY-EQ\",\r\n    \"transtype\": \"BUY\",\r\n    \"trigPrice\": \"\"\r\n  }\r\n]"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Search",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/exchange/getScripForSearch",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"symbol\":\"tcs\",\n\t\"exchange\": [\"All\", \"NSE\",\"BSE\", \"CDS\", \"MCX\", \"NFO\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "MWList",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/marketWatch/fetchMWList",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "6c64ed62-38c0-4dfe-b799-0c788a5945ba",
+					"name": "MWList",
+					"originalRequest": {
+						"url": "http://13.59.180.22:8080/MobullService/marketWatch/fetchMWList",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ZEB500 4452866664",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\":\"ZEB500\"\n\t\n}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "87"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Jul 2019 12:48:16 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"stat\": \"Ok\",\n    \"values\": [\n        \"mwGrpWD\",\n        \"mwGrpVi\"\n    ],\n    \"MaxMWCount\": 30,\n    \"logindefaultmw\": \"mwGrpVi\"\n}"
+				}
+			]
+		},
+		{
+			"name": "fetchMWScrips",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/marketWatch/fetchMWScrips",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"mwName\":\"mwGrpWD\"\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "fcb8d5ef-a8c9-4bc5-949a-c3134597ffd4",
+					"name": "fetchMWScrips",
+					"originalRequest": {
+						"url": "http://13.59.180.22:8080/MobullService/marketWatch/fetchMWScrips",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ZEB500 4452866664",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"userId\":\"ZEB500\",\n\"mwName\":\"mwGrpWD\"\n}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "6379"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Jul 2019 12:49:59 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"stat\": \"Ok\",\n    \"values\": [\n        {\n            \"tcksize\": \"5\",\n            \"openinterest\": \"0\",\n            \"optiontype\": \"XX\",\n            \"BestSellPrice\": \"0.00\",\n            \"ExchSeg\": \"mcx_fo\",\n            \"defmktproval\": \"3\",\n            \"CombinedSymbol\": \"NA\",\n            \"symbolname\": \"COPPER\",\n            \"BestBuySize\": \"0\",\n            \"noMktPro\": \"1\",\n            \"mktpro\": \"1\",\n            \"high\": \"430.00\",\n            \"lasttradedtime\": \"01/01/1970 05:30:00\",\n            \"BestSellSize\": \"0\",\n            \"low\": \"429.00\",\n            \"averageprice\": \"0\",\n            \"lasttradedquantity\": \"2\",\n            \"strikeprice\": \"0.00\",\n            \"close\": \"443.15\",\n            \"Expiry\": \"31 Jul, 2019\",\n            \"TradSym\": \"COPPER19JULFUT\",\n            \"spotprice\": \"0.0\",\n            \"BestBuyPrice\": \"0.00\",\n            \"scripRemarks\": \"COPPER\",\n            \"totalbuyqty\": \"0\",\n            \"multiplier\": 1,\n            \"totalsellqty\": \"0\",\n            \"ltp\": \"429.00\",\n            \"Change\": \"-14.15\",\n            \"decimalPrecision\": 2,\n            \"token\": \"214896\",\n            \"Exchange\": \"MCX\",\n            \"Series\": \"XX\",\n            \"corporateaction\": \"NA\",\n            \"UniqueKey\": \"NA\",\n            \"PerChange\": \"-3.19\",\n            \"companyname\": \"COPPER\",\n            \"Instrument\": \"FUTCOM\",\n            \"TradeVolume\": \"0\",\n            \"bodlot\": 2500,\n            \"maxQty\": 999999999,\n            \"open\": \"430.00\",\n            \"expdate\": \"1249084799\",\n            \"discQty\": \"25\",\n            \"minQty\": 1\n        },\n        {\n            \"tcksize\": \"100\",\n            \"openinterest\": \"0\",\n            \"optiontype\": \"XX\",\n            \"BestSellPrice\": \"0.00\",\n            \"ExchSeg\": \"mcx_fo\",\n            \"defmktproval\": \"3\",\n            \"CombinedSymbol\": \"NA\",\n            \"symbolname\": \"GOLD\",\n            \"BestBuySize\": \"0\",\n            \"noMktPro\": \"1\",\n            \"mktpro\": \"1\",\n            \"high\": \"34001.00\",\n            \"lasttradedtime\": \"01/01/1970 05:30:00\",\n            \"BestSellSize\": \"0\",\n            \"low\": \"34001.00\",\n            \"averageprice\": \"0\",\n            \"lasttradedquantity\": \"1\",\n            \"strikeprice\": \"0.00\",\n            \"close\": \"34905.00\",\n            \"Expiry\": \"5 Aug, 2019\",\n            \"TradSym\": \"GOLD19AUGFUT\",\n            \"spotprice\": \"0.0\",\n            \"BestBuyPrice\": \"0.00\",\n            \"scripRemarks\": \"GOLD.995EX-AHMEDABAD\",\n            \"totalbuyqty\": \"0\",\n            \"multiplier\": 1,\n            \"totalsellqty\": \"0\",\n            \"ltp\": \"34001.00\",\n            \"Change\": \"-904.00\",\n            \"decimalPrecision\": 2,\n            \"token\": \"211817\",\n            \"Exchange\": \"MCX\",\n            \"Series\": \"XX\",\n            \"corporateaction\": \"NA\",\n            \"UniqueKey\": \"NA\",\n            \"PerChange\": \"-2.59\",\n            \"companyname\": \"GOLD.995\",\n            \"Instrument\": \"FUTCOM\",\n            \"TradeVolume\": \"0\",\n            \"bodlot\": 1,\n            \"maxQty\": 999999999,\n            \"open\": \"34001.00\",\n            \"expdate\": \"1249516799\",\n            \"discQty\": \"25\",\n            \"minQty\": 1\n        },\n        {\n            \"tcksize\": \"10\",\n            \"openinterest\": \"0\",\n            \"optiontype\": \"XX\",\n            \"BestSellPrice\": \"0.00\",\n            \"ExchSeg\": \"mcx_fo\",\n            \"defmktproval\": \"3\",\n            \"CombinedSymbol\": \"NA\",\n            \"symbolname\": \"NICKEL\",\n            \"BestBuySize\": \"0\",\n            \"noMktPro\": \"1\",\n            \"mktpro\": \"1\",\n            \"high\": \"0.00\",\n            \"lasttradedtime\": \"01/01/1970 05:30:00\",\n            \"BestSellSize\": \"0\",\n            \"low\": \"0.00\",\n            \"averageprice\": \"0\",\n            \"lasttradedquantity\": \"0\",\n            \"strikeprice\": \"0.00\",\n            \"close\": \"935.10\",\n            \"Expiry\": \"31 Jul, 2019\",\n            \"TradSym\": \"NICKEL19JULFUT\",\n            \"spotprice\": \"0.0\",\n            \"BestBuyPrice\": \"0.00\",\n            \"scripRemarks\": \"NICKEL\",\n            \"totalbuyqty\": \"0\",\n            \"multiplier\": 1,\n            \"totalsellqty\": \"0\",\n            \"ltp\": \"878.60\",\n            \"Change\": \"-56.50\",\n            \"decimalPrecision\": 2,\n            \"token\": \"214232\",\n            \"Exchange\": \"MCX\",\n            \"Series\": \"XX\",\n            \"corporateaction\": \"NA\",\n            \"UniqueKey\": \"NA\",\n            \"PerChange\": \"-6.04\",\n            \"companyname\": \"NICKEL\",\n            \"Instrument\": \"FUTCOM\",\n            \"TradeVolume\": \"0\",\n            \"bodlot\": 250,\n            \"maxQty\": 999999999,\n            \"open\": \"0.00\",\n            \"expdate\": \"1249084799\",\n            \"discQty\": \"25\",\n            \"minQty\": 1\n        },\n        {\n            \"tcksize\": \"10\",\n            \"openinterest\": \"0\",\n            \"optiontype\": \"XX\",\n            \"BestSellPrice\": \"0.00\",\n            \"ExchSeg\": \"mcx_fo\",\n            \"defmktproval\": \"3\",\n            \"CombinedSymbol\": \"NA\",\n            \"symbolname\": \"CARDAMOM\",\n            \"BestBuySize\": \"0\",\n            \"noMktPro\": \"1\",\n            \"mktpro\": \"1\",\n            \"high\": \"0.00\",\n            \"lasttradedtime\": \"01/01/1970 05:30:00\",\n            \"BestSellSize\": \"0\",\n            \"low\": \"0.00\",\n            \"averageprice\": \"0\",\n            \"lasttradedquantity\": \"0\",\n            \"strikeprice\": \"0.00\",\n            \"close\": \"3454.40\",\n            \"Expiry\": \"15 Jul, 2019\",\n            \"TradSym\": \"CARDAMOM19JULFUT\",\n            \"spotprice\": \"0.0\",\n            \"BestBuyPrice\": \"0.00\",\n            \"scripRemarks\": \"EXVANDANMEDU\",\n            \"totalbuyqty\": \"0\",\n            \"multiplier\": 1,\n            \"totalsellqty\": \"0\",\n            \"ltp\": \"2600.00\",\n            \"Change\": \"-854.40\",\n            \"decimalPrecision\": 2,\n            \"token\": \"213727\",\n            \"Exchange\": \"MCX\",\n            \"Series\": \"XX\",\n            \"corporateaction\": \"NA\",\n            \"UniqueKey\": \"NA\",\n            \"PerChange\": \"-24.73\",\n            \"companyname\": \"CARDAMOM\",\n            \"Instrument\": \"FUTCOM\",\n            \"TradeVolume\": \"0\",\n            \"bodlot\": 100,\n            \"maxQty\": 999999999,\n            \"open\": \"0.00\",\n            \"expdate\": \"1247702399\",\n            \"discQty\": \"25\",\n            \"minQty\": 1\n        },\n        {\n            \"tcksize\": \"100\",\n            \"openinterest\": \"0\",\n            \"optiontype\": \"XX\",\n            \"BestSellPrice\": \"0.00\",\n            \"ExchSeg\": \"mcx_fo\",\n            \"defmktproval\": \"3\",\n            \"CombinedSymbol\": \"NA\",\n            \"symbolname\": \"CRUDEOILM\",\n            \"BestBuySize\": \"0\",\n            \"noMktPro\": \"1\",\n            \"mktpro\": \"1\",\n            \"high\": \"0.00\",\n            \"lasttradedtime\": \"01/01/1970 05:30:00\",\n            \"BestSellSize\": \"0\",\n            \"low\": \"0.00\",\n            \"averageprice\": \"0\",\n            \"lasttradedquantity\": \"0\",\n            \"strikeprice\": \"0.00\",\n            \"close\": \"4138.00\",\n            \"Expiry\": \"19 Jul, 2019\",\n            \"TradSym\": \"CRUDEOILM19JULFUT\",\n            \"spotprice\": \"0.0\",\n            \"BestBuyPrice\": \"0.00\",\n            \"scripRemarks\": \"ExMumbaiJNPTport\",\n            \"totalbuyqty\": \"0\",\n            \"multiplier\": 1,\n            \"totalsellqty\": \"0\",\n            \"ltp\": \"3700.00\",\n            \"Change\": \"-438.00\",\n            \"decimalPrecision\": 2,\n            \"token\": \"213477\",\n            \"Exchange\": \"MCX\",\n            \"Series\": \"XX\",\n            \"corporateaction\": \"NA\",\n            \"UniqueKey\": \"NA\",\n            \"PerChange\": \"-10.58\",\n            \"companyname\": \"LightSweetCrudeOilMini\",\n            \"Instrument\": \"FUTCOM\",\n            \"TradeVolume\": \"0\",\n            \"bodlot\": 10,\n            \"maxQty\": 999999999,\n            \"open\": \"0.00\",\n            \"expdate\": \"1248047999\",\n            \"discQty\": \"25\",\n            \"minQty\": 1\n        },\n        {\n            \"tcksize\": \"1\",\n            \"openinterest\": \"0\",\n            \"optiontype\": \"CE\",\n            \"BestSellPrice\": \"0.00\",\n            \"ExchSeg\": \"mcx_fo\",\n            \"defmktproval\": \"3\",\n            \"CombinedSymbol\": \"NA\",\n            \"symbolname\": \"COPPER\",\n            \"BestBuySize\": \"0\",\n            \"noMktPro\": \"1\",\n            \"mktpro\": \"1\",\n            \"high\": \"0.00\",\n            \"lasttradedtime\": \"01/01/1970 05:30:00\",\n            \"BestSellSize\": \"0\",\n            \"low\": \"0.00\",\n            \"averageprice\": \"0\",\n            \"lasttradedquantity\": \"0\",\n            \"strikeprice\": \"410.00\",\n            \"close\": \"32.07\",\n            \"Expiry\": \"21 Aug, 2019\",\n            \"TradSym\": \"COPPER19AUG410CE\",\n            \"spotprice\": \"0.0\",\n            \"BestBuyPrice\": \"0.00\",\n            \"scripRemarks\": \"COPPER\",\n            \"totalbuyqty\": \"0\",\n            \"multiplier\": 1,\n            \"totalsellqty\": \"0\",\n            \"ltp\": \"0.00\",\n            \"Change\": \"0.00\",\n            \"decimalPrecision\": 2,\n            \"token\": \"215083\",\n            \"Exchange\": \"MCX\",\n            \"Series\": \"XX\",\n            \"corporateaction\": \"NA\",\n            \"UniqueKey\": \"NA\",\n            \"PerChange\": \"0.00\",\n            \"companyname\": \"COPPER\",\n            \"Instrument\": \"OPTFUT\",\n            \"TradeVolume\": \"0\",\n            \"bodlot\": 2500,\n            \"maxQty\": 999999999,\n            \"open\": \"0.00\",\n            \"expdate\": \"1250899199\",\n            \"discQty\": \"25\",\n            \"minQty\": 1\n        },\n        {\n            \"tcksize\": \"5\",\n            \"openinterest\": \"0\",\n            \"optiontype\": \"XX\",\n            \"BestSellPrice\": \"0.00\",\n            \"ExchSeg\": \"mcx_fo\",\n            \"defmktproval\": \"3\",\n            \"CombinedSymbol\": \"NA\",\n            \"symbolname\": \"COPPER\",\n            \"BestBuySize\": \"0\",\n            \"noMktPro\": \"1\",\n            \"mktpro\": \"1\",\n            \"high\": \"0.00\",\n            \"lasttradedtime\": \"01/01/1970 05:30:00\",\n            \"BestSellSize\": \"0\",\n            \"low\": \"0.00\",\n            \"averageprice\": \"0\",\n            \"lasttradedquantity\": \"0\",\n            \"strikeprice\": \"0.00\",\n            \"close\": \"443.60\",\n            \"Expiry\": \"30 Aug, 2019\",\n            \"TradSym\": \"COPPER19AUGFUT\",\n            \"spotprice\": \"0.0\",\n            \"BestBuyPrice\": \"0.00\",\n            \"scripRemarks\": \"COPPER\",\n            \"totalbuyqty\": \"0\",\n            \"multiplier\": 1,\n            \"totalsellqty\": \"0\",\n            \"ltp\": \"435.00\",\n            \"Change\": \"-8.60\",\n            \"decimalPrecision\": 2,\n            \"token\": \"214897\",\n            \"Exchange\": \"MCX\",\n            \"Series\": \"XX\",\n            \"corporateaction\": \"NA\",\n            \"UniqueKey\": \"NA\",\n            \"PerChange\": \"-1.94\",\n            \"companyname\": \"COPPER\",\n            \"Instrument\": \"FUTCOM\",\n            \"TradeVolume\": \"0\",\n            \"bodlot\": 2500,\n            \"maxQty\": 999999999,\n            \"open\": \"0.00\",\n            \"expdate\": \"1251676799\",\n            \"discQty\": \"25\",\n            \"minQty\": 1\n        }\n    ],\n    \"ScripCount\": 7,\n    \"indexvalues\": [\n        {\n            \"indexName\": \"SENSEX\",\n            \"indexPerChange\": \"01.03\",\n            \"indexChange\": \"410.00\",\n            \"indexVal\": \"40124.20\",\n            \"indexExch\": \"bse_cm\"\n        },\n        {\n            \"indexName\": \"Nifty 50\",\n            \"indexPerChange\": \"00.00\",\n            \"indexChange\": \"00.00\",\n            \"indexVal\": \"11588.35\",\n            \"indexExch\": \"nse_cm\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "addScripToMW",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/marketWatch/addScripToMW",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 5566327428",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mwName\":\"mwGrpeN\",\n\t\"exch\":\"NSE\",\n\t\"symbol\":\"212\"\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "18970bf5-6f7e-4daf-a9ee-398dc05c4f78",
+					"name": "addScripToMW",
+					"originalRequest": {
+						"url": "https://www.zebull.in/rest/MobullService/v1/marketWatch/addScripToMW",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer TN1SB8 5566327428",
+								"description": "",
+								"warning": ""
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mwName\":\"mwGrpeN\",\n\t\"exch\":\"NSE\",\n\t\"symbol\":\"212\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "access-control-allow-credentials",
+							"key": "access-control-allow-credentials",
+							"value": "true",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"name": "access-control-allow-origin",
+							"key": "access-control-allow-origin",
+							"value": "chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "access-control-expose-headers",
+							"key": "access-control-expose-headers",
+							"value": "X-Test-2, X-Test-1",
+							"description": "Lets a server whitelist headers that browsers are allowed to access."
+						},
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "Keep-Alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "32",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 04 Mar 2020 11:31:40 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5, max=100",
+							"description": "Custom header"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Apache/2.4.29 (Ubuntu)",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 153,
+					"body": "{\"stat\":\"Ok\",\"Result\":\"success\"}"
+				}
+			]
+		},
+		{
+			"name": "deleteMWScrip",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/marketWatch/deleteMWScrip",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 5566327428",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mwName\":\"mwGrpeN\",\n\t\"exch\":\"NSE\",\n\t\"symbol\":\"212\"\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "3fe23cdd-3fa9-45f6-87a7-d0136fcfb1dd",
+					"name": "deleteMWScrip",
+					"originalRequest": {
+						"url": "https://www.zebull.in/rest/MobullService/v1/marketWatch/deleteMWScrip",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer TN1SB8 5566327428",
+								"description": "",
+								"warning": ""
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mwName\":\"mwGrpeN\",\n\t\"exch\":\"NSE\",\n\t\"symbol\":\"212\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "access-control-allow-credentials",
+							"key": "access-control-allow-credentials",
+							"value": "true",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"name": "access-control-allow-origin",
+							"key": "access-control-allow-origin",
+							"value": "chrome-extension://fhbjgbiflinjbdggehcddcbncdddomop",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "access-control-expose-headers",
+							"key": "access-control-expose-headers",
+							"value": "X-Test-2, X-Test-1",
+							"description": "Lets a server whitelist headers that browsers are allowed to access."
+						},
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "Keep-Alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "32",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Wed, 04 Mar 2020 12:08:17 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "keep-alive",
+							"key": "keep-alive",
+							"value": "timeout=5, max=100",
+							"description": "Custom header"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Apache/2.4.29 (Ubuntu)",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 166,
+					"body": "{\"stat\":\"Ok\",\"Result\":\"success\"}"
+				}
+			]
+		},
+		{
+			"name": "getScripDetails",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/ScripDetails/getScripQuoteDetails",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 5566327428",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"exch\":\"NSE\",\n\t\"symbol\":\"212\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Place Bracket Order",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/placeOrder/executePlaceOrder",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"complexty\": \"bo\",\r\n    \"discqty\": \"0\",\r\n    \"exch\": \"NSE\",\r\n    \"pCode\": \"mis\",\r\n    \"prctyp\": \"L\",\r\n    \"price\": \"61\",\r\n    \"qty\": 1,\r\n    \"ret\": \"DAY\",\r\n    \"stopLoss\": 1,\r\n    \"symbol_id\": \"212\",\r\n    \"target\": 1,\r\n    \"trading_symbol\": \"ASHOKLEY-EQ\",\r\n    \"trailing_stop_loss\": 20,\r\n    \"transtype\": \"buy\",\r\n    \"trigPrice\": \"\"\r\n  }\r\n]"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "9c7c975a-e915-452e-b7c5-3ac6039d840e",
+					"name": "Place Bracket Order",
+					"originalRequest": {
+						"url": "http://13.59.180.22:8080/MobullService/placeOrder/executePlaceOrder",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ZEB500 7756465953",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"complexty\": \"bo\",\r\n    \"discqty\": \"0\",\r\n    \"emsg\": null,\r\n    \"exch\": \"MCX\",\r\n    \"id\": null,\r\n    \"instrument\": \"COPPER\",\r\n    \"link\": null,\r\n    \"master_id\": 0,\r\n    \"pCode\": \"mis\",\r\n    \"prctyp\": \"L\",\r\n    \"price\": \"429.00\",\r\n    \"qty\": 1,\r\n    \"ret\": \"DAY\",\r\n    \"stopLoss\": 10,\r\n    \"symbol_id\": \"214896\",\r\n    \"target\": 10,\r\n    \"trading_symbol\": \"COPPER19JULFUT\",\r\n    \"trailing_stop_loss\": 5,\r\n    \"transtype\": \"buy\",\r\n    \"trigPrice\": \"\",\r\n    \"userId\": \"ZEB500\",\r\n    \"userSessionID\": \"3943835983\",\r\n    \"userSettingDto\": {\r\n      \"stat_DFlogin\": null,\r\n      \"exch\": [\r\n        \"MCX\"\r\n      ],\r\n      \"prctyp\": [\r\n        \"L\",\r\n        \"MKT\",\r\n        \"SL\",\r\n        \"SL-M\"\r\n      ],\r\n      \"pCode\": [\r\n        \"BO\",\r\n        \"CNC\",\r\n        \"CO\",\r\n        \"MIS\",\r\n        \"NRML\"\r\n      ],\r\n      \"s_prdt_ali\": \"BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\",\r\n      \"sTransFlg\": \"NO\",\r\n      \"default_market_watch_name\": \"mwGrpVi\",\r\n      \"broker_name\": \"ALICEBLUE\",\r\n      \"branch_id\": \"HO\",\r\n      \"market_watch_count\": \"30\",\r\n      \"email\": \"ramesh@zebuetrade.com\",\r\n      \"weblink\": [\r\n        {\r\n          \"Secure\": \"Y\",\r\n          \"name\": \"PayIn\",\r\n          \"url\": \"https://input.zebuetrade.com/PaymentGateway/Main/Hold_Funds.jsp\"\r\n        },\r\n        {\r\n          \"Secure\": \"Y\",\r\n          \"name\": \"PayOut\",\r\n          \"url\": \"https://input.zebuetrade.com/PaymentGateway/Main/PayOut.jsp\"\r\n        }\r\n      ],\r\n      \"account_id\": \"ZEB500\",\r\n      \"exchDeatil\": {\r\n        \"COMMODITY\": [\r\n          {\r\n            \"product\": [\r\n              \"BO\",\r\n              \"CO\",\r\n              \"MIS\",\r\n              \"NRML\"\r\n            ],\r\n            \"exchseg\": \"mcx_fo\",\r\n            \"exch\": \"MCX\"\r\n          }\r\n        ]\r\n      },\r\n      \"lots_weight\": \"N\",\r\n      \"password_special_character\": \"N\",\r\n      \"accountName\": \"ZEB500\",\r\n      \"userPrivileges\": \"all\",\r\n      \"ySXorderEntry\": \"NO\",\r\n      \"criteriaAttribute_array\": null,\r\n      \"emsg_DFlogin\": null\r\n    }\r\n  }\r\n]"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Jul 2019 10:07:09 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"stat\": \"Ok\",\n        \"nestOrderNumber\": \"190715000000010\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Place market Order",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/placeOrder/executePlaceOrder",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"complexty\": \"regular\",\r\n    \"discqty\": \"0\",\r\n    \"exch\": \"NSE\",\r\n    \"pCode\": \"mis\",\r\n    \"prctyp\": \"MKT\",\r\n    \"price\": \"\",\r\n    \"qty\": 1,\r\n    \"ret\": \"DAY\",\r\n    \"symbol_id\": \"212\",\r\n    \"trading_symbol\": \"ASHOKLEY-EQ\",\r\n    \"transtype\": \"BUY\",\r\n    \"trigPrice\": \"\"\r\n  }\r\n]"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "7ac782b5-37e3-42ed-9300-b8d8d04f112a",
+					"name": "Place market Order",
+					"originalRequest": {
+						"url": "http://13.59.180.22:8080/MobullService/placeOrder/executePlaceOrder",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ZEB500 7756465953",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"complexty\": \"regular\",\r\n    \"discqty\": \"0\",\r\n    \"exch\": \"MCX\",\r\n    \"instrument\": \"COPPER\",\r\n    \"master_id\": 0,\r\n    \"pCode\": \"mis\",\r\n    \"prctyp\": \"MKT\",\r\n    \"price\": \"\",\r\n    \"qty\": 1,\r\n    \"ret\": \"DAY\",\r\n    \"stopLoss\": \"\",\r\n    \"symbol_id\": \"214896\",\r\n    \"target\": \"\",\r\n    \"trading_symbol\": \"COPPER19JULFUT\",\r\n    \"trailing_stop_loss\": \"\",\r\n    \"transtype\": \"buy\",\r\n    \"trigPrice\": \"\",\r\n    \"userId\": \"ZEB500\",\r\n    \"userSessionID\": \"3943835983\",\r\n    \"userSettingDto\": {\r\n      \"stat_DFlogin\": null,\r\n      \"exch\": [\r\n        \"MCX\"\r\n      ],\r\n      \"prctyp\": [\r\n        \"L\",\r\n        \"MKT\",\r\n        \"SL\",\r\n        \"SL-M\"\r\n      ],\r\n      \"pCode\": [\r\n        \"BO\",\r\n        \"CNC\",\r\n        \"CO\",\r\n        \"MIS\",\r\n        \"NRML\"\r\n      ],\r\n      \"s_prdt_ali\": \"BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\",\r\n      \"sTransFlg\": \"NO\",\r\n      \"default_market_watch_name\": \"mwGrpVi\",\r\n      \"broker_name\": \"ALICEBLUE\",\r\n      \"branch_id\": \"HO\",\r\n      \"market_watch_count\": \"30\",\r\n      \"email\": \"ramesh@zebuetrade.com\",\r\n      \"weblink\": [\r\n        {\r\n          \"Secure\": \"Y\",\r\n          \"name\": \"PayIn\",\r\n          \"url\": \"https://input.zebuetrade.com/PaymentGateway/Main/Hold_Funds.jsp\"\r\n        },\r\n        {\r\n          \"Secure\": \"Y\",\r\n          \"name\": \"PayOut\",\r\n          \"url\": \"https://input.zebuetrade.com/PaymentGateway/Main/PayOut.jsp\"\r\n        }\r\n      ],\r\n      \"account_id\": \"ZEB500\",\r\n      \"exchDeatil\": {\r\n        \"COMMODITY\": [\r\n          {\r\n            \"product\": [\r\n              \"BO\",\r\n              \"CO\",\r\n              \"MIS\",\r\n              \"NRML\"\r\n            ],\r\n            \"exchseg\": \"mcx_fo\",\r\n            \"exch\": \"MCX\"\r\n          }\r\n        ]\r\n      },\r\n      \"lots_weight\": \"N\",\r\n      \"password_special_character\": \"N\",\r\n      \"accountName\": \"ZEB500\",\r\n      \"userPrivileges\": \"all\",\r\n      \"ySXorderEntry\": \"NO\",\r\n      \"criteriaAttribute_array\": null,\r\n      \"emsg_DFlogin\": null\r\n    }\r\n  }\r\n]"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "42"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Jul 2019 10:07:53 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"stat\": \"Ok\",\n        \"NOrdNo\": \"190715000000011\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "OrderBook",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/marketWatch/fetchMWScrips",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"userId\": \"CT9696\",\n\"mwName\": \"mwGrpAt\"\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "770c67bf-eb84-4474-9f03-b00cc518e244",
+					"name": "OrderBook",
+					"originalRequest": {
+						"url": "http://13.59.180.22:8080/MobullService/placeOrder/fetchOrderBook",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ZEB500 7756465953",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"ZEB500\",\r\n  \"userSessionID\": \"3943835983\",\r\n  \"userSettingDto\": {\r\n    \"stat_DFlogin\": null,\r\n    \"exch\": [\r\n      \"MCX\"\r\n    ],\r\n    \"prctyp\": [\r\n      \"L\",\r\n      \"MKT\",\r\n      \"SL\",\r\n      \"SL-M\"\r\n    ],\r\n    \"pCode\": [\r\n      \"BO\",\r\n      \"CNC\",\r\n      \"CO\",\r\n      \"MIS\",\r\n      \"NRML\"\r\n    ],\r\n    \"s_prdt_ali\": \"BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\",\r\n    \"sTransFlg\": \"NO\",\r\n    \"default_market_watch_name\": \"mwGrpVi\",\r\n    \"broker_name\": \"ALICEBLUE\",\r\n    \"branch_id\": \"HO\",\r\n    \"market_watch_count\": \"30\",\r\n    \"email\": \"ramesh@zebuetrade.com\",\r\n    \"weblink\": [\r\n      {\r\n        \"Secure\": \"Y\",\r\n        \"name\": \"PayIn\",\r\n        \"url\": \"https://input.zebuetrade.com/PaymentGateway/Main/Hold_Funds.jsp\"\r\n      },\r\n      {\r\n        \"Secure\": \"Y\",\r\n        \"name\": \"PayOut\",\r\n        \"url\": \"https://input.zebuetrade.com/PaymentGateway/Main/PayOut.jsp\"\r\n      }\r\n    ],\r\n    \"account_id\": \"ZEB500\",\r\n    \"exchDeatil\": {\r\n      \"COMMODITY\": [\r\n        {\r\n          \"product\": [\r\n            \"BO\",\r\n            \"CO\",\r\n            \"MIS\",\r\n            \"NRML\"\r\n          ],\r\n          \"exchseg\": \"mcx_fo\",\r\n          \"exch\": \"MCX\"\r\n        }\r\n      ]\r\n    },\r\n    \"lots_weight\": \"N\",\r\n    \"password_special_character\": \"N\",\r\n    \"accountName\": \"ZEB500\",\r\n    \"userPrivileges\": \"all\",\r\n    \"ySXorderEntry\": \"NO\",\r\n    \"criteriaAttribute_array\": null,\r\n    \"emsg_DFlogin\": null\r\n  }\r\n}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Jul 2019 10:07:34 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Prc\": \"429.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"137618\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"5\",\n        \"Prctype\": \"L\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"COPPER\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"BO\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"2500\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"COPPER19JULFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"31 Jul, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249084799\",\n        \"Nstordno\": \"190715000000010\",\n        \"OrderedTime\": \"15/07/2019 15:37:13\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:68357.25, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"COPPER\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 15:37:12\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"214896\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"1.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563185233\n    },\n    {\n        \"Prc\": \"34001.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"087729\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"100\",\n        \"Prctype\": \"L\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"GOLD\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"MIS\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"1\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"GOLD19AUGFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"5 Aug, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249516799\",\n        \"Nstordno\": \"190715000000009\",\n        \"OrderedTime\": \"15/07/2019 15:36:47\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:18892.15, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"GOLD.995\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 15:36:46\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"211817\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"100.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563185207\n    },\n    {\n        \"Prc\": \"00.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"318148\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"5\",\n        \"Prctype\": \"MKT\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"COPPER\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"MIS\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"2500\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"COPPER19JULFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"31 Jul, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249084799\",\n        \"Nstordno\": \"190715000000008\",\n        \"OrderedTime\": \"15/07/2019 15:12:40\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:7050.23, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"COPPER\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 15:12:39\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"214896\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"1.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563183760\n    },\n    {\n        \"Prc\": \"429.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"801695\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"5\",\n        \"Prctype\": \"L\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"COPPER\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"BO\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"2500\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"COPPER19JULFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"31 Jul, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249084799\",\n        \"Nstordno\": \"190715000000007\",\n        \"OrderedTime\": \"15/07/2019 15:08:59\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:68357.25, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"COPPER\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 15:08:58\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"214896\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"1.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563183539\n    },\n    {\n        \"Prc\": \"34001.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"561483\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"100\",\n        \"Prctype\": \"L\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"GOLD\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"MIS\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"1\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"GOLD19AUGFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"5 Aug, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249516799\",\n        \"Nstordno\": \"190715000000006\",\n        \"OrderedTime\": \"15/07/2019 15:05:40\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:18892.15, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"GOLD.995\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 15:05:39\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"211817\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"100.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563183340\n    },\n    {\n        \"Prc\": \"00.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"126430\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"5\",\n        \"Prctype\": \"MKT\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"COPPER\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"MIS\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"2500\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"COPPER19JULFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"31 Jul, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249084799\",\n        \"Nstordno\": \"190715000000005\",\n        \"OrderedTime\": \"15/07/2019 15:02:37\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:7050.23, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"COPPER\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 15:02:35\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"214896\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"1.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563183157\n    },\n    {\n        \"Prc\": \"429.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"228509\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"5\",\n        \"Prctype\": \"L\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"COPPER\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"BO\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"2500\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"COPPER19JULFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"31 Jul, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249084799\",\n        \"Nstordno\": \"190715000000004\",\n        \"OrderedTime\": \"15/07/2019 14:58:34\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:68357.25, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"COPPER\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 14:58:33\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"214896\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"1.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563182914\n    },\n    {\n        \"Prc\": \"34001.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"701979\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"100\",\n        \"Prctype\": \"L\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"GOLD\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"MIS\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"1\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"GOLD19AUGFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"5 Aug, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249516799\",\n        \"Nstordno\": \"190715000000003\",\n        \"OrderedTime\": \"15/07/2019 13:00:26\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:18892.15, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"GOLD.995\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 13:00:23\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"211817\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"100.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563175826\n    },\n    {\n        \"Prc\": \"34001.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"483399\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"100\",\n        \"Prctype\": \"L\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"GOLD\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"MIS\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"1\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"GOLD19AUGFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"5 Aug, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249516799\",\n        \"Nstordno\": \"190715000000002\",\n        \"OrderedTime\": \"15/07/2019 12:59:52\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:18892.15, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"GOLD.995\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 12:59:52\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"211817\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"100.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563175792\n    },\n    {\n        \"Prc\": \"34001.00\",\n        \"RequestID\": \"1\",\n        \"Cancelqty\": 0,\n        \"discQtyPerc\": \"25\",\n        \"Mktpro\": \"NA\",\n        \"defmktproval\": \"3\",\n        \"optionType\": \"XX\",\n        \"usecs\": \"126981\",\n        \"mpro\": \"1\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"Unfilledsize\": 0,\n        \"Usercomments\": \"NA\",\n        \"ticksize\": \"100\",\n        \"Prctype\": \"L\",\n        \"Status\": \"rejected\",\n        \"Minqty\": 0,\n        \"Sym\": \"GOLD\",\n        \"multiplier\": \"1\",\n        \"Exseg\": \"mcx_fo\",\n        \"ExchOrdID\": \"NA\",\n        \"ExchConfrmtime\": \"--\",\n        \"SyomOrderId\": \"\",\n        \"Pcode\": \"MIS\",\n        \"Dscqty\": 0,\n        \"Exchange\": \"MCX\",\n        \"Ordvaldate\": \"NA\",\n        \"accountId\": \"ZEB500\",\n        \"exchangeuserinfo\": \"111111111111010\",\n        \"Avgprc\": \"00.00\",\n        \"Trgprc\": \"00.00\",\n        \"Trantype\": \"B\",\n        \"bqty\": \"1\",\n        \"Fillshares\": 0,\n        \"Trsym\": \"GOLD19AUGFUT\",\n        \"AlgoCategory\": \"NA\",\n        \"strikePrice\": \"00.00\",\n        \"sipindicator\": \"N\",\n        \"AlgoID\": \"NA\",\n        \"reporttype\": \"failure\",\n        \"noMktPro\": \"1\",\n        \"BrokerClient\": \"--\",\n        \"decprec\": \"2\",\n        \"ExpDate\": \"5 Aug, 2019\",\n        \"COPercentage\": 0,\n        \"marketprotectionpercentage\": \"--\",\n        \"ExpSsbDate\": \"1249516799\",\n        \"Nstordno\": \"190715000000001\",\n        \"OrderedTime\": \"15/07/2019 12:10:06\",\n        \"modifiedBy\": \"--\",\n        \"RejReason\": \"RMS:Margin Exceeds,Required:18892.15, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"Scripname\": \"GOLD.995\",\n        \"stat\": \"Ok\",\n        \"orderentrytime\": \"Jul 15 2019 12:10:05\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"panNo\": \"AOXXX9632A\",\n        \"RefLmtPrice\": 0,\n        \"PriceNumerator\": \"1.0000\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"token\": \"211817\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"Validity\": \"DAY\",\n        \"series\": \"XX\",\n        \"InstName\": \"FUTCOM\",\n        \"GeneralNumerator\": \"100.0000\",\n        \"user\": \"ZEB500\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1563172806\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "OrderHistory",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/placeOrder/orderHistory",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nestOrderNumber\": \"190715000000011\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "ce8c0e38-042c-4a44-824f-586cdf9045a4",
+					"name": "OrderHistory",
+					"originalRequest": {
+						"url": "http://13.59.180.22:8080/MobullService/placeOrder/orderHistory",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer ZEB500 4452866664",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"ZEB500\",\r\n  \"nestOrderNumber\": \"190715000000011\",\r\n  \"userSessionID\": \"4452866664\",\r\n  \"userSettingDto\": {\r\n    \"stat_DFlogin\": null,\r\n    \"exch\": [\r\n      \"MCX\"\r\n    ],\r\n    \"prctyp\": [\r\n      \"L\",\r\n      \"MKT\",\r\n      \"SL\",\r\n      \"SL-M\"\r\n    ],\r\n    \"pCode\": [\r\n      \"BO\",\r\n      \"CNC\",\r\n      \"CO\",\r\n      \"MIS\",\r\n      \"NRML\"\r\n    ],\r\n    \"s_prdt_ali\": \"BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\",\r\n    \"sTransFlg\": \"NO\",\r\n    \"default_market_watch_name\": \"mwGrpVi\",\r\n    \"broker_name\": \"ALICEBLUE\",\r\n    \"branch_id\": \"HO\",\r\n    \"market_watch_count\": \"30\",\r\n    \"email\": \"ramesh@zebuetrade.com\",\r\n    \"weblink\": [\r\n      {\r\n        \"Secure\": \"Y\",\r\n        \"name\": \"PayIn\",\r\n        \"url\": \"https://input.zebuetrade.com/PaymentGateway/Main/Hold_Funds.jsp\"\r\n      },\r\n      {\r\n        \"Secure\": \"Y\",\r\n        \"name\": \"PayOut\",\r\n        \"url\": \"https://input.zebuetrade.com/PaymentGateway/Main/PayOut.jsp\"\r\n      }\r\n    ],\r\n    \"account_id\": \"ZEB500\",\r\n    \"exchDeatil\": {\r\n      \"COMMODITY\": [\r\n        {\r\n          \"product\": [\r\n            \"BO\",\r\n            \"CO\",\r\n            \"MIS\",\r\n            \"NRML\"\r\n          ],\r\n          \"exchseg\": \"mcx_fo\",\r\n          \"exch\": \"MCX\"\r\n        }\r\n      ]\r\n    },\r\n    \"lots_weight\": \"N\",\r\n    \"password_special_character\": \"N\",\r\n    \"accountName\": \"ZEB500\",\r\n    \"userPrivileges\": \"all\",\r\n    \"ySXorderEntry\": \"NO\",\r\n    \"criteriaAttribute_array\": null,\r\n    \"emsg_DFlogin\": null\r\n  }\r\n}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2403"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Jul 2019 11:26:33 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Prc\": \"00.00\",\n        \"Action\": \"B\",\n        \"productcode\": \"MIS\",\n        \"reporttype\": \"failure\",\n        \"triggerprice\": \"0.0\",\n        \"filledShares\": 0,\n        \"disclosedqty\": \"0\",\n        \"exchangetimestamp\": \"--\",\n        \"symbolname\": \"COPPER\",\n        \"ExchTimeStamp\": \"15/07/2019 15:37:57\",\n        \"nestordernumber\": \"190715000000011\",\n        \"duration\": \"DAY\",\n        \"averageprice\": \"0.0\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"filldateandtime\": \"-- --\",\n        \"Status\": \"rejected\",\n        \"rejectionreason\": \"RMS:Margin Exceeds,Required:7050.23, Available:0.00 for entity account-ZEB500 across exchange across segment across product for rule Consider Collateral for CASH and FO \",\n        \"stat\": \"Ok\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"exchangeorderid\": null,\n        \"PriceNumerator\": \"1.0000\",\n        \"legorderindicator\": \"\",\n        \"customerfirm\": \"C\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"nestreqid\": \"1\",\n        \"Ordtype\": \"MKT\",\n        \"unfilledSize\": 0,\n        \"scripname\": \"COPPER\",\n        \"exchange\": \"MCX\",\n        \"GeneralNumerator\": \"1.0000\",\n        \"bqty\": 2500,\n        \"Trsym\": \"COPPER19JULFUT\"\n    },\n    {\n        \"Prc\": \"00.00\",\n        \"Action\": \"B\",\n        \"productcode\": \"MIS\",\n        \"reporttype\": \"validation pending\",\n        \"triggerprice\": \"0.0\",\n        \"filledShares\": 0,\n        \"disclosedqty\": \"0\",\n        \"exchangetimestamp\": \"--\",\n        \"symbolname\": \"COPPER\",\n        \"ExchTimeStamp\": \"15/07/2019 15:37:57\",\n        \"nestordernumber\": \"190715000000011\",\n        \"duration\": \"DAY\",\n        \"averageprice\": \"0.0\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"filldateandtime\": \"-- --\",\n        \"Status\": \"validation pending\",\n        \"rejectionreason\": \"--\",\n        \"stat\": \"Ok\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"exchangeorderid\": null,\n        \"PriceNumerator\": \"1.0000\",\n        \"legorderindicator\": \"\",\n        \"customerfirm\": \"C\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"nestreqid\": \"1\",\n        \"Ordtype\": \"MKT\",\n        \"unfilledSize\": 1,\n        \"scripname\": \"COPPER\",\n        \"exchange\": \"MCX\",\n        \"GeneralNumerator\": \"1.0000\",\n        \"bqty\": 2500,\n        \"Trsym\": \"COPPER19JULFUT\"\n    },\n    {\n        \"Prc\": \"00.00\",\n        \"Action\": \"B\",\n        \"productcode\": \"MIS\",\n        \"reporttype\": \"NA\",\n        \"triggerprice\": \"0.0\",\n        \"filledShares\": 0,\n        \"disclosedqty\": \"0\",\n        \"exchangetimestamp\": \"--\",\n        \"symbolname\": \"COPPER\",\n        \"ExchTimeStamp\": \"15/07/2019 15:37:57\",\n        \"nestordernumber\": \"190715000000011\",\n        \"duration\": \"DAY\",\n        \"averageprice\": \"0.0\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"filldateandtime\": \"-- --\",\n        \"Status\": \"put order req received\",\n        \"rejectionreason\": \"--\",\n        \"stat\": \"Ok\",\n        \"PriceDenomenator\": \"1.0000\",\n        \"exchangeorderid\": null,\n        \"PriceNumerator\": \"1.0000\",\n        \"legorderindicator\": \"\",\n        \"customerfirm\": \"C\",\n        \"ordersource\": \"NEST_REST_WEB\",\n        \"GeneralDenomenator\": \"1.0000\",\n        \"nestreqid\": \"1\",\n        \"Ordtype\": \"MKT\",\n        \"unfilledSize\": 1,\n        \"scripname\": \"COPPER\",\n        \"exchange\": \"MCX\",\n        \"GeneralNumerator\": \"1.0000\",\n        \"bqty\": 2500,\n        \"Trsym\": \"COPPER19JULFUT\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "PositionBook",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/positionAndHoldings/positionBook",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ret\": \"DAY\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "43bfd280-3713-46d9-ab0d-d0fb3a4d7694",
+					"name": "PositionBook",
+					"originalRequest": {
+						"url": "http://localhost:8080/MobullService/v1/positionAndHoldings/positionBook",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer CT9797 8448395997",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ret\": \"DAY\"\r\n}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Apache-Coyote/1.1"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "704"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 15 Oct 2019 09:30:18 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"realisedprofitloss\": \"0.00\",\n        \"Fillsellamt\": \"0.00\",\n        \"Netqty\": \"1\",\n        \"Symbol\": \"ASHOKLEY\",\n        \"Instname\": \"NA\",\n        \"Expdate\": \"NA\",\n        \"BLQty\": 1,\n        \"Opttype\": \"XX\",\n        \"LTP\": \"68.70\",\n        \"Token\": \"212\",\n        \"Fillbuyamt\": \"68.70\",\n        \"Fillsellqty\": \"0\",\n        \"Tsym\": \"ASHOKLEY-EQ\",\n        \"sSqrflg\": \"Y\",\n        \"unrealisedprofitloss\": \"0.00\",\n        \"Buyavgprc\": \"68.70\",\n        \"MtoM\": \"0.00\",\n        \"stat\": \"Ok\",\n        \"s_NetQtyPosConv\": \"Y\",\n        \"Sqty\": \"0\",\n        \"Sellavgprc\": \"0.00\",\n        \"PriceDenomenator\": \"1\",\n        \"PriceNumerator\": \"1\",\n        \"actid\": \"CT9797\",\n        \"posflag\": \"true\",\n        \"Bqty\": \"1\",\n        \"Stikeprc\": \"0\",\n        \"Pcode\": \"MIS\",\n        \"BEP\": \"68.70\",\n        \"Exchange\": \"NSE\",\n        \"GeneralDenomenator\": \"1\",\n        \"Series\": \"EQ\",\n        \"Type\": \"DAY1\",\n        \"Netamt\": \"-68.70\",\n        \"companyname\": \"ASHOK LEYLAND LTD\",\n        \"Fillbuyqty\": \"1\",\n        \"GeneralNumerator\": \"1\",\n        \"Exchangeseg\": \"nse_cm\",\n        \"discQty\": \"10\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Holdings",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/positionAndHoldings/holdings",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "a37264c7-206f-4bfe-b42b-4b93fa28da19",
+					"name": "Holdings",
+					"originalRequest": {
+						"url": "http://zebu.irongates.in:8080/MobullService/v1/positionAndHoldings/holdings",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer TN1SB8 8597737395",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 15 Oct 2019 08:42:24 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"stat\": \"Ok\",\n    \"clientid\": \"TN1SB8\",\n    \"HoldingVal\": [\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"68.75\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"A\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"ASHOKLEY\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"1\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"24.00\",\n            \"Scripcode\": \"500477\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"68.80\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"68.75\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"ASHOKLEY-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"500477\",\n            \"Token1\": \"212\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"1\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"68.80\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"1\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"68.75\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE208A01029\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"42.75\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"A\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"BHEL\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"1\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"40.00\",\n            \"Scripcode\": \"500103\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"42.75\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"42.75\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"BHEL-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"500103\",\n            \"Token1\": \"438\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"1\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"42.75\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"1\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"42.75\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE257A01026\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"42225.00\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"B\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"CLNINDIA\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"150\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"40.00\",\n            \"Scripcode\": \"506390\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"42187.50\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"281.50\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"CLNINDIA-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"506390\",\n            \"Token1\": \"715\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"150\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"281.25\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"150\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"281.50\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE492A01029\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"8295.00\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"B\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"CUPID\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"60\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"40.00\",\n            \"Scripcode\": \"530843\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"8286.00\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"138.25\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"CUPID-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"530843\",\n            \"Token1\": \"18520\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"60\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"138.10\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"60\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"138.25\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE509F01011\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"8415.00\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"A\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"FEDERALBNK\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"100\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"40.00\",\n            \"Scripcode\": \"500469\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"8420.00\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"84.15\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"FEDERALBNK-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"500469\",\n            \"Token1\": \"1023\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"100\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"84.20\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"100\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"84.15\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE171A01029\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"2440.00\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"A\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"HDFCBANK\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"2\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"13.00\",\n            \"Scripcode\": \"500180\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"2440.20\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"1220.00\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"HDFCBANK-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"500180\",\n            \"Token1\": \"1333\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"2\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"1220.10\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"2\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"1220.00\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE040A01034\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"247.00\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"B\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"HDIL\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"100\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"80.00\",\n            \"Scripcode\": \"532873\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"270.00\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"2.47\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"HDIL-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"532873\",\n            \"Token1\": \"14803\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"100\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"2.70\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"100\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"2.47\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE191I01012\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"2137.50\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"B\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"ICIL\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"50\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"40.00\",\n            \"Scripcode\": \"521016\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"2120.00\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"42.75\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"ICIL-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"521016\",\n            \"Token1\": \"11987\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"50\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"42.40\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"50\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"42.75\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE483B01026\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"12670.00\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"A\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"JSWENERGY\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"200\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"40.00\",\n            \"Scripcode\": \"533148\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"12640.00\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"63.35\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"JSWENERGY-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"533148\",\n            \"Token1\": \"17869\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"200\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"63.20\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"200\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"63.35\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE121E01018\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"354.45\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"B\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"KOTAKNIFTY\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"3\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"10.00\",\n            \"Scripcode\": \"537708\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"354.30\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"118.15\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"KOTAKNIFTY-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"537708\",\n            \"Token1\": \"18102\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"3\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"118.10\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"3\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"118.15\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INF174K014P6\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"10685.00\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"B\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"POLYMED\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"50\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"31.00\",\n            \"Scripcode\": \"531768\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"10560.00\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"213.70\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"POLYMED-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"531768\",\n            \"Token1\": \"25718\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"50\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"211.20\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"50\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"213.70\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE205C01021\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"26268.00\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"B\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"PPL\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"398\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"31.00\",\n            \"Scripcode\": \"542684\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"26268.00\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"66.00\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"PPL-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"542684\",\n            \"Token1\": \"10297\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"398\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"66.00\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"398\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"66.00\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE050001010\",\n            \"Tprod\": \"MIS\"\n        },\n        {\n            \"WCqty\": \"0\",\n            \"BSEHOldingValue\": \"124.95\",\n            \"hsflag\": \"Y\",\n            \"Series1\": \"A\",\n            \"HUqty\": \"0\",\n            \"YSXHOldingValue\": \"0.00\",\n            \"CSEHOldingValue\": \"0.00\",\n            \"Ttrind\": \"N\",\n            \"DaysMTM\": \"0\",\n            \"csflag\": \"Y\",\n            \"WHqty\": \"0\",\n            \"Pcode\": \"CNC\",\n            \"Price\": \"0.00\",\n            \"BuyQty\": \"0\",\n            \"Exch4\": \"0\",\n            \"Bsetsym\": \"TATAMOTORS\",\n            \"Exch5\": \"0\",\n            \"LTcse\": \"0.00\",\n            \"MCXHOldingValue\": \"0.00\",\n            \"Holdqty\": \"1\",\n            \"Exch1\": \"nse_cm\",\n            \"Exch2\": \"bse_cm\",\n            \"Exch3\": \"0\",\n            \"LTysx\": \"0.00\",\n            \"Haircut\": \"20.00\",\n            \"Scripcode\": \"500570\",\n            \"LTPValuation\": \"0\",\n            \"NSEHOldingValue\": \"125.05\",\n            \"Ysxtsym\": \"0\",\n            \"Ltp\": \"124.95\",\n            \"Coltype\": \"LT\",\n            \"Btst\": \"0\",\n            \"LTmcxsxcm\": \"0.00\",\n            \"Usedqty\": \"0\",\n            \"Token5\": \"0\",\n            \"Nsetsym\": \"TATAMOTORS-EQ\",\n            \"CUqty\": \"0\",\n            \"Token2\": \"500570\",\n            \"Token1\": \"3456\",\n            \"Token4\": \"0\",\n            \"SellableQty\": \"1\",\n            \"Token3\": \"0\",\n            \"Mcxsxcmsym\": \"0\",\n            \"Csetsym\": \"0\",\n            \"LTnse\": \"125.05\",\n            \"Series\": \"EQ\",\n            \"Colqty\": \"1\",\n            \"ExchSeg5\": null,\n            \"ExchSeg2\": \"BSE\",\n            \"ExchSeg1\": \"NSE\",\n            \"ExchSeg4\": null,\n            \"LTbse\": \"124.95\",\n            \"ExchSeg3\": null,\n            \"isin\": \"INE155A01022\",\n            \"Tprod\": \"MIS\"\n        }\n    ],\n    \"Totalval\": {\n        \"TotalMCXHoldingValue\": \"0.00\",\n        \"TotalCSEHoldingValue\": \"0.00\",\n        \"TotalNSEHoldingValue\": \"113782.60\",\n        \"TotalYSXHoldingValue\": \"0.00\",\n        \"TotalBSEHoldingValue\": \"113973.40\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "TradeBook",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/placeOrder/fetchTradeBook",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "4e74f150-f202-42d2-9055-e7135c3fe576",
+					"name": "TradeBook",
+					"originalRequest": {
+						"url": "http://localhost:8080/MobullService/v1/placeOrder/fetchTradeBook",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer CT9797 8448395997",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "Apache-Coyote/1.1"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "933"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 15 Oct 2019 09:32:29 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"Filltime\": \"15:00:05\",\n        \"usecs\": \"048483\",\n        \"Ordduration\": \"DAY\",\n        \"ExchordID\": \"1000000006545587\",\n        \"Qty\": 1,\n        \"ordergenerationtype\": \"--\",\n        \"strikeprice\": \"00.00\",\n        \"AvgPrice\": \"68.70\",\n        \"Prctype\": \"L\",\n        \"Minqty\": 0,\n        \"Exchseg\": \"nse_cm\",\n        \"Pcode\": \"MIS\",\n        \"FillLeg\": 1,\n        \"Exchange\": \"NSE\",\n        \"accountId\": \"CT9797\",\n        \"Price\": \"68.70\",\n        \"companyname\": \"ASHOK LEYLAND LTD\",\n        \"Trantype\": \"B\",\n        \"Exchtime\": \"15-Oct-2019 14:59:54\",\n        \"bqty\": 1,\n        \"AlgoCategory\": \"NA\",\n        \"Filldate\": \"15-Oct-2019\",\n        \"Custofrm\": \"C\",\n        \"expdate\": \"NA\",\n        \"optiontype\": \"XX\",\n        \"AlgoID\": \"NA\",\n        \"Symbol\": \"212\",\n        \"Filledqty\": 1,\n        \"Time\": \"15/10/2019 15:00:05\",\n        \"symbolname\": \"ASHOKLEY\",\n        \"BrokerClient\": \"--\",\n        \"NOReqID\": \"1\",\n        \"Tsym\": \"ASHOKLEY-EQ\",\n        \"Nstordno\": \"191015000026375\",\n        \"ReportType\": \"fill\",\n        \"Expiry\": \"NA\",\n        \"stat\": \"Ok\",\n        \"PriceDenomenator\": \"1\",\n        \"panNo\": \"CJDPB8617G\",\n        \"PriceNumerator\": \"1\",\n        \"posflag\": \"true\",\n        \"GeneralDenomenator\": \"1\",\n        \"FillId\": \"2575701\",\n        \"series\": \"EQ\",\n        \"Fillqty\": 1,\n        \"GeneralNumerator\": \"1\",\n        \"user\": \"CT9797\",\n        \"remarks\": \"--\",\n        \"iSinceBOE\": 1571131805\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "CancelOrder",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/placeOrder/cancelOrder",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"exch\": \"NSE\",\n\"nestOrderNumber\": \"191015000018737\",\n\"trading_symbol\": \"ASHOKLEY-EQ\"\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "c8868214-1aaa-440c-bdcf-605dbef03eac",
+					"name": "CancelOrder",
+					"originalRequest": {
+						"url": "http://zebu.irongates.in:8080/MobullService/v1/placeOrder/cancelOrder",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer TN1SB8 8597737395",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"exch\": \"NSE\",\n\"nestOrderNumber\": \"191015000018737\",\n\"trading_symbol\": \"ASHOKLEY-EQ\"\n}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "60"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 15 Oct 2019 08:40:21 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"stat\": \"Ok\",\n    \"Result\": \" NEST Order Number :191015000018737\"\n}"
+				}
+			]
+		},
+		{
+			"name": "ModifyOrder",
+			"request": {
+				"url": {
+					"raw": "https://www.zebull.in/rest/MobullService/v1/placeOrder/modifyOrder?",
+					"protocol": "https",
+					"host": [
+						"www",
+						"zebull",
+						"in"
+					],
+					"path": [
+						"rest",
+						"MobullService",
+						"v1",
+						"placeOrder",
+						"modifyOrder"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"discqty\":0,\n\"exch\": \"NSE\",\n\"filledQuantity\":0,\n\"nestOrderNumber\": \"191015000018737\",\n\"prctyp\": \"L\",\n\"price\": \"64\",\n\"qty\": 1,\n\"trading_symbol\": \"ASHOKLEY-EQ\",\n\"trigPrice\": \"00.00\"\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "6ebe89d5-593e-45b4-a7a3-4ee990d666ee",
+					"name": "ModifyOrder",
+					"originalRequest": {
+						"url": {
+							"raw": "http://13.59.180.22:8080/MobullService/placeOrder/modifyOrder?",
+							"protocol": "http",
+							"host": [
+								"13",
+								"59",
+								"180",
+								"22"
+							],
+							"port": "8080",
+							"path": [
+								"MobullService",
+								"placeOrder",
+								"modifyOrder"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ZEB500 4452866664",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"account_id\": \"ZEB500\",\n\"discqty\": 0,\n\"exch\": \"MCX\",\n\"exchSeg\": \"mcx_fo\",\n\"filledQuantity\": 0,\n\"mktPro\": \"NA\",\n\"nestOrderNumber\": \"190000000000001\",\n\"pCode\": \"\",\n\"prctyp\": \"L\",\n\"price\": \"428.00\",\n\"qty\": 0,\n\"s_prdt_ali\": \"BO:BO||CNC:CNC||CO:CO||MIS:MIS||NRML:NRML\",\n\"scripToken\": \"214896\",\n\"symbol_id\": \"214896\",\n\"trading_symbol\": \"COPPER19JULFUT\",\n\"transtype\": \"SELL\",\n\"trigPrice\": \"00.00\",\n\"userId\": \"ZEB500\",\n\"validity\": \"DAY\"\n}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "34"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 15 Jul 2019 12:58:40 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"stat\": \"Not_Ok\",\n    \"Emsg\": \"No Data\"\n}"
+				}
+			]
+		},
+		{
+			"name": "sqrOofPosition",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/positionAndHoldings/sqrOofPosition",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"exchSeg\":\"nse_cm\",\r\n  \"pCode\":\"MIS\",\r\n  \"netQty\":\"0\",\r\n  \"tockenNo\":\"212\",\r\n  \"symbol\":\"ASHOKLEY\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Limits",
+			"request": {
+				"url": "https://www.zebull.in/rest/MobullService/v1/limits/getRmsLimits",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer TN1SB8 8597737395",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

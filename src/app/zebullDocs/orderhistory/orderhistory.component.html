@@ -1,0 +1,350 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+      <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <span class="titleText">Order History</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt; <span class="base"> BASE URL </span>&gt; + v1/placeOrder/orderHistory</p><br>
+            <span class="subTitle ">Method</span><br>
+            <P class="title "> Post</P>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>nestOrderNumber</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Nest Order Number</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="cls_pre place">
+       {{'{'}}
+        "nestOrderNumber":"190401000000031"
+       {{'}'}}
+    </pre>
+            <br><br>
+            <span class="subTitle">Success Response</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>Trsym</code>
+                        <span>String</span>
+                    </td>
+                    <td>Trading Symbol</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>Prc</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Price</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <code>Qty</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Quantity</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <code>Status</code>
+                        <span>String</span>
+                    </td>
+                    <td>Status Of The Order</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <code>Action</code>
+                        <span>String</span>
+                    </td>
+                    <td>Transaction Type</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <code>Ordtype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Order Type</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <code>PriceNumerator</code>
+                        <span>String</span>
+                    </td>
+                    <td>Price Numerator</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>
+                        <code>GeneralNumerator</code>
+                        <span>String</span>
+                    </td>
+                    <td>General Numerator</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>
+                        <code>PriceDenomenator</code>
+                        <span>String</span>
+                    </td>
+                    <td>Price Denominator</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>
+                        <code>GeneralDenomenator</code>
+                        <span>String</span>
+                    </td>
+                    <td>General Denominator</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>
+                        <code>bqty</code>
+                        <span>String</span>
+                    </td>
+                    <td>Board Lot Quantity</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>
+                        <code>exchange</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>
+                        <code>nestordernumber</code>
+                        <span>String</span>
+                    </td>
+                    <td>Nest Order Number</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>
+                        <code>nestreqid</code>
+                        <span>String</span>
+                    </td>
+                    <td>Nest Request Id</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>
+                        <code>symbolname</code>
+                        <span>String</span>
+                    </td>
+                    <td>Symbol Name</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>
+                        <code>averageprice</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Average Price</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>
+                        <code>triggerprice</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Trigger Price</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>
+                        <code>disclosedqty</code>
+                        <span>String</span>
+                    </td>
+                    <td>Disclosed Quantity</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>
+                        <code>exchangeorderid</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange Order Id</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>
+                        <code>rejectionreason</code>
+                        <span>String</span>
+                    </td>
+                    <td>Rejection Reason</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>
+                        <code>duration</code>
+                        <span>String</span>
+                    </td>
+                    <td>Order Duration</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>
+                        <code>productcode</code>
+                        <span>String</span>
+                    </td>
+                    <td>Product Code</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>
+                        <code>reporttype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Report Type</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>
+                        <code>customerfirm</code>
+                        <span>String</span>
+                    </td>
+                    <td>Customer Firm</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>
+                        <code>exchangetimestamp</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Exchange Time Stamp</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>
+                        <code>ordersource</code>
+                        <span>String</span>
+                    </td>
+                    <td>Order Source</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>
+                        <code>filldateandtime</code>
+                        <span>String</span>
+                    </td>
+                    <td>Fill Date And Time</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>
+                        <code>ordergenerationtype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Order Generation Type</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>
+                        <code>scripname</code>
+                        <span>String</span>
+                    </td>
+                    <td>Scrip Name</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>
+                        <code>legorderindicator</code>
+                        <span>String</span>
+                    </td>
+                    <td>Leg Order Indicator</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>
+                        <code>filledShares</code>
+                        <span>String</span>
+                    </td>
+                    <td>Filled Shares</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td class="b"><li>Session Expired</li><br><li>Not able to Retrieve OrderHistory</li><br><li>No Data</li>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+  <span class="s2">var jsonObj = </span>{{'{'}}
+       <span class="s2">"nestOrderNumber":<span class="s3">"1904010000031"</span></span>
+  {{'}'}}; 
+  <span class="s2">var pUrl = "BASE URL + URL";
+  $.ajax</span>({{'{'}}
+        <span class="s2">url: pUrl,
+        contentType: 'application/json',
+        type: 'post',
+        data: JSON.Stringify(jsonObj),
+        crossDomain:<span class="s3">true,</span>
+        success:<span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+        <span class="s2">error:<span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+  {{'}'}});
+{{'}'}}
+</pre>
+        </div>
+    </div>
+</div>

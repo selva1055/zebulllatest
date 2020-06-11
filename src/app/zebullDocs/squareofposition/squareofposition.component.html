@@ -1,0 +1,153 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+      <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <span class="titleText">Square of Position</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt; <span class="base"> BASE URL </span>&gt; + v1/positionAndHoldings/sqrOofPosition</p><br>
+            <span class="subTitle">Method</span><br>
+            <P class="title"> Post</P><br>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table class="cls_value">
+                <tr>
+                    <th>S.NO </th>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>exchSeg</code>
+                        <span>String</span>
+                    </td>
+                    <td>nse_cm</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>pCode</code>
+                        <span>String</span>
+                    </td>
+                    <td>MIS</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>netQty</code>
+                        <span>int</span>
+                    </td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <code>tokenNo</code>
+                        <span>int</span>
+                    </td>
+                    <td>212</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <code>symbol</code>
+                        <span>String</span>
+                    </td>
+                    <td>ASHOKLEY</td>
+                </tr>
+
+            </table><br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="cls_value cls_pre">
+        {{'{'}} 
+        "exchSeg":"nse_cm",
+        "pCode":"MIS",
+        "netQty":"0",
+        "tokenNo":"212",
+        "symbol":"ASHOKLEY"
+        {{'}'}}
+     </pre>
+            <span class="subTitle">Success Response</span><br><br>
+            <table class="cls_value">
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>nestOrderNumber</code>
+                        <span>int</span>
+                    </td>
+                    <td>Nest Order Number</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table class="news">
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td class="b"><li>Session Expired</li><br><li>Not able to Retrieve Place Order</li><br><li>Error Occurred :
+                        < reason></li>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+  <span class="s2">var jsonObj = </span>{{'{'}}
+        <span class="s2">"exchSeg": "nse_cm",
+        "pCode": "MIS",
+        "netQty":<span class="s3">"0",</span>
+        "tokenNo":<span class="s3">"212",</span>
+        "symbol": "ASHOKLEY"</span>
+    {{'}'}}; 
+  <span class="s2">var pUrl = "BASE URL + URL"
+  $.ajax</span>({{'{'}}
+         <span class="s2">url: pUrl,
+         contentType: 'application/json',
+         headers: </span>{{'{'}}
+         <span class="s2">'Authorization': "authorization token"</span>
+         {{'}'}},
+         <span class="s2">type: 'post',
+         data:JSON.stringify(jsonObj),
+         crossDomain:<span class="s3">true,</span>
+         success: <span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+         <span class="s2">error: <span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+   {{'}'}});
+{{'}'}}
+</pre>
+        </div>
+    </div>
+</div>

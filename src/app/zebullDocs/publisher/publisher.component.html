@@ -1,0 +1,140 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row">
+    <div class="col-sm-12 col-lg-12 col-md-12 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+
+
+            <span class="titleText">Trade Publisher Plugin </span><br><br>
+            <p style="text-align: justify;">The Zebu Publisher Javscript plugin lets you add one-click trade
+                buttons to your webpage. It works like a basket combined with a payment gateway, where an
+                inline popup opens on your webpage, guides the user through a trade, and lands the user back on your
+                page.
+                As described in the offset order execution section, it is possible to capture the request_token from
+                this flow to start a zebu Connect session as well.</p>
+
+            <p style="text-align: justify;">You can add one or more stocks to the basket (maximum 10) dynamically
+                using the Javascript plugin, or embed simple static buttons using plain HTML.</p>
+            <br>
+            <br>
+
+            <span class="Text">Getting started</span><br><br>
+            <pre><img src="../assets/copy.svg" width="16" height="16" style="float: right;cursor: pointer;" (click)="copyInputMessage(userinput)">
+            <p>{{'<'}}<span class="tag_color">script</span> <span class="data_color">src</span>=<span class="value_color">"https://www.zebull.in/rest/js/irongates_publisher.js"</span>{{'>'}}{{'<'}}<span class="tag_color">script</span>{{'>'}}</p>
+            </pre>
+            <br>
+            <p>
+                Include Zebull Publisher on your webpage by pasting the following script tag at the end of your webpage, just before the closing body tag. You only need to include this once to render any number of buttons on a page.
+            </p>
+            <br>
+            <br>
+            <span class="Text">Custom HTML Buy button</span><br><br>
+            <pre id="text-content" #userinput><p>{{'<'}}<span>A link that initiates a buy limit of the SBIN stock</span>{{'>'}}            <img src="../assets/copy.svg" width="16" height="16" style="float: right;cursor: pointer;" (click)="copyInputMessage(userinput)">
+{{'<'}}<span><span class="tag_color">zebu-button</span> <span class="data_color">data-symbol_id</span>=<span class="value_color">"3045"</span> 
+             <span class="data_color">data-exchange</span>=<span class="value_color">"NSE"</span> 
+             <span class="data_color">data-tradingsymbol</span>=<span class="value_color">"SBIN-EQ"</span> 
+             <span class="data_color">data-transaction_type</span>=<span class="value_color">"buy"</span> 
+             <span class="data_color">data-quantity</span>=<span class="value_color">"1</span>"
+             <span class="data_color">data-order_type</span>=<span class="value_color">"L"</span> 
+             <span class="data_color">data-variety</span>=<span class="value_color">"regular"</span> 
+             <span class="data_color">data-product</span>=<span class="value_color">"mis"</span> 
+             <span class="data_color">data-price</span>=<span class="value_color">"151.40"</span> 
+             <span class="data_color">data-stoploss</span>=<span class="value_color">"--"</span> 
+             <span class="data_color">data-trailing_stoploss</span>=<span class="value_color">"--"</span> 
+             <span class="data_color">data-trigprice</span>=<span class="value_color">"--"</span> 
+             <span class="data_color">data-ret</span>=<span class="value_color">"day"</span> 
+             <span class="data_color">data-target</span>=<span class="value_color">"--"</span></span>{{'>'}}<span>BUY</span>{{'<'}}<span><span class="tag_color">zebu-button</span></span>{{'>'}}
+            </p></pre>
+            <p>
+                You can use the HTML5 data attributes on any HTML element and turn it into a trade button which gets
+                invoked with a single click. The examples on the right show a link and a button being turned into trade
+                buttons.
+            </p>
+            <br>
+            <span class="Text">Demo buy a single share of SBIN</span> &nbsp; <span>click <img src="../assets/right.svg" width="10"> </span>
+            &nbsp;<img (click)="buySingleShare()" src="../assets/BUYINZEBU1.svg" width="100">
+            <br>
+            <br>
+
+            <span class="Text">Custom HTML Sell button</span><br><br>
+            <pre><p>{{'<'}}<span>A button that initiates a sell limit of the SBIN stock</span>{{'>'}} <img src="../assets/copy.svg" width="16" height="16" style="float: right;cursor: pointer;" (click)="copyInputMessage(userinput)">
+{{'<'}}<span><span class="tag_color">zebu-button </span><span class="data_color">data-symbol_id</span>=<span class="value_color">"3045"</span>
+             <span class="data_color">data-exchange</span>=<span class="value_color">"NSE"</span>
+             <span class="data_color">data-tradingsymbol</span>=<span class="value_color">"SBIN-EQ"</span>
+             <span class="data_color">data-transaction_type</span>=<span class="value_color">"sell</span>
+             <span class="data_color">data-quantity</span>=<span class="value_color">"1"</span>
+             <span class="data_color">data-order_type</span>=<span class="value_color">"L</span>
+             <span class="data_color">data-variety</span>=<span class="value_color">"regular"</span>
+             <span class="data_color">data-product</span>=<span class="value_color">"mis"</span>
+             <span class="data_color">data-price</span>=<span class="value_color">"152.40"</span>
+             <span class="data_color">data-stoploss</span>=<span class="value_color">"--"</span>
+             <span class="data_color">data-trailing_stoploss</span>=<span class="value_color">"--"</span>
+             <span class="data_color">data-target</span>=<span class="value_color">"--"</span></span>{{'>'}}<span>SELL</span>{{'<'}}<span><span class="tag_color">zebu-button</span></span>{{'>'}}
+ </p></pre>
+            <br>
+            <p>
+                You can use the HTML5 data attributes on any HTML element and turn it into a trade button which gets
+                invoked with a single click. The examples on the right show a link and a button being turned into trade
+                buttons.
+            </p>
+            <br>
+            <span class="Text">Demo sell a single share of SBIN</span>&nbsp;click <img src="../assets/right.svg" width="10">
+            &nbsp;<img (click)="sellSingleShare()" src="../assets/SELLINZEBU1.svg" width="100">
+            <br>
+            <br>
+
+            <span class="Text"> Generating Multiple Trade with Javascript</span><br><br>
+            <pre>{{'<'}}<span>A button that initiates a buy and sell stoploss of the BHEL stock</span>{{'>'}}<img src="../assets/copy.svg" width="16" height="16" style="float: right;cursor: pointer;" (click)="copyInputMessage(userinput)">
+    {{'<'}}<span><span class="tag_color">span</span> <span class="data_color">id=</span><span class="value_color">"default-button"</span></span>{{'>'}}{{'<'}}<span><span class="tag_color">/span</span></span>{{'>'}}
+    {{'<'}}<span><span class="tag_color">script</span></span>{{'>'}}
+        <span>//Only run your custom code once SasPublisher has fully initialised.</span>
+        <span><span class="data_color">SasPublisher.ready</span></span>{{'('}}<span><span class="tag_color">function</span></span>{{'('}}{{')'}} {{'{'}}
+            <span><span class="tag_color">var </span><span class="data_color">sas</span> = <span class="tag_color">new</span> <span class="data_color">SasPublisher</span></span>{{'('}}{{')'}}{{';'}} 
+                <span><span class="data_color">sas.add</span></span>{{'('}}{{'{'}}
+                    <span><span class="value_color">"tradingsymbol"</span>: <span class="value_color">"BHEL-EQ",</span>
+                    <span class="value_color">"exchange"</span>: <span class="value_color"> "NSE",</span>
+                    <span class="value_color">"transaction_type"</span>: <span class="value_color">"buy",</span>
+                    <span class="value_color">"order_type"</span>: <span class="value_color">"SL",</span>
+                    <span class="value_color">"product"</span>: <span class="value_color">"mis",</span>
+                    <span class="value_color">"price"</span>: <span class="data_color">"24.55",</span>
+                    <span class="value_color">"quantity"</span>: <span class="data_color">1,</span>
+                    <span class="value_color">"complexty"</span>: <span class="value_color">"regular",</span>
+                    <span class="value_color">"trigPrice"</span>: <span class="data_color">"24.45",</span>
+                    <span class="value_color">"stoploss"</span>: <span class="value_color">"--",</span>
+                    <span class="value_color">"symbol_id"</span>: <span class="data_color">438,</span>
+                    <span class="value_color">"target"</span>: <span class="value_color">"--",</span>
+                    <span class="value_color">"trailing_stoploss"</span>: <span class="value_color">"--",</span> </span>
+                    {{'}'}}{{')'}}{{';'}}
+                        
+                <span><span class="data_color">sas.add</span></span>{{'('}}{{'{'}}
+                    <span><span class="value_color">"tradingsymbol"</span>:<span class="value_color"> "BHEL-EQ",</span>
+                    <span class="value_color">"exchange"</span>:<span class="value_color"> "NSE",</span>
+                    <span class="value_color">"transaction_type"</span>:<span class="value_color"> "sell",</span>
+                    <span class="value_color">"order_type"</span>:<span class="value_color"> "SL",</span>
+                    <span class="value_color">"product"</span>:<span class="value_color"> "mis",</span>
+                    <span class="value_color">"price"</span>:<span class="data_color"> "25.55",</span>
+                    <span class="value_color">"quantity"</span>:<span class="data_color"> 1,</span>
+                    <span class="value_color">"complexty"</span>:<span class="value_color"> "regular",</span>
+                    <span class="value_color">"trigPrice"</span>:<span class="data_color"> "24.65",</span>
+                    <span class="value_color">"stoploss"</span>:<span class="value_color"> "--",</span>
+                    <span class="value_color">"symbol_id"</span>:<span class="data_color">438,</span>
+                    <span class="value_color">"target"</span>:<span class="value_color"> "--",</span>
+                    <span class="value_color">"trailing_stoploss"</span>:<span class="value_color"> "--",</span></span>
+                    {{'}'}}{{')'}}{{';'}}
+    
+                <span><span class="data_color">sas.renderButton</span></span>{{'('}}<span><span class="value_color">"#default-button"</span></span>{{')'}}{{';'}}
+        {{'}'}}{{')'}}{{';'}} 
+    {{'<'}}<span><span class="tag_color">/script</span></span>{{'>'}}
+ </pre>
+            <br>
+            <br>
+            <p>
+                You can create a basket of stocks and get the plugin to render a zebu button that executes it, or link
+                the basket to your own button (or any HTML element).
+            </p>
+            <span class="Text">Demo trade a multiple share of BHEL</span>&nbsp;click <img src="../assets/right.svg" width="10">
+                &nbsp;<img (click)="multipleShare()" src="../assets/TRADEINZEBU1.svg" width="100">
+            <br>
+            <br>
+        </div>
+    </div>
+</div>

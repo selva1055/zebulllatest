@@ -1,0 +1,157 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+       <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll color" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <span class="titleText">Add Scrips</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt;<span class="base"> BASE URL</span>&gt; + v1/marketWatch/addScripToMW</p><br>
+            <span class="subTitle ">Method</span><br>
+            <P class="title"> Post</P>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table class="input">
+                <tr>
+                    <th>
+                        S.NO
+                    </th>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                    <!-- <th>MANDATORY</th> -->
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>mwName</code>
+                        <span>String</span>
+                    </td>
+                    <td>Market Watch Name</td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>exch</code>
+                        <span>String</span>
+                    </td>
+                    <td>
+                        <code>Exchange</code>
+                        <span>NSE</span>
+                    </td>
+                    <!-- <td></td> -->
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>symbol</code>
+                        <span>String</span>
+                    </td>
+                    <td>Symbol Token</td>
+                    <!-- <td></td> -->
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="example cls_pre">
+      {{'{'}} 
+           "mwName": "abc",
+           "exch": "NSE",
+           "symbol": "46801"
+       {{'}'}}
+        </pre>
+            <br><br>
+            <span class="subTitle"> Success Response</span><br><br>
+            <table class="cls_1">
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>Result</code>
+                        <span>String</span>
+                    </td>
+                    <td>success</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td class="b"><li>Session Expired</li><br><li>failure</li><br><li>Not able to Retrieve AddScripsToMW</li><br><li>
+                        No_data</li><br><li>Number of scrips already is :
+                        < maximum number of scrips allowed in market watch> The number of scrips chosen
+                            is :
+                            < number of scrips chosen to add> The maximum scrips can be added is :
+                                < number of you can add></li><br><li>Scrip is already present in
+                                    ‘MWName’</li><br><li>Unable to add scrips ::
+                                    < error message></li><br><li>BAD_INPUT</li><br><li>Error occurred></li><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>values</code>
+                        <span>String</span>
+                    </td>
+                    <td>No Market Watch
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+  <span class="s2">var jsonObj = </span>{{'{'}}
+     <span class="s2">"mwName": "abc",
+     "exch": "NSE",
+     "symbol": <span class="s3">"46801"</span></span>
+  {{'}'}}; 
+  <span class="s2">var pUrl = "BASE URL + URL";
+  $.ajax</span>({{'{'}}
+     <span class="s2">url: pUrl,
+     contentType: 'application/json',
+     headers: </span>{{'{'}}
+     <span class="s2">'Authorization': "authorization token</span>
+     {{'}'}},
+     <span class="s2">type: 'post',
+     data:JSON.stringify(jsonObj),
+     crossDomain:<span class="s3">true,</span>
+     success: <span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+     <span class="s2">error: <span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+   {{'}'}});
+{{'}'}}</pre>
+        </div>
+    </div>
+</div>

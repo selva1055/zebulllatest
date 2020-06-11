@@ -1,0 +1,803 @@
+<div class="padd0">
+  <mat-toolbar style="font-size: 1.3rem;" class="padd0right padd0left">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"
+      style="text-align: left;padding-left: 4px;padding-right: 4px;line-height: 24px;">
+      <span *ngIf="nifname" class="white-space">
+        <span class="white-txt2 text-uppercase pointer fSize12" (click)="showIndexList(0)"
+          style="float: left;">{{nifname}}&nbsp;&nbsp;&nbsp;{{nifindexVal}}</span><br>
+        <span class="liwhite-txt fSize12 pointer" style="padding-left: 0px;"
+          [style.color]="nifindexChange < 0 ? 'red' : 'rgb(49, 209, 32)'"
+          (click)="indexloadChart(leftindexchart)">{{nifPer}}
+          <span [style.color]="nifindexChange < 0 ? 'red' : 'rgb(49, 209, 32)'">({{nifindexChange}}%)</span>
+        </span>
+      </span>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"
+      style="text-align: right;line-height: 24px;padding-left: 4px;padding-right: 4px;">
+      <span *ngIf="nifname" class="white-space">
+        <span class="white-txt2 text-uppercase pointer fSize12" (click)="showIndexList(1)"
+          style="float:right;">{{senxname}}&nbsp;&nbsp;&nbsp;{{senxindexVal}}</span><br>
+        <span class="liwhite-txt fSize12 pointer" [style.color]="senxindexChange < 0 ? 'red' : 'rgb(49, 209, 32)'"
+          (click)="indexloadChart(rightindexchart)">&nbsp;&nbsp;&nbsp;{{senxPer}}
+          <span [style.color]="senxindexChange < 0 ? 'red' : 'rgb(49, 209, 32)'">({{senxindexChange}}%)</span>
+        </span>
+      </span>
+    </div>
+    <span style="position: relative;">
+      <img src="assets/images/menu.svg" width="25" (click)="openNav()">
+    </span>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>
+<div *ngIf="routeTo.url == '/homes'" class="mobiletabs">
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon" (click)="selectTabs('marketwatch');">format_align_left</mat-icon>
+      </ng-template>
+      <div>
+        <div class="input-group paddTB8 border-bottom" style="background: #fff;">
+          <span class="input-group-addon bordr0">
+            <img src="assets/image/webapp_SVG/webapp_SVG/Search.svg" width="20" height="20">
+          </span>
+          <input type="text" class="form-control text-uppercase bordr0 search" name="searchbox"
+            placeholder="Enter company or symbol" autocomplete="off" [(ngModel)]="searchbox"
+            (input)="getsearchItems($event.target.value)" (blur)="closeItems()">
+          <span class="input-group-addon bordr0" style="border-left: 1px solid #c1c0c0;"
+            [matMenuTriggerFor]="filltermenu">
+            <img src="assets/image/webapp_SVG/webapp_SVG/funnel.svg" width="20" height="20">
+          </span>
+          <mat-menu #filltermenu="matMenu" yPosition="below" xPosition="before" style="padding-top: 10px;"
+            panelClass="custom" class='customClass'>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="fillter-radio-group"
+              [(ngModel)]="favoriteSeason" (click)="fillterByMarketWatchGroup($event)">
+              <button mat-menu-item *ngFor="let season of filterlist">
+                <div class="hiddenradio">
+                  <input type="radio" class="fillter-radio-button" [value]="season.name">
+                  <span>
+                    <img *ngIf="!season.select" src="assets/image/sort (1).svg" width="20" height="20" />
+                    <img *ngIf="season.select" src="assets/image/sort (2).svg" width="20" height="20" />
+                    &nbsp;&nbsp; {{season.name}}</span>
+                </div>
+              </button>
+            </mat-radio-group>
+          </mat-menu>
+        </div>
+        <ul *ngIf="showList" [class]="searchList.length > 0 ? 'mk-srccroll' : ''" class="dropdown-menu" id="style-1">
+          <ng-container *ngFor="let data of searchList">
+            <li *ngIf="data['exch'] == segmentfiltervalue.toUpperCase() || segmentfiltervalue == 'All'"
+              (click)="data['checked'] ? scripsPOrd(data,'del'):setSelectVal(data,'add')">
+              <span class="fSize115" style="white-space: inherit;">{{data['instrument_name']}}
+              </span>
+              <span class="exchHglght" style="padding: 0px 4px;">{{data['exch']}}</span>
+              <span style="float: right;" class="fadd" *ngIf="!data['checked']">ADD</span>
+              <span style="float: right;" class="fremove" *ngIf="data['checked']">REMOVE</span>
+            </li>
+          </ng-container>
+        </ul>
+        <div class="padd0left padd0right mobileheight">
+          <div *ngIf="!nomktwtc" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 inheritHght obverflow"
+            id="style-1">
+            <mat-progress-bar mode="indeterminate" *ngIf="mktload || mktlistload"></mat-progress-bar>
+            <!-- <div cdkDropList class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 mw-list"
+              (cdkDropListDropped)="drop($event)"> -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB4 boderBT hoverparent"
+              *ngFor="let scrips of scripsmkt;let i=index">
+              <div *ngIf="scrips['Exchange'] != 'X' && scrips['token'] != '100'">
+                <div (click)="showDepth(scrips,i)" style="cursor: pointer;">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 padd_L10 padd_R2 nowrap paddT2">
+                      <div
+                        *ngIf="scrips.Instrument == 'OPTIDX' || scrips.Instrument == 'OPTSTK' || scrips.Instrument == 'OPTFUT' || scrips.Instrument == 'OPTCUR'"
+                        class="tradSym">{{scrips.instrumentOptidx}}</div>
+                      <div *ngIf="scrips.Instrument.startsWith('FUT')" class="tradSym">{{scrips.instrumentFut}}
+                      </div>
+                      <div *ngIf="scrips.Exchange =='NSE' || scrips.Exchange == 'BSE'" class="tradSym">
+                        {{scrips['TradSym']}}
+                      </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5  padd_L2 padd_R5 text-right">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px 0px;">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 0px 2px;"></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="padding: 0px 2px;">
+                          <div class="fSize11 bcBtn text-uppercase">
+                            <span [style.color]="scrips['close'] < scrips['ltp'] ? 'green':'red'"
+                              class="fSize10 paddRL2 paddR2"
+                              [ngClass]="scrips['close'] < scrips['ltp'] ? 'glyphicon glyphicon glyphicon-menu-up' : 'glyphicon glyphicon glyphicon-menu-down'"></span>
+                          </div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" style="padding: 0px 0px;">
+                          <div class="fSize11 bcBtn text-uppercase ">
+                            <span id="ltpBack_{{scrips.token}}" class="fSize12">{{scrips['ltp']}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 padd_L10 padd_R2 nowrap">
+                      <span class="fSize105 bcBtn text-uppercase greylabel exc-color">{{scrips['Exchange']}}</span>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5  padd_L2 padd_R5 text-right">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px 0px;">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding: 0px 8px;" class="paddT2">
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="padding: 0px 0px;" class="paddT2">
+                          <div class="fSize11 bcBtn text-uppercase "
+                            [style.color]="scrips['Change'] > 0 ? 'green' : scrips['Change'] < 0 ? 'red' : ''">
+                            <span id="change_{{scrips.token}}">
+                              {{scrips['Change'] != undefined ? (scrips['Change'] > 0 ? ('+' + scrips['Change']|number:'1.2-2') : scrips['Change']|number:'1.2-2') : '0.00'}}
+                            </span>
+                            <span class="paddL5 fSize11"
+                              id="pers_{{scrips.token}}">({{scrips.PerChange != undefined ? (scrips.PerChange|number:'1.2-2') : '0.00'}}%)
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd_L10 padd_R2 paddB7 paddT10"
+                  *ngIf="scrips['showDP']">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padd_R2 paddL0">
+                      <div class="fSize10 bcBtn text-uppercase">
+                        <span class="fSize105 bcBtn text-uppercase fweight300"><span
+                            class="fWeight0 greylabel fSize10">O
+                          </span><span class="fSize11">{{scrips['open']}}</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center" style="padding-left: 5px;">
+                      <div class="fSize10 bcBtn text-uppercase text-right">
+                        <span class="fSize105 bcBtn text-uppercase fweight300"><span
+                            class="fWeight0 greylabel fSize10">H
+                          </span><span class="fSize11">{{scrips['high']}}</span></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center" style="padding-right: 5px;">
+                      <div class="fSize10 bcBtn text-uppercase text-left">
+                        <span class="fSize105 bcBtn text-uppercase fweight300"><span
+                            class="fWeight0 greylabel fSize10">L
+                          </span><span class="fSize11">{{scrips['low']}}</span></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right padd_L2 padd_R5">
+                      <div class="fSize10 bcBtn text-uppercase">
+                        <span class="fSize105 bcBtn text-uppercase fweight300"><span
+                            class="fWeight0 greylabel fSize10">C
+                          </span><span class="fSize11">{{scrips['close']}}</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd_L10 padd_R2" *ngIf="scrips['showDP']">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT greylabel padd0left">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-left">BID</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-right">ORDERS</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-right">QTY.</div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 greylabel padd_L2 padd_R5">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-left paddL15">ASK</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-right"
+                      style="padding-left: 15%; ">ORDERS</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-right">QTY.</div>
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd_L10 padd_R5" *ngIf="scrips['showDP']">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthbuycolor">
+                        {{scrips['bp'] == undefined ? '0' :scrips['bp']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bno'] == undefined ? '0' :scrips['bno']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bq'] == undefined ? '0' :scrips['bq']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthsellcolor">
+                        {{scrips['sp'] == undefined ? '0' :scrips['sp']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['sno'] == undefined ? '0' :scrips['sno']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['bs'] == undefined ? '0' :scrips['bs']}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthbuycolor">
+                        {{scrips['bp1'] == undefined ? '0' :scrips['bp1']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bno1'] == undefined ? '0' :scrips['bno1']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bq1'] == undefined ? '0' :scrips['bq1']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthsellcolor">
+                        {{scrips['sp1'] == undefined ? '0' :scrips['sp1']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['sno1'] == undefined ? '0' :scrips['sno1']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['bs1'] == undefined ? '0' :scrips['bs1']}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthbuycolor">
+                        {{scrips['bp2'] == undefined ? '0' :scrips['bp2']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bno2'] == undefined ? '0' : scrips['bno2']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bq2'] == undefined ? '0' : scrips['bq2']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthsellcolor">
+                        {{scrips['sp2'] == undefined ? '0' : scrips['sp2']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['sno2'] == undefined ? '0' : scrips['sno2']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['bs2'] == undefined ? '0' : scrips['bs2']}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthbuycolor">
+                        {{scrips['bp3'] == undefined ? '0' : scrips['bp3']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bno3'] == undefined ? '0' : scrips['bno3']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bq3'] == undefined ? '0' : scrips['bq3']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthsellcolor">
+                        {{scrips['sp3'] == undefined ? '0' : scrips['sp3']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['sno3'] == undefined ? '0' : scrips['sno3']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['bs3'] == undefined ? '0' : scrips['bs3']}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthbuycolor">
+                        {{scrips['bp4'] == undefined ? '0' : scrips['bp4']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bno4'] == undefined ? '0' : scrips['bno4']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthbuycolor">
+                        {{scrips['bq4'] == undefined ? '0' : scrips['bq4']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left depthsellcolor">
+                        {{scrips['sp4'] == undefined ? '0' : scrips['sp4']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['sno4'] == undefined ? '0' : scrips['sno4']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right depthsellcolor">
+                        {{scrips['bs4'] == undefined ? '0' : scrips['bs4']}}</div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margintop8 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">TOTAL BQ
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['tbq'] == undefined ? '0' : scrips['tbq'] }}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">TOTAL SQ
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['tsq'] == undefined ? '0' : scrips['tsq'] }}</div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">VOLUME
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['v'] == undefined ? '0' : scrips['v']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">AVG.PRICE
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['ap'] == undefined ? '0' : scrips['ap']}}</div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">LTQ</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['ltq'] == undefined ? '0' : scrips['ltq']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">LTT</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['lasttradedtime'] == undefined ? 'NA' : scrips['lasttradedtime'].slice(10,19)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">LUT</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['lut'] == undefined ? '0' : scrips['lut']}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 fSize10 padd0 text-left greylabel">TTV</div>
+                      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 fSize11 padd0 text-right">
+                        {{scrips['ttv'] == undefined ? '0' : scrips['ttv']}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2"
+                    *ngIf=" scrips['Exchange']!='BSE' && scrips['Exchange']!='NSE'">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">OI</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{openI}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">Expiry Date
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['Expiry'] == undefined ? 'NA' : scrips['Expiry']}}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddT2 hoverBtn paddL0" id="hoverBtn{{i}}">
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn  btn-xs btnwidsq buybtn"
+                      (click)="scripsPOrd(scrips,'buy')">B</button>
+                    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                      data-backdrop="static" data-keyboard="false"></button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-xs btnwidsq sellbtn "
+                      (click)="scripsPOrd(scrips,'sell')">S</button>
+                    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                      data-backdrop="static" data-keyboard="false"></button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-default btn-xs btnwidsq" (click)="showSecurityInfo(scrips,i)">
+                      <img src="assets/image/webapp_SVG/webapp_SVG/Information.svg" style="width: 100%;">
+                    </button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-default btn-xs btnwidsq" routerLink="main"
+                      (click)="loadChart(scrips)" [disabled]="false">
+                      <img src="assets/image/Chart Symbol.svg" style="width: 100%;padding: 1.5px;"></button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-default btn-xs btnwidsq" (click)="getSecurityAlert(scrips)">
+                      <img src="assets/images/securityAlert.svg" style="width: 100%;padding: 1.5px;">
+                    </button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-default btn-xs btnwidsq" (click)="scripsPOrd(scrips,'del')">
+                      <img src="assets/image/Delete_Dustbin.svg" style="width: 100%;padding: 1.5px;"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div *ngIf="nomktwtc" class="text-center paddT100">
+            No Scrips added to market watch.<br> Use search and add scrips to market watch
+          </div>
+        </div>
+        <footer style="text-align: center;">
+          <mat-tab-group class="fooder-segment" [selectedIndex]='currGp' headerPosition="below"
+            (selectedTabChange)="fooderMWGroup($event)">
+            <mat-tab label="ONE"></mat-tab>
+            <mat-tab label="TWO"></mat-tab>
+            <mat-tab label="THREE"></mat-tab>
+            <mat-tab label="FOUR"></mat-tab>
+            <mat-tab label="FIVE"></mat-tab>
+          </mat-tab-group>
+        </footer>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon" (click)="selectTabs('position');">event_note</mat-icon>
+      </ng-template>
+      <div class=" btm-container-scroll padd0">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;margin-top: 10%;"
+          *ngIf="positionsvisiblemsg">
+          <div>
+            <img src="assets/image/noDataInfo.svg" alt="" width="35" height="35">
+            <span style="color: #000000de; font-size: 12px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO POSITIONS
+              FOUND</span>
+          </div>
+          <div style="padding-top: 15px !important;">
+            <span style="color: #000000de; font-size: 10px;">
+              Use MIS orders to add positions. <br>
+              Use regular Buy / Sell <br>
+              OR<br>
+              Quick Buy / Sell to place orders
+            </span>
+          </div>
+        </div>
+        <div *ngIf="positionsvisible" class="padd0 mobileholdingheight">
+          <div class="padd0" *ngFor="let data of position;">
+            <div [ngStyle]="{'background-color': data['Netqty'] == 0 ? 'rgb(239, 240, 241)' : '' }"
+              class="boderBT padd0 text-uppercase padd5 col-lg-12 col-md-12 col-sm-12 col-xs-12 position-hover"
+              style="border-bottom:0.3px solid lightgrey">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB2 padd0">
+                <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 paddTB2 fleft fsize105">Qty.
+                  <span [class]="data['Netqty'] > 0 ? 'blueStatus':'redStatus'">{{data['Netqty']}}</span>
+                </div>
+                <div class=" col-lg-5 col-md-5 col-sm-5 col-xs-5 paddTB2 textcenter fsize105">B.Avg
+                  <span>{{data['Buyavgprc']}}</span>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4 col-xs-4 paddTB2 fsize105 fright">
+                  <span class="bgGray">{{data['Pcode']}}</span>
+                </div>
+                <div
+                  class="col-lg-7 col-md-7 col-sm-7 col-xs-7 fSize12 text-uppercase inst-lblclass paddTB2 txt-black nowrap block-tooltip"
+                  style="text-align: left;">
+                  <span title="{{data['Nsetsym']}}" style="padding-left: 0px; "
+                    *ngIf="data['Instname'] == 'OPTIDX' || data['Instname'] == 'OPTSTK' || data['Instname'] == 'OPTFUT' || data['Instname'] == 'OPTCUR'"
+                    class="tradSym">{{data['instrumentOptidx']}}</span>
+                  <ng-container *ngIf="data['Instname'] != null || data['Instname'] != undefined">
+                    <span title="{{data['Nsetsym']}}" style="padding-left: 0px; "
+                      *ngIf="data['Instname'].startsWith('FUT')" class="tradSym">{{data['instrumentFut']}}</span>
+                  </ng-container>
+                  <span title="{{data['Nsetsym']}}" style="padding-left: 0px; "
+                    *ngIf="data['Exchange'] =='NSE' || data['Exchange'] == 'BSE'" class="tradSym">
+                    {{data['Symbol']}}
+                  </span>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 fSize12 paddTB2 fright"
+                  [style.color]="data.MtoM > 0 ? 'green' : 'red'">{{data['MtoM']}}
+                </div>
+                <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 fsize105 paddTB2 fleft">
+                  <span>{{data['Exchange']}}</span>
+                </div>
+                <div class=" col-lg-5 col-md-5 col-sm-5 col-xs-5 fsize105 paddTB2 textcenter">
+                  S.Avg <span>{{data['Sellavgprc']}}</span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-uppercase paddTB2 fright fsize105">
+                  LTP <span>{{data['LTP']}}</span>
+                </div>
+              </div>
+              <div class="position-hov" *ngIf="data['Netqty'] != 0">
+                <div class="textcenter">
+                  <button mat-raised-button class="bgColorBule paddRL9 fSize105 actionBtn inlineH"
+                    (click)="goToPositionAdd(data)">ADD</button>&nbsp;
+                  <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                    data-backdrop="static" data-keyboard="false"></button>
+                  <button mat-raised-button class="bgColorRed paddRL9 fSize105 actionBtn inlineH"
+                    (click)="goToPositionExit(data)"
+                    *ngIf="data.Pcode == 'CNC' || data.Pcode == 'MIS' || data.Pcode == 'NRML'">EXIT</button>&nbsp;
+                  <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                    data-backdrop="static" data-keyboard="false"></button>
+                  <button mat-raised-button class="bgcolorConvert paddRL9 fMethod fSize105 actionBtn inlineH"
+                    (click)="convertPosition(data)"
+                    *ngIf="data.Pcode == 'CNC' || data.Pcode == 'MIS' || data.Pcode == 'NRML'">CONV</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <footer style="text-align: end;padding-right: 15px;">
+            <span>Total MTM   <span
+              [class]="totalvalue == 0 ? 'clas-mtomnone':totalvalue > 0  ? 'clas-mtompastve-red': 'clas-mtomnegv-green' ">&nbsp;
+              {{this.totalvalue}}</span></span>
+          </footer>
+      </div>
+     
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon" (click)="selectTabs('holding');">import_contacts</mat-icon>
+      </ng-template>
+      <div class=" btm-container-scroll padd0">
+        <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;"
+          *ngIf="holdingvisiblemsg">
+          <div>
+            <img src="assets/image/noDataInfo.svg" alt="" width="35" height="35">
+            <span style="color: #000000de; font-size: 12px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO HOLDINGS
+              FOUND</span>
+          </div>
+          <div style="padding-top: 15px !important;">
+            <span style="color: #000000de; font-size: 10px;">
+              Use CNC order to add scrips to your portfolio.
+              <br>
+              Use regular Buy / Sell <br>
+              OR<br>
+              Quick Buy / Sell to place orders
+            </span>
+          </div>
+        </div>
+        <div *ngIf="holdingvisible" class="padd0 mobileholdingheight">
+          <div class="padd0" *ngFor="let data of holdings;">
+            <div class="boderBT padd0 text-uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12 padd5 holding-hover">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB2 padd0">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB2 fsize105 fleft">Qty.
+                  <span>{{data['SellableQty']}}</span> &nbsp;<span *ngIf="data['Btst'] > 0"><span
+                      style="font-size: 10px;">T1 </span>:
+                    {{data['Btst']}}</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB2 fsize105 text-right">Total Val.
+                  <span>
+                    {{data.ExchSeg1 == "NSE" ? data.NSEHOldingValue : data.BSEHOldingValue}}
+                  </span>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-4 col-xs-7 fSize12 nowrap paddTB2 block-tooltip"
+                  title="{{data['Nsetsym']}}">
+                  {{data['ExchSeg1'] == 'NSE' ? data['NsetsymTemp'] : data['Bsetsym']}}
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 fSize12 text-uppercase paddTB2 fright">
+                  <span [class]="data['MTM'] > 0 ? 'greenStatus':'redStatus'">{{data['MTM']}}</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize105 paddTB2">Avg.
+                  <span>
+                    {{data.ExchSeg1 == "NSE" ? (data.NSEHOldingValue - ((data.NSEHOldingValue/100)*data.Haircut)).toFixed(2) : (data.BSEHOldingValue - ((data.BSEHOldingValue/100)*data.Haircut)).toFixed(2)}}
+                  </span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB2 fright fSize105">LTP
+                  <span>
+                    {{data.ExchSeg1 == "NSE" ? data['LTnse'] : data['LTbse']}}
+                  </span>
+                </div>
+              </div>
+              <div class="holding-hov textcenter">
+                <button mat-raised-button class="bgColorBule paddRL9 fSize105 actionBtn inlineH"
+                  (click)="goToHoldingAdd(data)">ADD</button>&nbsp;
+                <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                  data-backdrop="static" data-keyboard="false"></button>
+                <button mat-raised-button class="bgColorRed paddRL9 fSize105 actionBtn inlineH"
+                  (click)="goToHoldingExit(data)">EXIT</button>
+                <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                  data-backdrop="static" data-keyboard="false"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon" (click)="selectTabs('orders');">assignment</mat-icon>
+      </ng-template>
+      <div class=" btm-container-scroll padd0">
+        <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;"
+          *ngIf="ordervisiblemsg">
+          <div>
+            <img src="assets/image/noDataInfo.svg" alt="" width="35" height="35">
+            <span style="color: #000000de; font-size: 12px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO ORDERS FOUND</span>
+          </div>
+          <div style="padding-top: 15px !important;">
+            <span style="color: #000000de; font-size: 10px;">
+              Place your orders from market watch using regular Buy & Sell <br>
+            OR<br>
+            Using Quick orders
+            </span>
+          </div>
+        </div>
+        <div *ngIf="ordervisible" class="padd0 mobileholdingheight">
+          <div class="padd0" *ngFor="let data of orders;">
+            <div class="boderBT padd0 text-uppercase col-lg-12 col-md-12 col-sm-12 col-xs-12 padd5 holding-hover">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB2 padd0">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize105 paddTB2 fleft">
+                  <span [ngClass]="data['Trantype'] == 'B' ? 'button-box-blue' : 'button-box-red'">
+                    {{data['Trantype']=='B' ? 'Buy' : 'Sell'}}
+                  </span>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize105 paddTB2 textcenter">
+                  {{data['OrderedTime'] == undefined ? '':data['OrderedTime'].split(" ")[1]}}
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize105 paddTB2 text-right">
+                  <span
+                    [ngClass]="data['Status'] == 'rejected' ? 'border-box-red' : data['Status'] == 'open' ? 'border-box-blue' :  data['Status'] == 'complete' ? 'border-box-green' : data['Status'] == 'cancelled' ? 'border-box-red':data['Status'] == 'trigger pending' ? 'button-box-gray':'' "><span
+                      *ngIf="data['Status'] == 'trigger pending'">Trigger..</span> <span
+                      *ngIf="data['Status'] != 'trigger pending'">{{data['Status']}}</span></span>
+                </div>
+                <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 fSize12 paddTB2 fleft block-tooltip"
+                  title="{{data['Trsym']}}">
+                  <span
+                    *ngIf="data['InstName'] == 'OPTIDX' || data['InstName'] == 'OPTSTK' || data['InstName'] == 'OPTFUT' || data['InstName'] == 'OPTCUR'"
+                    class="tradSym">{{data['instrumentOptidx']}}</span>
+                  <ng-container *ngIf="data['InstName'] != null || data['InstName'] != undefined">
+                    <span style="padding-left: 0px; " *ngIf="data['InstName'].startsWith('FUT')"
+                      class="tradSym">{{data['instrumentFut']}}</span>
+                  </ng-container>
+                  <span *ngIf="data['Exchange'] =='NSE' || data['Exchange'] == 'BSE'" class="tradSym">
+                    {{data['Sym']}}
+                  </span>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 fSize12 paddTB2 fright">
+                  {{data['Prc']}}
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 fSize105 paddTB2">
+                  <span class="text-uppercase  exchange-info">{{data['Exchange']}} &nbsp;{{data['Pcode']}}
+                    &nbsp;{{data['Prctype']}}</span>
+                </div>
+                <div class=" col-lg-7 col-md-7 col-sm-7 col-xs-7 fright paddTB2 fsize106">
+                  <span>{{data['Qty']}}/{{data['Qty']}} <span *ngIf="data['Trgprc'] > 0 "> &nbsp;trg.
+                      {{data['Trgprc']}}</span>
+                  </span>
+                </div>
+              </div>
+              <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB2 padd0">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB2 fsize105 fleft">Qty.
+                  <span>{{data['SellableQty']}}</span> &nbsp;<span *ngIf="data['Btst'] > 0"><span
+                      style="font-size: 10px;">T1 </span>:
+                    {{data['Btst']}}</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB2 fsize105 text-right">Total Val.
+                  <span>
+                    {{data.ExchSeg1 == "NSE" ? data.NSEHOldingValue : data.BSEHOldingValue}}
+                  </span>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-4 col-xs-7 fSize12 nowrap paddTB2 block-tooltip"
+                  title="{{data['Nsetsym']}}">
+                  {{data['ExchSeg1'] == 'NSE' ? data['NsetsymTemp'] : data['Bsetsym']}}
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 fSize12 text-uppercase paddTB2 fright">
+                  <span [class]="data['MTM'] > 0 ? 'greenStatus':'redStatus'">{{data['MTM']}}</span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize105 paddTB2">Avg.
+                  <span>
+                    {{data.ExchSeg1 == "NSE" ? (data.NSEHOldingValue - ((data.NSEHOldingValue/100)*data.Haircut)).toFixed(2) : (data.BSEHOldingValue - ((data.BSEHOldingValue/100)*data.Haircut)).toFixed(2)}}
+                  </span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB2 fright fSize105">LTP
+                  <span>
+                    {{data.ExchSeg1 == "NSE" ? data['LTnse'] : data['LTbse']}}
+                  </span>
+                </div>
+              </div> -->
+              <div class="holding-hov textcenter">
+                <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation([data])"
+                  title="Cancel Order"
+                  *ngIf="data.Status === 'open' || data.Status === 'trigger pending'">C</button>&nbsp;
+                <button mat-raised-button class="bgcolorGreen fSize12" (click)="scripsPOrd(data,'modify')"
+                  title="Modify Order"
+                  *ngIf="data.Status === 'open' || data.Status === 'trigger pending'">M</button>&nbsp;
+                <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                  data-backdrop="static" data-keyboard="false"></button>
+                <button mat-raised-button class="bgcolorGray fSize12"
+                  *ngIf="data.Status === 'open' || data.Status === 'trigger pending'" (click)=" openInfoDialog(data)"
+                  title="Order history">i</button>&nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="example-tab-icon" (click)="selectTabs('funds');">credit_card</mat-icon>
+      </ng-template>
+      <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;"
+        *ngIf="fundvisiblemsg">
+        <div>
+          <img src="assets/image/noDataInfo.svg" alt="" width="35" height="35">
+          <span style="color: #000000de; font-size: 12px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO FUNDS AVAILABLE</span>
+        </div>
+        <div style="padding-top: 15px !important;">
+          <span style="color: #000000de; font-size: 10px;">
+            No funds available please add..
+          </span>
+        </div>
+      </div>
+      <div *ngIf="fundvisible" style="background: white;padding: 0px 15px;" class=" btm-container-scroll">
+        <div *ngFor="let data of funds">
+          <div class="bcBtn text-uppercase lineHgt15 marginTop10">
+            <div
+              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft fWeight200 nowrap">
+              Total MTM
+              <span class="text-uppercase paddRight5 textright floatR fWeight200"
+                [style.color]="(+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) < 0 ? 'red' : (+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) > 0 ? 'green' : 'black'">{{(+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) | number : '.2'}}</span>
+            </div>
+            <div
+              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft fWeight200 nowrap">
+              Available Margin<span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 fWeight200"
+                [style.color]="data.cashmarginavailable < 0 ? 'red' : data.net > 0 ? 'green' : 'black'">
+                {{data.net | currency:' '}}</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 textcenter padd0left padd0right">
+              <button mat-raised-button class="btn1" (click)="getPayInPayOutTokenKey('Deposit')">DEPOSIT</button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 textcenter padd0left padd0right">
+              <button mat-raised-button class="btn2" (click)="getPayInPayOutTokenKey('Withdraw')">WITHDRAW</button>
+            </div>
+            <!-- Separator -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boderBT marginTB5"></div>
+            <div
+              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+              Opening Balance
+              <span class="fSize12 inst-lbl text-uppercase floatR blackcolor textright paddRight5">
+                {{data.cashmarginavailable | currency:' '}}</span>
+            </div>
+            <div
+              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+              Margin Utilized
+              <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5">
+                {{(+data.spanmargin)+(+data.exposuremargin) | currency:' '}}</span>
+            </div>
+            <div
+              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+              MTM Realised
+              <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5"
+              [style.color]="data.realizedMtomPrsnt == 0 ? 'block': data.realizedMtomPrsnt > 0 ? 'green' : 'red'">
+              {{+data.realizedMtomPrsnt | number : '.2'}}</span>
+            </div>
+            <div
+              class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+              MTM UnRealised
+              <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5"
+              [style.color]="data.unrealizedMtomPrsnt == 0 ? 'block' : data.unrealizedMtomPrsnt > 0 ? 'green' : 'red'">
+              {{+data.unrealizedMtomPrsnt | number : '.2'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div id="mySidepanel" class="sidepanel">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB14_RL15">
+      <span style="color: #fff; font-size: 16px">{{userId}}</span>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB14_RL15 fright">
+      <span style="color: #fff; font-size: 16px;" (click)="closeNav()">X</span>
+      <!-- <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">×</a> -->
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a routerLink="../homes" (click)="closeNav()">
+      <img src="assets/image/home.svg" width="25">&nbsp;Home
+    </a>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a routerLink="profile" (click)="closeNav()">
+      <img src="assets/finalsvg/profile.svg" width="25">&nbsp;Profile
+    </a>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a routerLink="settings" (click)="closeNav()">
+      <img src="assets/finalsvg/settings.svg" width="25">&nbsp;Settings
+    </a>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a href="http://coearn.zebuetrade.com" target="_blank" (click)="closeNav()">
+      <img src="assets/finalsvg/view_details.svg" width="25">&nbsp;Co-Earn
+    </a>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a routerLink="/ordergen" target="_blank" (click)="closeNav()">
+      <img src="assets/finalsvg/Orders.svg" width="25">&nbsp;Order Generator
+    </a>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a href="https://zebull.in/#/zebullDoc/intro" target="_blank" (click)="closeNav()">
+      <img src="assets/finalsvg/view_details.svg" width="25">&nbsp;API Documentation
+    </a>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a class="cursor" (click)="showMarketStatus();closeNav()">
+      <img src="assets/finalsvg/stock_market.svg" width="25">&nbsp;Market Status
+    </a>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a class="cursor" (click)="openCustomerSupportDialog();closeNav()">
+      <img src="assets/finalsvg/contact.svg" width="25">&nbsp;Customer Support
+    </a>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <a class="cursor" (click)="showLogoutAlert();closeNav()">
+      <img src="assets/finalsvg/logout.svg" width="25">&nbsp;Logout
+    </a>
+  </div>
+</div>

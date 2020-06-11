@@ -1,0 +1,135 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+       <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;"
+        id="mainDiv">
+        <div class="height">
+            <span class="titleText">Delete Scrips</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt;<span class="base"> BASE URL</span>&gt; + v1/marketWatch/deleteMWScrip</p><br>
+            <span class="subTitle ">Method</span><br>
+            <P class="title "> Post</P>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table class="param">
+                <tr>
+                    <th>S.NO </th>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>mwName</code>
+                        <span>String</span>
+                    </td>
+                    <td>Market Watch Name</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>exch</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>symbol</code>
+                        <span>String</span>
+                    </td>
+                    <td>Symbol Token</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="new cls_pre">
+         {{'{'}}
+           "mwName": "abc",
+           "exch": "NSE",
+           "symbol": "46801"
+         {{'}'}}
+     </pre>
+            <br>
+            <span class="subTitle">Success Response</span><br><br>
+            <table class="cls_re">
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>Result</code>
+                        <span>String</span>
+                    </td>
+                    <td>success</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table class="start">
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td class="b"><li>failure</li><br><li>Session Expired</li><br><li>Not able to Retrieve DeleteMWScrips</li><br><li>
+                        token is Not A Proper Symbol</li><br><li>Cannot Delete the Last Scrip</li>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+    <span class="s2">var jsonObj = </span>{{'{'}}
+        <span class="s2">"mwName": "abc",
+        "exch": "NSE",
+        "symbol": <span class="s3">"46801"</span></span>
+    {{'}'}}; 
+    <span class="s2">var pUrl = "BASEURL + URL"
+    $.ajax</span>({{'{'}}
+        <span class="s2">url: pUrl,
+        contentType: 'application/json',
+        headers: </span>{{'{'}}
+        <span class="s2">'Authorization': "authorization token" </span>
+        {{'}'}},
+        <span class="s2">type: 'post',
+        data:JSON.stringify(jsonObj),
+        crossDomain:<span class="s3">true,</span>
+        success: <span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+        <span class="s2">error: <span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+    {{'}'}});
+{{'}'}}
+</pre>
+        </div>
+    </div>
+</div>

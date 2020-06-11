@@ -1,0 +1,187 @@
+<div *ngFor='let key of userInfo'>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  header">
+    <div class="pers-head">PROFILE</div>
+  </div>
+  
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">NAME</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{key['accountName'] == undefined ? 'NA' : key['accountName']}}</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">USER ID</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{key['accountId']}}</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">EMAIL</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{key['emailAddr'] === undefined ? 'NA' : key['emailAddr']}}</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">MOBILE NO</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{key['cellAddr'] == undefined ? 'NA' : key['cellAddr']}}</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">PAN</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{key['panNo'] == undefined ? 'NA' : ('*' + (key['panNo']).slice(-4))}}</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">DP ID</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{key['dpId'] == undefined ? 'NA' : ('*' + (key['dpId']).slice(-4))}}</span>
+    </div>
+  </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header">
+    <div class="pers-head">ACCOUNT</div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">SEGMENTS</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{exch}}</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">PRODUCTS</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{pCode}}</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">ORDER TYPE</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{prctyp}}</span>
+    </div>
+  </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header">
+    <div class="pers-head">BANK DETAILS</div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">ACCOUNT</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{key['bankAccountNo'] == undefined ? 'NA' : ('*' + (key['bankAccountNo']).slice(-4))}}</span>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+      <span class="lef">BANK</span>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop">
+      <span class="rig">{{key['bankName'] == undefined ? 'NA' : key['bankName']}}</span>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="app-tv-chart-btm-container padd1 w3-center w3-animate-bottom" style="background: white">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+    <div style="background: white" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 vhght">
+      <div style="background: white" class="padd0" style="overflow: scroll" *ngFor='let key of userInfo'>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="pro-name">{{key['accountName'] == undefined ? 'NA' : key['accountName']}}</div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="pro col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <div class="pers-head">Personal</div>
+            <div class="pers-body">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padd0">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop padd0 pers">
+                  <div class="lef">E-mail</div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padd0 pers">
+                  <div class="rig">{{key['emailAddr'] === undefined ? 'NA' : key['emailAddr']}}</div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padd0">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop padd0 pers">
+                  <div class="lef">PAN</div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padd0 pers">
+                  <div class="rig">{{key['panNo'] == undefined ? 'NA' : ('*' + (key['panNo']).slice(-4))}}</div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padd0">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop padd0 pers">
+                  <div class="lef">Phone</div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padd0 pers">
+                  <div class="rig">{{key['cellAddr'] == undefined ? 'NA' : key['cellAddr']}}</div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padd0">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop padd0 pers">
+                  <div class="lef">DP IDs</div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padd0 pers">
+                  <div class="rig">{{key['dpId'] == undefined ? 'NA' : ('*' + (key['dpId']).slice(-4))}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pro col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <div class="pers-head">Account</div>
+            <div class="acc-body">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 marginTop padd0 pers">
+                  <div class="lef">Segments</div>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8 padd0 pers">
+                  <div class="rig">{{exch}}</div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 marginTop padd0 pers">
+                  <div class="lef">Products</div>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8 padd0 pers">
+                  <div class="rig">{{pCode}}</div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 marginTop padd0 pers">
+                  <div class="lef">Order Types</div>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8 padd0 pers">
+                  <div class="rig">{{prctyp}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pro col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <div class="pers-head">Bank Accounts</div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padd0">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop padd0 pers">
+                <div class="lef">Account</div>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padd0 pers">
+                <div class="rig">
+                  {{key['bankAccountNo'] == undefined ? 'NA' : ('*' + (key['bankAccountNo']).slice(-4))}}</div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padd0">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 marginTop padd0 pers">
+                <div class="lef">Bank</div>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padd0 pers">
+                <div class="rig">{{key['bankName'] == undefined ? 'NA' : key['bankName']}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

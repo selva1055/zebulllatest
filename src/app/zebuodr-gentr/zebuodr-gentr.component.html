@@ -1,0 +1,343 @@
+<div class="container-fluid padd0">
+  <div class="subhead">
+    <div class="container-fluid padd0">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <span><img  (click)="goToHomePage()" src="assets/image/zebu.jpg"
+            style="width: 32px; height: 32px;margin-top: 4px; text-align: left; background-color: #fff;"></span>&nbsp;
+        <!-- </div>
+      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-center"> -->
+        <h4 style="color: #fff;display: inline-block;">ORDER GENERATOR</h4>
+        <span><img  (click)="goToHomePage()" src="assets/image/home.svg"
+          style="width: 25px; height: 32px;margin-top: 4px;float: right;"></span>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid fullpage margT2">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddRL0">
+      <div class="col-md-3 col-md-3 col-sm-12 col-xs-12 genlayout paddRLP0">
+        <!-- [ngClass]="bgColorBStype == 'buy' ? 'genboxshadblue' : 'genboxshadred' "-->
+        <!-- <mat-accordion>
+          <mat-expansion-panel [expanded]="panelOpenState">
+            <mat-expansion-panel-header style="border-bottom: 1px solid #ddd; text-align: center;">
+              <mat-panel-title>
+                  How to...
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <br>
+            <p>
+                Search your script on the top search bar. Gloabl search will show scrips matching your search criteria from
+                all exchanges<br><br>
+                Select your transaction type. Default is 'Buy'.<br><br>
+                Choose the order type and price type. All order types are enabled, but while placing the order, based on
+                user's approved exchange and order type, certain orders may not get executed<br><br>
+                Enter all price information and confirm by clicking 'Buy' or 'Sell'<br><br>
+                Repeat the steps until you add all your scrips/orders<br><br>
+                Share via E-mail or SMS by copying the link generated (OR)<br><br>
+                Share via WhatsApp thru WhatsApp share icon (OR)<br><br>
+                Share via telegram thru Telegram share icon
+            </p>
+          </mat-expansion-panel>
+        </mat-accordion> -->
+        <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center paddTB2 boderBT">
+          <h5><b>How to...</b></h5>
+        </div> -->
+        <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB2">
+          <p>
+            Search your script on the top search bar. Gloabl search will show scrips matching your search criteria from
+            all exchanges<br>
+            Select your transaction type. Default is 'Buy'.<br>
+            Choose the order type and price type. All order types are enabled, but while placing the order, based on
+            user's approved exchange and order type, certain orders may not get executed<br>
+            Enter all price information and confirm by clicking 'Buy' or 'Sell'<br>
+            Repeat the steps until you add all your scrips/orders<br>
+            Share via E-mail or SMS by copying the link generated (OR)<br>
+            Share via WhatsApp thru WhatsApp share icon (OR)<br>
+            Share via telegram thru Telegram share icon
+          </p>
+        </div> -->
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 genlayout paddRL0">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddRL0 paddL02">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddRL0 paddL02">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddRL0 paddL02">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 genbox"
+                [ngClass]="bgColorBStype == 'buy' ? 'genboxshadblue' : 'genboxshadred' ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group"
+                  style="border-radius: 5px;border: 1px solid #777777;">
+                  <span class="input-group-addon bordr0"><i class="glyphicon glyphicon-search"></i></span>
+                  <input type="text" class="form-control text-uppercase bordr0" (input)="getsearchItems($event)"
+                    placeholder="Enter company or symbol" autocomplete="on" id="searchFocus" [(ngModel)]="searchbox">
+                  <ul *ngIf="showList" [class]="searchList.length > 0 ? 'srccroll' : 'srchgt'">
+                    <li *ngFor="let data of searchList" (click)="setSelectVal(data)">
+                      <span>{{data['instrument_name']}} <span class="greylabel">{{data['symbol']}}</span></span>
+                      <span class="exchHglght">{{data['exch']}}</span>
+                    </li>
+                  </ul>
+                </div>
+                <form [formGroup]="ordgenerator" (ngSubmit)="checkIfZero($event)" class="margT4">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margT2" *ngIf="symData">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padd0 margT2" *ngIf="symData"
+                      style="text-align: left;">
+                      <span class="symHead">{{symexch == 'NSE' || symexch == 'BSE' ? symHead : slctdINST }}
+                        <div class="col-lg-0 col-md-0 col-sm-12 col-xs-12 padd0 margT2" *ngIf="symData"
+                          style="text-align: left;">
+                          <span class="greyFT">({{symexch}})</span>
+                        </div>
+                      </span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padd0 margT2" *ngIf="symData"
+                      style="text-align: right;">
+                      <span class="fSize13">₹ {{symPrc}}
+                        <div class="col-lg-0 col-md-0 col-sm-12 col-xs-12 padd0 margT2" *ngIf="symData"
+                          style="text-align: right;">
+                          <span class="greyFT">{{price}}&nbsp;({{perChange}}%)</span>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-7 col-xs-7 margB1 padd0 margT2 buysellAlignRL" *ngIf="symData">
+                    <span class="padd0  justStrt position tabgrp">
+                      <input type="radio" id="day" value="buy" name="bstype" formControlName="bstype"
+                        (click)="buysellType('buy')">
+                      <label for="day" class="boder BUY"
+                        [ngClass]="bgColorBStype == 'buy' ? 'slctdTab' : 'slctdTabsl'">BUY</label>
+                    </span>
+                    <span class="padd0 justStrt position tabgrp">
+                      <input type="radio" id="ioc" value="sell" name="bstype" formControlName="bstype"
+                        (click)="buysellType('sell')">
+                      <label for="ioc" class="boder SELL"
+                        [ngClass]="bgColorBStype == 'buy' ? 'slctdTab' : 'slctdTabsl'">SELL</label>
+                    </span>
+                  </div>
+                  <div [class]="showOpt == true? 'showOptShow' : 'showOpthide'">
+                    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margT2"> -->
+                    <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5 padd0 dispflex justeven position margT10">
+                      <label [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'">MIS
+                        <input type="radio" id="mis" value="mis" name="position" formControlName="position"
+                          (change)="formtypselect()" [attr.disabled]="is_mis">
+                        <span class="checkmark"></span>
+                      </label>
+                      <label *ngIf="!cncvalid" [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> NRML
+                        <input type="radio" id="nrml" value="nrml" name="position" formControlName="position"
+                          (change)="formtypselect()" [attr.disabled]="is_nrml">
+                        <span class="checkmark"></span>
+                      </label>
+                      <label *ngIf="cncvalid" [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> CNC
+                        <input type="radio" id="cnc" value="cnc" name="position" formControlName="position"
+                          (change)="formtypselect()" [attr.disabled]="is_cnc">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0 padd0"></div>
+                    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 padd0 dispflex justeven complexty margT10">
+                      <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> LMT
+                        <input type="radio" name="orderTypeSelect" value="L" id="lOrderType"
+                          formControlName="orderTypeSelect" (change)="formtypselect()" [attr.disabled]="is_lmt">
+                        <span class="checkmark"></span></label>
+                      <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> MKT
+                        <input type="radio" name="orderTypeSelect" value="MKT" id="mOrderType"
+                          formControlName="orderTypeSelect" (change)="formtypselect()" [attr.disabled]="is_mkt">
+                        <span class="checkmark"></span></label>
+                      <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> SL
+                        <input type="radio" name="orderTypeSelect" value="SL" id="slOrderType"
+                          formControlName="orderTypeSelect" (change)="formtypselect()" [attr.disabled]="is_slLmt">
+                        <span class="checkmark"></span></label>
+                      <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> SL-M
+                        <input type="radio" name="orderTypeSelect" value="SL-M" id="sl-mOrderType"
+                          formControlName="orderTypeSelect" (change)="formtypselect()" [attr.disabled]="is_slMkt">
+                        <span class="checkmark"></span></label>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-0 col-xs-0 padd0"></div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margT2">
+                      <div _ngcontent-c1="" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padd0"></div>
+                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 padd0  typflex justEnd tabgrp orderTypeSelect">
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margT2 inputgrp">
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 paddL0">
+                        <label>Qty.</label>
+                        <input type="number" step="{{tikLot}}" min="0" class="form-control" formControlName="quantity"
+                          [attr.disabled]="is_qtyVal">
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 paddR0">
+                        <label>Price</label>
+                        <input type="number" step="{{tikPrc}}" min="0" class="form-control" formControlName="priceVal"
+                          [attr.disabled]="is_priceVal" (blur)="checkTick('price')">
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 paddL0">
+                        <label>Trigger Price</label>
+                        <input type="number" step="{{tikPrc}}" min="0" class="form-control"
+                          formControlName="trigPriceVal" [attr.disabled]="is_trigPriceVal" (blur)="checkTick('tprice')">
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 paddR0">
+                        <label>Stoploss</label>
+                        <input type="number" step="{{tikPrc}}" min="0" class="form-control" formControlName="stplss"
+                          [attr.disabled]="is_stplss" (blur)="checkTick('stoploss')">
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 paddL0">
+                        <label>Target</label>
+                        <input type="number" step="{{tikPrc}}" min="0" class="form-control" formControlName="target"
+                          [attr.disabled]="is_target" (blur)="checkTick('target')">
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 paddR0">
+                        <label>Trailing Stoploss</label>
+                        <input type="number" step="{{tikPrc}}" min="0" class="form-control"
+                          formControlName="tralngstplss" [attr.disabled]="is_tralngstplss"
+                          (blur)="checkTick('tstoploss')">
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 padd0 margT2 inputgrp justeven dispflex">
+                      <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'">REGULAR
+                        <input type="radio" id="regular" value="regular" [attr.disabled]="is_rlgr"
+                          formControlName="complexty" (change)="formtypselect()">
+                        <span class="checkmark"></span></label>
+                      <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> BO
+                        <input type="radio" id="bo" value="bo" formControlName="complexty" [attr.disabled]="is_bo"
+                          (change)="formtypselect()">
+                        <span class="checkmark"></span></label>
+                      <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> CO
+                        <input type="radio" id="co" value="co" formControlName="complexty" [attr.disabled]="is_co"
+                          (change)="formtypselect()">
+                        <span class="checkmark"></span></label>
+                      <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> AMO
+                        <input type="radio" [attr.disabled]="is_amo" id="amo" value="amo" formControlName="complexty"
+                          (change)="formtypselect()">
+                        <span class="checkmark"></span></label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-0 col-xs-0 padd0 margT2 inputgrp justeven dispflex"></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddR0 paddL0">
+                      <span *ngIf="qtyzro" class="redAlert">Qty can't be lesser than 0<br></span>
+                      <span *ngIf="chkqty" class="redAlert">Qty should be multiple of {{tikLot}}<br></span>
+                      <span *ngIf="chkPrc" class="redAlert">Price should be multiple of {{tikPrc}}<br></span>
+                      <span *ngIf="prczro" class="redAlert">Price should be greater than 0<br></span>
+                      <span *ngIf="chkTPrc" class="redAlert">Trigger Price should be multiple of {{tikPrc}}<br></span>
+                      <span *ngIf="thPrc" class="redAlert">Trigger Price should be less than or equal to
+                        Price<br></span>
+                      <span *ngIf="tlPrc" class="redAlert">Trigger Price can't be lesser than Price<br></span>
+                      <span *ngIf="thPrczro" class="redAlert">Trigger Price should be greater than 0<br></span>
+                      <span *ngIf="chkstp" class="redAlert">Stoploss should be multiple of {{tikPrc}}<br></span>
+                      <span *ngIf="stplzero" class="redAlert">Stoploss should be greater than 0<br></span>
+                      <span *ngIf="slLess" class="redAlert">Stoploss should be less than price<br></span>
+                      <span *ngIf="slHigh" class="redAlert">Stoploss should be greater than price<br></span>
+                      <span *ngIf="chktstp" class="redAlert">Trailing Stoploss should be multiple of
+                        {{tikPrc}}<br></span>
+                      <span *ngIf="trgstplss" class="redAlert">Trailing Stoploss should be greater than 0<br></span>
+                      <span *ngIf="chktrgt" class="redAlert">Target should be multiple of {{tikPrc}}<br></span>
+                      <span *ngIf="trail20" class="redAlert">Trailing Stoploss should be minimum of Rs.
+                        {{minTick}}<br></span>
+                      <!-- <span *ngIf="trghPrc" class="redAlert">Stop loss should be less than or equal to Buy Price</span> -->
+                      <span *ngIf="trgetZero" class="redAlert">Target should be greater than 0<br></span>
+                      <span *ngIf="trLess" class="redAlert">Target should be less than price<br></span>
+                      <span *ngIf="trHigh" class="redAlert">Target should be greater than price<br></span>
+                      <span *ngIf="bo_msg" class="fSize10">Target, StopLoss and Trailing Stoploss should be in absolute
+                        values (Ex. Rs.1, Rs.2)<br></span>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margT5 text-right ">
+                      <button type="submit" class="btn cusbtn text-uppercase"
+                        [ngClass]="bgColorBStype == 'buy' ? 'buybtn' : 'sellbtn'">{{bgColorBStype}}</button>
+                      <button type="button" class="btn btn-default cusbtn" (click)="formReset('rst')">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 paddB2LR0" style="border: 1px solid #ddd">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center paddTB2 boderBT">
+          <h5>BASKET ORDERS</h5>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 baskets sideHeadPadd borderbottom"
+          *ngFor="let baskOrd of basketLists;let n=index" style="transition:0.5s">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 baskets" style="padding: 0.5% 0">
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6 padd0 paddTB5">
+              <span class="fSize12 bcBtn text-uppercase padd0">{{baskOrd['trading_symbol']}}</span>&nbsp;<span
+                class="fSize10 bcBtn text-uppercase ">({{baskOrd['exch']}})</span>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 padd0 paddTB5 baskets text-right">
+              <span class="fSize12 bcBtn "><span class="greylabel" title="Qty / Disclosed Qty">
+                  Qty:</span> {{baskOrd['qty']}}<span></span></span>&nbsp;&nbsp;
+              <span class="glyphicon glyphicon-trash dlt" style="font-size:10px" (click)="deleteSelected(n)"></span>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padd0 paddTB5">
+              <span class="fSize12 bcBtn text-uppercase">
+                <span
+                  [class]="baskOrd['transtype'] == 'buy' ? 'buydisp' : 'selldisp'">{{baskOrd['transtype']}}</span>&nbsp;
+                <!-- <span class="fSize12 bcBtn text-uppercase complhead"
+                  *ngIf="baskOrd['complexty'] != 'regular'">{{baskOrd['complexty']}}</span>
+                <span class="fSize12 bcBtn text-uppercase complhead"
+                  *ngIf="baskOrd['complexty'] == 'regular'">{{baskOrd['prctyp']}}</span> -->
+                <span class="fSize12 bcBtn text-uppercase complhead">{{baskOrd['pCode']}} - {{baskOrd['prctyp']}}</span>
+              </span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padd0 paddTB5 baskets text-right">
+              <span class="fSize12 bcBtn"><span class="greylabel"
+                  title="Price/Trigger Price"></span>{{baskOrd['price'] == '--' ? '0.00' : baskOrd['price']}}<span
+                  *ngIf="baskOrd['trigPrice'] > 0">/{{baskOrd['trigPrice']}} trg.</span> </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center paddTB5 marginRL" *ngIf="basketLists.length>0">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddL0 paddR0" *ngIf="!copied">
+            <button type="button" (click)="generateURL()" class="btn btngen btn-sm" data-toggle="modal"
+              data-target="#myModal" *ngIf="!copied" [disabled]="copied">Generate URL</button>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  paddL0 paddR0" *ngIf="!copied">
+            <button type="button" class="btn btn-default btn-sm" (click)="orderRst()" style="border-radius: 0"
+              *ngIf="!copied" [disabled]="copied">Reset</button>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" *ngIf="copied" style="padding: 0px;">
+            <button type="button" class="btn btngen btn-sm" *ngIf="copied" [disabled]="!copied"
+              (click)="copyLink(orderLink)">
+              <img src="assets/images/copy.svg" width="18" height="18">&nbsp;
+              {{copy}}
+            </button>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" *ngIf="copied" style="padding: 0px;">
+            <button type="button" class="btn btngenwp btn-sm" *ngIf="copied" [disabled]="!copied"
+              (click)="openWhatsappShare(orderLink)">
+              <img src="assets/images/whatsapp.svg" width="18" height="18">
+            </button>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" *ngIf="copied" style="padding: 0px;">
+            <button type="button" class="btn btngentg btn-sm" *ngIf="copied" [disabled]="!copied"
+              (click)="openTelegramShare(orderLink)">
+              <img src="assets/images/telegram.svg" width="18" height="18">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal fade " id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content  text-center" style="margin-top: 86%;border-radius: 0;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title ">Order Generation</h4>
+          <h6 class="modal-title ">Order link is generated</h6>
+        </div>
+        <div class="modal-body">
+          <p style="word-break: break-all">
+            <a href="{{orderLink}}" target="_new" #oderlink>{{orderLink}}</a>
+          </p>
+        </div>
+        <div class="modal-footer text-center">
+          <button type="button" class="btn btngen btn-sm" (click)="copyLink(orderLink)">{{copy}}</button>
+          <button type="button" class="btn btngen btn-sm" (click)="openWhatsappShare(orderLink)">
+            Whatsapp
+          </button>
+          <button type="button" class="btn btngen btn-sm" (click)="openTelegramShare(orderLink)">
+            Telegram
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> -->

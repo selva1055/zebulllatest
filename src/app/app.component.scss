@@ -1,0 +1,192 @@
+.top-container {
+  background: #1e3465;
+  color: #fff;
+  padding: 7px 0 7px 0;
+}
+.displayBlock {
+  display: block;
+}
+.displayNone {
+  display: none;
+}
+.common-right {
+  float: right;
+  justify-content: normal !important;
+  padding-top: 6px;
+}
+
+.borderTicker{
+  border: 1px solid #fff;
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: background-color 1s linear;
+}
+
+.borderRed {
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: background-color 1s linear;
+}
+
+.borderGreen {
+  border: 1px solid green;
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: background-color 1s linear;
+}
+
+.common-left {
+  float: left;
+  justify-content: normal !important;
+}
+.white-txt2 {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+}
+label {
+  font-weight: 300;
+}
+.liwhite-txt {
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 400;
+  padding-left: 8px;
+}
+.green-txt {
+  color: #31d120;
+  font-size: 13px;
+  font-weight: 400;
+  padding-left: 8px;
+}
+
+.mtmalgin {
+  margin-right: 80px !important;
+  margin-top: 4px !important;
+}
+
+.pipe {
+  padding: 0 5px 0 5px;
+}
+.foot-link {
+  font-size: 13px;
+  color: #c5cad4 !important;
+  line-height: 25px;
+  font-weight: 400;
+}
+.btn-def {
+  color: #fff;
+  background-color: #fff0;
+  line-height: 1;
+}
+
+.btn-def:active:focus,
+.btn-def:focus {
+  outline: none;
+  outline-offset: -2px;
+}
+.dropdown-menu {
+  top: 140%;
+  left: -63%;
+  font-size: 12px;
+}
+
+.glyphicon-bell {
+  cursor: pointer;
+  color: #fff;
+}
+
+.glyphicon-user {
+  color: #fff;
+}
+
+.center-modal {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%) !important;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+.modal-content {
+  border-radius: 3px !important;
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #fff0;
+}
+input.form-control {
+  font-size: 12px;
+  border-radius: 3px;
+  width: 90%;
+}
+.mat-radio-label-content {
+  font-size: 12px;
+  font-family: "Poppins";
+}
+.bottom-sheet-width {
+  width: 450px !important;
+  height: 450px !important;
+}
+.pointer {
+  cursor: pointer !important;
+}
+
+li {
+  cursor: pointer;
+}
+// toggle-button {
+//   height: 25px;
+// }
+
+.modal-dialog {
+  width: 40%;
+}
+.order-header {
+  color: #fff;
+  font-size: 12px;
+}
+.padd14 {
+  padding-left: 14px;
+}
+.width41 {
+  width: 41%;
+}
+
+/* On screens that are 992px wide or less, go from four columns to two columns */
+@media screen and (max-width: 720px) and (min-width: 320px) {
+}
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 721px) and (min-width: 1200px) {
+}
+
+@media screen and (max-width: 960px) {
+  .modal-dialog {
+    width: 100%;
+    margin: 0px;
+  }
+  .modal-content {
+    height: 100vh;
+  }
+  .paddML5 {
+    padding-left: 5px;
+  }
+  .paddMRLI8 {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  input.form-control {
+    width: 100%;
+  }
+  label {
+    font-weight: 300;
+    font-size: 11px;
+  }
+  .width41 {
+    width: 100%;
+  }
+  .cusbtn {
+    margin-top: 1%;
+  }
+}
