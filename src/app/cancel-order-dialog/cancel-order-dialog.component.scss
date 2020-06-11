@@ -1,0 +1,86 @@
+.conv-title {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 18px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 18px;
+  color: #1f3565;
+}
+.blubtn {
+  background: #2196f3;
+  color: white;
+}
+.btngray {
+  background-color: gray;
+  color: #fff;
+}
+.brdrline {
+  border-top: solid 1px rgba(0, 0, 0, 0.05);
+  // border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+}
+.graylabel {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: gray;
+}
+input[type="number"] {
+  position: relative;
+  margin: 0px 0 0rem;
+  border: 0.5px solid #bbb;
+  padding: 0.2rem;
+}
+.price {
+  margin-top: 30px;
+  font-weight: bold;
+}
+.scripname {
+  margin-top: 10px;
+  text-align: right;
+  margin-bottom: 5px;
+  color: #1f3565;
+}
+table {
+  width: 100% !important;
+}
+.mat-elevation-z8 {
+  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0);
+}
+th {
+  border-top-width: 0.1px !important;
+  border-top-color: rgba(0, 0, 0, 0.05);
+}
+.mat-column-Nstordno {
+  width: 15% !important;
+}
+
+.mat-column-Trsym {
+  width: 15% !important;
+}
+
+.mat-column-Prctype {
+  width: 8% !important;
+}
+
+.mat-column-Qty {
+  width: 5% !important;
+}
+
+.mat-column-Prc {
+  width: 5% !important;
+}
+
+.fsize13 {
+  font-size: 13px !important;
+}
+.padd0 {
+  padding: 0px;
+}
+tr.mat-row {
+  height: 35px !important;
+}
+tr.mat-header-row {
+  height: 45px !important;
+}

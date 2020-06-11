@@ -1,0 +1,15 @@
+<div style="text-align: center;" class="header">
+	<!-- <h4>Index</h4> -->
+</div>
+<div>
+	<mat-list role="list" class="index-scroller">
+		<mat-list-item role="listitem" class="pointer only-show-on-hover fsize14" *ngFor="let idx of indexNames"
+			(click)="setIndexObject(idx)">{{idx['IndexName']}}</mat-list-item>
+	</mat-list>
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!-- doughnut chart -->
+<script src="node_modules/chart.js/src/chart.js"></script>

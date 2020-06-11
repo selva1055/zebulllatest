@@ -1,0 +1,389 @@
+<ngx-ui-loader logoSize="50" fgsColor="white" pbColor="white"></ngx-ui-loader>
+<router-outlet>
+</router-outlet>
+<div class="modal fade" id="editOrders" role="dialog">
+  <div class="modal-dialog center-modal">
+    <div class="modal-content" ngDraggable [handle]="myHandle" [position]='position'>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-body">
+        <form [formGroup]="ordgenerator">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 handle margB2" #myHandle
+            [style.background]="bgColorBStype == 'buy' ? '#2196F3' : '#ff5353'">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 2% 0%;text-align: center;">
+              <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                <span class="symHead">
+                  <span class="editSym">{{editInstrmntname}} &nbsp;&nbsp;<span>{{tikprice}}</span></span>
+                </span>
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                <span class="symHead">
+                  <span class="order-header" style="float: right;">DPR : {{lowPrice}} - {{highPrice}}</span>
+                </span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <span class="symHead">
+                  <span class="order-header"
+                    style="float: left;padding-top: 13px;">{{exchange}}&nbsp;&nbsp;{{change}}&nbsp;&nbsp;({{perchange}}%)</span>
+                </span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 10px;">
+                <span class="symHead" style="float: right;">
+                  <span class=" padd0  justStrt position tabgrp">
+                    <input type="radio" id="day" value="buy" name="bstype" formControlName="bstype"
+                      (click)="buysellType('buy')">
+                    <label for="day" class="boder None"
+                      [ngClass]="bgColorBStype == 'buy' ? 'slctdTab' : 'slctdTabsl'">BUY</label>
+                  </span>
+                  <span class=" padd0  justStrt position tabgrp">
+                    <input type="radio" id="ioc" value="sell" name="bstype" formControlName="bstype"
+                      (click)="buysellType('sell')">
+                    <label for="ioc" class="boder None"
+                      [ngClass]="bgColorBStype == 'buy' ? 'slctdTab' : 'slctdTabsl'">SELL</label>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margB1 text-right" style="padding-right: 7px">
+
+          </div>
+          <div class="showOptShow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 padd0 dispflex justeven position ">
+                <label [ngClass]="bgColorBStype == 'buy' ? 'custmrad' : 'custmrads'">MIS
+                  <input type="radio" id="mis" value="mis" name="position" formControlName="position"
+                    (change)="formtypselect()" class="mis" [attr.disabled]="is_mis">
+                  <span class="checkmark"></span>
+                </label>
+                <label *ngIf="!cncvalid" [ngClass]="bgColorBStype == 'buy' ? 'custmrad' : 'custmrads'"> NRML
+                  <input type="radio" id="nrml" value="nrml" name="position" formControlName="position"
+                    (change)="formtypselect()" class="nrml" [attr.disabled]="is_nrml">
+                  <span class="checkmark"></span>
+                </label>
+
+                <label *ngIf="cncvalid" [ngClass]="bgColorBStype == 'buy' ? 'custmrad' : 'custmrads'"> CNC
+                  <input type="radio" id="cnc" value="cnc" name="position" formControlName="position"
+                    (change)="formtypselect()" class="nrml" [attr.disabled]="is_nrml">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-1 padd0"></div>
+              <div class="col-lg-7 col-md-7 col-sm-8 col-xs-8 dispflex complexty justeven paddML5" style="padding-right: 7px;">
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> LMT
+                  <input type="radio" name="orderTypeSelect" value="L" id="lOrderType" formControlName="orderTypeSelect"
+                    (change)="formtypselect()" [attr.disabled]="is_lmt">
+                  <span class="checkmark"></span></label>
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> MKT
+                  <input type="radio" name="orderTypeSelect" value="MKT" id="mOrderType"
+                    formControlName="orderTypeSelect" (change)="formtypselect()" [attr.disabled]="is_mkt">
+                  <span class="checkmark"></span></label>
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> SL
+                  <input type="radio" name="orderTypeSelect" value="SL" id="slOrderType"
+                    formControlName="orderTypeSelect" (change)="formtypselect()" [attr.disabled]="is_slLmt">
+                  <span class="checkmark"></span></label>
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> SL-M
+                  <input type="radio" name="orderTypeSelect" value="SL-M" id="sl-mOrderType"
+                    formControlName="orderTypeSelect" (change)="formtypselect()" [attr.disabled]="is_slMkt">
+                  <span class="checkmark"></span></label>
+              </div>
+              <!-- <mat-radio-group aria-label="Select an option" class="example-radio-group" formControlName="position">
+                <mat-radio-button id="mis" class="mis" name="position" value="mis" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="is_mis">
+                  MIS
+                </mat-radio-button>
+                <mat-radio-button *ngIf="!cncvalid" id="nrml" class="nrml" name="position" value="nrml"
+                  (change)="formtypselect()" [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'"
+                  [disabled]="is_nrml">
+                  NRML
+                </mat-radio-button>
+                <mat-radio-button *ngIf="cncvalid" id="cnc" class="nrml" name="position" value="cnc"
+                  (change)="formtypselect()" [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'"
+                  [disabled]="is_nrml">
+                  CNC
+                </mat-radio-button>
+              </mat-radio-group>
+              <mat-radio-group aria-label="Select an option" formControlName="orderTypeSelect" class="float-right">
+                <mat-radio-button id="lOrderType" name="orderTypeSelect" value="L" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="is_lmt">
+                  LMT
+                </mat-radio-button>
+                <mat-radio-button id="mOrderType" name="orderTypeSelect" value="MKT" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="is_mkt">
+                  MKT
+                </mat-radio-button>
+                <mat-radio-button id="slOrderType" name="orderTypeSelect" value="SL" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="is_slLmt">
+                  SL
+                </mat-radio-button>
+                <mat-radio-button id="sl-mOrderType" name="orderTypeSelect" value="SL-M" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="is_slMkt">
+                  SL-M
+                </mat-radio-button>
+              </mat-radio-group> -->
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+              <div _ngcontent-c1="" class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padd0"></div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 padd0  typflex justEnd tabgrp orderTypeSelect">
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margT2 inputgrp">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddMRLI8 padd14">
+                <label>Qty</label>
+                <input type="number" step="{{tikLot}}" min="0" class="form-control paddL10" formControlName="quantity"
+                  [attr.disabled]="is_qtyVal" (blur)="pageType != 'orderGenModify' ? checkTick('qty') : ''">
+                <span *ngIf="qtyzro" class="redAlert">Qty can't be lesser than 0</span>
+                <span *ngIf="chkqty" class="redAlert">Qty should be multiple of {{tikLot}}</span>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddMRLI8">
+                <label>Price</label>
+                <input type="number" step="{{tikPrc}}" min="0" class="form-control paddL10" formControlName="priceVal"
+                  [attr.disabled]="is_priceVal" (blur)="pageType != 'orderGenModify' ? checkTick('price') : ''">
+                <span *ngIf="chkPrc" class="redAlert">Price should be multiple of {{tikPrc}}</span>
+                <span *ngIf="prczro" class="redAlert">Price should be greater than 0</span>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddMRLI8">
+                <label>Trigger Price</label>
+                <input type="number" step="{{tikPrc}}" min="0" class="form-control paddL10" formControlName="trigPriceVal"
+                  [attr.disabled]="is_trigPriceVal" (blur)="pageType != 'orderGenModify' ? checkTick('tprice'):''">
+                <span *ngIf="chkTPrc" class="redAlert">Trigger Price should be multiple of {{tikPrc}}</span>
+                <span *ngIf="thPrc" class="redAlert">Trigger Price should be less than or equal to Price</span>
+                <span *ngIf="tlPrc" class="redAlert">Trigger Price can't be lesser than Price</span>
+                <span *ngIf="thPrczro" class="redAlert">Trigger Price should be greater than 0</span>
+                <span *ngIf="isTrigCo" class="redAlert">Trigger Price should be 3% of the price ({{coTrig}})</span>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margT2 padd0">
+              <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8 padd0 margT2 inputgrp dispflex">
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'">REGULAR
+                  <input type="radio" id="regular" value="regular" formControlName="complexty"
+                    (change)="formtypselect()" [attr.disabled]="_rlgr">
+                  <span class="checkmark"></span></label>
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> BO
+                  <input type="radio" id="bo" value="bo" formControlName="complexty" (change)="formtypselect()"
+                    [attr.disabled]="_bo">
+                  <span class="checkmark"></span></label>
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> CO
+                  <input type="radio" id="co" value="co" formControlName="complexty" (change)="formtypselect()"
+                    [attr.disabled]="_co">
+                  <span class="checkmark"></span></label>
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> AMO
+                  <input type="radio" id="amo" value="amo" formControlName="complexty" (change)="formtypselect()"
+                    [attr.disabled]="_amo">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-lg-3 col-md-2 col-sm-4 col-xs-4 padd0 margT2 inputgrp dispflex">
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> DAY
+                  <input type="radio" id="day" value="day" formControlName="complextyType" #D
+                    (change)="formtypselectType(D.value)" [attr.disabled]="_validity_day">
+                  <span class="checkmark"></span>
+                </label>
+                <label [ngClass]="bgColorBStype == 'buy'?'custmrad' : 'custmrads'"> IOC
+                  <input type="radio" id="ioc" value="ioc" formControlName="complextyType" #I
+                    (change)="formtypselectType(I.value)" [attr.disabled]="_validity_ioc">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <!-- <mat-radio-group aria-label="Select an option" formControlName="complexty">
+                <mat-radio-button id="regular" value="regular" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="_rlgr">
+                  RGLR
+                </mat-radio-button>
+                <mat-radio-button id="bo" value="bo" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="_bo">
+                  BO
+                </mat-radio-button>
+                <mat-radio-button id="co" value="co" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="_co">
+                  CO
+                </mat-radio-button>
+                <mat-radio-button id="amo" value="amo" (change)="formtypselect()"
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="_amo">
+                  AMO
+                </mat-radio-button>
+              </mat-radio-group>
+              <mat-radio-group aria-label="Select an option" formControlName="complextyType" class="float-right">
+                <mat-radio-button id="day" value="day" (change)="formtypselectType(D.value)" #D
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="">
+                  DAY
+                </mat-radio-button>
+                <mat-radio-button id="ioc" value="ioc" (change)="formtypselectType(I.value)" #I
+                  [ngClass]="bgColorBStype == 'buy'? 'custmrad' : 'custmrads'" [disabled]="_validity_ioc">
+                  IOC
+                </mat-radio-button>
+              </mat-radio-group> -->
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margT2 inputgrp">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddMRLI8 padd14">
+                <label *ngIf="bo_msg">Stoploss</label>
+                <input *ngIf="bo_msg" type="number" step="{{tikPrc}}" min="0" class="form-control paddL10"
+                  formControlName="stplss" [attr.disabled]="is_stplss" (blur)="pageType != 'orderGenModify' ? checkTick('stoploss') : ''">
+                <span *ngIf="chkstp" class="redAlert">Stoploss should be multiple of {{tikPrc}}</span>
+                <span *ngIf="stplzero" class="redAlert">Stoploss should be greater than 0</span>
+                <span *ngIf="slLess" class="redAlert">Stoploss should be less than price</span>
+                <span *ngIf="slHigh" class="redAlert">Stoploss should be greater than price</span>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddMRLI8">
+                <label *ngIf="bo_msg">Target</label>
+                <input *ngIf="bo_msg" type="number" step="{{tikPrc}}" min="0" class="form-control paddL10"
+                  formControlName="target" [attr.disabled]="is_target" (blur)="pageType != 'orderGenModify' ? checkTick('target'):''">
+                <span *ngIf="chktrgt" class="redAlert">Target should be multiple of {{tikPrc}}</span>
+                <!-- <span *ngIf="trghPrc" class="redAlert">Stop loss should be less than or equal to Buy Price</span> -->
+                <span *ngIf="trgetZero" class="redAlert">Target should be greater than 0</span>
+                <span *ngIf="trLess" class="redAlert">Target should be less than price</span>
+                <span *ngIf="trHigh" class="redAlert">Target should be greater than price</span>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 paddMRLI8">
+                <label *ngIf="bo_msg">Trailing Stoploss</label>
+                <input *ngIf="bo_msg" type="number" step="{{tikPrc}}" min="0" class="form-control paddL10"
+                  formControlName="tralngstplss" [attr.disabled]="is_tralngstplss" (blur)="pageType != 'orderGenModify' ? checkTick('tstoploss'):''">
+                <span *ngIf="chktstp" class="redAlert">Trailing Stoploss should be multiple of {{tikPrc}}</span>
+                <span *ngIf="trgstplss" class="redAlert">Trailing Stoploss should be greater than 0</span>
+                <span *ngIf="trail20" class="redAlert">Trailing Stoploss should be minimum of Rs. {{minTick}}
+                  <br></span>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 inputgrp">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-left paddMRLI8">
+                <label *ngIf="hideDiscQty">Disc. Qty</label>
+                <input type="number" *ngIf="hideDiscQty" step="{{tikPrc}}" min="0"
+                  class="form-control paddL10 width41" formControlName="discQty" [attr.disabled]="is_discloseQty"
+                  (blur)="pageType != 'orderGenModify' ? checkTick('discQty'):''">
+                <span  *ngIf="" class="redAlert">Disclosed quantity should not greater than qty</span>
+                <span *ngIf="chkDisc" class="redAlert">Disclosed quantity should be either 0 or 10% to 100% of
+                  {{tikLot}}. <br></span>
+
+                <span *ngIf="bo_msg" class="fSize10" style="color: #000;">Target, StopLoss and Trailing Stoploss should
+                  be in absolute values
+                  (Ex. Rs.1, Rs.2)<br></span>
+              </div>
+              <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" *ngIf="!bo_msg">
+                <span *ngIf="bo_msg" class="fSize10" style="color: #000;">Target, StopLoss and Trailing Stoploss should be in absolute values
+                  (Ex. Rs.1, Rs.2)<br></span>
+                  <span>&nbsp; &nbsp;</span>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"  *ngIf="is_discloseQty && bo_msg ? true : false">
+                <span *ngIf="bo_msg" class="fSize10" style="color: #000;">Target, StopLoss and Trailing Stoploss should be in absolute values
+                  (Ex. Rs.1, Rs.2)<br></span>
+              </div> -->
+              <!-- <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" *ngIf="_validity_ioc">
+                <span *ngIf="bo_msg" class="fSize10" style="color: #000;">Target, StopLoss and Trailing Stoploss should be in absolute values
+                  (Ex. Rs.1, Rs.2)<br></span>
+                  <span>&nbsp; &nbsp;</span>
+              </div> -->
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right"
+                style="padding-right: 12px; padding-left: 0px;padding-bottom: 15px;">
+                <button type="submit" class="btn cusbtn text-uppercase"
+                  [ngClass]="bgColorBStype == 'buy' ? 'buybtn' : 'sellbtn'"
+                  (click)="saveOrders(editedId,$event);">{{save}}</button>
+                <button type="button" class="btn btn-default cusbtn" data-dismiss="modal"
+                  (click)="resetposition()">Cancel</button>
+              </div>
+            </div>
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 inputgrp">
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-left">
+                <label *ngIf="hideDiscQty">Disc. Qty</label>
+                <input style="width: 41%" *ngIf="hideDiscQty" type="number" step="{{tikPrc}}" min="0"
+                  class="form-control paddL10" formControlName="discQty" [attr.disabled]="is_discloseQty"
+                  (blur)="checkTick('discQty')">
+                <span *ngIf="" class="redAlert">Disclosed quantity should not greater than qty</span>
+                <span *ngIf="chkDisc" class="redAlert">Disclosed quantity should be either 0 or 10% to 100% of
+                  {{tikLot}}. <br></span>
+
+                <span *ngIf="bo_msg" class="fSize10" style="color: #000;">Target, StopLoss and Trailing Stoploss should
+                  be in absolute values
+                  (Ex. Rs.1, Rs.2)<br></span>
+              </div>
+            
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right"
+                style="padding-right: 12px; padding-left: 0px;padding-bottom: 15px;">
+                <button type="submit" class="btn cusbtn text-uppercase"
+                  [ngClass]="bgColorBStype == 'buy' ? 'buybtn' : 'sellbtn'"
+                  (click)="saveOrders(editedId,$event);">{{save}}</button>
+                <button type="button" class="btn btn-default cusbtn" data-dismiss="modal"
+                  (click)="resetposition()">Cancel</button>
+              </div>
+            </div> -->
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal fade" ngDraggable id="support" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 modal-body"
+        style="background: #fff; border: 1px solid #1e346542;border-radius: 5px;">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 handle margB2" [style.background]=" '#1e3465'">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 1%;text-align: center;">
+            <span class="symHead" style="color: white">Customer Support
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 handle margB2">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margB2" style="height:100px">
+              <span class="paddL2"><a class="support-zebu" aria-hidden="true" href="http://www.zebuetrade.com/"
+                  target="_blank"></a></span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margB2">
+              <span class="fSize12 paddL2">SEBI Registration No: <span class="fSize12 fWeight600 paddL2">INZ000174634
+                </span><br>
+                CDSL : <span class="fSize12 fWeight600 paddL2">12080400 </span><br>
+                AMFI ARN : <span class="fSize12 fWeight600 paddL2">113118 </span><br>
+                Research Analyst : <span class="fSize12 fWeight600 paddL2">INH200006044 </span><br>
+                MCX member ID : <span class="fSize12 fWeight600 paddL2">55730 </span><br>
+                NSE member ID : <span class="fSize12 fWeight600 paddL2">13179 </span><br>
+              </span>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margB2" style="height:100px">
+              <span class="fSize16 fWeight600 paddL2">Zebu Share and Wealth Managements Pvt Ltd</span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margB2">
+              <span class="glyphicon glyphicon-earphone">
+              </span>
+              <span class="paddL2"> 93 80 108 010</span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margB2">
+              <span class="glyphicon glyphicon-envelope">
+              </span>
+              <span class="paddL2"> assist@zebuetrade.com</span>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margB2">
+              <span class="glyphicon glyphicon-globe blue">
+              </span>
+              <span class="paddL2"> www.zebuetrade.com</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 1%;">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 fSize10">
+            <span class="paddL20"> ZEBULL Web Version - 1.0 (16 - JUL - 19)</span>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <a class="support-fb" aria-hidden="true" href="https://www.facebook.com/zebuetrade" target="_blank"></a>
+            <a class="support-youtube" aria-hidden="true" href="https://www.youtube.com/zebuetrade" target="_blank"></a>
+            <a class="support-tweeter" aria-hidden="true" href="https://twitter.com/ZebuETrade" target="_blank"></a>
+          </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right " style="padding-right: 11px;">
+          <button type="button" class="btn btn-default cusbtn" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- <input (keyup.control.B)="onkeyup($event)"> -->

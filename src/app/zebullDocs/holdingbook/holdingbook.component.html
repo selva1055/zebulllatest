@@ -1,0 +1,388 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+      <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <span class="titleText">Holdings</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt; <span class="base"> BASE URL </span>&gt; + v1/positionAndHoldings/holdings</p><br>
+            <span class="subTitle">Method</span><br>
+            <P class="title">Get</P>
+            <br>
+            <span class="subTitle">Success Response</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>stat</td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>HoldingVal</td>
+                    <td>JSON Array Containing JSON Object</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Totalval</td>
+                    <td>JSON Object</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>clientid</td>
+                    <td>Client Id</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">Totalval JSON object contains below parameters</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>TotalNSEHoldingValue</td>
+                    <td>Total NSE Holding Value</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>TotalBSEHoldingValue</td>
+                    <td>Total BSE Holding Value </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>TotalMCXHoldingValue</td>
+                    <td>Total MCXCM Holding Value</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>TotalCSEHoldingValue</td>
+                    <td>Total CSE Holding Value</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>TotalYSXHoldingValue</td>
+                    <td> Total YSX Holding Value</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">HoldingVal JSON array contains JSON object with
+                        following parameters.
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Bsetsym</td>
+                    <td>BSE Trading Symbol</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Nsetsym</td>
+                    <td>NSE Trading Symbol</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Mcxsxcmsym</td>
+                    <td>MCXSXCM Trading Symbol</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Csetsym</td>
+                    <td>CSE Trading Symbol</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Ysxtsym</td>
+                    <td>YSX Trading Symbol</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Exch1</td>
+                    <td>Exchange 1</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Exch2</td>
+                    <td>Exchange 2</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Exch3</td>
+                    <td>Exchange 3</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Exch4</td>
+                    <td>Exchange 4</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Exch5</td>
+                    <td>Exchange 5</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Usedqty</td>
+                    <td>CNC Used Quantity</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Holdqty</td>
+                    <td>Holding Quantity</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Ltp</td>
+                    <td>Last Traded Price Of The Scrip</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Btst</td>
+                    <td>BTST Holding</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>Ttrind</td>
+                    <td>TT-Indicator</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Scripcode</td>
+                    <td>Scrip Code</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Series</td>
+                    <td>Series For NSE / CSE</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>Pcode</td>
+                    <td>Product Code</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>Coltype</td>
+                    <td>Collateral Type</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>HUqty</td>
+                    <td>Holdings Update Quantity</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>WHqty</td>
+                    <td>Withheld Holdings Quantity</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>Colqty</td>
+                    <td>Collateral Quantity</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>CUqty</td>
+                    <td>Collateral Update Quantity</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>WCqty</td>
+                    <td>Withheld Collateral Update Quantity</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>Price</td>
+                    <td>Price</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>Haircut</td>
+                    <td>Hair Cut Price</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>LTnse</td>
+                    <td>LT Rate NSE</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>LTbse</td>
+                    <td>LT Rate BSE</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>LTmcxsxcm</td>
+                    <td>LT Rate MCXSXCM</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>LTcse</td>
+                    <td>LT Rate CSE</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>LTysx</td>
+                    <td>LT Rate YSX</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>Tprod</td>
+                    <td>Target Product</td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>Token1</td>
+                    <td>Token 1</td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>Token2</td>
+                    <td>Token 2</td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>Token3</td>
+                    <td>Token 3</td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td>Token4</td>
+                    <td>Token 4</td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>Token5</td>
+                    <td>Token 5</td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td>csflag</td>
+                    <td>Collateral Square-off Flag</td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td>hsflag</td>
+                    <td>Holding Square-off Flag</td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>SellableQty</td>
+                    <td>Qty that can be sold</td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>ExchSeg1</td>
+                    <td>Exchange Segment 1</td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td>ExchSeg2</td>
+                    <td>Exchange Segment 2</td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td>ExchSeg3</td>
+                    <td>Exchange Segment 3</td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td>ExchSeg4</td>
+                    <td>Exchange Segment 4</td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>ExchSeg5</td>
+                    <td>Exchange Segment 5</td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td>NSEHOldingValue</td>
+                    <td>Holding value of each scrip in NSE</td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td>BSEHOldingValue</td>
+                    <td>Holding value of each scrip in BSE</td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td>MCXHOldingValue</td>
+                    <td>Holding value of each scrip in MCXCM</td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td>CSEHOldingValue</td>
+                    <td>Holding value of each scrip in CSE</td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td>YSXHOldingValue</td>
+                    <td>Holding value of each scrip in YSX</td>
+                </tr>
+                <tr>
+                    <td>51</td>
+                    <td>BuyQty</td>
+                    <td>Buy Quantity For CSE</td>
+                </tr>
+                <tr>
+                    <td>52</td>
+                    <td>Series1</td>
+                    <td>Series For BSE</td>
+                </tr>
+                <tr>
+                    <td>53</td>
+                    <td>isin</td>
+                    <td>ISIN For NSE or BSE or MCXCM</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>RESPONSE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td class="b"><li>Session Expired</li><br><li>Not able to Retrieve Holding</li><br><li>No Data</li>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+   <span class="s2">var pUrl = "BASE URL + URL";
+   $.ajax</span>({{'{'}}
+       <span class="s2">url: pUrl,
+       contentType: 'application/json',
+       headers: </span>{{'{'}}
+       <span class="s2">'Authorization': "authorization token"</span>
+       {{'}'}},
+       <span class="s2">type: 'get',
+       crossDomain:<span class="s3">true,</span>
+       success: <span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+       <span class="s2">error: <span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+   {{'}'}});
+ {{'}'}}
+ </pre>
+    </div>
+</div>
+</div>

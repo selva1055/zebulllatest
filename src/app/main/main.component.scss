@@ -1,0 +1,362 @@
+.app-tv-chart-container {
+  height: calc(100vh - 50vh) !important;
+  // height: 350px !important;
+  // height: 80% !important;
+}
+
+.chartafter50per {
+  height: 50%;
+}
+
+.padd4px {
+  padding: 4px;
+}
+
+.paddLR0 {
+  padding: 0%;
+}
+
+.position-head {
+  height: 85%;
+}
+
+.font105 {
+  font-size: 10.5px;
+  color: #000000;
+}
+
+.borderR1 {
+  border-right: 1px solid #ded3d3;
+}
+
+.textcenter {
+  text-align: center !important;
+}
+
+.margintop50 {
+  margin-top: 25%;
+}
+
+.holding-hov {
+  position: absolute;
+  bottom: 10%;
+  left: 33%;
+  display: none;
+}
+
+div.holding-hover:hover div.holding-hov {
+  display: block;
+}
+// .bgcolorGray .holding-hover:hover {
+//   .holding-hov {
+//     display: block;
+//   }
+// }
+
+.position-hov {
+  position: absolute;
+  bottom: 10%;
+  left: 16%;
+  display: none;
+}
+
+.position-hover:hover {
+  .position-hov {
+    display: block;
+  }
+}
+
+.bgcolorYellow {
+  background-color: #ecb311f2 !important;
+  color: #000 !important;
+}
+
+.bgColorRed {
+  background-color: #f65140 !important;
+  color: white !important;
+}
+
+.bgColorBule {
+  background-color: #4078f6 !important;
+  padding: 0px 9px !important;
+  color: white;
+  font-size: 11px;
+  border-radius: 3px !important;
+  line-height: 21px !important;
+  min-width: 0px !important;
+}
+
+.fsize105 {
+  font-size: 10.5px !important;
+  color: #000000;
+  font-family: "Montserrat";
+  text-transform: capitalize;
+}
+.fsize106 {
+  font-size: 10.5px !important;
+  color: #000000;
+  font-family: "Montserrat";
+  text-transform: capitalize;
+}
+
+.paddRL9 {
+  padding: 0px 9px !important;
+}
+
+.actionBtn {
+  min-width: 0px !important;
+}
+
+.inlineH {
+  line-height: 23px !important;
+}
+
+.inst-lbl {
+  padding: 2px;
+  color: black;
+  font-size: 8px;
+  font-weight: initial;
+}
+
+.fright {
+  text-align: right;
+}
+
+.fleft {
+  text-align: left;
+}
+
+.paddTB2 {
+  padding: 2px 0px;
+}
+
+.bgGray {
+  text-align: left;
+  font-size: 10.5px;
+  font-family: "Montserrat";
+  color: grey;
+  background: #8080802b;
+  text-transform: capitalize;
+  padding: 0px 11px 0px 11px;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+}
+
+.bgcolorConvert {
+  background: #808080;
+  color: white;
+}
+
+.bgcolorGray {
+  background: #1e3465;
+  padding: 0px 9px !important;
+  color: white;
+  font-size: 11px;
+  border-radius: 3px !important;
+  line-height: 21px !important;
+  min-width: 0px !important;
+}
+
+.order-hov {
+  position: absolute;
+  bottom: 10%;
+  left: 40%;
+  display: none;
+}
+
+.fSize12 {
+  font-size: 11px !important;
+  // font-family: "poppins";
+  font-family: "Montserrat" !important;
+}
+
+.order-hover:hover {
+  .order-hov {
+    display: block;
+  }
+}
+
+// .border-box {
+//   color: red;
+//   border: red 1px solid;
+//   font-size: 8px;
+//   border-radius: 2px;
+//   padding-left: 2px;
+//   padding-right: 2px;
+//   padding-top: 0px;
+//   padding-bottom: 0px;
+//   font-family: Roboto;
+// }
+.border-box-red {
+  border: none;
+  font-size: 10.5px;
+  border-radius: 2px;
+  background-color: #ff00001a;
+  color: red;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.border-box-blue {
+  border: none;
+  font-size: 10.5px;
+  background-color: #2196f324;
+  border-radius: 2px;
+  color: #2196f3;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.border-box-green {
+  border: none;
+  font-size: 10.5px;
+  background-color: #e1efe1;
+  border-radius: 2px;
+  color: green;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.fSize15 {
+  padding-left: 1px;
+  font-family: "Montserrat";
+  font-size: 12px;
+  text-align: right;
+  padding: inherit;
+  margin-top: 4px;
+  color: black;
+}
+
+// .border-box-green {
+//   color: green;
+//   border: none;
+//   outline: none;
+//   padding-right: 11px;
+//   padding-left: 11px;
+//   padding-top: 2px;
+//   padding-bottom: 2px;
+//   border-radius: 2px;
+//   font-size: 10.5px;
+//   text-transform: uppercase;
+//   background-color: rgba(11, 156, 49, 0.2);
+// }
+
+.button-box-red {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #ff00001a;
+  color: red;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.button-box-blue {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #2196f32e;
+  color: #2196f3;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.button-box-gray {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #80808029;
+  color: gray;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.bgcolorGreen {
+  background-color: #39b3ea !important;
+  padding: 0px 5.5px !important;
+  color: white;
+  font-size: 11px;
+  border-radius: 3px !important;
+  line-height: 21px !important;
+  min-width: 0px !important;
+}
+
+.bgcolorRed {
+  background: #f65140 !important;
+  color: #fff !important;
+  padding: 0px 7px;
+  font-size: 11px;
+  border-radius: 3px !important;
+  line-height: 21px !important;
+  min-width: 0px !important;
+}
+
+.btm-container-scroll {
+  height: calc(100vh - 62vh);
+  overflow-y: auto;
+  // -webkit-user-select: none; /* Safari 3.1+ */
+  // -moz-user-select: none; /* Firefox 2+ */
+  // -ms-user-select: none; /* IE 10+ */
+  // user-select: none; /* Standard syntax */
+}
+
+.data {
+  font-family: "Montserrat";
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+  /* for vertical scrollbars */
+  // height: 12px; /* for horizontal scrollbars */
+}
+
+//New Align POSITIONS//@css
+.dtaexg {
+  border: none;
+  outline: none;
+  font-size: 9px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  letter-spacing: 0.5px;
+  padding-right: 8%;
+  padding-left: 8%;
+}
+
+//NEW ALIGN FOR POSITIONS //@Change on 15-10-2019 - Tuesday//
+.hght {
+  height: 4px;
+  text-align: center;
+}
+
+.greenStatus {
+  color: green;
+}
+
+.redStatus {
+  color: red;
+}
+
+.blueStatus {
+  color: #1442ac;
+}
+
+.padd5 {
+  padding: 5px;
+}
+
+.fWeight200 {
+  font-weight: 200;
+}
+
+a:hover {
+  border-bottom: 2px solid #1e3465;
+}

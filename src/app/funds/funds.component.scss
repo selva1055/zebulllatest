@@ -1,0 +1,164 @@
+body {
+  background: #fff !important;
+}
+.align {
+  padding-left: 25px;
+  margin-top: 5px;
+  text-align: center;
+}
+.text-center {
+  text-align: center !important;
+}
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+.paddTop10 {
+  padding-top: 1rem;
+}
+.paddBtm10 {
+  padding-bottom: 1rem;
+}
+
+.border {
+  border: 1px solid rgb(106, 105, 105);
+}
+
+.paddLeft {
+  padding: 25px 40px 10px 0px;
+}
+.paddLeft1 {
+  padding: 10px 40px 10px 0px;
+}
+.paddLeft3 {
+  padding-left: 3rem;
+  padding-right: 0px;
+}
+.paddRight {
+  padding: 25px 0px 10px 45px;
+}
+.paddRt {
+  padding: 10px 0px 10px 20px;
+}
+.paddRt2 {
+  padding: 10px 0px 10px 53px;
+}
+.pLeft {
+  margin-left: 1rem;
+}
+.paddB30 {
+  padding-bottom: 30px;
+}
+.pRight {
+  margin-right: 0.5rem;
+}
+.paddTB15 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.fleft {
+  float: left;
+}
+.fright {
+  float: right;
+}
+.fontS15 {
+  font-size: 15px;
+  color: #737373;
+}
+.fontS18 {
+  color: #737373;
+  font-size: 18px;
+  font-weight: 500;
+}
+.fontS12px {
+  font-size: 10px;
+}
+.fontS14px {
+  font-size: 14px;
+}
+.fontS16px {
+  font-size: 13px;
+}
+.fontS20px {
+  font-size: 20px;
+}
+.fontSpx {
+  font-size: 8px;
+}
+.textCenter {
+  text-align: center;
+}
+.pr0px {
+  padding-right: 0px;
+}
+.bgcolor {
+  background: #f5f5f5;
+}
+.padd0{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.btn2 {
+  background: #288ee7;
+  color: white;
+  border-radius: 2px;
+  width: 80%;
+  text-align: center;
+  height: auto;
+  font-size: 12px;
+  font-family: "Montserrat";
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.btn1 {
+  background: #039a03;
+  color: white;
+  border-radius: 2px;
+  width: 80%;
+  text-align: center;
+  font-size: 12px;
+  font-family: 'Montserrat';
+  font-weight: 500;
+  letter-spacing: 1px;
+  height: auto;
+}
+.marginBottom10 {
+  margin-bottom: 10px;
+}
+.fSize12 {
+  font-size: 12px !important;
+}
+.textright {
+  text-align: -webkit-right !important;
+}
+// .textEnd {
+//   text-align: center !important;
+//   margin-left: -49px;
+// }
+.mar00 {
+  padding-top: 5px;
+  // margin-left: 25rem;
+}
+
+.border1 {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+@media (min-width: 768px) {
+  .col-sm-5 {
+    width: 41.66666667%;
+  }
+}
+
+h3.header[_ngcontent-c14] {
+  color: #737373;
+}
+
+.h3,
+h3 {
+  font-size: 23px;
+  font-weight: 600;
+}

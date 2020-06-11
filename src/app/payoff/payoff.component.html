@@ -1,0 +1,463 @@
+<nav class="navbar navbar-default own-class" id="topNav">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!-- <a class="navbar-brand" href="#">WebSiteName</a> -->
+      <i class="fa fa-bars bar-1"></i>
+    </div>
+    <ul class="nav navbar-nav navbar-right nav-ul-1">
+      <li><a href="#">Set Alerts</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Support</a></li>
+      <li><a href="#" onclick="logOutUser()">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="navbar navbar-default" id="topheader">
+  <div class="container-fluid">
+      <div class="navbar-header CodespineStyle">
+        <a class="navbar-brand" href="#">Option Bees</a>
+        <i class="fa fa-bars bar-2"></i>
+      </div>
+      <div class="user-name">
+        <i class="fa fa-user" ></i>      
+        <span id="user_name"></span>
+      </div>
+      <ul class="nav nav-ul-2">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="positions.html">Positions</a></li>
+        <li><a href="optionChain.html">Option Chain</a></li>
+        <li><a href="payoffDiagram.html" class="active">Payoff Diagram</a></li>
+        <li><a href="tradeLogs.html">Trade Ledger</a></li>
+      </ul>      
+  </div>
+</nav>
+<div class="bodyStyle"> 
+  <div class="container-fluid" id="rfs_option">
+    <div class="row white-box box-marg">
+      <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+        <div class="panel-body pannel" style="margin-left: 30px;">
+          <div class="script-name">Scrip Name :</div>
+          <div class="radio">
+            <label><input type="radio" name="symbol" style="bottom: 24px;" value="Nifty" (click)="symbolcheck()" checked>Nifty</label><br> 
+            <label><input type="radio" name="symbol" style="top: 18px" value="Banknifty" (click)="symbolcheck()">Bank Nifty</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 nif-bnk-fut panel-body">
+          <table style="width: 100%;border: none">
+            <tr>
+              <td style="font-size: 17px;text-align: left;">
+                <b><span id="chgnif"></span></b>								
+              </td>
+              <td align="right">
+                <b><span id="_nifteeVal" style="font-size: 17px"></span></b>
+                <b><span style="font-size: 11px;" id="_pchnge"></span></b>	
+              </td>
+            </tr>
+            <tr style="border-bottom: none;">
+              <td style="font-size: 15px;text-align: left;">
+                <b>FUTURE</b>
+              </td>
+              <td align="right">
+                  <b><span class="future_price" id="future_price1"></span></b>
+                  <b><span style="font-size: 11px;" id="futPC1"></span></b>								
+                </td>
+            </tr>
+          </table>					
+      </div>
+      <div class="panel-body col-lg-3 col-md-3 col-sm-12 col-xs-12">
+        
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <input list="radio_option" class="form-control searchblk" type="text" placeholder="Search" id="instrmnt" autocomplete="on">
+            <datalist id="radio_option"></datalist>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <input type="text" class="form-control searchblk" id="five_th" min="0" step="any" name="Price" placeholder="Price">
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="input-group" style="display: flex;">
+              <input type="button" value="-" class="button-minus" data-field="quantity">
+              <input type="number" min="0" max="" name="quantity" class="form-control quantity-field" id="lot_val" placeholder="Lot"> 
+              <input type="button" value="" class="button-plus" data-field="quantity">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center red" id="bid_ask" ></div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <button type="button" class="btn btn-xs searchbtnfr" onclick="getStrategyValue('CE')">Buy</button>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <button type="button" class="btn btn-xs searchbtnfl" onclick="getStrategyValue('PE')">Sell</button>
+            </div>
+
+        
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 " style="padding-right: 0;">
+        <div class="panel-body" style="padding:0 0 0 15px">
+          <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6 panel-body paddl0"
+            style="font-size: 12px;padding-bottom: 0px;">
+            <span style="color: grey">Max Pain</span><br>
+            <span id="_maxpain"></span>
+          </div>
+          
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 panel-body paddl0"
+            style="font-size: 12px;padding-bottom: 0px;">
+            <span style="color: grey; ">CE-Highest OI</span><br>
+            <span  id="_highestCeOi"></span>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 panel-body paddl0"
+            style="font-size: 12px;padding-bottom: 0px;">
+            <span style="color: grey;">CE-Unwinding</span><br>
+            <span  id="_ceUnwinding"></span>
+          </div>
+          <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6 panel-body paddl0"
+            style="font-size: 12px;padding-bottom: 0px;">
+            <span style="color: grey;">CE-OI Build-up	</span><br>
+            <span id="_ceBuildUp"></span>
+          </div>
+        </div>
+        
+        <div class=" panel-body"
+          style="padding: 0 0 0 15px">
+          <div class="col-lg-2 col-md-3 col-sm-3 col-xs-6 panel-body paddl0 "
+            style="font-size: 12px;">
+            <span style="color: grey; ">PCR</span><br>
+            <span  id="_pcrVal"></span>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 panel-body paddl0"
+            style="font-size: 12px;">
+            <span style="color: grey;">PE-Highest OI</span><br>
+            <span  id="_highestPeOi"></span>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 panel-body paddl0"
+            style="font-size: 12px;">
+            <span style="color: grey; ">PE-Unwinding</span><br>
+            <span  id="_peUnwinding"></span>
+          </div>
+          <div class="col-lg-4 col-md-3 col-sm-3 col-xs-6 panel-body paddl0"
+            style="font-size: 12px;">
+            <span style="color: grey;">PE-OI Build-up</span><br>
+            <span  id="_peBuildUp"></span>
+          </div>
+        </div>
+      </div>	
+    </div>
+  </div>
+
+  <div class="container-fluid" id="rfs_table">
+    <div class="row">			
+      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 side" >
+        <div class="white-box panel-body" id="tbl1_ht">
+          <!-- <select class="form-control searchblk" id="opexp_Date" onchange="chngExp()"></select> -->
+          <select id="opexp_Date" class="form-control searchblk" [ngModel]="selectedDate" (change)="chngExp($event.target.value)">
+            <option *ngFor="let item of expiry_dates" [value] = "item">
+            {{item}}
+            </option>
+          </select>
+          <div class="panel panel-default" style="margin-bottom: 5px">
+            <div style="text-align: center;padding: 3%">	
+              <button type="button" class="btn btn-xs future_btn_buy" style="float: left;" onclick="pushFutureData('BUY')">Buy</button>
+                <span id="futPCChg"></span>
+              <span class="future_price" id="future_price"></span>							
+              <span style="font-size: 10px;" id="futPC"></span> 
+              <button type="button" class="btn btn-xs future_btn_sell" style="float: right;" onclick="pushFutureData('SELL')">Sell</button>	
+            </div>
+          </div>
+            <table class="table chainTab">
+              <thead id="othead">
+                <tr>
+                  <th>CALL</th>
+                  <th>STRIKE</th>
+                  <th>PUT</th>
+                </tr>
+              </thead>
+              <tbody  id="optdata">
+                <tr *ngIf = "err != true" class = "text-center">No data Available</tr>
+                <tr *ngFor="let item of optionChainTable;let i = index;" id = "row_{{i+1}}">
+                  <td [class] = "item.callsstrikeprice <= nifVal ? 'yellow' : ''">
+                    {{item.callslasttradeprice}}<br>
+                    <span [class] = "item.callsnetchange > 0 ? 'green' : 'red'">
+                      {{item.callsnetchange}}
+                    </span>
+                    <div style="margin-top:5px">
+                      <button type="button" class="btn  btn-sm opbtn" id="cBuy"  onclick="getSelectedValue()">
+                        B
+                      </button>                    
+                      <button type="button" class="btn  btn-sm ocbtn" id="cSell" onclick="getSelectedValue()">
+                        S
+                      </button>
+                    </div>
+                  </td>
+                  <td [class] = "item.callsstrikeprice == nifVal ? 'nifred' : ''">
+                      {{item.callsstrikeprice}}
+                  </td>
+                  <td [class] = "item.callsstrikeprice > nifVal ? 'yellow' : ''">
+                    {{item.putslasttradeprice}}<br>
+                    <span [class] = "item.putsnetchange > 0 ? 'green' : 'red'">
+                      {{item.putsnetchange}}
+                    </span>
+                    <div style="margin-top:5px">
+                      <button type="button" class="btn  btn-sm ocbtn" id="pBuy" onclick="getSelectedValue()">
+                        B
+                      </button>
+                      <button type="button" class="btn  btn-sm opbtn" id="pSell" onclick="getSelectedValue()">
+                        S
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+      <!-- Data Table code -->
+      <div class="col-lg-6 col-md-5 col-sm-8 col-xs-12 side1">
+    
+        <div class="white-box panel-body"  id="tble_ht">
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="op-position">
+                OPEN POSITIONS
+              </div>								
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 "></div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+              <select class="form-control searchblk" id="strategy" onchange="chngpayoff($event)">
+                <option hidden="hidden">Select</option>
+              </select>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2" style="display: flex;padding-left: 0">
+              <div>
+              <i class="fa fa-save"  id="update_stg" style="font-size: 15px;line-height: 2.2;" data-toggle="tooltip" title="Update Strategy"></i>
+              </div>&nbsp;&nbsp;&nbsp;&nbsp;
+              <div>	
+                <i class="fa fa-trash-o"  id="trigger" style="font-size: 15px;line-height: 2.2;"
+                data-toggle="tooltip" title="Delete Strategy!"></i>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-6 col-xs-12 share">
+              
+                <span style="float: left;">
+                  <a href="#" id="reset"  data-toggle="tooltip" title="Reset All !">RESET</a>
+                </span>
+
+              <span style="padding:0 10%;color: black">|</span>		
+      
+                <span>
+                  <a href="#">SHARE</a>
+                </span>
+
+              <span style="padding:0 10%;color: black">|</span>
+
+                <span>
+                  <a href="#" id="reFresh">REFRESH</a>
+                </span>		
+                          
+                                            
+            </div>							
+            <div class="col-md-5 "></div>
+            <div class="col-md-2 col-sm-2 col-xs-6">
+              <a href="#" id="trade_logs" data-toggle="tooltip" title="Save to tradeLogs">Save TradeLogs
+              </a>
+            </div>
+            <!-- <div class="col-md-1" style="margin-left: -18px;">
+              <a href="#" id="update_stg" >Update</a>
+            </div> -->
+            <div class="col-md-2 col-sm-3 col-xs-6">
+              <a href="#" id="saveNew" data-html="true" data-toggle="popover" class="disabled">SaveNew</a>
+              <div id="popup-content" class="hide">
+                <input type="text" class="form-control searchblk" id="pstratagy_name" name="pstratagy_name" placeholder="Stratagy Name" required="required" >
+                  <button class="btn btn-primary btn-xs save" id="psave_stgy" >Save</button>
+                  <button class="btn btn-xs save" id="cancel">Cancel</button>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+          <div class="row">
+            <table id="table1" class="table table-hover nowrap tableadj">
+              <thead >
+                <tr>
+                  <th>Instrument</th>
+                  <th>Qty</th>
+                  <th>Avg Price</th>
+                  <th>LTP</th>
+                  <th>Exit Price</th>
+                  <th>P&L</th>
+                  <th>IV</th>
+                  <th>Delta</th>
+                  <th>Theta</th>
+                  <th></th>										
+                </tr>
+              </thead>				
+            </table>
+            
+            <div id="position_div">
+              <div class="col-lg-4 col-md-4 col-xs-12 col-sm-4">
+                <div class="op-position">
+                  CLOSED POSITIONS
+                </div>										
+              </div>
+
+              <table id="clsd_qty_table" class="table table-hover nowrap tableadj" style="width: 100%;"> 
+                <thead>
+                  <tr>
+
+                    <th>Instrument</th>
+                    <th>Qty</th>
+                    <th>Entry Price</th>
+                    <th>LTP</th>
+                    <th>Exit Price</th>
+                    <th>P&L</th>
+                    <th style="font-size: 13px;">IV</th>
+                    <th style="font-size: 13px;">Delta</th>
+                    <th style="font-size: 13px;">Theta</th>
+                    
+                  </tr>
+                </thead>				
+              </table>
+            </div>								
+            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 " id="tot_details" style="font-weight: bold;font-size: 14px;">
+              <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
+                <span id="tot_delta"></span>
+              </div>
+              <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3" style="padding: 0">
+                <span id="tot_theta"></span>
+              </div>
+              <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
+                <span id="tot_vega"></span>
+              </div>
+              <div class="col-lg-3 col-md-3 col-xs-6 col-sm-3">
+                <span style="float: right;" id="tot_pnl"></span>			
+              </div>
+            </div>
+          </div>
+          <div id="t_note" class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+            Add a position to view position table
+          </div>
+          <div id="execute" class="col-lg-12 col-md-12 col-xs-12 col-sm-12 panel panel-body panel-default" style="margin-top: 2%;padding-bottom: 13px">
+            <div class="col-md-10">
+              <div class="col-md-6 dis cent" style="margin-top: 1.2%">
+                <div class="col-md-5 col-xs-12">
+                  <span class="net_cred">Lock Debit &nbsp;</span>
+                </div>
+                <div class="col-md-2">
+                  <b style="font-size: 16px"> < </b>
+                </div>
+                <div class="col-md-5 col-xs-12" style="padding: 0">
+                  <input type="text" class="form-control searchblk" id="net_debit_exe" name="netDebit" placeholder="Net Debit" required="required">
+                </div>
+              </div>
+              <div class="col-md-6 dis2 cent" style="margin-top: 1.2%">
+                <div class="col-md-5 col-xs-12">
+                  <span class="net_deb">Lock Credit &nbsp;</span>
+                </div>
+                <div class="col-md-2">
+                  <b style="font-size: 16px"> > </b>
+                </div>
+                <div class="col-md-5 col-xs-12" style="padding: 0">
+                  <input type="text" class="form-control searchblk" id="net_credit_exe" name="netCredit" placeholder="Net Credit" required="required">	
+                </div>	
+              </div>										
+            </div>						
+            <div class="col-md-2 col-xs-12 cent">
+              <button class="btn-exe">Execute</button>							
+            </div>
+          </div>  
+        </div>
+      </div>
+
+      <!-- modal -->
+      <div class="modal fade" id="editLegs">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" style="text-align: center;font-weight: bold;"></h4>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                <div class="col-md-3">
+                  <!-- <label>Instrument<p><input type="text" class="input-sm" id="instrument" disabled/></p></label> -->
+                  <label>Instrument<p><input list="radio_option" class="input-sm" type="text" placeholder="Search" id="instrument" autocomplete="on" />
+              <datalist id="radio_option2"></datalist></p></label>
+                  <label>Entry Quantity<p><input type="number" class="input-sm" id="qty"/></p></label>
+                  <label>Average Price<p><input type="text" class="input-sm" id="avgPrice" /></p></label>	
+                </div>
+                <div class="col-md-3">
+                  <label>LTP<p><input type="number" class="input-sm" id="_ltp" disabled/></p></label>
+                  <label>Exit Quantity<p><input type="number" onkeypress="return isNumberKey(event)" class="input-sm required" id="exit_qty" autocomplete="off" /></p><span id="er" style="font-size: 11px"></span></label>
+                  <label>Exit Price<p><input type="number" class="input-sm" id="exitPrice" /></p></label>
+                </div>
+                <div class="col-md-2">
+                  <label><p><input type="hidden" class="input-sm" id="iv" readonly/></p></label>
+                  <label><p><input type="hidden" class="input-sm" id="delta" readonly /></p></label>
+                  <label><p><input type="hidden" class="input-sm" id="theta" readonly /></p></label>
+                  <label><p><input type="hidden" class="input-sm" id="pnl" readonly /></p></label>
+                  <label><p><input type="hidden" class="input-sm" id="strategy_id" readonly /></p></label>
+                  <label><p><input type="hidden" class="input-sm" id="strategy_name" readonly /></p></label>
+                  <label><p><input type="hidden" class="input-sm" id="symbol" readonly /></p></label>
+                  <label><p><input type="hidden" class="input-sm" id="option_type" readonly /></p></label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="button" id="modalSave"  class="btn btn-primary"  value="Save changes">
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      
+      <!-- Amchart code -->
+      <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+        <div class=" white-box" id="third_col">
+          <div class="row">						
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!-- TradingView Widget BEGIN -->
+                <div id="aapl" style="padding: 2.2% 1.5% 0.5%" >
+                  <div class="tradingview-widget-container">
+                      <div id="tradingview_2654d"></div>									  
+                  </div>
+                </div>
+                <!-- TradingView Widget END -->								
+              <div id="chartdiv"></div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div id="slider"></div>					
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="panel panel-body panel-default pay-box" id="p_details">
+                <div class="pay-details" id="net_c">
+                  <div>Net credit</div>
+                  <span id="netCredit"></span>
+                </div>
+                <div class="pay-details" id="net_d">
+                  <div>Net Debit</div>
+                  <span id="netDebit"></span>
+                </div>
+                <div class="pay-details">
+                  <div>Max Profit</div>
+                  <span id="maxProfit"></span>
+                </div>
+                <div class="pay-details">
+                  <div>Max Loss</div>
+                  <span id="maxLoss"></span>
+                </div>
+                <div class="pay-details">
+                  <div>Breakevens</div>
+                  <span id="breakEven"></span>
+                </div>
+              </div>								
+            </div>
+          </div>					
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

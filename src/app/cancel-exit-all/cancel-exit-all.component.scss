@@ -1,0 +1,108 @@
+.conv-title {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 18px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 18px;
+  color: #1f3565;
+}
+.blubtn {
+  background: #2196f3;
+  color: white;
+}
+.btngray {
+  background-color: gray;
+  color: #fff;
+}
+.brdrline {
+  border-top: solid 1px rgba(0, 0, 0, 0.05);
+}
+.graylabel {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: gray;
+}
+
+.button-box-red {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #ff00001a;
+  color: red;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding: 2px 12px;
+  margin-right: 10px;
+}
+.mat-elevation-z8 {
+  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.button-box-blue {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #2196f32e;
+  color: #2196f3;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  padding: 2px 12px;
+  margin-right: 10px;
+}
+button {
+  // Remove focus around button
+  outline: none;
+  background: transparent;
+}
+.fzize12 {
+  font-size: 12px;
+}
+.thead {
+  font-weight: 0;
+  font-size: 11px;
+  color: gray;
+  font-size: 13px;
+}
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+table {
+  width: 100% !important;
+}
+.padd0 {
+  padding: 0px;
+}
+.fsize13 {
+  font-size: 13px;
+}
+tr.mat-row {
+  height: 35px !important;
+}
+tr.mat-header-row {
+  height: 45px !important;
+}
+.mat-column-Trantype {
+  width: 5% !important;
+}
+
+.mat-column-Trsym {
+  width: 15% !important;
+}
+
+.mat-column-Qty {
+  width: 8% !important;
+}
+
+.mat-column-Pcode {
+  width: 8% !important;
+}
+
+.mat-column-Validity {
+  width: 8% !important;
+}

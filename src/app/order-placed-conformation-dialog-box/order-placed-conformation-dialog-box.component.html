@@ -1,0 +1,11 @@
+<h3 mat-dialog-title>Alert</h3>
+<div mat-dialog-content>
+  <p>This basket order has been already placed <br>
+    Do you still want to place it again?<br>
+    <b>Note:</b> If you want to see the status go to order window
+  </p>
+</div>
+<div mat-dialog-actions style="float: right;padding: 10px;">
+  <button mat-button (click)="onNoClick()">No</button>
+  <button mat-button (click)="onYesClick()">Yes</button>
+</div>

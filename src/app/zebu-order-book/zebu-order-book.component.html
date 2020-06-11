@@ -1,0 +1,150 @@
+<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:3%;"> -->
+    <div class="container-fluid" id="container">
+        <div class="inheritHght margT1">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inheritHght">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padd0 inheritHght" style="background: white;position:relative;">
+                    <!-- Search Box -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group paddTB2 boderBT ">
+                        <span class="input-group-addon bordr0">
+                        <i class="glyphicon glyphicon-search"></i></span>
+                        <input type="text" class="form-control text-uppercase bordr0" name="searchbox"
+                        placeholder="Enter company or symbol" autocomplete="on" id="searchFocus">
+                        <ul *ngIf="showList" [class]="searchList.length > 6 ? 'srccroll' : 'srchgt'" class="dropdown-menu">
+                        <li *ngFor="let data of searchList" (click)="setSelectVal(data)">
+                            <span>{{data['instrument_name']}} <span class="greylabel">{{data['symbol']}}</span></span>
+                            <span class="exchHglght">{{data['exch']}}</span>
+                        </li>
+                        </ul>
+                    </div>
+                    <!-- Market Watch Data-->
+            
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB2 boderBT hoverparent" *ngFor="let scrips of scripsmkt;let i=index" (click)="showDepth(scrips,i)" >
+            
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 paddTB2P">
+                        <div class="fSize12 bcBtn text-uppercase">{{scrips['TradSym']}} <span
+                            class="fSize10 bcBtn text-uppercase ">{{scrips['Exchange']}}</span></div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 baskets text-right paddTB4P">
+                        <div class="fSize12 bcBtn text-uppercase">
+                            <span Class="greylabel"
+                            [style.color]="scrips['ltp']-scrips['close'] < 0 ? 'red' : scrips['ltp']-scrips['close'] > 0 ? 'green' : 'black'  ">({{(scrips['ltp']-scrips['close']).toFixed(2)}})</span>&nbsp;
+                            <span class="greylabel">{{(scrips['Change']/scrips['close']).toFixed(2)}} %</span>&nbsp;&nbsp;&nbsp;
+                            <span [style.color]="scrips['prevLtp'] < scrips['ltp'] ?'green':'red'"
+                            [ngClass]="scrips['prevLtp'] < scrips['ltp'] ? 'glyphicon glyphicon-menu-up' : 'glyphicon glyphicon-menu-down'"></span>&nbsp;&nbsp;
+                            <span [style.color]="scrips['prevLtp'] < scrips['ltp'] ?'green':'red'"> {{scrips['ltp']}}</span>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="fSize10 bcBtn text-uppercase">
+                            <span Class="greylabel"> Open :</span>
+                            <span class="fSize12 bcBtn text-uppercase ">{{scrips['open']}}</span>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center">
+                        <div class="fSize10 bcBtn text-uppercase">
+                            <span Class="greylabel">High :</span>
+                            <span class="fSize12 bcBtn text-uppercase ">{{scrips['high']}}</span>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center">
+                        <div class="fSize10 bcBtn text-uppercase">
+                            <span Class="greylabel">Low :</span>
+                            <span class="fSize12 bcBtn text-uppercase ">{{scrips['low']}}</span>
+                        </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-right">
+                        <div class="fSize10 bcBtn text-uppercase">
+                            <span Class="greylabel">Close :</span>
+                            <span class="fSize12 bcBtn text-uppercase ">{{scrips['close']}}</span>
+                        </div>
+                        </div>
+                        <!--hover show button-->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddT1 hoverBtn" id="hoverBtn">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <button type="button" class="btn  btn-sm btnwidsq buybtn"  (click)="scripsPOrd(scrips,'buy')">B</button>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <button type="button" class="btn btn-sm btnwidsq sellbtn " (click)="scripsPOrd(scrips,'sell')">S</button>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <button type="button" class="btn btn-default btn-sm btnwidsq" ><span class="glyphicon glyphicon-align-right"></span></button>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <button type="button" class="btn btn-default btn-sm btnwidsq" ><img src="assets/images/chart.svg" style="width: 100%;"></button>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <button type="button" class="btn btn-default btn-sm btnwidsq"  (click)="scripsPOrd(scrips,'del')"><span class="glyphicon glyphicon-trash"></span></button>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <button type="button" class="btn btn-default btn-sm btnwidsq" ><span class="glyphicon glyphicon-option-horizontal"></span></button>
+                        </div>
+                        </div>
+                        <!-- depth -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddT1" *ngIf="scrips['showDP']">
+                        <!--depth buy-->
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize12 padd0 text-left">BID</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize12 padd0 text-center">ORDERS</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize12 padd0 text-right">QTY.</div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <!--depth sell-->
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize12 padd0 text-left">BID</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize12 padd0 text-center">ORDERS</div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize12 padd0 text-right">QTY.</div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Depth View  -->
+                    <footer>
+                        <ul class="pagination pagination-lg margB0 inheritWdth boderTP boderBT bodRad0">
+                        <li [ngClass]="{'active': selectedItem == mwgrp1}" class="" (click)="marktgrp(mwgrp1)"><a>1</a></li>
+                        <li [ngClass]="{'active': selectedItem == mwgrp2}" class="" (click)="marktgrp(mwgrp2)"><a>2</a></li>
+                        <li [ngClass]="{'active': selectedItem == mwgrp3}" class="" (click)="marktgrp(mwgrp3)"><a>3</a></li>
+                        <li [ngClass]="{'active': selectedItem == mwgrp4}" class="" (click)="marktgrp(mwgrp4)"><a>4</a></li>
+                        <li [ngClass]="{'active': selectedItem == mwgrp5}" class="" (click)="marktgrp(mwgrp5)"><a>5</a></li>
+                        </ul>
+                    </footer>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" >
+                        <table datatable class="row-border hover" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" style="background: white">
+                            <thead>
+                                <tr class="text-capitalize fSize12">
+                                    <th>Order ID</th>
+                                    <th>Buy/Sell</th>
+                                    <th>Time/Date</th>
+                                    <th>Prod.</th>
+                                    <th>Complexity</th>
+                                    <th>Ord.Type</th>
+                                    <th>Instrument</th>
+                                    <th>Qty</th>
+                                    <th>Exe. Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="fSize12 text-capitalize">
+                                <tr *ngFor="let order of ordersBook">
+                                    <td>{{order['Nstordno']}}</td>
+                                    <td>{{order['Trantype']}}</td>
+                                    <td>{{order['OrderedTime']}}</td>
+                                    <td>{{order['Pcode']}}</td>
+                                    <td>{{order['Prctype']}}</td>
+                                    <td>{{order['Prctype']}}</td>
+                                    <td>{{order['Trsym']}} <span>({{order['Exchange']}})</span></td>
+                                    <td>{{order['Qty']}}</td>
+                                    <td>{{order['Prc']}} </td>
+                                    <td class="text-capitalize ctooltip"><span>{{order['Status']}}</span> 
+                                        <span class="tooltiptext">
+                                        {{order['RejReason']}}
+                                        </span>
+                                    </td>
+                                </tr>
+                    
+                            </tbody>
+                        </table>
+                    </div>
+                        <!-- <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 margT2"></div> -->
+                        <!-- </div> -->
+            </div>
+        </div>          
+    </div>

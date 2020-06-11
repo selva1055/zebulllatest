@@ -1,0 +1,18 @@
+<nav>
+  Security Trade Alert
+</nav>
+<br>
+<div class="scrip-head">
+  <span style="float: left;">{{data['TradSym']}} <span
+      style="color: gray;font-size: 12px;">({{data['Exchange']}})</span></span>
+  <span style="float: right;">{{data['ltp']}}</span>
+</div>
+<mat-grid-list cols="2" rowHeight="7:1" style="padding: 0 5%;">
+  <mat-form-field style="width: 100%">
+    <input matInput type="number" id="price" class="number" placeholder="Enter your price">
+  </mat-form-field>
+</mat-grid-list>
+<div class="closebtn">
+  <button mat-stroked-button style="margin: 0 2%;" color="basic" (click)="closeModelBox()">Close</button>
+  <button mat-stroked-button style="margin: 0 2%;" color="tertiary" (click)="subscribeTradeAlert()">Subscribe</button>
+</div>

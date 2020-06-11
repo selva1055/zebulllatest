@@ -1,0 +1,153 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderB0 paddRL0" *ngIf="emptytablesegment">
+  <mat-tab-group class="ordertable" (selectedTabChange)="getPositionSegments($event.index)">
+    <mat-tab *ngFor="let tab of segmentlist">
+      <ng-template mat-tab-label>
+        {{tab}}
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 example-table-container paddRL42">
+  <table class="marginT30" *ngIf="emptytable">
+    <tr>
+      <th class="fSize14 tleft paddL15">
+        <mat-checkbox [(ngModel)]="positioncheck" (change)="selectHoldingCheckBox($event,'')"></mat-checkbox>
+      </th>
+      <th class="fSize14 tleft">Instrument</th>
+      <th class="fSize14 tleft">Product</th>
+      <th class="fSize14 tright">Qty</th>
+      <th class="fSize12 tright">Buy Avg</th>
+      <th class="fSize12 tright">Sell Avg</th>
+      <th class="fSize12 tright">LTP</th>
+      <th class="fSize12 tright paddR15">MTM</th>
+    </tr>
+    <tr *ngFor="let element of position">
+      <td class="fSize12 tleft paddL15" [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''">
+        <mat-checkbox [(ngModel)]="element['checked']" (change)="selectHoldingCheckBox($event,element)"
+          [disabled]="element.Pcode == 'BO' || element.Pcode == 'CO' || element.Pcode == 'AMO' ||  element['Netqty'] == 0 ? true : false ">
+        </mat-checkbox>
+      </td>
+      <td class="fSize12 tleft" [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''">
+        <div class="floatType">
+          <div class="info">
+            <span
+              *ngIf="element['Instname'] == 'OPTIDX' || element['Instname'] == 'OPTSTK' || element['Instname'] == 'OPTFUT' || element['Instname'] == 'OPTCUR'"
+              class="tradSym">{{element['instrumentOptidx']}}</span>
+            <ng-container *ngIf="element['Instname'] != null || element['Instname'] != undefined">
+              <span *ngIf="element['Instname'].startsWith('FUT')" class="tradSym">{{element['instrumentFut']}}</span>
+            </ng-container>
+            <span *ngIf="element['Exchange'] =='NSE' || element['Exchange'] == 'BSE'" class="tradSym">
+              {{element['Symbol']}}
+            </span>
+            <span [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''" class="cls-exchng">{{element.Exchange}}</span>
+          </div>
+          <div style="float: right;" *ngIf="element['Netqty'] != 0"
+            class="btn-group btn-group-xs hide-btn-group actions">
+            <button mat-raised-button class="addbtn" (click)="openPositionInfo(element)">INFO</button>&nbsp;
+            <button mat-raised-button class="addbtn" (click)="goToPositionAdd(element)">ADD</button>&nbsp;
+            <button mat-raised-button
+              *ngIf="element.Pcode == 'CNC' || element.Pcode == 'MIS' || element.Pcode == 'NRML'" class="exitbtn"
+              (click)="goToPositionExit(element)">EXIT</button>&nbsp;
+            <button mat-raised-button
+              *ngIf="element.Pcode == 'CNC' || element.Pcode == 'MIS' || element.Pcode == 'NRML'" class="convertbtn"
+              (click)="convertPosition(element)">CONV</button>
+          </div>
+          <!-- <div style="float: right; padding-right: 5%;" class="btn-group btn-group-xs hide-btn-group actions">
+            <button mat-raised-button [matMenuTriggerFor]="belowMenu" style="border: 1px solid #1f3565;">
+              <img mat-button src="assets/image/hor_more.svg" style="width: 100%;">
+            </button>
+            <mat-menu #belowMenu="matMenu" yPosition="below">
+              <div class="fSize12">
+                <button mat-menu-item class="fSize12" (click)="openPositionInfo(element)">Info</button>
+              </div>
+              <div class="fSize12" *ngIf="element['Netqty'] != 0">
+                <button mat-menu-item class="fSize12" (click)="goToPositionAdd(element)">Add</button>
+              </div>
+              <div class="fSize12" *ngIf="element['Netqty'] != 0">
+                <button mat-menu-item
+                  *ngIf="element.Pcode == 'CNC' || element.Pcode == 'MIS' || element.Pcode == 'NRML'" class="fSize12"
+                  (click)="goToPositionExit(element)">Exit</button>
+              </div>
+              <div class="fSize12" *ngIf="element['Netqty'] != 0">
+                <button mat-menu-item
+                  *ngIf="element.Pcode == 'CNC' || element.Pcode == 'MIS' || element.Pcode == 'NRML'" class="fSize12"
+                  (click)="convertPosition(element)">Convert</button>
+              </div>
+            </mat-menu>
+          </div> -->
+        </div>
+      </td>
+      <td class="fSize12 tleft" [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''">
+        {{element.Pcode}}
+      </td>
+      <td class="fSize12 tright" [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''">
+        {{element.Netqty}}
+      </td>
+      <td class="fSize12 tright" [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''">
+        {{element.Buyavgprc}}
+      </td>
+      <td class="fSize12 tright" [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''">
+        {{element.Sellavgprc}}
+      </td>
+      <td class="fSize12 tright" [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''">
+        {{element.LTP}}
+      </td>
+      <td class="fSize12 tright paddR15" [ngClass]="element['Netqty'] == 0 ? 'fadeColor' : ''">
+        <span
+          [ngClass]="element['MtoM'] >  0 ? 'clas-mtompastve': 0 >  element['MtoM'] ? 'clas-mtomnegv' : element['MtoM'] == 0 ? 'clas-gray':'clas-mtomnone'">
+          {{element.MtoM}}
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>
+        <span class="commomexit" style="float: left;">
+          <button mat-flat-button [disabled]="!showOverAllExit" class="exitallbtn"
+            (click)="openAllPositionExitConfirmation()">EXIT</button>
+        </span>
+      </td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td class="fSize12 tright">Total MTM</td>
+      <td class="fSize12 tright paddR15">
+        <span
+          [class]="totalvalue == 0 ? 'clas-mtomnone':totalvalue > 0  ? 'clas-mtompastve-red': 'clas-mtomnegv-green' ">&nbsp;
+          {{this.totalvalue}}</span>
+      </td>
+    </tr>
+  </table>
+  <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;" *ngIf="emptytablemsg">
+    <div>
+      <img src="assets/image/noDataInfo.svg" alt="" width="100" height="100">
+      <span style="color: #000000de; font-size: 18px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO {{sengmenttypes}}
+        POSITION</span>
+    </div>
+    <div style="padding-top: 30px !important;">
+      <span style="color: #000000de; font-size: 14px;">
+        Use MIS orders to add positions. <br>
+        Use regular Buy / Sell <br>
+        OR<br>
+        Quick Buy / Sell to place orders
+      </span>
+    </div>
+  </div>
+
+</div>
+
+<div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;" *ngIf="showDatafound">
+  <div>
+    <img src="assets/image/noDataInfo.svg" alt="" width="100" height="100">
+    <span style="color: #000000de; font-size: 18px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO POSITION FOUND</span>
+  </div>
+  <div style="padding-top: 30px !important;">
+    <span style="color: #000000de; font-size: 14px;">
+      Use MIS orders to add positions. <br>
+      Use regular Buy / Sell
+      OR
+      Quick Buy / Sell to place orders
+    </span>
+  </div>
+</div>

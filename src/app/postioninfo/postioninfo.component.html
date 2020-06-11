@@ -1,0 +1,141 @@
+<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<span>MIS</span><span>NIFTY</span><span>Closed</span>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+</div> -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top:20px">
+    <mat-grid-list cols="2" rowHeight="50px" style="position:relative;display:block">
+        <mat-grid-tile>
+            <div class="pbtn" style="display: inline-block !important;">
+                {{info.Pcode}}</div>
+            <div class="inlineBlock fsize13 paddL15">
+                {{info.Tsym}}<span class="fSize10"> {{info.Exchange}}</span>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<!-- 
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB15">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <span class="type"> BUY</span>&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- <span class="headerType">{{info['Symbol']}}<span class="subheader">&nbsp;{{info['Exchange']}}</span></span> -->
+<!-- <span class="fright status">TRIGGER PENDING</span> -->
+<!-- </div> -->
+<!-- </div> -- -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddLR30">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderBottom">
+        <!-- &nbsp; -->
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingTop15 overflow">
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 borderRigth paddMLR0">
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+            <span class="leftSide">Qty</span>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0 ">
+            <span class="rightSide fleft">{{info.Netqty}}</span>
+        </div>
+        <!-- <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+            <span class="leftSide">Order Type</span>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+            <span class="rightSide fleft">0.00</span>
+        </div> -->
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+            <span class="leftSide">BEP</span>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+            <span class="rightSide fleft">{{info.BEP}}</span>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+            <span class="leftSide">LTP</span>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+            <span class="rightSide fleft">{{info.LTP}}</span>
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+            <span class="leftSide">MTM</span>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+            <span class="rightSide fleft">{{info.MtoM}}</span>
+        </div>
+        <!-- <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+            <span class="leftSide">Start Date</span>
+        </div> -->
+        <!-- <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+            <span class="rightSide fleft">{{info['IsuStartDate']}}</span>
+        </div> -->
+        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+            <span class="leftSide">Realized MTM</span>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+            <span class="rightSide fleft">{{info.realisedprofitloss}}</span>
+        </div>
+    </div>
+
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 paddL30 paddMLR0">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddRL0">
+            <span class="leftSide" style="font-size:13px;color:black;">Buys</span>
+        </div>
+        <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="leftSide">{{info.netsellqty}}</span>
+        </div> -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="leftSide">Total Buy Qty</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="rightSide fright">{{info.netbuyqty}}</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="leftSide">Buy Avg Price
+            </span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="rightSide fright">{{info.netbuyamt}}</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="leftSide">Buy Value</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="rightSide fright">{{info.netbuyamt}}</span>
+        </div>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 paddL30 paddMLR0">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddRL0">
+            <span class="leftSide" style="font-size:13px;color:black;">Sells</span><br>
+        </div>
+        <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="leftSide">{{info.netsellqty}}</span><br>
+        </div> -->
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="leftSide">Total Sell Qty </span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="rightSide fright">{{info.netsellqty}}</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="leftSide">Sell Avg Price c </span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="rightSide fright">{{info.CFSellavgprc}}</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="leftSide">Sell Value</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+            <span class="rightSide fright">{{info.netSellamt}}</span>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddLR30 paddingTop15">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderBottom">
+        <!-- &nbsp; -->
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingTop15">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 txtend">
+        <!-- <button mat-stroked-button color="primary">Primary</button> &nbsp;&nbsp; -->
+        <button mat-stroked-button class="btnClose" (click)="closeModelBox()">Close</button>
+    </div>
+</div>

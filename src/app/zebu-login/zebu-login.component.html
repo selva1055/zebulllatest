@@ -1,0 +1,445 @@
+<div class="col-md-12 loginbg " *ngIf="show_hide_flag==1">
+  <div class="row h-100 align-items-center" style="overflow: hidden;">
+    <div class="col-lg-5 col-md-12 mx-auto">
+      <div class="row row-eq-height login-wrapper">
+        <div class="col-lg-6 col-md-12 col-xs-12 login-left p-5 text-center show_hide webdevice">
+          <div class="row">
+            <div class="col-lg-12 col-xs-12 align-self-end">
+              <img src="../assets/images/zebull_logo.jpeg" alt="image">
+            </div>
+            <div class="col-md-12 col-xs-12 align-self-center welcome" style="margin-top: 20px;">
+              <h1 class="font"><b>ZEBULL</b> </h1><br>
+              <div class="align-self-center;">
+                <p style="font-weight: 400;margin-top: 20% !important;font-family: 'Montserrat' !important;">Zebu's web trading platform</p>
+              </div>
+            </div>
+          </div>
+
+          <footer class="footer">
+            <div class="footer-copyright text-center py-3 fontFam">
+              <a class="footer-3" href="https://zebull.in/#/ordergen" target="_blank">Order Generator</a> |
+              <a class="footer-3" href="http://coearn.zebuetrade.com" target="_blank">CoEarn</a>
+              <br>
+              <a class="footer-3" href="https://zebull.in/#/zebullDoc/intro" target="_blank">API Documentation</a>
+            </div>
+            <div class="footer-copyright text-center py-3">
+              <a class="footer-3" href="https://www.nseindia.com/">NSE</a> |
+              <a class="footer-3" href="https://www.bseindia.com/">BSE</a> |
+              <a class="footer-3" href="https://www.mcxindia.com/">MCX</a> |
+              <a class="footer-3" href="https://www.sebi.gov.in/">SEBI</a>
+            </div>
+            <div class="footer-copyright text-center" style="color: #fff !important;">
+              <a class="footer-3" href="http://www.zebuetrade.com/disclaimer/">Risk Disclosure</a> |
+              <a class="footer-3" href="http://www.zebuetrade.com/privacy-policy/">Security</a><br>
+              <a class="footer-3" href="http://www.zebuetrade.com/terms-conditions/">Terms and Conditions</a>
+            </div>
+          </footer>
+        </div>
+
+        <!-- login -->
+        <div *ngIf="flag == 0" class="col-lg-6 col-md-12 col-xs-12 login-right p-5">
+          <div class="row h-100  fontFam">
+            <div class="col-md-12 col-xs-12">
+              <h2 style="text-align: center;margin-top: 7px;color: #1f3565;">SIGN IN</h2><br>
+              <form class="my-5" [formGroup]="zebulogin" (ngSubmit)="getEncryptionKey()">
+
+                <div class="form-group">
+                  <mat-label class="fontFam">USER ID</mat-label><br>
+                  <input (input)="this.zebulogin.patchValue({userId:$event.target.value.toUpperCase()});" type="email"
+                    formControlName="userId">
+                </div>
+                <br>
+                <div class="form-group">
+                  <mat-label class="fontFam">PASSWORD</mat-label><br>
+                  <input [type]="hide ? 'password' : 'text'" minlength="1" maxlength="20" formControlName="password">
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  <div *ngIf="notOKstat" class="alert-danger fontFam">
+                    {{notOKstat}}
+                  </div><br><br>
+                </div>
+                <div class="container-login100-form-btn" style="margin-top: 25px !important;">
+                  <input class="login100-form-btn" type="Submit" [disabled]="zebulogin.invalid" value="Submit">
+                </div>
+                <div class="col-lg-12 col-xs-12 align-self-end padd0" style="margin-top: 15px;">
+                  <div class="col-lg-6 col-xs-6 padd0" style="text-align: left;">
+                    <!-- <a style="color:#1f3565; font-size: 12px;" href="http://202.143.97.137/KYC/"> Create an account</a> -->
+                    <a style="color:#1f3565; font-size: 12px;" (click)="goToUnblockUser()">Unblock User</a>
+                  </div>
+                  <div class="col-lg-6 col-xs-6 padd0" style="text-align: right;">
+                    <a style="cursor: pointer; color:#1f3565; font-size:12px" (click)="goToForgetPassword()">Forgot
+                      Password?</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <footer class="footer_right">
+              <div class="col-lg-12 col-xs-12 align-self-end">
+                <a style="color:#1f3565; font-size: 11px;" href="https://www.zebuetrade.com/" target="_blank">
+                  Zebu Share and Wealth Managements Pvt Ltd<br>
+                  127,1st floor, PSK Booshanam Mahal,<br>
+                  Velachery, Chennai 6000 042.
+                </a>
+              </div>
+            </footer>
+          </div>
+        </div>
+
+        <!-- Two Factor Authentication -->
+        <div *ngIf="flag == 1" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 login-right p-5">
+          <form [formGroup]="zebufauthen" (ngSubmit)="zebu2fa('normal')">
+            <h2 class="factortitle fontFam" style="text-align: center;">SECURITY QUESTIONS</h2>
+            <div class="input-regist fontFam" style="margin-top: 56px; font-weight: 500;">
+              <label style="font-weight: 500;">{{quizn1}}</label>
+              <input type="password" class="fontFam" formControlName="answer1" minlength="1" maxlength="20"
+                id="userName" required />
+            </div>
+            <div class="fontFam" style="margin-top: 30px">
+              <label style="font-weight: 500;">{{quizn2}}</label>
+              <input type="password" formControlName="answer2" id="pass" minlength="1" maxlength="20" required />
+            </div>
+            <div *ngIf="errorMsg" style="margin-top: 30px;padding: 1%;" class="alert-danger">
+              Please Enter Valid answer
+            </div>
+            <div *ngIf="errorMsgBlk" style="margin-top: 30px;padding: 1%;" class="alert-danger">
+              User Blocked Contact System Administrator
+            </div>
+            <div class="container-login100-form-btn fontFam" style="margin-top: 32px;">
+              <input type="submit" class="login100-form-btn" [disabled]="zebufauthen.invalid" value="Submit">
+            </div>
+            <div class="col-lg-12 col-xs-12 padd0" style=" margin-top: 12px;color: #1f3565; text-align: end;">
+              <a style="cursor: pointer;" (click)="backToLogin(0)">Back to Login</a>
+            </div>
+          </form>
+        </div>
+
+        <!-- 2fa Reset Page -->
+        <div *ngIf="flag == 2" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 login-right p-5 fontFam">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fontFam ">
+            <form [formGroup]="zebufauthenreset" (ngSubmit)="zebu2fa('reset')">
+              <h2 class="text-center">RESET 2 FACTOR AUTHENTICATION</h2>
+              <div class="row factor fontFam" style="height: calc(100vh - 300px); overflow: auto;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                  <div class="input-regist fontFam">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer00" value="" (change)="checkBox($event)">{{quizr1}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer00" value="" (change)="checkBox($event)">{{quizr1}} -->
+                    </label>
+                    <input type="text" formControlName="answer0" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 14px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer10" value="" (change)="checkBox($event)">{{quizr2}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer10" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr2}} -->
+                    </label>
+                    <input type="text" formControlName="answer1" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 28px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer20" value="" (change)="checkBox($event)">{{quizr3}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer20" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr3}} -->
+                    </label>
+                    <input type="text" formControlName="answer2" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 30px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer30" value="" (change)="checkBox($event)">{{quizr4}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer30" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr4}} -->
+                    </label>
+                    <input type="text" formControlName="answer3" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 30px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer40" value="" (change)="checkBox($event)">{{quizr5}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer40" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr5}} -->
+                    </label>
+                    <input type="text" formControlName="answer4" minlength="1" maxlength="20" required />
+                  </div>
+
+                  <div class="input-regist" style="margin-top: 45px;">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer50" value="" (change)="checkBox($event)">{{quizr6}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer50" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr6}} -->
+                    </label>
+                    <input type="text" formControlName="answer5" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 31px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer60" value="" (change)="checkBox($event)">{{quizr7}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer60" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr7}} -->
+                    </label>
+                    <input type="text" formControlName="answer6" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 28px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer70" value="" (change)="checkBox($event)">{{quizr8}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer70" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr8}} -->
+                    </label>
+                    <input type="text" formControlName="answer7" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 30px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer80" value="" (change)="checkBox($event)">{{quizr9}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer80" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr9}} -->
+                    </label>
+                    <input type="text" formControlName="answer8" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 65px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer90" value="" (change)="checkBox($event)">{{quizr10}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer90" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr10}} -->
+                    </label>
+                    <input type="text" formControlName="answer9" minlength="1" maxlength="20" required />
+                  </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                  <div class="input-regist" style="margin-top: 33px;">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer100" value="" (change)="checkBox($event)">{{quizr11}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer100" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr11}} -->
+                    </label>
+                    <input type="text" formControlName="answer10" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 14px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer100" value="" (change)="checkBox($event)">{{quizr12}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer110" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr12}} -->
+                    </label>
+                    <input type="text" formControlName="answer11" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 28px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer120" value="" (change)="checkBox($event)">{{quizr13}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer120" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr13}} -->
+                    </label>
+                    <input type="text" formControlName="answer12" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 13px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer130" value="" (change)="checkBox($event)">{{quizr14}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer130" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr14}} -->
+                    </label>
+                    <input type="text" formControlName="answer13" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 30px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer140" value="" (change)="checkBox($event)">{{quizr15}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer140" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr15}} -->
+                    </label>
+                    <input type="text" formControlName="answer14" minlength="1" maxlength="20" required />
+                  </div>
+                  <div class="input-regist" style="margin-top: 63px;">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer150" value="" (change)="checkBox($event)">{{quizr16}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer150" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr16}} -->
+                    </label>
+                    <input type="text" formControlName="answer15" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 31px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer160" value="" (change)="checkBox($event)">{{quizr17}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer160" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr17}} -->
+                    </label>
+                    <input type="text" formControlName="answer16" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 27px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer170" value="" (change)="checkBox($event)">{{quizr18}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer170" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr18}} -->
+                    </label>
+                    <input type="text" formControlName="answer17" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 49px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer180" value="" (change)="checkBox($event)">{{quizr19}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer180" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr19}} -->
+                    </label>
+                    <input type="text" formControlName="answer18" minlength="1" maxlength="20" required />
+                  </div>
+                  <div style="margin-top: 48px">
+                    <label class="quz-pad">
+                      <mat-checkbox name="answer190" value="" (change)="checkBox($event)">{{quizr20}}</mat-checkbox>
+                      <!-- <input type="checkbox" name="answer190" value=""
+                        (change)="checkBox($event)">&nbsp; {{quizr20}} -->
+                    </label>
+                    <input type="text" formControlName="answer19" minlength="1" maxlength="20" required />
+                  </div>
+                </div>
+              </div>
+              <div class="container-login100-form-btn" style="margin-top: 32px;">
+                <input type="submit" class="login100-form-btn" value="Save">
+              </div>
+              <div *ngIf="save2fa" style="padding: 2%;" class="alert-danger text-center">
+                Your Answers have been registered Successfully
+              </div>
+              <div class="col-lg-12 col-xs-12" style="margin-top: 15px; text-align: end; color: #1f3565;">
+                <a style="cursor: pointer;" (click)="backToLogin(0)">Back to Login</a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Forgot Password -->
+        <div *ngIf="flag == 3" class="col-lg-6 col-md-12 col-xs-12 login-right margn p-5">
+          <div class="row h-100 ">
+            <div class="col-md-12 col-xs-12">
+              <div style="text-align: center !important;color: #1f3565;">
+                <h2>FORGOT PASSWORD</h2>
+              </div>
+
+              <form class="my-5" *ngIf="!showForget" [formGroup]="forgotPass" (ngSubmit)="resetPass()">
+                <div class="form-group">
+                  <label>USER ID</label>
+                  <input type="text" minlength="1" maxlength="20"
+                    (input)="this.forgotPass.patchValue({userId:$event.target.value.toUpperCase()});"
+                    formControlName="userId">
+                </div>
+                <div class="form-group">
+                  <label>PAN NUMBER</label>
+                  <input type="text" minlength="1" maxlength="20" formControlName="pan">
+                </div>
+                <div class="form-group">
+                  <label>EMAIL ID</label>
+                  <input type="text" minlength="1" maxlength="50" formControlName="email">
+                </div>
+                <div class="form-group">
+                  <label>DATE OF BIRTH</label>
+                  <input type="text" minlength="1" maxlength="20" formControlName="dob">
+                </div>
+                 <div *ngIf="forgotemsg" class="alert-danger fontFam">
+                    {{forgotemsg}}
+                 </div>
+                <br>
+                <input class="login100-form-btn" type="Submit" [disabled]="forgotPass.invalid">
+              </form>
+              <div class="login_text" style="color: #1f3565;font-size: 12px;font-weight: 400;">
+                <div class="col-md-6 col-lg-6 col-xs-6 padd0" style="text-align: left;">
+                  <a style="cursor: pointer;" (click)="goToUnblockUser()">Unblock User</a>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6 padd0" style="text-align: right;">
+                  <a style="cursor: pointer;" (click)="backToLogin(0)">Back to Login</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Password Reset -->
+        <div *ngIf="flag == 4" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 login-right text-center p-5">
+          <div class="row h-100 ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <form [formGroup]="passReset" (ngSubmit)="resetNow()">
+                <h2 style="padding-bottom: 1rem; padding-top:1rem ">RESET PASSWORD</h2>
+                <div class="input-regist form-group" style="margin-top: 10px;">
+                  <label>OLD PASSWORD</label>
+                  <input [type]="oldhide ? 'password' : 'text'" formControlName="oldPass" minlength="1" maxlength="20"
+                    id="oldPass" required />
+                  <mat-icon matSuffix (click)="oldhide = !oldhide">{{oldhide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </div>
+                <div class="input-regist form-group" style="margin-top: 30px;">
+                  <label>NEW PASSWORD</label>
+                  <input [type]="newhide ? 'password' : 'text'" formControlName="newPass" minlength="1" maxlength="100"
+                    id="newPass" required />
+                  <mat-icon matSuffix (click)="newhide = !newhide">{{newhide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </div>
+                <div class="input-regist form-group" style="margin-top: 30px;">
+                  <label>CONFORM PASSWORD</label>
+                  <input [type]="conformhide ? 'password' : 'text'" formControlName="confPass" minlength="1" maxlength="20"
+                    id="confPass" required />
+                  <mat-icon matSuffix (click)="conformhide = !conformhide">{{conformhide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </div>
+                <div *ngIf="notOKstat" class="alert-danger margin10">
+                  {{notOKstat}}
+                </div>
+                <div class="container-login100-form-btn" style="margin-top: 25px">
+                  <input class="login100-form-btn" type="submit" value="Reset" [disabled]="passReset.invalid">
+                </div>
+              </form>
+              <br>
+              <div style="margin-top: 10px; margin-bottom: 17px;">
+                <p style="font-size: 11px;"><b>Password policy:-</b></p>
+              </div>
+              <div style="text-align: left; font-size: 11px;">
+                <p style="font-size: 11px;">Password should be alphanumeric</p>
+                <p style="font-size: 11px;">Password should be at least 6 characters and maximum 12 characters</p>
+                <p style="font-size: 11px;">Password should not be the same as your User/Login ID</p>
+                <p style="font-size: 11px;">Password should not be the same as your last 3 passwords.</p>
+                <p style="font-size: 11px;">For extra safety, it is recommended that you use a special character in
+                  the
+                  password</p>
+                <p style="font-size: 11px;">For security purposes, login password will expire every 14 days and will
+                  need to be reset by you.
+                </p>
+              </div>
+              <div class="col-lg-12 col-xs-12 text-left" style="margin-top: 15px;">
+                <a style="cursor: pointer;" (click)="backToLogin(0)">Back to Login</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unblock user -->
+        <div *ngIf="flag == 5" class="col-lg-6 col-md-12 col-xs-12 login-right fontFam  p-5">
+          <div class="row h-100 ">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fontFam">
+              <form [formGroup]="unblock" (ngSubmit)="unblockUser()">
+                <div style="text-align: center;color: #1f3565;">
+                  <h2>UNBLOCK ACCOUNT</h2>
+                </div>
+                <div class="input-regist fontFam" style="margin-top: 50px;">
+                  <label>USER ID</label>
+                  <input type="text" formControlName="userId" minlength="1" maxlength="20" id="userId"
+                    (input)="this.unblock.patchValue({userId:$event.target.value.toUpperCase()});" required />
+                </div>
+
+                <div class="input-regist fontFam" style="margin-top: 25px;">
+                  <label>PAN NUMBER</label>
+                  <input type="text" formControlName="pan" minlength="1" maxlength="20" id="pan"
+                    (input)="this.unblock.patchValue({pan:$event.target.value.toUpperCase()});" required />
+                </div>
+
+                <div class="input-regist fontFam" style="margin-top: 25px;">
+                  <label>EMAIL</label>
+                  <input type="text" formControlName="email" minlength="1" maxlength="100" id="email" required />
+                </div>
+
+                <div *ngIf="notOKstat" class="fontFam alert-danger margin10">
+                  {{notOKstat}}
+                </div>
+
+                <div class="container-login100-form-btn fontFam" style="margin-top: 30px">
+                  <input class="login100-form-btn" type="submit" value="Unblock" [disabled]="unblock.invalid">
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6 fontFam padd0"
+                  style="margin-top: 15px;text-align: start !important;color: #1f3565;font-size: 12px;">
+                  <a style="cursor: pointer;" (click)="goToResetPassword()">Reset Password</a>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xs-6 fontFam padd0"
+                  style="margin-top: 15px;text-align: end !important;color: #1f3565;font-size: 12px;">
+                  <a style="cursor: pointer;" (click)="backToLogin(0)">Back to Login</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

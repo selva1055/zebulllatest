@@ -1,0 +1,250 @@
+.genlayout {
+  height: 100%;
+}
+ul {
+  margin-top: 6%;
+  margin-bottom: 10px;
+}
+.genbox {
+  padding: 3% 4%;
+  background: #fff;
+  overflow: hidden;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  .input-group-addon {
+    background: transparent;
+  }
+  .input-group {
+    input {
+      border-right: 0;
+    }
+  }
+}
+
+.genboxshadblue {
+  box-shadow: 0 1px 8px 0 rgba(0, 88, 247, 0.68);
+}
+.genboxshadred {
+  box-shadow: 0 1px 8px 0 rgba(239, 5, 5, 0.52);
+}
+.inputgrp {
+  .form-control {
+    border-bottom: 1px solid #ccc;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    box-shadow: none;
+  }
+}
+
+.subhead {
+  background: #1f3565 !important;
+}
+
+.container-fluid {
+  padding-right: 5px !important;
+  padding-left: 5px !important;
+}
+
+.symHead {
+  font-size: 16px;
+  font-family: calibri;
+}
+.symsubHead {
+  padding: 1px 5px 1px 5px;
+  font-size: 10px;
+  background: #ddd;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.sideHeadPadd {
+  padding: 4px 5px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  //height: 60px;
+}
+.borderbottom {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.sideHeadPadd > div {
+  margin: 7px 0px;
+  padding-left: 2px;
+  padding-bottom: 12px;
+  // border-bottom: 1px solid #e7e7e7;
+}
+.complhead {
+  background-color: white;
+  color: #616a6d;
+  border: 1px solid white;
+  border-radius: 2px;
+  padding: 0 5px;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+input:disabled + .checkmark {
+  cursor: not-allowed;
+  background: url("../../assets/images/strip.svg");
+  border: 1px solid #c2c0c0;
+}
+
+.showOptShow {
+  opacity: 1;
+  pointer-events: all;
+}
+.showOpthide {
+  opacity: 0.3;
+  pointer-events: none;
+}
+div.excg {
+  display: inline;
+}
+
+.modal-footer {
+  padding: 15px;
+  margin-bottom: 12px;
+  text-align: center;
+  border-top: 0px solid #e5e5e5;
+}
+
+.input-group {
+  .form-control:focus {
+    border-color: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+.paddTB5 {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.SELL {
+  margin-right: 0px !important;
+}
+
+.margT10 {
+  margin-top: 2%;
+}
+
+.dlt:hover {
+  color: red;
+}
+img {
+  vertical-align: top;
+  float: left;
+}
+
+.redAlert {
+  font-size: 11px;
+  color: red;
+}
+.marginB12 {
+  margin-bottom: 12px;
+}
+
+.marginRL {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+:host /deep/ {
+  /* Extra small devices (phones, 600px and down) */
+  @media only screen and (max-width: 720px) {
+    .align {
+      text-align: center;
+    }
+    .paddL0 {
+      padding-left: 0px;
+    }
+    .paddR0 {
+      padding-right: 0px;
+    }
+    .paddRL0 {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .custmrad {
+      margin-left: 0px;
+    }
+
+    .buysellAlignRL {
+      text-align: left;
+    }
+    .justeven {
+      justify-content: space-between !important;
+    }
+    .marginT12 {
+      margin-bottom: 12px;
+    }
+    .paddRLP0 {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
+
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (max-width: 992px) and (min-width: 721px) {
+    .align {
+      text-align: right;
+    }
+    .paddL0 {
+      padding-left: 15px;
+      padding-right: 0px;
+    }
+    .buysellAlignRL {
+      text-align: right;
+    }
+    .paddRL0 {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .paddRLP0 {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .marginT12 {
+      margin-bottom: 12px;
+    }
+    .paddR0 {
+      padding-right: 16px;
+      padding-left: 0px;
+    }
+  }
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    // .align {
+    //   text-align: right;
+    // }
+    .paddL02 {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    // .buysellAlignRL {
+    //   text-align: right;
+    // }
+    // .paddRL0 {
+    //   padding-left: 15px;
+    //   padding-right: 15px;
+    // }
+    // .marginT12 {
+    //   margin-bottom: 12px;
+    // }
+    // .paddR0 {
+    //   padding-right: 16px;
+    //   padding-left: 0px;
+    // }
+    // .paddL0 {
+    //   padding-left: 15px;
+    // }
+    // .paddRLP0 {
+    //   padding-left: 0px;
+    //   padding-right: 0px;
+    // }
+  }
+}

@@ -1,0 +1,141 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+   <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;" id="mainDiv">
+    <div class="height">
+      <span class="titleText">Get Session Id</span>
+      <br><br>
+      <p>
+        Session Id will be used for rest of the API service calls. To generate the session ID the combination of User Id, API Key (Generated in Zebull web portal) and the encryption Key received in the previous step should be concatenated. The concatenated string should be hashed using SHA-256 algorithm. The sample on the right side provides the implementation example for JavaScript. The same can be done using any other programming language using the respective SHA-256 library.
+      </p><br>
+      <span class="subTitle">URL</span><br>
+      <p> &lt; <span class="base">BASE URL </span>&gt; + v1/customer/getUserSID</p>
+      <span class="subTitle ">Method</span><br>
+      <P class="title ">Post</P>
+      <span class="subTitle">Input Parameters</span><br><br>
+      <table>
+        <tr>
+          <th class="cls_no">S.NO</th>
+          <th class="cls_key">KEY</th>
+          <th>VALUE</th>
+          <th>DESCRIPTION</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <code>userId</code>
+            <span>String</span>
+          </td>
+          <td>User Id</td>
+          <td>User Id</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>
+            <code>userData</code>
+            <span>String</span>
+          </td>
+          <td>User Data</td>
+          <td>Encrypted Data</td>
+        </tr>
+      </table>
+      <br>
+      <span class="subTitle">Note</span><br><br>
+      <p>
+        * Encrypt the data using SHA-256 algorithm. <br><br>
+        * The data to be encrypted USER ID, API key and encryption key. <br><br>
+        * You can generate API key on zebull web application and you can get encryption key.
+      </p><br>
+      <span class="subTitle">Example</span><br><br>
+      <pre class="cls_pre login">
+       {{'{'}}
+       "userId":"abc123",
+       "userData":"Encrypted Data" 
+       {{'}'}}
+        </pre>
+      <br>
+      <span class="subTitle">Success Response</span><br><br>
+      <table>
+        <tr>
+          <th>S.NO</th>
+          <th>PARAMETERS</th>
+          <th>RESPONSE</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <code>stat</code>
+            <span>String</span>
+          </td>
+          <td>Ok</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>
+            <code>sessionID</code>
+            <span>String</span>
+          </td>
+          <td>Session Id
+          </td>
+        </tr>
+         </table>
+      <br>
+      <span class="subTitle">Error</span>
+      <br><br>
+      <table class="cls_error">
+        <tr>
+          <th>S.NO</th>
+          <th>PARAMETERS</th>
+          <th>RESPONSE</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>
+            <code>stat</code>
+            <span>String</span>
+          </td>
+          <td>Not_Ok</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>
+            <code>emsg</code>
+            <span>String</span>
+          </td>
+          <td class="b"><li>User does not login. Please login</li><br>
+            <li>Invalid Input</li>
+          </td>
+        </tr>
+      </table>
+      <br>
+
+    </div>
+  </div>
+  <div class="col-md-5 col-sm-5 col-xs-5 col-lg-5">
+    <div class="subTitless">Sample Javascript</div><br>
+    <div class="modify">
+      <pre class="code">
+{{'{'}}
+  <span class="s2">var plainText=userId + API Key + Encryption key;</span>
+  <span class="s2">var hashText=CryptoJS.SHA256(plainText);</span>
+  <span class="s2">var encpData=hashText.toString(CryptoJS.
+  enc.Base64);</span>
+  <span class="s2">var jsonObj = </span>{{'{'}}
+    <span class="s2">"userId": "abc123",
+    "userData": encpData</span>
+  {{'}'}}; 
+  <span class="s2">var pUrl = "BASE URL + URL";
+  $.ajax</span>({{'{'}}
+    <span class="s2">url: pUrl,
+    contentType: 'application/json',</span>
+    <span class="s2">type: 'post',
+    data:JSON.stringify(jsonObj),
+    crossDomain:<span class="s3">true,</span>
+    success: <span class="s4">function</span>(data)</span>{{'{'}}
+    {{'}'}}
+    <span class="s2">error: <span class="s4">function</span>(errorThrown)</span>{{'{'}}{{'}'}}
+  {{'}'}});
+{{'}'}}</pre>
+    </div>
+  </div>
+</div>
+

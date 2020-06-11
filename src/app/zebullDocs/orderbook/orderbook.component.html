@@ -1,0 +1,614 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+     <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll color" id="mainDiv" style="background: white !important;">
+        <div class="height">
+            <span class="titleText ">Order Book</span>
+            <br><br>
+            <span class="subTitle ">URL</span><br>
+            <p>&lt; <span class="base"> BASE URL </span>&gt; + v1/placeOrder/fetchOrderBook</p><br>
+            <span class="subTitle">Method</span><br>
+            <P class="title">Get</P>
+            <br>
+            <span class="subTitle ">Success Response </span><br><br>
+            <table>
+                <tr>
+                    <th class="cls_th">S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>RESPONSE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>Exseg</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange Segment Name</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>Trsym</code>
+                        <span>String</span>
+                    </td>
+                    <td>Trading Symbol</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <code>Nstordno</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Nest Order Number</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <code>Prc</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Price</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <code>Qty</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Quantity</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <code>Dscqty</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Disclosed Quantity</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <code>Trgprc</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Trigger price</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>
+                        <code>Validity</code>
+                        <span>String</span>
+                    </td>
+                    <td>validity</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>
+                        <code>Scripname</code>
+                        <span>String</span>
+                    </td>
+                    <td>Scrip Name</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>
+                        <code>Sym</code>
+                        <span>String</span>
+                    </td>
+                    <td>Scrip token</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>
+                        <code>Status</code>
+                        <span>String</span>
+                    </td>
+                    <td>Status of the order</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>
+                        <code>Fillshares</code>
+                        <span>String</span>
+                    </td>
+                    <td>Filled Quantity</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>
+                        <code>ExpDate</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Expiry Date</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>
+                        <code>Ordvaldate</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Order Validity Date</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>
+                        <code>Pcode</code>
+                        <span>String</span>
+                    </td>
+                    <td>Product Code</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>
+                        <code>Avgprc</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Average Price</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>
+                        <code>Unfilledsize</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Unfilled Size</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>
+                        <code>ExchOrdID</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Exchange Order Id</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>
+                        <code>RejReason</code>
+                        <span>String</span>
+                    </td>
+                    <td>Rejection Reason</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>
+                        <code>ExchConfrmtime</code>
+                        <span>Float</span>
+                    </td>
+                    <td>Exchange Confirmation Time</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>
+                        <code>Mktpro</code>
+                        <span>String</span>
+                    </td>
+                    <td>Market Protection</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>
+                        <code>Cancelqty</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Cancelled Quantity</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>
+                        <code>Trantype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Transaction Type</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>
+                        <code>Prctype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Price Type</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>
+                        <code>Exchange</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange Name</td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>
+                        <code>ticksize</code>
+                        <span>Float</span>
+                    </td>
+                    <td>Ticker Size Of The Scrip (in paisa)</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>
+                        <code>decprec</code>
+                        <span>Float</span>
+                    </td>
+                    <td>Decimal Precision</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>
+                        <code>multiplier</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Multiplier Of Scrip</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>
+                        <code>bqty</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Board Lot Quantity</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>
+                        <code>mpro</code>
+                        <span>String</span>
+                    </td>
+                    <td>Market Protection Flag</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>
+                        <code>string</code>
+                        <span>String</span>
+                    </td>
+                    <td>Token Of The Scrip</td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>
+                        <code>noMktPro</code>
+                        <span>String</span>
+                    </td>
+                    <td>No Market Protection Flag</td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>
+                        <code>defmktproval</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Default Market Protection Value</td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>
+                        <code>RequestID</code>
+                        <span>String</span>
+                    </td>
+                    <td>Nest Request ID</td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td>
+                        <code>SyomOrderId</code>
+                        <span>String</span>
+                    </td>
+                    <td>Syom Order ID</td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>
+                        <code>RefLmtPrice</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Reference Limit Price For CO Order</td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td>
+                        <code>COPercentage</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Cover Order Percentage</td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td>
+                        <code>InstName</code>
+                        <span>String</span>
+                    </td>
+                    <td>Instrument Name</td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>
+                        <code>ExpSsbDate</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Expiry Date Of Scrip In ssboe Format</td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>
+                        <code>discQtyPerc</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Disclose Quantity Percentage For Exchanges</td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td>
+                        <code>Minqty</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Minimum Quantity</td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td>
+                        <code>BrokerClient</code>
+                        <span>String</span>
+                    </td>
+                    <td>Specifies The Broker-Client Relationship</td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td>
+                        <code>user</code>
+                        <span>String</span>
+                    </td>
+                    <td>User Id</td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>
+                        <code>accountId</code>
+                        <span>String</span>
+                    </td>
+                    <td>Account Id</td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td>
+                        <code>PriceNumerator</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Price Numerator</td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td>
+                        <code>GeneralNumerator</code>
+                        <span>Int</span>
+                    </td>
+                    <td>General Numerator</td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td>
+                        <code>PriceDenomenator</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Price Denominator</td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td>
+                        <code>GeneralDenomenator</code>
+                        <span>Int</span>
+                    </td>
+                    <td>General Denominator</td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td>
+                        <code>series</code>
+                        <span>String</span>
+                    </td>
+                    <td>Scrip Group Or Series</td>
+                </tr>
+                <tr>
+                    <td>51</td>
+                    <td>
+                        <code>orderentrytime</code>
+                        <span>time</span>
+                    </td>
+                    <td>Order Entry Time</td>
+                </tr>
+                <tr>
+                    <td>52</td>
+                    <td>
+                        <code>ordergenerationtype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Order Generation Type</td>
+                </tr>
+                <tr>
+                    <td>53</td>
+                    <td>
+                        <code>sipindicator</code>
+                        <span>String</span>
+                    </td>
+                    <td>Sip Indicatior</td>
+                </tr>
+                <tr>
+                    <td>54</td>
+                    <td>
+                        <code>ordersource</code>
+                        <span>String</span>
+                    </td>
+                    <td>Order Source</td>
+                </tr>
+                <tr>
+                    <td>55</td>
+                    <td>
+                        <code>remarks</code>
+                        <span>String</span>
+                    </td>
+                    <td>Remarks</td>
+                </tr>
+                <tr>
+                    <td>56</td>
+                    <td>
+                        <code>marketprotectionpercentage</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Market Protection Percentage</td>
+                </tr>
+                <tr>
+                    <td>57</td>
+                    <td>
+                        <code>reporttype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Report Type</td>
+                </tr>
+                <tr>
+                    <td>58</td>
+                    <td>
+                        <code>iSinceBOE</code>
+                        <span>time</span>
+                    </td>
+                    <td>Seconds Since boe</td>
+                </tr>
+                <tr>
+                    <td>59</td>
+                    <td>
+                        <code>usecs</code>
+                        <span>time</span>
+                    </td>
+                    <td>u Seconds</td>
+                </tr>
+                <tr>
+                    <td>60</td>
+                    <td>
+                        <code>modifiedBy</code>
+                        <span>String</span>
+                    </td>
+                    <td>Modified By user</td>
+                </tr>
+                <tr>
+                    <td>61</td>
+                    <td>
+                        <code>optionType</code>
+                        <span>String</span>
+                    </td>
+                    <td>Option Type</td>
+                </tr>
+                <tr>
+                    <td>62</td>
+                    <td>
+                        <code>strikePrice</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Strike Price</td>
+                </tr>
+                <tr>
+                    <td>63</td>
+                    <td>
+                        <code>Usercomments</code>
+                        <span>String</span>
+                    </td>
+                    <td>Remarks Sent In Place Order API</td>
+                </tr>
+                <tr>
+                    <td>64</td>
+                    <td>
+                        <code>AlgoID</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange Algo ID</td>
+                </tr>
+                <tr>
+                    <td>65</td>
+                    <td>
+                        <code>AlgoCategory</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange Algo Category</td>
+                </tr>
+                <tr>
+                    <td>66</td>
+                    <td>
+                        <code>panNo</code>
+                        <span>Int</span>
+                    </td>
+                    <td>Pan No</td>
+                </tr>
+                <tr>
+                    <td>67</td>
+                    <td>
+                        <code>OrderedTime</code>
+                        <span>time</span>
+                    </td>
+                    <td>Ordered Date And Time ( DD/MM/YYYY HH:MM:SS)</td>
+                </tr>
+                <tr>
+                    <td>68</td>
+                    <td>
+                        <code>exchangeuserinfo</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange User Info</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle ">Error</span><br><br>
+            <table class="sub">
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>RESPONSE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td class="b"><li>Session Expired</li><br><li>Not able to Retrieve Order Book</li><br><li>No Data</li>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+    <span class="s2">var pUrl = "BASE URL + URL";
+    $.ajax</span>({{'{'}}
+         <span class="s2">url: pUrl,
+         contentType: 'application/json',
+         headers: </span>{{'{'}}
+         <span class="s2">'Authorization': "authorization token"</span>
+         {{'}'}},
+         <span class="s2">type: 'get',
+         crossDomain:<span class="s3">true,</span>
+         success: <span class="s4">function</span>( data )</span> {{'{'}}{{'}'}}
+         <span class="s2">error: <span class="s4">function</span>( errorThrown )</span> {{'{'}}{{'}'}}
+    {{'}'}});
+{{'}'}}
+</pre>
+        </div>
+    </div>
+</div>

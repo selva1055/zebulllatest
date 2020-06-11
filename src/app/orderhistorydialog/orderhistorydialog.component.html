@@ -1,0 +1,259 @@
+<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <mat-grid-list cols="2" rowHeight="50px" style="position:relative;display:block">
+        <mat-grid-tile>
+            <div style="display: inline-block !important;" [class]="data[0].Action == 'B'? 'orderbuy':'ordersell'">
+                {{data[0].Action == 'B'? 'Buy':'Sell'}}</div>
+            <div class="inlineBlock fSize12 paddL15">
+                {{data[0].Trsym}}<span class="fSize10"> ({{data[0].exchange}})</span>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="fSize12 floatR paddR15T6">
+                Exch. Order.No #{{data[0].exchangeorderid}} &nbsp;&nbsp; Nest.Order.No #{{data[0].nestordernumber}}
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="infoData[0]Data" class="mat-elevation-z8 table" style="height: 250px">
+            <ng-container matColumnDef="ExchTimeStamp">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12">Time</th>
+                <td mat-cell *matCellDef="let element" class="fSize12"> {{element.ExchTimeStamp.split(" ")[1]}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 padd-size"> Status </th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.Status}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="productcode">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800  fSize12">Prod.Type</th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.productcode}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Ordtype">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800  fSize12">Order Type</th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.Ordtype}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Qty">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12"> Qty </th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.Qty}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="filledShares">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12"> Filled qty. </th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.filledShares}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="disclosedqty">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12"> Dis. Qty</th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.disclosedqty}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="averageprice">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12"> Avg.Price </th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.averageprice}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Prc">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12"> Price </th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.Prc}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="triggerprice">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12"> Tirg.Price </th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.triggerprice}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="exchangetimestamp">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12"> Exch.time </th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.exchangetimestamp}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="filldateandtime">
+                <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12"> Exch.Update </th>
+                <td mat-cell *matCellDef="let element" class="fSize12">{{element.filldateandtime}}
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="infoColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: infoColumns;"></tr>
+        </table>
+    </div>
+    <mat-toolbar>
+        <div class="text-right">
+            <button class="nav-bar" mat-raised-button (click)="goToBack()">Close</button>
+        </div>
+    </mat-toolbar>
+</div> -->
+
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 sideNav fsize13" style="padding-right: 15px; padding-left: 15px;">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+        <mat-list [(ngModel)]="modeselect">
+            <mat-list-item [ngClass]="type == 'info' ? 'hoverbtn':''" (click)="orderhistryType('info')" value="domain">
+                Information</mat-list-item>
+            <mat-list-item [ngClass]="type == 'history' ? 'hoverbtn':''" (click)="orderhistryType('history')"
+                value="exact">
+                History</mat-list-item>
+        </mat-list>
+    </div>
+</div>
+<!-- <div class="menuContainer"> -->
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" *ngIf="type == 'history'"
+    style="padding-right: 15px; padding-left: 15px;">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0" style="margin-top: 20px;">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padd0">
+            <span [ngClass]="data[0].Action == 'B'? 'orderHistybuy':'orderHistySell'">
+                {{data[0].Action == 'B'? 'Buy':'Sell'}}</span>&nbsp;<span>{{data[0].Trsym}}</span>&nbsp;
+            <span class="subheader">{{data[0].exchange}}</span>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padd0">
+            <span class="fSize12 floatR">
+                &nbsp;&nbsp; Nest.Order.No
+                #{{data[0].nestordernumber}}
+            </span>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0" style="margin-top: 20px;">
+        <table>
+            <tr>
+                <th class="fSize12">Time</th>
+                <th class="fSize12">Status</th>
+                <th class="fSize12">Exch.<br>time</th>
+                <th class="fSize12">Exch.<br>update</th>
+                <th class="fSize12">Qty.</th>
+                <th class="fSize12">Filled <br>qty.</th>
+                <th class="fSize12">Avg.<br>price</th>
+                <th class="fSize12">Price</th>
+            </tr>
+            <tr *ngFor="let index of infoData">
+                <td class="fSize12">{{index['ExchTimeStamp'].split(" ")[1]}}</td>
+                <td class="fSize12">{{index['Status']}}</td>
+                <td class="fSize12">{{index['exchangetimestamp']}}</td>
+                <td class="fSize12">{{index['filldateandtime']}}</td>
+                <td class="fSize12">{{index['Qty']}}</td>
+                <td class="fSize12">{{index['filledShares']}}</td>
+                <td class="fSize12">{{index['averageprice']}}</td>
+                <td class="fSize12">{{index['Prc']}}</td>
+            </tr>
+
+        </table>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
+        <button class="nav-bar" mat-flat-button color="warn" (click)="goToBack()">Close</button>
+    </div>
+</div>
+<!-- Information -->
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" *ngIf="type == 'info'">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB15">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <span [ngClass]="data[0].Action == 'B'? 'orderHistybuy':'orderHistySell'">
+                {{infoData[0].Action == 'B'? 'Buy':'Sell'}}</span>&nbsp;
+            <span class="headerType">{{infoData[0]['Trsym']}}<span
+                    class="subheader">&nbsp;{{infoData[0]['exchange']}}</span></span>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddLR30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderBottom">
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingTop15 overflow">
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 borderRigth paddMLR0">
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+                <span class="leftSide">Quantity</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0 ">
+                <span class="rightSide fleft">{{infoData[0]['Qty']}}</span>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+                <span class="leftSide">Price</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+                <span class="rightSide fleft">{{infoData[0]['Prc']}}</span>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+                <span class="leftSide">Avg.price</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+                <span class="rightSide fleft">{{infoData[0]['averageprice']}}</span>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+                <span class="leftSide">Trigger price</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+                <span class="rightSide fleft">{{infoData[0]['triggerprice'] }}</span>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+                <span class="leftSide">Order type</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+                <span class="rightSide fleft">{{infoData[0]['Ordtype']}}</span>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+                <span class="leftSide">Product</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+                <span class="rightSide fleft">{{infoData[0]['productcode']}}</span>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 paddRL0">
+                <span class="leftSide">Validity</span>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRL0">
+                <span class="rightSide fleft">{{infoData[0]['duration']}}</span>
+            </div>
+        </div>
+
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 paddL30 paddMLR0">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="leftSide">Order ID</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="rightSide fright">{{infoData[0]['nestordernumber']}}</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="leftSide">Exch. Order ID</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="rightSide fright">--</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="leftSide">Time</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="rightSide fright">{{infoData[0]['filldateandtime'].split(" ")[1]}}</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="leftSide">Exch. Time</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="rightSide fright">{{infoData[0]['ExchTimeStamp'].split(" ")[1]}}</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="leftSide">Placed by</span>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddRL0">
+                <span class="rightSide fright">{{userId}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddLR30 paddingTop15">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderBottom">
+        </div>
+    </div>
+    <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddingTop15"> -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 txtend paddingTop15">
+        <button mat-flat-button color="warn" (click)="closeModelBox()">Close</button>
+    </div>
+    <!-- </div> -->
+</div>

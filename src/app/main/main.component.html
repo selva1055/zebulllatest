@@ -1,0 +1,328 @@
+
+<div class="app-tv-chart-container padd1" [hidden]="defaultchart == 'chartiq'">
+  <app-iqchart></app-iqchart>
+</div>
+<div [hidden]="defaultchart == 'tradeview'">
+  <div class="app-tv-chart-container padd1" id="tv_chart_container"></div>
+</div>
+
+<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 chartafter50per paddLR0"> -->
+  <!--Positions-->
+  <div style="background: white" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 borderR1 padd4px position-head">
+    <div style="text-align: center;background: #1f3565;color: #fff;padding: 4px 0px;" class="boderBT">
+      <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"></span>
+      <span style="font-size: 11px;">POSITIONS</span>
+      <span style="float: right;">
+        <a routerLinkActive="active" routerLink="/home/positions" style="cursor: pointer;" class="main">
+          <img src="../assets/image/PopOut.svg" width="18px">
+        </a>
+      </span>
+    </div>
+    <div style="background: white" class=" btm-container-scroll padd0">
+      <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;"
+        *ngIf="positionsvisiblemsg">
+        <div>
+          <img src="assets/image/noDataInfo.svg" alt="" width="35" height="35">
+          <span style="color: #000000de; font-size: 12px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO POSITIONS FOUND</span>
+        </div>
+        <div style="padding-top: 15px !important;">
+          <span style="color: #000000de; font-size: 10px;">
+            Use MIS orders to add positions. <br>
+            Use regular Buy / Sell <br>
+            OR<br>
+            Quick Buy / Sell to place orders
+          </span>
+        </div>
+      </div>
+      <div *ngIf="positionsvisible">
+        <div class="padd0" *ngFor="let data of position;">
+          <div [ngStyle]="{'background-color': data['Netqty'] == 0 ? 'rgb(239, 240, 241)' : '' }"
+            class="boderBT text-uppercase padd5 col-lg-12 col-md-12 col-sm-12 position-hover"
+            style="border-bottom:0.3px solid lightgrey">
+            <div class="col-lg-12 col-md-12 col-sm-12 paddTB2 ">
+              <div class=" col-lg-3 col-md-3 col-sm-3 paddTB2 fleft fsize105">Qty.
+                <span [class]="data['Netqty'] > 0 ? 'blueStatus':'redStatus'">{{data['Netqty']}}</span>
+              </div>
+              <div class=" col-lg-5 col-md-5 col-sm-5 paddTB2 textcenter fsize105">B.Avg
+                <span>{{data['Buyavgprc'].replace(',','')}}</span>
+              </div>
+              <div class=" col-lg-4 col-md-4 col-sm-4 paddTB2 fsize105 fright">
+                <span class="bgGray">{{data['Pcode']}}</span>
+              </div>
+              <div
+                class="col-lg-7 col-md-7 col-sm-7 fSize12 text-uppercase inst-lbl paddTB2 txt-black nowrap block-tooltip"
+                style="text-align: left;">
+                <span title="{{data['Nsetsym']}}" style="padding-left: 0px; "
+                  *ngIf="data['Instname'] == 'OPTIDX' || data['Instname'] == 'OPTSTK' || data['Instname'] == 'OPTFUT' || data['Instname'] == 'OPTCUR'"
+                  class="tradSym">{{data['instrumentOptidx']}}</span>
+                <ng-container *ngIf="data['Instname'] != null || data['Instname'] != undefined">
+                  <span title="{{data['Nsetsym']}}" style="padding-left: 0px; "
+                    *ngIf="data['Instname'].startsWith('FUT')" class="tradSym">{{data['instrumentFut']}}</span>
+                </ng-container>
+                <span title="{{data['Nsetsym']}}" style="padding-left: 0px; "
+                  *ngIf="data['Exchange'] =='NSE' || data['Exchange'] == 'BSE'" class="tradSym">
+                  {{data['Symbol']}}
+                </span>
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 fSize12 paddTB2 fright"
+                [style.color]="data.MtoM.replace(',','') > 0 ? 'green' : 'red'">{{data['MtoM'].replace(',','')}}
+              </div>
+              <div class=" col-lg-3 col-md-3 col-sm-3 fsize105 paddTB2 fleft">
+                <span>{{data['Exchange']}}</span>
+              </div>
+              <div class=" col-lg-5 col-md-5 col-sm-5 fsize105 paddTB2 textcenter">
+                S.Avg <span>{{data['Sellavgprc']}}</span>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 text-uppercase paddTB2 fright fsize105">
+                LTP <span>{{data['LTP']}}</span>
+              </div>
+            </div>
+            <div class="position-hov" *ngIf="data['Netqty'] != 0">
+              <div class="textcenter">
+                <button mat-raised-button class="bgColorBule paddRL9 fSize105 actionBtn inlineH"
+                  (click)="goToPositionAdd(data)">ADD</button>&nbsp;
+                <button mat-raised-button class="bgColorRed paddRL9 fSize105 actionBtn inlineH"
+                  (click)="goToPositionExit(data)"
+                  *ngIf="data.Pcode == 'CNC' || data.Pcode == 'MIS' || data.Pcode == 'NRML'">EXIT</button>&nbsp;
+                <button mat-raised-button class="bgcolorConvert paddRL9 fMethod fSize105 actionBtn inlineH"
+                  (click)="convertPosition(data)"
+                  *ngIf="data.Pcode == 'CNC' || data.Pcode == 'MIS' || data.Pcode == 'NRML'">CONV</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Holdings-->
+  <div style="background: white" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 borderR1 padd4px position-head">
+    <div style="text-align: center;background: #1f3565;color: #fff;padding: 4px 0px;" class="boderBT">
+      <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"></span>
+      <span style="font-size: 11px;">HOLDINGS</span>
+      <span style="float: right;">
+        <a routerLinkActive="active" routerLink="/home/holdings" style="cursor: pointer;" class="main">
+          <img src="../assets/image/PopOut.svg" width="18px">
+        </a>
+      </span>
+    </div>
+    <div style="background: white" class=" btm-container-scroll padd0">
+      <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;"
+        *ngIf="holdingvisiblemsg">
+        <div>
+          <img src="assets/image/noDataInfo.svg" alt="" width="35" height="35">
+          <span style="color: #000000de; font-size: 12px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO HOLDINGS FOUND</span>
+        </div>
+        <div style="padding-top: 15px !important;">
+          <span style="color: #000000de; font-size: 10px;">
+            Use CNC order to add scrips to your portfolio.
+            <br>
+            Use regular Buy / Sell <br>
+            OR<br>
+            Quick Buy / Sell to place orders
+          </span>
+        </div>
+      </div>
+      <div *ngIf="holdingvisible">
+        <div class="padd0" *ngFor="let data of holdings;">
+          <div class="boderBT text-uppercase col-lg-12 col-md-12 col-sm-12 padd5 holding-hover">
+            <div class="col-lg-12 col-md-12 col-sm-12 paddTB2">
+              <div class="col-lg-6 col-md-6 col-sm-12 paddTB2 fsize105 fleft">Qty.
+                <span>{{data['SellableQty']}}</span> &nbsp;<span *ngIf="data['Btst'] > 0"><span
+                    style="font-size: 10px;">T1 </span>:
+                  {{data['Btst']}}</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 paddTB2 fsize105 text-right">Total Val.
+                <span>
+                  {{data.ExchSeg1 == "NSE" ? data.NSEHOldingValue : data.BSEHOldingValue}}
+                </span>
+              </div>
+              <div class="col-lg-7 col-md-7 col-sm-12 fSize12 nowrap paddTB2 block-tooltip" title="{{data['Nsetsym']}}">
+                {{data['ExchSeg1'] == 'NSE' ? data['NsetsymTemp'] : data['Bsetsym']}}
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-12  fSize12 text-uppercase paddTB2 fright">
+                <span [class]="data['MTM'] > 0 ? 'greenStatus':'redStatus'">{{data['MTM']}}</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 fSize105 paddTB2">Avg.
+                <span>
+                  {{data.ExchSeg1 == "NSE" ? (data.NSEHOldingValue - ((data.NSEHOldingValue/100)*data.Haircut)).toFixed(2) : (data.BSEHOldingValue - ((data.BSEHOldingValue/100)*data.Haircut)).toFixed(2)}}
+                </span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 paddTB2 fright fSize105">LTP
+                <span>
+                  {{data.ExchSeg1 == "NSE" ? data['LTnse'] : data['LTbse']}}
+                </span>
+              </div>
+            </div>
+            <div class="holding-hov textcenter">
+              <button mat-raised-button class="bgColorBule paddRL9 fSize105 actionBtn inlineH"
+                (click)="goToHoldingAdd(data)">ADD</button>&nbsp;
+              <button mat-raised-button class="bgColorRed paddRL9 fSize105 actionBtn inlineH"
+                (click)="goToHoldingExit(data)">EXIT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Orders-->
+  <div style="background: white" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 borderR1 padd4px position-head">
+    <div style="text-align: center;background: #1f3565;color: #fff;padding: 4px 0px;" class="boderBT">
+      <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"></span>
+      <span style="font-size: 11px;">ORDERS</span>
+      <span style="float: right;">
+        <a routerLinkActive="active" routerLink="/home/orders" style="cursor: pointer;" class="main">
+          <img src="../assets/image/PopOut.svg" width="18px">
+        </a>
+      </span>
+    </div>
+    <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;" *ngIf="ordervisiblemsg">
+      <div>
+        <img src="assets/image/noDataInfo.svg" alt="" width="35" height="35">
+        <span style="color: #000000de; font-size: 12px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO ORDERS FOUND</span>
+      </div>
+      <div style="padding-top: 15px !important;">
+        <span style="color: #000000de; font-size: 10px;">
+          Place your orders from market watch using regular Buy & Sell <br>
+          OR<br>
+          Using Quick orders
+        </span>
+      </div>
+    </div>
+    <div style="background: white" class=" btm-container-scroll padd0">
+      <div *ngIf="ordervisible">
+        <div *ngFor="let data of orders">
+          <div class="text-uppercase col-lg-12 col-md-12 col-sm-12 padd5 order-hover" matTooltipPosition="below"
+            matTooltip="{{data['RejReason'] == '--' ? '':data['RejReason']}}"
+            style="padding: 6px;border-bottom:0.3px solid lightgrey">
+            <div class="col-lg-12 col-md-12 col-sm-12 paddTB2">
+              <div class="col-lg-4 col-md-4 col-sm-4  fSize105 paddTB2 fleft">
+                <span [ngClass]="data['Trantype'] == 'B' ? 'button-box-blue' : 'button-box-red'">
+                  {{data['Trantype']=='B' ? 'Buy' : 'Sell'}}
+                </span>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 fSize105 paddTB2 textcenter">
+                {{data['OrderedTime'] == undefined ? '':data['OrderedTime'].split(" ")[1]}}
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 fSize105 paddTB2 text-right">
+                <span
+                  [ngClass]="data['Status'] == 'rejected' ? 'border-box-red' : data['Status'] == 'open' ? 'border-box-blue' :  data['Status'] == 'complete' ? 'border-box-green' : data['Status'] == 'cancelled' ? 'border-box-red':data['Status'] == 'trigger pending' ? 'button-box-gray':'' "><span
+                    *ngIf="data['Status'] == 'trigger pending'">Trigger..</span> <span
+                    *ngIf="data['Status'] != 'trigger pending'">{{data['Status']}}</span></span>
+              </div>
+              <div class=" col-lg-9 col-md-9 col-sm-12 fSize12 paddTB2 fleft block-tooltip" title="{{data['Trsym']}}">
+                <span
+                  *ngIf="data['InstName'] == 'OPTIDX' || data['InstName'] == 'OPTSTK' || data['InstName'] == 'OPTFUT' || data['InstName'] == 'OPTCUR'"
+                  class="tradSym">{{data['instrumentOptidx']}}</span>
+                <ng-container *ngIf="data['InstName'] != null || data['InstName'] != undefined">
+                  <span style="padding-left: 0px; " *ngIf="data['InstName'].startsWith('FUT')"
+                    class="tradSym">{{data['instrumentFut']}}</span>
+                </ng-container>
+                <span *ngIf="data['Exchange'] =='NSE' || data['Exchange'] == 'BSE'" class="tradSym">
+                  {{data['Sym']}}
+                </span>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-12 fSize12 paddTB2 fright">
+                <span *ngIf="data['Status'] == 'complete'">{{data['Avgprc']}}</span><span
+                *ngIf="data['Status'] != 'complete'">{{data['Prc']}}</span>
+              </div>
+              <div class="col-lg-5 col-md-5 col-sm-5 fSize105 paddTB2">
+                <span class="text-uppercase  exchange-info">{{data['Exchange']}} &nbsp;{{data['Pcode']}}
+                  &nbsp;{{data['Prctype']}}</span>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7 fright paddTB2 fsize106">
+                <span>{{data['Qty']}}/{{data['Qty']}} <span *ngIf="data['Trgprc'] > 0 "> &nbsp;trg.
+                    {{data['Trgprc']}}</span>
+                </span>
+              </div>
+            </div>
+
+            <div class="order-hov">
+              <div class="fSize12 tcenter">
+                <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation([data])"
+                  title="Cancel Order"
+                  *ngIf="data.Status === 'open' || data.Status === 'trigger pending'">C</button>&nbsp;
+                <button mat-raised-button class="bgcolorGreen fSize12" (click)="scripsPOrd(data,'modify')"
+                  title="Modify Order"
+                  *ngIf="data.Status === 'open' || data.Status === 'trigger pending'">M</button>&nbsp;
+                <button mat-raised-button class="bgcolorGray fSize12"
+                  *ngIf="data.Status === 'open' || data.Status === 'trigger pending'" (click)=" openInfoDialog(data)"
+                  title="Order history">i</button>&nbsp;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Funds-->
+  <div style="background: white" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padd4px position-head">
+    <div style="text-align: center;background: #1f3565;color: #fff;padding: 4px 0px;" class="boderBT">
+      <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"></span>
+      <span style="font-size: 11px;">FUNDS</span>
+      <span style="float: right;">
+        <a routerLinkActive="active" routerLink="/home/funds" style="cursor: pointer;" class="main">
+          <img src="../assets/image/PopOut.svg" width="18px">
+        </a>
+      </span>
+    </div>
+    <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;" *ngIf="fundvisiblemsg">
+      <div>
+        <img src="assets/image/noDataInfo.svg" alt="" width="35" height="35">
+        <span style="color: #000000de; font-size: 12px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO FUNDS AVAILABLE</span>
+      </div>
+      <div style="padding-top: 15px !important;">
+        <span style="color: #000000de; font-size: 10px;">
+          No funds available please add..
+        </span>
+      </div>
+    </div>
+    <div *ngIf="fundvisible" style="background: white" class=" btm-container-scroll padd0">
+      <div class="padd0">
+        <div class="padd0" *ngFor="let data of funds">
+          <div>
+            <div class="bcBtn text-uppercase lineHgt15 marginTop10">
+              <div
+                class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft fWeight200 nowrap">
+                Total MTM
+                <span class="text-uppercase paddRight5 textright floatR fWeight200"
+                  [style.color]="(+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) < 0 ? 'red' : (+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) > 0 ? 'green' : 'black'">{{(+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) | number : '.2'}}</span>
+              </div>
+              <div
+                class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft fWeight200 nowrap">
+                Available Margin<span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 fWeight200"
+                  [style.color]="data.cashmarginavailable < 0 ? 'red' : data.net > 0 ? 'green' : 'black'">
+                  {{data.net | currency:' '}}</span>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boderBT marginTB5"></div>
+              <div
+                class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+                Opening Balance
+                <span class="fSize12 inst-lbl text-uppercase floatR blackcolor textright paddRight5">
+                  {{data.cashmarginavailable | currency:' '}}</span>
+              </div>
+              <div
+                class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+                Margin Utilized
+                <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5">
+                  {{(+data.spanmargin)+(+data.exposuremargin) | currency:' '}}</span>
+              </div>
+              <div
+                class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+                MTM Realised
+                <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5"
+                  [style.color]="data.realizedMtomPrsnt == 0 ? 'block': data.realizedMtomPrsnt > 0 ? 'green' : 'red'">
+                  {{+data.realizedMtomPrsnt | number : '.2'}}</span>
+              </div>
+              <div
+                class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+                MTM UnRealised
+                <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5"
+                  [style.color]="data.unrealizedMtomPrsnt == 0 ? 'block' : data.unrealizedMtomPrsnt > 0 ? 'green' : 'red'">
+                  {{+data.unrealizedMtomPrsnt | number : '.2'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

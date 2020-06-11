@@ -1,0 +1,180 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px;padding-left: 82px;padding-right: 82px;">
+  <div class="row" style="border: 0.5px solid #ccc;border-radius: 3px;">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: -webkit-center;">
+      <div style="height:213px; width:369px;left: 45px;">
+        <br>
+        <canvas id="canvas"></canvas>
+      </div>
+      <br>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddTB15 textCenter padd0" style="left: 20px;">
+          <span class="fontS12px textCenter">
+            Available Margin </span><br>
+          <span class="fontS20px textCenter"><b> INR
+              {{funds[0]['net'] | number : '.1'}} </b>
+          </span>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padd0"  style="left: 62px;padding-top: 10px;">
+          <span class="fontS12px textCenter"><span style='font-size:15px;color: #46bfbd;'>&#9632;</span>Opening Balance</span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4  textEnd" style="padding-top: 15px;">
+          <span class="fontS12px" style="margin-right: 3px;"><span style='font-size:15px;color:#f7464a;'>&#9632;</span>Margin Used </span>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fontS16px textCenter padd0" style="left: 52px;">
+          <span class="fontS16px textCenter" style="margin-left: 4px;"> <b>INR
+              {{funds[0]['cashmarginavailable'] | number : '.1'}}</b>
+          </span>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4  fontS16px">
+          <b>INR
+            {{funds[0]['brokeragePrsnt'] != undefined ? ((+funds[0]['spanmargin']) + (+funds[0]['exposuremargin']) + (+funds[0]['scripbasketmargin']) + (+funds[0]['brokeragePrsnt'])).toFixed(2) : 'NA'}}</b>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  textCenter">
+          <button mat-raised-button class="btn1" (click)="getPayInPayOutTokenKey('Deposit')"
+            style="left: 30px;margin-top: 30px;">DEPOSIT</button>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  textCenter">
+          <button mat-raised-button class="btn2" (click)="getPayInPayOutTokenKey('Withdraw')"
+            style="margin-top: 30px;">WITHDRAW</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"> </div>
+  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddLeft">
+    <div style="background-color: #fff">
+      <div style="background: white" class=" btm-container-scroll ">
+        <div class="">
+          <div class="" *ngFor="let data of funds">
+            <div class="bcBtn text-uppercase lineHgt15">
+              <div>
+                <label class="pLeft"> <b> MTM Realised </b> </label>
+                <span class="text-uppercase paddRight5 textright floatR fWeight600 pRight"
+                  [style.color]="data.realizedMtomPrsnt > 0 ? 'green':'red'">{{data.realizedMtomPrsnt | number : '.2'}}</span>
+              </div>
+              <div class="bgcolor">
+                <label class="pLeft"> <b> MTM UnRealised </b> </label>
+                <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 fWeight600 pRight">
+                  {{data.unrealizedMtomPrsnt | currency:' '}}</span>
+              </div>
+               <div>
+                  <span class="pLeft"> Collateral Value </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5 pRight"
+                    [style.color]="data.collateralvalue > 0 ? 'green' : 'red'">
+                    {{data.collateralvalue}}</span>
+                </div>
+                <div class="bgcolor">
+                  <span class="pLeft"> Cover Order </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5 pRight">
+                    {{data.coverOrderMarginPrsnt}}</span>
+                </div>
+                <div>
+                  <span class="pLeft"> Debits </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5 pRight">
+                    {{data.debits | currency:' '}}</span>
+                </div>
+                <div class="bgcolor">
+                  <span class="pLeft"> Margin Utilized </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 pRight"
+                    [style.color]="data.spanmargin < 0 ? 'red' : data.exposuremargin > 0 ? 'green' : 'black'">
+                    {{(+data.spanmargin)+(+data.exposuremargin) | currency:' '}}</span>
+                </div>
+                <div>
+                  <span class="pLeft"> Pay In </span>
+                  <span class="fSize12 inst-lbl text-uppercase floatR blackcolor textright paddRight5 pRight">
+                    {{data.rmsPayInAmnt | currency:' '}} </span>
+                </div>
+                <div class="bgcolor">
+                  <span class="pLeft"> Pay Out </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5 pRight"
+                    [style.color]="data.payoutamount > 0 ? 'green' : 'red'">
+                    {{data.payoutamount | currency:' '}}</span>
+                </div>
+                <div>
+                  <span class="pLeft"> Span Margin </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 pRight">
+                    {{data.spanmargin}}</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 paddRight">
+    <div style="background-color: #fff">
+      <div style="background: white" class=" btm-container-scroll ">
+        <div class="">
+          <div class="" *ngFor="let data of funds">
+            <div class="bcBtn text-uppercase lineHgt15">
+              <div>
+                <label class="pLeft"> <b> Adhoc Margin </b> </label>
+                <span class="text-uppercase paddRight5 textright floatR fWeight600 pRight"
+                  [style.color]="(+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) < 0 ? 'red' : (+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) > 0 ? 'green' : 'black'">{{+data.adhocMargin | number : '.2'}}</span>
+              </div>
+              <div class="bgcolor">
+                <label class="pLeft"> <b> Adhoc Script Margin </b> </label>
+                <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 fWeight600 pRight">
+                  {{data.adhocscripmargin | currency:' '}}</span>
+              </div>
+              <!-- <p (click)="openMorebutton(true)" [hidden]="!showhidemore" class="mar00" style="text-align: right">
+                Show
+                more &#9660;</p> -->
+              <div *ngIf="!showhidemore">
+                <div>
+                  <span class="pLeft"> Cash Margin Available </span>
+                  <span class="fSize12 inst-lbl text-uppercase floatR blackcolor textright paddRight5 pRight"
+                    [style.color]="data.cashmarginavailable > 0 ? 'green' : 'red'">
+                    {{data.cashmarginavailable | currency:' '}} </span>
+                </div>
+                <div class="bgcolor">
+                  <span class="pLeft"> CNC Margin Used </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5 pRight">
+                    {{data.cncMarginUsed | currency:' '}}</span>
+                </div>
+                <div>
+                  <span class="pLeft"> Cover Order Margin </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5 pRight">
+                    {{data.coverOrderMarginPrsnt}}</span>
+                </div>
+                <div class="bgcolor">
+                  <span class="pLeft"> Credits </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 pRight"
+                    [style.color]="data.unrealizedMtomPrsnt > 0 ? 'green' : 'red'">
+                    {{data.credits}}</span>
+                </div>
+                <div>
+                  <span class="pLeft"> Debits </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5 pRight">
+                    {{data.debits | currency:' '}}</span>
+                </div>
+                <div class="bgcolor">
+                  <span class="pLeft"> Direct Collateral Value </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5 pRight"
+                    [style.color]="data.directcollateralvalue > 0 ? 'green' : 'red'">
+                    {{data.directcollateralvalue}}</span>
+                </div>
+                <div>
+                  <span class="pLeft"> RMS IPO Amount </span>
+                  <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 pRight" [style.color]="">
+                    {{data.rmsIpoAmnt}}</span>
+                </div>
+              </div>
+              <!-- <p (click)="openMorebutton(false)" [hidden]="showhidemore" class="mar00" style="text-align: right">
+                Show
+                less &#x25B2;</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

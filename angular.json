@@ -1,0 +1,292 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "zebuOrders": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/zebuOrders",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "node_modules/alertifyjs/build/css/alertify.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "src/app/chartiq/js/thirdparty/promise.min.js",
+              "src/app/chartiq/js/thirdparty/@webcomponents/template.js",
+              "src/app/chartiq/js/thirdparty/@webcomponents/custom-elements.min.js",
+              "src/app/chartiq/js/thirdparty/@webcomponents/native-shim.js",
+              "src/app/chartiq/js/thirdparty/html2canvas.js",
+              "src/app/chartiq/js/thirdparty/perfect-scrollbar.jquery.js",
+              "src/app/chartiq/js/chartiq.js",
+              "src/app/chartiq/js/addOns.js",
+              "src/app/chartiq/examples/feeds/quoteFeedSimulator.js",
+              "src/app/chartiq/examples/feeds/symbolLookupChartIQ.js",
+              "src/app/chartiq/examples/markers/markersSample.js",
+              "src/app/chartiq/examples/markers/tradeAnalyticsSample.js",
+              "src/app/chartiq/examples/markets/marketDefinitionsSample.js",
+              "src/app/chartiq/examples/markets/marketSymbologySample.js",
+              "src/app/chartiq/examples/translations/translationSample.js",
+              "src/app/chartiq/js/componentUI.js",
+              "src/app/chartiq/js/components.js",
+              "src/app/chartiq/examples/templates/js/sample-template.js"
+             ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "zebuOrders:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "zebuOrders:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "zebuOrders:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "zebuOrders-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "zebuOrders:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "zebuOrders:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "optionbees": {
+      "root": "projects/optionbees/",
+      "sourceRoot": "projects/optionbees/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/optionbees",
+            "index": "projects/optionbees/src/index.html",
+            "main": "projects/optionbees/src/main.ts",
+            "polyfills": "projects/optionbees/src/polyfills.ts",
+            "tsConfig": "projects/optionbees/tsconfig.app.json",
+            "assets": [
+              "projects/optionbees/src/favicon.ico",
+              "projects/optionbees/src/assets"
+            ],
+            "styles": [
+              "projects/optionbees/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/optionbees/src/environments/environment.ts",
+                  "with": "projects/optionbees/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "optionbees:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "optionbees:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "optionbees:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/optionbees/src/test.ts",
+            "polyfills": "projects/optionbees/src/polyfills.ts",
+            "tsConfig": "projects/optionbees/tsconfig.spec.json",
+            "karmaConfig": "projects/optionbees/karma.conf.js",
+            "styles": [
+              "projects/optionbees/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/optionbees/src/favicon.ico",
+              "projects/optionbees/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/optionbees/tsconfig.app.json",
+              "projects/optionbees/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "optionbees-e2e": {
+      "root": "projects/optionbees-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/optionbees-e2e/protractor.conf.js",
+            "devServerTarget": "optionbees:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "optionbees:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/optionbees-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "zebuOrders",
+  "cli": {
+    "analytics": "1a92a26c-8215-47aa-a8b3-17651d449afe"
+  }
+}

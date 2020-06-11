@@ -1,0 +1,245 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderB0 paddLR0" *ngIf="emptytablesegment">
+  <mat-tab-group class="ordertable" (selectedTabChange)="getorderssegment($event.index)"
+    [selectedIndex]="selectedIndex">
+    <mat-tab *ngFor="let tab of ordertabs">
+      <ng-template mat-tab-label>
+        {{tab['tabs']}}
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 example-table-container paddRL42 marginT30">
+  <!-- Pending Table -->
+  <table *ngIf="selectedIndex == 0 && openOrder.length > 0">
+    <tr>
+      <th class="padd15">
+        <mat-checkbox [(ngModel)]="myModel" *ngIf="selectedIndex == 0" (change)="selectPendingOrderCheck($event,'')">
+        </mat-checkbox>
+      </th>
+      <th>Time</th>
+      <th>Product</th>
+      <th>Type</th>
+      <th>Instrument</th>
+      <th class="tright">Qty</th>
+      <th class="tright">Price</th>
+      <th class="tcenter">Status</th>
+    </tr>
+
+    <tr *ngFor="let index of openOrder">
+      <td class="padd15">
+        <mat-checkbox [checked]="myModel" *ngIf="selectedIndex == 0" (change)="selectPendingOrderCheck($event,index)"
+          [disabled]="index['Status'] == 'open' || (index['Status'] == 'trigger pending' && (index['Pcode'] != 'CO' || index['Pcode'] != 'BO')) ? 'false':'true'">
+        </mat-checkbox>
+      </td>
+      <td class="fSize12 tleft">{{index['OrderedTime'] == undefined ? '' : index['OrderedTime'].split(" ")[1]}}</td>
+      <td class="fSize12 tleft">{{index['Pcode']}}</td>
+      <td class="fSize12 tleft">
+        <button [ngClass]="index['Trantype'] == 'B'? 'odrbuy':'odrsell'">{{index['Trantype']}}</button>
+      </td>
+      <td class="fSize12 tleft">
+        <div class="floatType">
+          <div class="info">
+            <span style="padding-left: 0px; "
+              *ngIf="index['InstName'] == 'OPTIDX' || index['InstName'] == 'OPTSTK' || index['InstName'] == 'OPTFUT' || index['InstName'] == 'OPTCUR'"
+              class="tradSym">{{index['instrumentOptidx']}}</span>
+            <ng-container *ngIf="index['InstName'] != null || index['InstName'] != undefined">
+              <span style="padding-left: 0px; " *ngIf="index['InstName'].startsWith('FUT')"
+                class="tradSym">{{index['instrumentFut']}}</span>
+            </ng-container>
+            <span style="padding-left: 0px; " *ngIf="index['Exchange'] =='NSE' || index['Exchange'] == 'BSE'"
+              class="tradSym">
+              {{index['Sym']}}
+            </span>&nbsp;
+            <span class="cls-exchng">{{index['Exchange']}}</span>
+          </div>
+          <div style="float: right;" class="btn-group btn-group-xs hide-btn-group actions">
+            <button mat-raised-button class="modfibtn"
+              *ngIf="index['Status'] == 'open' || index.Status == 'trigger pending' || index.Status == 'validation pending'"
+              (click)="scripsPOrd(index,'modify')">MOD</button>
+            <button mat-raised-button class="cancelbtn"
+              *ngIf="index['Status'] != 'complete' && index.Status == 'open' || index.Status == 'trigger pending' || index.Status == 'after market order req received'|| index.Status =='modify after market order req received'"
+              (click)="openConfirmation([index])">CAN</button>
+            <button mat-raised-button class="infobtn" (click)="openInfoDialog(index)">INFO</button>
+            <!-- <button mat-raised-button class="modfibtn" (click)="scripsPOrd(index,'modify')"
+            [disabled]="index.Status == 'complete' ? 'true' : index.Status == 'rejected' ? 'true':index.Status == 'cancelled' ? 'true':'false' ">MODIFY</button>
+          <button mat-raised-button class="cancelbtn" (click)="openConfirmation([index])"
+            [disabled]="(index.Status == 'open' || index.Status == 'trigger pending' || index.Status == 'after market order req received'|| index.Status =='modify after market order req received') ? 'false' :'true'">CANCEL</button>
+          <button mat-raised-button class="infobtn" (click)="openInfoDialog(index)">INFO</button> -->
+          </div>
+        </div>
+      </td>
+      <td class="fSize12 tright">
+        {{index['Fillshares']}}/{{index['Qty']}}
+      </td>
+      <td class="fSize12 tright">
+        <span>
+          {{index['Prc']}}
+          <span class="fSize12" *ngIf="index['Trgprc'] > 0 ">/{{index['Trgprc']}} trg.</span>
+        </span>
+      </td>
+      <td class="fSize12 tcenter">
+        <span
+          [class]="index['Status'] == 'open' ? 'clsstausopen': index['Status'] == 'complete' ? 'clsstatusgreen':index['Status'] == 'cancelled' ? 'clsstatusgray':index['Status'] == 'rejected' ? 'clsstatusred':index['Status'] == 'trigger pending' ? 'clsstauspurprle':index['Status'] == 'open pending' ? 'clsstausopen':index['Status'] == 'validation pending' ? 'clsstausopen':''">
+          <span *ngIf="index['Status'] == 'trigger pending'">TRIG PENDING</span><span
+            *ngIf="index['Status'] != 'trigger pending'">{{index['Status']}}</span>
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Complete Table -->
+  <table *ngIf="selectedIndex == 1 && completedOrder.length > 0">
+    <tr>
+      <th>Time</th>
+      <th>Product</th>
+      <th>Type</th>
+      <th>Instrument</th>
+      <th class="tright">Qty</th>
+      <th class="tright">Price</th>
+      <th class="tcenter">Status</th>
+    </tr>
+    <tr *ngFor="let index of completedOrder">
+      <td class="fSize12 tleft">{{index['OrderedTime'] == undefined ? '' : index['OrderedTime'].split(" ")[1]}}</td>
+      <td class="fSize12 tleft">{{index['Pcode']}}</td>
+      <td class="fSize12 tleft">
+        <button [ngClass]="index['Trantype'] == 'B'? 'odrbuy':'odrsell'">{{index['Trantype']}}</button>
+      </td>
+      <td class="fSize12 tleft">
+        <div class="floatType">
+          <div class="info">
+            <span style="padding-left: 0px; "
+              *ngIf="index['InstName'] == 'OPTIDX' || index['InstName'] == 'OPTSTK' || index['InstName'] == 'OPTFUT' || index['InstName'] == 'OPTCUR'"
+              class="tradSym">{{index['instrumentOptidx']}}</span>
+            <ng-container *ngIf="index['InstName'] != null || index['InstName'] != undefined">
+              <span style="padding-left: 0px; " *ngIf="index['InstName'].startsWith('FUT')"
+                class="tradSym">{{index['instrumentFut']}}</span>
+            </ng-container>
+            <span style="padding-left: 0px; " *ngIf="index['Exchange'] =='NSE' || index['Exchange'] == 'BSE'"
+              class="tradSym">
+              {{index['Sym']}}
+            </span>&nbsp;
+            <span class="cls-exchng">{{index['Exchange']}}</span>
+          </div>
+          <div style="float: right;" class="btn-group btn-group-xs hide-btn-group actions padd0">
+            <button mat-raised-button class="infobtn" (click)="openInfoDialog(index)">INFO</button>
+          </div>
+        </div>
+      </td>
+
+      <td class="fSize12 tright">
+        {{index['Fillshares']}}/{{index['Qty']}}
+      </td>
+      <td class="fSize12 tright">
+        <span>
+          {{index['Avgprc']}} <span class="fSize12" *ngIf="index['Trgprc'] > 0 ">/{{index['Trgprc']}} trg.</span>
+        </span>
+      </td>
+      <td class="fSize12 tcenter">
+        <span
+          [class]="index['Status'] == 'open' ? 'clsstausopen': index['Status'] == 'complete' ? 'clsstatusgreen':index['Status'] == 'cancelled' ? 'clsstatusgray':index['Status'] == 'rejected' ? 'clsstatusred':index['Status'] == 'trigger pending' ? 'clsstatusgray':index['Status'] == 'open pending' ? 'clsstatusgray':index['Status'] == 'validation pending' ? 'clsstatusgray':''">
+          <span *ngIf="index['Status'] == 'trigger pending'">TRIG PENDING</span> <span
+            *ngIf="index['Status'] != 'trigger pending'">{{index['Status']}}</span>
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <!-- All Order Table -->
+  <table *ngIf="selectedIndex == 2 && orders.length > 0" style="margin-bottom: 100px;">
+    <tr style="font-weight: 100;">
+      <th>Time</th>
+      <th>Product</th>
+      <th>Type</th>
+      <th>Instrument</th>
+      <th class="tright">Qty</th>
+      <th class="tright">Price</th>
+      <th class="tcenter">Status</th>
+    </tr>
+
+    <tr *ngFor="let index of orders">
+      <td class="fSize12 tleft">{{index['OrderedTime'] == undefined ? '' : index['OrderedTime'].split(" ")[1]}}</td>
+      <td class="fSize12 tleft">{{index['Pcode']}}</td>
+      <td class="fSize12 tleft">
+        <button [ngClass]="index['Trantype'] == 'B'? 'odrbuy':'odrsell'">{{index['Trantype']}}</button>
+      </td>
+      <td class="fSize12">
+        <div class="floatType">
+          <div class="info">
+            <span style="padding-left: 0px; "
+              *ngIf="index['InstName'] == 'OPTIDX' || index['InstName'] == 'OPTSTK' || index['InstName'] == 'OPTFUT' || index['InstName'] == 'OPTCUR'"
+              class="tradSym">{{index['instrumentOptidx']}}</span>
+            <ng-container *ngIf="index['InstName'] != null || index['InstName'] != undefined">
+              <span style="padding-left: 0px; " *ngIf="index['InstName'].startsWith('FUT')"
+                class="tradSym">{{index['instrumentFut']}}</span>
+            </ng-container>
+            <span style="padding-left: 0px; " *ngIf="index['Exchange'] =='NSE' || index['Exchange'] == 'BSE'"
+              class="tradSym">
+              {{index['Sym']}}
+            </span>&nbsp;
+            <span class="cls-exchng">{{index['Exchange']}}</span>
+          </div>
+          <div style="float: right;" class="btn-group btn-group-xs hide-btn-group actions padd0">
+            <button mat-raised-button class="modfibtn"
+              *ngIf="index['Status'] == 'open' || index.Status == 'trigger pending' || index.Status == 'validation pending'"
+              (click)="scripsPOrd(index,'modify')">MOD</button>
+            <button mat-raised-button class="exitbtn"
+              *ngIf="index['Status'] != 'complete' && index.Status == 'open' && index.Pcode == 'CO' || index.Status == 'trigger pending' && index.Pcode == 'CO' || index.Status == 'open' && index.Pcode == 'BO' || index.Status == 'trigger pending' && index.Pcode == 'BO'"
+              (click)="exitBOCOOrder(index)">EXIT</button>
+            <button mat-raised-button class="cancelbtn"
+              *ngIf="index['Status'] != 'complete' && index.Status == 'open' || index.Status == 'trigger pending' || index.Status == 'after market order req received'|| index.Status =='modify after market order req received'"
+              (click)="openConfirmation([index])">CAN</button>
+            <button mat-raised-button class="infobtn" (click)="openInfoDialog(index)">INFO</button>
+          </div>
+        </div>
+      </td>
+      <td class="fSize12 tright">
+        {{index['Fillshares']}}/{{index['Qty']}}
+      </td>
+      <td class="fSize12 tright">
+        <span>
+          <span *ngIf="index['Status'] == 'complete'">{{index['Avgprc']}}</span><span
+            *ngIf="index['Status'] != 'complete'">{{index['Prc']}}</span>
+          <span class="fSize12" *ngIf="index['Trgprc'] > 0 ">/{{index['Trgprc']}} trg.</span>
+        </span>
+      </td>
+      <td class="fSize12 tcenter">
+        <span matTooltip="{{index['RejReason'] == '--' ? '':index['RejReason']}}"
+          [class]="index['Status'] == 'open' ? 'clsstausopen': index['Status'] == 'complete' ? 'clsstatusgreen':index['Status'] == 'cancelled' ? 'clsstatusgray':index['Status'] == 'rejected' ? 'clsstatusred':index['Status'] == 'trigger pending' ? 'clsstauspurprle':index['Status'] == 'open pending' ? 'clsstatusgray':index['Status'] == 'validation pending' ? 'clsstatusgray':''">
+          <span *ngIf="index['Status'] == 'trigger pending'">TRIG PENDING</span> <span
+            *ngIf="index['Status'] != 'trigger pending'">{{index['Status']}}</span>
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 5%;" *ngIf="emptytablemsg">
+    <div>
+      <img src="assets/image/noDataInfo.svg" alt="" width="100" height="100">
+      <span style="color: #000000de; font-size: 18px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO {{ordertype}}
+        ORDERS</span>
+    </div>
+    <div style="padding-top: 30px !important;">
+      <span style="color: #000000de; font-size: 14px;">
+        Place your orders from market watch using regular Buy & Sell <br>
+        OR<br>
+        Using Quick orders
+      </span>
+    </div>
+  </div>
+  <div class="commomexit" *ngIf="showOverAllExit && selectedIndex == 0">
+    <button mat-flat-button class="exitbtn" (click)="openAllOrderExitConfirmation()">Cancel</button>
+  </div>
+</div>
+<div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;" *ngIf="showDatafound">
+  <div>
+    <img src="assets/image/noDataInfo.svg" alt="" width="100" height="100">
+    <span style="color: #000000de; font-size: 18px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO ORDERS FOUND</span>
+  </div>
+  <div style="padding-top: 30px !important;">
+    <span style="color: #000000de; font-size: 14px;">
+      Place your orders from market watch using regular Buy & Sell <br>
+      OR<br>
+      Using Quick orders
+    </span>
+  </div>
+</div>

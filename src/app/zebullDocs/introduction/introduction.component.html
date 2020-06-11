@@ -1,0 +1,76 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row">
+    <div class="col-sm-12 col-lg-12 col-md-12 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+
+
+            <span class="titleText">Introduction</span><br><br>
+            <p style="text-align: justify;">Mobull Rest based web services are build on top of Thomson
+                Reuters (Omnesys) REST API which connects to their NEST based OMS and RMS systems. This
+                acts as a wrapper to simplify the complex nature of the original API. Mobull
+                REST provides an easy way to place orders, view order book, watch positions and view funds
+                and balances.</p>
+            <p style="text-align: justify;">Mobull is built as a complete REST based platform and all
+                input and output parameters are based on JSON unless stated otherwise. The service calls
+                are platform independent and the examples given are Javascript based (AJAX)
+                calls.</p>
+            <p style="text-align: justify;">Each API call is structured as below</p><br>
+            <ul style="font-style: italic;">
+                <li>-URL to be called</li>
+                <li>-Input Parameters with example JSON set</li>
+                <li>-Response from server with all possible keys</li>
+                <li>-Error messages</li>
+                <li>-Sample JS programs (Optional)</li>
+            </ul>
+            <span class="Text">BASE URL</span><br><br>
+            <p>The BASE URL is the common url used as prefix for all API call.</p>
+            <pre>
+            <p>Base URL : https://www.zebull.in/rest/MobullService/</p>
+        </pre>
+        <span class="Text">GENERATE API KEY</span><br><br>
+        <li>User should first login through zebull web application.</li><br>
+        <li>The API key can be generated through profile settings.</li><br>
+        <li>The generated API key will be send to the user's registered mail.</li><br>
+        <li>For authentication and authorization work flow, use that API key.</li><br>
+
+            <span class="Text">AUTHENTICATION</span><br><br>
+            <p>The following diagram depicts the usual API authentication flow.
+                After getting the encryption key, user has to generate SHA-256 encrypted key to get
+                User's Session Id. To do this, the user needs to encrypt the combintaion of User id,
+                API key and encryption Key. Sending this to the API will provide the session id. Use the session id in
+                authorization header for all further API calls. If there are any issues found, like unauthorized
+                access or invalid session, user can re-generate session id by using the same set of process described
+                above. </p>
+
+            <img src="assets/zebu image.PNG"> <br>
+
+          <span class="Text">AUTHORIZATION</span><br><br>
+            <p>Every request except "authentication" should be appended with Authorization header having Bearer
+                token as below</p>
+            <pre>
+                <p>Authorization: Bearer userId userSessionId</p>
+    </pre>
+            <table>
+                <tr>
+                    <td>Bearer</td>
+                    <td> Constant text. Adding this depends on the platform from which the user is going
+                        to make the call</td>
+                </tr>
+                <tr>
+                    <td>userId</td>
+                    <td>User ID used for login</td>
+                </tr>
+                <tr>
+                    <td>userSessionId</td>
+                    <td>User Session ID which will be received upon successful API authentication</td>
+                </tr>
+            </table><br>
+            <!--  <ul>
+          <li>"Authorization: Bearer" - Constant text. Addig this depends on the platform from whih the user is going to make the call</li>
+          <li>"ZEB100" - User ID used for login</li>
+          <li>"8526253268" - User Session ID which will be received upon successful 2FA authentication </li>
+      </ul> -->
+
+        </div>
+    </div>
+</div>

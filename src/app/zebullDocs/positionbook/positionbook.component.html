@@ -1,0 +1,514 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: black;">
+       <div class="col-lg-7 col-xs-7 col-sm-7 col-md-7 search_scroll" style="background: white !important;" id="mainDiv">
+        <div class="height">
+            <span class="titleText">Position Book</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>&lt;<span class="base"> BASE URL </span>&gt; + v1/positionAndHoldings/positionBook</p><br>
+            <span class="subTitle ">Method</span><br>
+            <P class="title "> Post</P><br>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table class="position">
+                <tr>
+                    <th>S.NO </th>
+                    <th>KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>ret</code>
+                        <span>String</span>
+                    </td>
+                    <td>
+                        <code>Retention Type</code>
+                        <span>DAY/NET</span>
+                    </td>
+                </tr>
+            </table><br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="position cls_pre">
+       {{'{'}}
+       "ret": "DAY/NET"
+       {{'}'}}
+    </pre>
+            <br>
+            <span class="subTitle">Success Response</span><br><br>
+            <table>
+                <tr>
+                    <th class="serial">S.NO</th>
+                    <th class="second">PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>Exchange</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange name</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>Tsym</code>
+                        <span>String</span>
+                    </td>
+                    <td>Trading symbol</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <code>Netqty</code>
+                        <span>String</span>
+                    </td>
+                    <td>Net quantity</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <code>Netamt</code>
+                        <span>int</span>
+                    </td>
+                    <td>Net amount</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>
+                        <code>Pcode</code>
+                        <span>String</span>
+                    </td>
+                    <td>Product code</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>
+                        <code>MtoM</code>
+                        <span>String</span>
+                    </td>
+                    <td>Market to market</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>
+                        <code>BEP</code>
+                        <span>String</span>
+                    </td>
+                    <td>Break-even price of the position</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>
+                        <code>LTP</code>
+                        <span>String</span>
+                    </td>
+                    <td>Last trade price of the scrip</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>
+                        <code>Instname</code>
+                        <span>String</span>
+                    </td>
+                    <td>Instrument name</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>
+                        <code>Expdate</code>
+                        <span>String</span>
+                    </td>
+                    <td>Expiry date</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>
+                        <code>Opttype</code>
+                        <span>String</span>
+                    </td>
+                    <td>Option type</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>
+                        <code>Stikeprc</code>
+                        <span>int</span>
+                    </td>
+                    <td>Strike price</td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>
+                        <code>Buyavgprc</code>
+                        <span>int</span>
+                    </td>
+                    <td>Buy average price</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>
+                        <code>Sellavgprc</code>
+                        <span>int</span>
+                    </td>
+                    <td>Sell average price</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>
+                        <code>Bqty</code>
+                        <span>int</span>
+                    </td>
+                    <td>Buy quantity</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>
+                        <code>Sqty</code>
+                        <span>int</span>
+                    </td>
+                    <td>Sell quantity</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>
+                        <code>Fillbuyamt</code>
+                        <span>int</span>
+                    </td>
+                    <td>Fill buy amount</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>
+                        <code>Fillsellamt</code>
+                        <span>int</span>
+                    </td>
+                    <td>Fill sell amount</td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td>
+                        <code>BLQty</code>
+                        <span>int</span>
+                    </td>
+                    <td>Board lot quantity</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>
+                        <code>Token</code>
+                        <span>String</span>
+                    </td>
+                    <td>Token of the scrip</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td>
+                        <code>Symbol</code>
+                        <span>String</span>
+                    </td>
+                    <td>Symbol name</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td>
+                        <code>Exchangeseg</code>
+                        <span>String</span>
+                    </td>
+                    <td>Exchange segment</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td>
+                        <code>Fillbuyqty</code>
+                        <span>int</span>
+                    </td>
+                    <td>Fill buy quantity</td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td>
+                        <code>Fillsellqty</code>
+                        <span>int</span>
+                    </td>
+                    <td>Fill sell quantity</td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td>
+                        <code>s_NetQtyPosConv</code>
+                        <span>int</span>
+                    </td>
+                    <td>Net quantity position conversion Y/N<br>Y→ Net qty based partial position
+                        conversion<br>N→ Transaction type based partial position conversion
+                    </td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td>
+                        <code>posflag</code>
+                        <span>String</span>
+                    </td>
+                    <td>Partial position conversion flag</td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td>
+                        <code>sSqrflg</code>
+                        <span>String</span>
+                    </td>
+                    <td>Square of flag</td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td>
+                        <code>discQty</code>
+                        <span>int</span>
+                    </td>
+                    <td>Disclose quantity Percentage</td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td>
+                        <code>PriceNumerator</code>
+                        <span>int</span>
+                    </td>
+                    <td>Price numerator</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>
+                        <code>GeneralNumerator</code>
+                        <span>int</span>
+                    </td>
+                    <td>General numerator</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>
+                        <code>PriceDenomenator</code>
+                        <span>int</span>
+                    </td>
+                    <td>Price denominator</td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>
+                        <code>GeneralDenomenator</code>
+                        <span>int</span>
+                    </td>
+                    <td>General denominator</td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>
+                        <code>companyname</code>
+                        <span>String</span>
+                    </td>
+                    <td>Company name</td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>
+                        <code>realisedprofitloss</code>
+                        <span>String</span>
+                    </td>
+                    <td>Realized profit loss</td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td>
+                        <code>unrealisedprofitloss</code>
+                        <span>String</span>
+                    </td>
+                    <td>Unrealized profit loss</td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>
+                        <code>Type</code>
+                        <span>String</span>
+                    </td>
+                    <td>Type of position<br>NET1 – Carry Forward Position<br>DAY1 – Day position<br>DAYNET -
+                        For positions which is having both Day as well as Carry Forward Position</td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td>
+                        <code>Series</code>
+                        <span>String</span>
+                    </td>
+                    <td>series</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">Only for NET position type , following
+                        fields are displayed</td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td>
+                        <code>netSellamt</code>
+                        <span>int</span>
+                    </td>
+                    <td>Net Sell amount</td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>
+                        <code>netbuyamt</code>
+                        <span>int</span>
+                    </td>
+                    <td>Net Buy Amount</td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>
+                        <code>netbuyqty</code>
+                        <span>int</span>
+                    </td>
+                    <td>Net Buy quantity</td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td>
+                        <code>netsellqty</code>
+                        <span>int</span>
+                    </td>
+                    <td>Net Sell quantity</td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td>
+                        <code>CFBuyavgprc</code>
+                        <span>int</span>
+                    </td>
+                    <td>CF net buy average price</td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td>
+                        <code>CFsellavgprc</code>
+                        <span>int</span>
+                    </td>
+                    <td>CF net sell average price</td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>
+                        <code>CFbuyqty</code>
+                        <span>int</span>
+                    </td>
+                    <td>CF buy quantity</td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td>
+                        <code>CFsellqty</code>
+                        <span>int</span>
+                    </td>
+                    <td>CF sell quantity</td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td>
+                        <code>FillbuyamtCF</code>
+                        <span>int</span>
+                    </td>
+                    <td>CF fill buy amount</td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td>
+                        <code>FillsellamtCF</code>
+                        <span>int</span>
+                    </td>
+                    <td>CF fill sell amount</td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td>
+                        <code>actid</code>
+                        <span>String</span>
+                    </td>
+                    <td>Account Id</td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td>
+                        <code>NetBuyavgprc</code>
+                        <span>int</span>
+                    </td>
+                    <td>Net Buy Average price</td>
+                </tr>
+                <tr>
+                    <td>51</td>
+                    <td>
+                        <code>NetSellavgprc</code>
+                        <span>int</span>
+                    </td>
+                    <td>Net Sell Average price</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>String</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>String</span>
+                    </td>
+                    <td class="b"><li>Session Expired</li><br><li>Not able to Retrieve PositionBook</li><br><li>No Data</li>
+                    </td>
+                </tr>
+            </table>
+            <br>
+        </div>
+    </div>
+    <div class="col-lg-5 col-xs-5 col-sm-5 col-md-5">
+        <div class="subTitless">Sample Javascript</div><br>
+        <div class="modify">
+            <pre class="code">
+{{'{'}}
+<span class="s2">var jsonObj = </span>{{'{'}}
+     <span class="s2">"ret": "DAY/NET"</span>
+  {{'}'}}; 
+ <span class="s2">var pUrl = "BASE URL + URL";
+ $.ajax</span>({{'{'}}
+      <span class="s2">url: pUrl,
+      contentType: 'application/json',
+      headers: </span>{{'{'}}
+      <span class="s2">'Authorization': "authorization token"</span>
+      {{'}'}},
+      <span class="s2">type: 'post',
+      data:JSON.stringify(jsonObj),
+      crossDomain:<span class="s3">true,</span>
+      success: <span class="s4">function</span>( data )</span>{{'{'}}{{'}'}}
+      <span class="s2">error: <span class="s4">function</span>( errorThrown )</span>{{'{'}}{{'}'}}
+   {{'}'}});
+{{'}'}}
+</pre>
+        </div>
+    </div>
+</div>

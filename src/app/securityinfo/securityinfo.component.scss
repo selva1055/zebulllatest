@@ -1,0 +1,113 @@
+.header {
+  padding: 30px 15px 15px 15px;
+  //   border-bottom: 1px solid #ccc;
+}
+.paddRL0 {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.fright {
+  float: right;
+}
+
+.fleft {
+  float: left;
+}
+
+.status {
+  float: right !important;
+  background: #cccccc59 !important;
+  color: #757575 !important;
+  border-radius: 2px !important;
+  padding: 7px !important;
+  font-size: 11px !important;
+}
+.type {
+  background: #049ddc40 !important;
+  padding: 6px 18px 6px 18px !important;
+  font-size: 11px !important;
+  color: #19b0ef !important;
+  border-radius: 2px !important;
+}
+.headerType {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0000009c;
+}
+.priceheader {
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  color: #0000009c !important;
+  float: right !important;
+}
+.subheader {
+  font-size: 11px;
+  color: #424242;
+}
+.priceheader {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0000009c;
+  }
+
+.rightSide {
+  font-size: 13px;
+  font-weight: 500;
+  color: #0000009c;
+}
+
+.leftSide {
+  font-size: 13px;
+  font-weight: 500;
+  color: #a5a4a4;
+}
+
+.borderRigth {
+  border-right: 1px solid #cccccc40;
+}
+
+.paddingTop15 {
+  padding-top: 15px !important;
+}
+
+.paddTB15 {
+  padding-top: 30px !important;
+  padding-bottom: 15px !important;
+}
+
+.borderBottom {
+  border-bottom: 1px solid #cccccc40 !important;
+}
+
+.paddLR30 {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}
+
+.txtend {
+  text-align: right;
+}
+
+.btnClose {
+  border: 1px solid #ccc;
+}
+
+.paddL30 {
+  padding-left: 30px;
+}
+
+@media screen and (max-width: 920px) {
+  .paddMLR0 {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .overflow {
+    overflow: scroll;
+    height: 53%;
+  }
+  .fleft {
+    float: right;
+  }
+}

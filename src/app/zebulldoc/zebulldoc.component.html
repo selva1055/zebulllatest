@@ -1,0 +1,141 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="top-container cls_head">
+    <img class="zebumenu" src="../assets/zebu.jpg" width="40" height="40">
+    <span class="white-txt2 fsize20">ZEBU NEST API DOCUMENTATION</span>
+    <div class="common-right">
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-md-3 col-lg-3 col-sm-3 sidenavbar position">
+    <div class="tabs ">
+      <div class="tab space">
+        <!-- <ul> -->
+          <div class="row">
+          <div class="col-md-2 col-lg-2 col-sm-2">
+            <!-- <img class="cls_intr" src="assets/intro.svg"> -->
+          </div>
+          <div class="col-md-10 col-lg-10 col-sm-10">
+             <!-- <li><a class="list intro" routerLink="./intro">INTRODUCTION</a></li> -->
+             <li><a class="list intro tab-labels authen " routerLink="./intro">INTRODUCTION</a></li>
+          </div>
+        </div>
+        <!-- </ul> -->
+      </div>
+    </div>
+    <div class="tabs ">
+      <div class="tab">
+        <input type="checkbox" id="chck2" (click)="checkBoxChange($event)">
+        <div class="col-md-2 col-lg-2 col-sm-2">
+          <!-- <img class="cls_img" src="assets/auth.svg"> -->
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10 ">
+          <label class="tab-label authen li" for="chck2">AUTHENTICATION</label>
+        </div>
+        <div class="tab-content"> 
+          <li><a class="list" routerLink="encryptionkey">API Encryption Key</a></li>
+          <li><a class="list" routerLink="session-id">SessionId</a></li>
+          <!-- <li><a class="list" routerLink="login">Login</a></li>
+          <li><a class="list" routerLink="validate2fa">Validate 2FA </a></li>
+          <li><a class="list" routerLink="save2fa">Save 2FA</a></li>
+          <li><a class="list" routerLink="forgotpassword">Forgot Password</a></li>
+          <li><a class="list" routerLink="unblockuser">Unblock User</a></li>
+          <li><a class="list" routerLink="userdetails">User Details </a></li> -->
+        </div> 
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab">
+        <input type="checkbox" id="chck3" (click)="checkBoxChange($event)">
+        <div class="col-md-2 col-lg-2 col-sm-2">
+          <!-- <img src="assets/Market_Watch.svg" class="cls_mkt"> -->
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10">
+          <label class="tab-label" for="chck3">MARKET WATCH</label>
+        </div>
+        <div class="tab-content">
+          <li><a class="list" routerLink="search">Search Scrips</a></li>
+          <li><a class="list" routerLink="marketwatchList">Market Watch List </a></li>
+          <!-- <li><a class="list" routerLink="deleteScrips"> Delete</a></li> -->
+          <li><a class="list" routerLink="marketwatchScrips"> Market Watch Scrips</a></li>
+          <li><a class="list" routerLink="addScrips"> Add scrips</a></li>
+          <li><a class="list" routerLink="deleteScrips"> Delete scrips</a></li>
+          <li><a class="list" routerLink="scripsdetails"> Scrips details</a></li>
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab">
+        <input type="checkbox" id="chck4" (click)="checkBoxChange($event)">
+        <div class="col-md-2 col-lg-2 col-sm-2">
+          <!-- <img src="assets/Orders.svg" class="cls_order"> -->
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10">
+          <label class="tab-label" for="chck4">ORDER MANAGEMENT</label>
+        </div>
+        <div class="tab-content">
+          <li><a class="list" routerLink="positionBook">Position Book</a></li>
+          <li><a class="list" routerLink="positionconvertion"> Position Convertion </a></li>
+          <li><a class="list" routerLink="squareofposition"> Square of Position </a></li>
+          <li><a class="list" routerLink="placeOrder"> Place Order</a></li>
+          <li><a class="list" routerLink="bracketOrder"> Bracket Order</a></li>
+          <li><a class="list" routerLink="orderBook"> Order Book</a></li>
+          <li><a class="list" routerLink="tradebook"> Trade Book</a></li>
+          <li><a class="list" routerLink="exitBracketorder"> Exit Bracket Order</a></li>
+          <li><a class="list" routerLink="modifyOrder"> Modify Order</a></li>
+          <li><a class="list" routerLink="marketorder"> Market Order</a></li>
+          <li><a class="list" routerLink="cancelOrder"> Cancel Order</a></li>
+          <li><a class="list" routerLink="orderHistory"> Order History</a></li>
+          <li><a class="list" routerLink="holdingBook"> Holding</a></li>
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab">
+        <input type="checkbox" id="chck5" (click)="checkBoxChange($event)">
+        <div class="col-md-2 col-lg-2 col-sm-2">
+          <!-- <img src="assets/Funds.svg" class="cls_funds"> -->
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10">
+          <label class="tab-label" for="chck5">FUNDS</label>
+        </div>
+        <div class="tab-content">
+          <li><a class="list" routerLink="getlimits">Get Limits</a></li>
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab">
+        <input type="checkbox" id="chck7" (click)="checkBoxChange($event)">
+        <div class="col-md-2 col-lg-2 col-sm-2">
+          <!-- <img src="assets/postman.svg" class="cls_postman"> -->
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10">
+
+          <label class="tab-label" for="chck7">POSTMAN</label>
+        </div>
+        <div class="tab-content">
+          <li><a class="list" routerLink="postman">Postman Scrips</a></li>
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="tab">
+        <input type="checkbox" id="chck8" (click)="checkBoxChange($event)">
+        <div class="col-md-2 col-lg-2 col-sm-2">
+          <!-- <img src="assets/postman.svg" class="cls_postman"> -->
+        </div>
+        <div class="col-md-10 col-lg-10 col-sm-10">
+
+          <label class="tab-label" for="chck8">JS PUBLISHER</label>
+        </div>
+        <div class="tab-content">
+          <li><a class="list" routerLink="publisher">JS Publisher Scrips</a></li>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9 col-lg-9 col-sm-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>

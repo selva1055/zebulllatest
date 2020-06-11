@@ -1,0 +1,32 @@
+h3 {
+  background: #1f3565;
+  text-align: center;
+  color: #fff;
+  //   display: contents;
+}
+// p {
+//   //   white-space: nowrap;
+// //   display: contents;
+// }
+button {
+  border: 1px solid #1f3565;
+  color: #1f3565;
+  float: right;
+  border-radius: 0px;
+  height: 38px;
+}
+button:hover {
+  background: #1f3565;
+  color: #fff;
+  border-radius: 0px;
+  height: 38px;
+}
+
+.mat-dialog-content {
+  margin: 0 0px;
+}
+
+// Add this to your global stylesheet after your theme setup
+.myapp-no-padding-dialog .mat-dialog-container {
+  padding: 0;
+}

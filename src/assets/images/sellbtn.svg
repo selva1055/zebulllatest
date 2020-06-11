@@ -1,0 +1,15 @@
+<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="102" width="302" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#7f0000" id="svg_1" d="m50.517322,4.083766l193.555926,0l0.330671,0c55.522802,-1.010905 51.86368,21.418004 51.86368,47.007072c-0.00001,25.589077 3.049719,44.703867 -52.194351,45.659192l-193.555926,0l0,0c-52.360436,-3.032724 -47.261931,-20.744055 -47.261931,-46.333132c0,-25.589077 -8.136467,-47.344037 47.261931,-46.333132z" stroke-width="5" fill="#fff"/>
+  <text font-weight="bold" stroke="#7f0000" transform="matrix(4.327908959096775,0,0,3.6977523900663445,-209.72192001811683,-121.54348830179809) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_2" y="54.883428" x="52.175411" stroke-width="0" fill="#7f0000">SELL</text>
+ </g>
+</svg>

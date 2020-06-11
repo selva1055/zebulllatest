@@ -1,0 +1,1871 @@
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<div id="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inheritHght" style="padding: 0 5px;">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padd0 inheritHght" style="background:white;position:relative;">
+      <!-- Search Box -->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 input-group paddTB2 boderBT ">
+        <span class="input-group-addon bordr0">
+          <i class="glyphicon glyphicon-search"></i></span>
+        <input type="text" class="form-control text-uppercase bordr0" name="searchbox"
+          placeholder="Enter company or symbol" autocomplete="off" [(ngModel)]="searchbox"
+          (input)="getsearchItems($event.target.value)" (blur)="closeItems()">
+        <ul *ngIf="showList" [class]="searchList.length > 0 ? 'srccroll' : 'srchgt'" class="dropdown-menu">
+          <li *ngFor="let data of searchList" (click)="setSelectVal(data,'add')">
+            <span class="fSize115">{{data['instrument_name']}} <span class="greylabel">{{data['symbol']}}</span></span>
+            <span class="exchHglght">{{data['exch']}}</span>
+          </li>
+        </ul>
+      </div>
+      <!-- Market Watch Data-->
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0left padd0right height">
+        <div *ngIf="!nomktwtc" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 inheritHght"
+          style="background:white;position:relative;overflow: auto;">
+          <mat-progress-bar mode="indeterminate" *ngIf="mktload || mktlistload"></mat-progress-bar>
+          <div cdkDropList class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 mw-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddTB4 boderBT hoverparent mw-box"
+              *ngFor="let scrips of scripsmkt;let i=index" cdkDrag>
+              <div *ngIf="scrips['Exchange'] != 'X' && scrips['token'] != '100'">
+                <div class="barind"
+                  [style.background]="scrips['ltp']-scrips['close'] < 0 ? 'red' : scrips['ltp']-scrips['close'] > 0 ? 'green' : 'gray'  ">
+                </div>
+                <div (click)="showDepth(scrips,i)" style="cursor: pointer;">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 paddB1_5">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 padd_L10 padd_R2 nowrap">
+                      <span class="fsize11 bcBtn text-uppercase fweight300 block-tooltip"
+                        title="{{scrips['TradSym']}} ({{scrips['Exchange']}})">{{scrips['TradSym']}} <span
+                          class="fSize105 bcBtn text-uppercase greylabel">({{scrips['Exchange']}})</span>
+                      </span>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4  padd_L2 padd_R5 text-right">
+                      <div class="fSize11 bcBtn text-uppercase ">
+                        <span
+                          id="pers_{{scrips.token}}">({{scrips.PerChange != undefined ? (scrips.PerChange|number:'1.2-2') : '0.00'}}%)
+                        </span>
+                        <span [style.color]="scrips['close'] < scrips['ltp'] ? 'green':'red'" class="fSize10 paddRL2 paddR2"
+                          [ngClass]="scrips['close'] < scrips['ltp'] ? 'glyphicon glyphicon glyphicon-triangle-top' : 'glyphicon glyphicon glyphicon-triangle-bottom'"></span>
+                        <span id="ltpBack_{{scrips.token}}" class="fSize12">{{scrips['ltp']}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 padd_L10 padd_R2">
+                      <div class="fSize10 bcBtn text-uppercase">
+                        <!-- <span Class="greylabel">Open </span><br> -->
+                        <span class="fSize105 bcBtn text-uppercase fWeight600"><span
+                            class="fWeight0 greylabel fSize10">O
+                          </span><span class="fSize11">{{scrips['open']}}</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                      <div class="fSize10 bcBtn text-uppercase text-right">
+                        <!-- <span Class="greylabel">High </span><br> -->
+                        <span class="fSize105 bcBtn text-uppercase fWeight600"><span
+                            class="fWeight0 greylabel fSize10">H
+                          </span><span class="fSize11">{{scrips['high']}}</span></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                      <div class="fSize10 bcBtn text-uppercase text-left">
+                        <!-- <span Class="greylabel">Low </span><br> -->
+                        <span class="fSize105 bcBtn text-uppercase fWeight600"><span
+                            class="fWeight0 greylabel fSize10">L
+                          </span><span class="fSize11">{{scrips['low']}}</span></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-right padd_L2 padd_R5">
+                      <div class="fSize10 bcBtn text-uppercase">
+                        <!-- <span Class="greylabel">Close </span><br> -->
+                        <span class="fSize105 bcBtn text-uppercase fWeight600"><span
+                            class="fWeight0 greylabel fSize10">C
+                          </span><span class="fSize11">{{scrips['close']}}</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- depth -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd_L10 padd_R2" *ngIf="scrips['showDP']">
+                  <!--depth buy-->
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT greylabel padd0left">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-left">BID</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-right">ORDERS</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-right">QTY.</div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 greylabel padd_L2 padd_R5">
+                    <!--depth sell-->
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-left">ASK</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-right">ORDERS</div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize10 padd0 text-right">QTY.</div>
+                  </div>
+                </div>
+                <!-- Depth View  -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd_L10 padd_R5" *ngIf="scrips['showDP']">
+                  <!--depth buy View-->
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['bp'] == undefined ? '0' :scrips['bp']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bno'] == undefined ? '0' :scrips['bno']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bq'] == undefined ? '0' :scrips['bq']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['sp'] == undefined ? '0' :scrips['sp']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['sno'] == undefined ? '0' :scrips['sno']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bs'] == undefined ? '0' :scrips['bs']}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['bp1'] == undefined ? '0' :scrips['bp1']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bno1'] == undefined ? '0' :scrips['bno1']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bq1'] == undefined ? '0' :scrips['bq1']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['sp1'] == undefined ? '0' :scrips['sp1']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['sno1'] == undefined ? '0' :scrips['sno1']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bs1'] == undefined ? '0' :scrips['bs1']}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['bp2'] == undefined ? '0' :scrips['bp2']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bno2'] == undefined ? '0' : scrips['bno2']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bq2'] == undefined ? '0' : scrips['bq2']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['sp2'] == undefined ? '0' : scrips['sp2']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['sno2'] == undefined ? '0' : scrips['sno2']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bs2'] == undefined ? '0' : scrips['bs2']}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['bp3'] == undefined ? '0' : scrips['bp3']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bno3'] == undefined ? '0' : scrips['bno3']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bq3'] == undefined ? '0' : scrips['bq3']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['sp3'] == undefined ? '0' : scrips['sp3']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['sno3'] == undefined ? '0' : scrips['sno3']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bs3'] == undefined ? '0' : scrips['bs3']}}</div>
+                    </div>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['bp4'] == undefined ? '0' : scrips['bp4']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bno4'] == undefined ? '0' : scrips['bno4']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bq4'] == undefined ? '0' : scrips['bq4']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-left">
+                        {{scrips['sp4'] == undefined ? '0' : scrips['sp4']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['sno4'] == undefined ? '0' : scrips['sno4']}}</div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 fSize11 padd0 text-right">
+                        {{scrips['bs4'] == undefined ? '0' : scrips['bs4']}}</div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 margintop2">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">TOTAL BQ</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['tbq'] == undefined ? '0' : scrips['tbq'] }}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">TOTAL SQ</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['tsq'] == undefined ? '0' : scrips['tsq'] }}</div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">VOLUME</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['v'] == undefined ? '0' : scrips['v'].split(".")[0]}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">AVG.PRICE</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['ap'] == undefined ? '0' : scrips['ap']}}</div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">LTQ</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['ltq'] == undefined ? '0' : scrips['ltq']}}</div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">LTT</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['lasttradedtime'] == undefined ? 'NA' : scrips['lasttradedtime'].slice(10,19)}}</div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">LCL</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{lowPrice}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">UCL</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{highPrice}}
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">LUT</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['lut'] == undefined ? '0' : scrips['lut']}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">TTV</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{totalPrice}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0"
+                    *ngIf=" scrips['Exchange']!='BSE' && scrips['Exchange']!='NSE'">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthbuycolor padd0left">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">OI</div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{openI}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 TEXT depthsellcolor padd0right">
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize10 padd0 text-left greylabel">Expiry Date
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 fSize11 padd0 text-right">
+                        {{scrips['Expiry'] == undefined ? 'NA' : scrips['Expiry']}}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <!--hover show button-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 paddT2 hoverBtn paddL0" id="hoverBtn{{i}}">
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn  btn-xs btnwidsq buybtn"
+                      (click)="scripsPOrd(scrips,'buy')">B</button>
+                    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                      data-backdrop="static" data-keyboard="false"></button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-xs btnwidsq sellbtn "
+                      (click)="scripsPOrd(scrips,'sell')">S</button>
+                    <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+                      data-backdrop="static" data-keyboard="false"></button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-default btn-xs btnwidsq" (click)="showSecurityInfo(scrips,i)">
+                      <span>&#921;</span>
+                      <!-- <span
+                        class="glyphicon glyphicon-align-center"></span> -->
+                    </button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-default btn-xs btnwidsq" (click)="loadChart(scrips)"
+                      [disabled]="false">
+                      <img src="assets/images/chart.svg" style="width: 100%;padding: 1.5px;"></button>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <button type="button" class="btn btn-default btn-xs btnwidsq" (click)="scripsPOrd(scrips,'del')">
+                      <img src="assets/images/bin.svg" style="width: 100%;padding: 1.5px;"></button>
+                  </div>
+                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="nomktwtc" class="text-center margintop50">
+          No Scrips added to market watch.<br> Use search and add scrips to market watch
+        </div>
+      </div>
+      <footer>
+        <ul class="pagg margB0 inheritWdth boderBT bodRad0">
+          <button [ngClass]="{'active': selectedItem == mwgrp1}"
+            title="{{ mwgrpList[0] == 'false' ? 'Empty Watchlist please add scrips to the list ' : ''}}"
+            [disabled]="mwgrpList[0] == 'false'" class=" btn-md" (click)="marktgrp(mwgrp1)"><a>1</a></button>
+          <button [ngClass]="{'active': selectedItem == mwgrp2}"
+            title="{{ mwgrpList[1] == 'false' ? 'Empty Watchlist please add scrips to the list' : ''}}"
+            [disabled]="mwgrpList[1] == 'false'" class=" btn-md" (click)="marktgrp(mwgrp2)"><a>2</a></button>
+          <button [ngClass]="{'active': selectedItem == mwgrp3}"
+            title="{{ mwgrpList[2] == 'false' ? 'Empty Watchlist please add scrips to the list' : ''}}"
+            [disabled]="mwgrpList[2] == 'false'" class=" btn-md" (click)="marktgrp(mwgrp3)"><a>3</a></button>
+          <button [ngClass]="{'active': selectedItem == mwgrp4}"
+            title="{{ mwgrpList[3] == 'false' ? 'Empty Watchlist please add scrips to the list' : ''}}"
+            [disabled]="mwgrpList[3] == 'false'" class=" btn-md" (click)="marktgrp(mwgrp4)"><a>4</a></button>
+          <button [ngClass]="{'active': selectedItem == mwgrp5}"
+            title="{{ mwgrpList[4] == 'false' ? 'Empty Watchlist please add scrips to the list' : ''}}"
+            [disabled]="mwgrpList[4] == 'false'" class=" btn-md" (click)="marktgrp(mwgrp5)"><a>5</a></button>
+        </ul>
+      </footer>
+    </div>
+    <div id="accordion">
+      <div
+        [ngClass]="appComp._isTogglePage == 'main' ? 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse in': 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse'"
+        data-parent="#accordion" id="main">
+        <div class="app-tv-chart-container padd1" id="tv_chart_container"></div>
+
+        <div class="app-tv-chart-btm-container padd1" [ngClass]="appComp._device_width > 720 ? 'displayBlock' : 'displayNone'" style="background: white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <!--Positions-->
+            <div style="background: white" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padd4px position-head ">
+              <div style="text-align: center;" class="boderBT">
+                <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                  (click)="getPositions()"></span>
+                Positions
+                <!-- <span style="float: right;cursor: pointer;" data-toggle="collapse" data-target="#main,#position"
+                  class="glyphicon glyphicon-fullscreen" title="Expand View"
+                  (click)="expandCurrentData('position')"></span> -->
+                <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('position')"
+                  class="glyphicon glyphicon-fullscreen" title="Expand View"></span>
+              </div>
+              <div style="background: white" class=" btm-container-scroll padd0">
+                <div *ngIf="!positionsvisible" class="textcenter margintop50">
+                  <div>No Positions available</div>
+                </div>
+                <div *ngIf="positionsvisible">
+                  <div class="padd0" *ngFor="let data of position;">
+                    <div class="boderBT text-uppercase col-lg-12 col-md-12 col-sm-12 padd0 position-hover"
+                      style="padding: 6px;">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd0 ">
+                        <div
+                          class="col-lg-7 col-md-7 col-sm-7 fSize12 se text-uppercase inst-lbl padd0 txt-black nowrap block-tooltip"
+                          title="{{data['Nsetsym']}}" style="padding-left: 0px; ">{{data['Tsym']}}
+                        </div>
+                        <div
+                          class="col-lg-5 col-md-5 col-sm-5  fSize12 se text-uppercase padd0 fright txt-black inst-lbl"
+                          [style.color]="data.MtoM < 0 ? 'red' : 'green'">
+                          {{data['MtoM']}}</div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd0 ">
+                        <div class="col-lg-4 col-md-4 col-sm-4 fSize10 inst-lbl text-uppercase padd0"
+                          style="padding-left: 0px; ">Avg.Price <span class="fSize12 inst-lbl txt-black">
+                            {{ data['Netqty']}}</span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 fSize10 inst-lbl textcenter text-uppercase padd0"
+                          style="padding-left: 0px; ">
+                          {{ data['Exchange']}}
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 text-uppercase padd0 fright fSize10 txt-black">LTP
+                          {{data['LTP']}}
+                        </div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd0 ">
+                        <div
+                          class="col-lg-7 col-md-7 col-sm-7 fSize12 se text-uppercase inst-lbl padd0 txt-black nowrap block-tooltip"
+                          title="{{data['Nsetsym']}}" style="padding-left: 0px; ">{{data['Pcode']}}
+                        </div>
+                        <div
+                          class="col-lg-5 col-md-5 col-sm-5  fSize12 se text-uppercase txt-black padd0 fright inst-lbl">
+                          {{data['BEP']}}</div>
+                      </div>
+                      <div class="position-hov">
+                        <div class="fSize12 textcenter">
+                          <button mat-raised-button class="bgColorBule paddRL9 fSize10 actionBtn inlineH"
+                            (click)="goToPositionAdd(data)" *ngIf="data['Netqty'] != 0">ADD</button>&nbsp;
+                          <button mat-raised-button class="bgColorRed paddRL9 fSize10 actionBtn inlineH"
+                            (click)="goToPositionExit(data)" *ngIf="data['Netqty'] != 0">EXIT</button>&nbsp;
+                          <button mat-raised-button class="bgcolorConvert paddRL9 fSize10 actionBtn inlineH"
+                            (click)="convertPosition(data)" *ngIf="data['Netqty'] != 0">CONVERT</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Holdings-->
+            <div style="background: white" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padd4px position-head ">
+              <div style="text-align: center;" class="boderBT">
+                <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                  (click)="getHoldings()"></span>
+                Holdings
+                <!-- <span style="float: right;cursor: pointer;" data-toggle="collapse" data-target="#main,#holdings"
+                  class="glyphicon glyphicon-fullscreen" title="Expand View"
+                  (click)="expandCurrentData('holdings')"></span> -->
+                <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('holdings')"
+                  class="glyphicon glyphicon-fullscreen" title="Expand View"></span>
+              </div>
+              <div style="background: white" class=" btm-container-scroll padd0">
+                <div *ngIf="!holdingvisible" class="textcenter margintop50">
+                  <div>No Holdings available</div>
+                </div>
+                <div *ngIf="holdingvisible">
+                  <div class="padd0" *ngFor="let data of holdings;">
+                    <div class="boderBT text-uppercase col-lg-12 col-md-12 col-sm-12 padd0 holding-hover"
+                      style="padding: 6px;">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd0 ">
+                        <div
+                          class="col-lg-5 col-md-5 col-sm-5 fSize12 se text-uppercase inst-lbl padd0 txt-black nowrap block-tooltip"
+                          title="{{data['Nsetsym']}}" style="padding-left: 0px; ">{{data['Nsetsym']}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 fSize10 se text-uppercase inst-lbl padd0 fleft"
+                          style="padding-left: 0px; ">QTY {{data['Holdqty']}}
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4  fSize12 se text-uppercase padd0 fright inst-lbl">
+                          {{data['NSEHOldingValue']}}</div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd0 ">
+                        <div class="col-lg-6 col-md-6 col-sm-6 fSize10 inst-lbl  text-uppercase padd0"
+                          style="padding-left: 0px; ">Avg.Price
+                          {{ data['OrderedTime']}}
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 text-uppercase padd0 fright fSize10 txt-black">LTP
+                          {{data['LTnse']}}
+                        </div>
+                      </div>
+                      <div class="holding-hov">
+                        <td class="textcenter">
+                          <button mat-raised-button class="bgColorBule paddRL9 fSize10 actionBtn inlineH"
+                            (click)="goToHoldingAdd(data)">ADD</button>&nbsp;
+                          <button mat-raised-button class="bgColorRed paddRL9 fSize10 actionBtn inlineH"
+                            (click)="goToHoldingExit(data)">SQ.OFF</button>
+                        </td>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Orders-->
+            <div style="background: white" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padd4px position-head">
+              <div style="text-align: center;" class="boderBT">
+                <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                  (click)="getOrders('orders');getTradeBooks()"></span>
+                Orders
+                <!-- <span style="float: right;cursor: pointer;" class="glyphicon glyphicon-fullscreen" title="Expand View"
+                  data-toggle="collapse" data-target="#main,#orders" (click)="expandCurrentData('orders')"></span> -->
+                <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('orders')"
+                  class="glyphicon glyphicon-fullscreen" title="Expand View"></span>
+              </div>
+              <div *ngIf="!ordervisible" class="textcenter margintop50">
+                <div>No Orders available</div>
+              </div>
+              <div style="background: white" class=" btm-container-scroll padd0">
+
+                <!-- <div class="padd0" *ngIf="ordervisible" > -->
+                <!-- <div *ngIf="data.stat == 'Session Expired' ? holdingSectionExpried() : ''"></div> -->
+                <div *ngIf="ordervisible">
+                  <div *ngFor="let data of orders">
+                    <div class="boderBT text-uppercase col-lg-12 col-md-12 col-sm-12 padd0 order-hover"
+                      matTooltipPosition="below" matTooltip="{{data['RejReason'] == '--' ? '':data['RejReason']}}"
+                      style="padding: 6px;">
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd0 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12  fSize9  padd0 text-uppercase "><span
+                            class="fSize9  padd0 text-uppercase"
+                            [ngClass]="data['Trantype'] == 'B' ? 'border-box-blue' : 'border-box-red'">
+                            {{data['Trantype']=='B' ? 'Buy' : 'Sell'}}
+                          </span>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12  fSize9  padd0 text-uppercase fright"><span
+                            class="fSize9  padd0 text-uppercase fright"
+                            [ngClass]="data['Status'] == 'rejected' ? 'border-box-red' : data['Status'] == 'open' ? 'border-box-blue' :  data['Status'] == 'complete' ? 'border-box-green' : data['Status'] == 'cancelled' ? 'border-box-red':'' ">{{data['Status']}}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd0 ">
+                        <div
+                          class=" col-lg-9 col-md-9 col-sm-12 fSize12 se text-uppercase inst-lbl padd0 txt-black nowrap block-tooltip"
+                          title="{{data['Trsym']}} ({{data['Exchange']}})" style="padding-left: 0px; ">{{data['Trsym']}}
+                          <span class="text-uppercase  exchange-info padd0 ">({{data['Exchange']}})</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12  fSize12 se  text-uppercase padd0 fright inst-lbl">
+                          {{data['Prc']}}</div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 padd0 ">
+                        <div class="col-lg-4 col-md-4 col-sm-12 fSize10 inst-lbl  text-uppercase padd0"
+                          style="padding-left: 0px; ">
+                          {{data['OrderedTime'] == undefined ? '':data['OrderedTime'].split(" ")[1]}}
+                        </div>
+                        <div class=" col-lg-2 col-md-2 col-sm-12    text-uppercase padd0 fSize10">
+                          {{data['Validity']}}
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 fSize10  inst-lbl text-uppercase padd0">
+                          {{data['Prctype']}}
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-12    text-uppercase padd0 fright fSize10 txt-black"><span
+                            class="text-uppercase padd0 fSize8">QTY: </span>{{data['Qty']}}
+                        </div>
+                        <!-- </div> -->
+                      </div>
+                      <div class="order-hov">
+                        <div class="fSize12 tcenter">
+                          <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation(data)"
+                            title="Cancel Order"
+                            *ngIf="data.Status === 'open' || data.Status === 'trigger Pending'">C</button>&nbsp;
+                          <button mat-raised-button class="bgcolorGreen fSize12" (click)="scripsPOrd(data,'modify')"
+                            title="Modify Order"
+                            *ngIf="data.Status === 'open' || data.Status === 'trigger Pending'">M</button>&nbsp;
+                          <button mat-raised-button class="bgcolorGray fSize12" (click)="openInfoDialog(data)"
+                            title="Order history">i</button>&nbsp;
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Funds-->
+            <div style="background: white" class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padd4px position-head ">
+              <div style="text-align: center;" class="boderBT">
+                <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                  (click)="getFunds()"></span>
+                Funds
+                <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('funds')"
+                  class="glyphicon glyphicon-fullscreen" title="Expand View"></span>
+              </div>
+              <div style="background: white" class=" btm-container-scroll padd0">
+                <div class="padd0">
+                  <div class="padd0" *ngFor="let data of funds">
+                    <div>
+                      <div class="bcBtn text-uppercase lineHgt15 marginTop10">
+                        <div
+                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft fWeight600 nowrap">
+                          Total MTM
+                          <span class="text-uppercase paddRight5 textright floatR fWeight600"
+                            [style.color]="(+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) < 0 ? 'red' : (+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) > 0 ? 'green' : 'black'">{{(+data.unrealizedMtomPrsnt)+(+data.realizedMtomPrsnt) | number : '.2'}}</span>
+                        </div>
+                        <div
+                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft fWeight600 nowrap">
+                          Available Margin<span
+                            class="floatR fSize12 inst-lbl text-uppercase textright paddRight5 fWeight600"
+                            [style.color]="data.cashmarginavailable < 0 ? 'red' : data.net > 0 ? 'green' : 'black'">
+                            {{data.net | currency:' '}}</span>
+                        </div>
+                        <!-- Separator -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 boderBT marginTB5"></div>
+                        <div
+                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+                          Opening Balance
+                          <span class="fSize12 inst-lbl text-uppercase floatR blackcolor textright paddRight5">
+                            {{data.cashmarginavailable | currency:' '}}</span>
+                        </div>
+                        <div
+                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+                          Margin Utilized
+                          <span class="floatR fSize12 inst-lbl text-uppercase blackcolor textright paddRight5">
+                            {{(+data.spanmargin)+(+data.exposuremargin) | currency:' '}}</span>
+                        </div>
+                        <div
+                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+                          MTM Realised
+                          <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5"
+                            [style.color]="data.realizedMtomPrsnt > 0 ? 'green' : 'red'">
+                            {{data.realizedMtomPrsnt}}</span>
+                        </div>
+                        <div
+                          class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fSize12 inst-lbl text-uppercase blackcolor textleft nowrap">
+                          MTM UnRealised
+                          <span class="floatR fSize12 inst-lbl text-uppercase textright paddRight5"
+                            [style.color]="data.unrealizedMtomPrsnt > 0 ? 'green' : 'red'">
+                            {{data.unrealizedMtomPrsnt}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Positions Detail View -->
+      <div
+        [ngClass]="appComp._isTogglePage == 'position' ? 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse in': 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse'"
+        id="position" class="w3-container w3-center w3-animate-bottom">
+        <div class="app-tv-chart-btm-container padd1" style="background: white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <!--depth buy-->
+            <div style="background: white" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 vhght">
+              <div style="text-align: center;" class="boderBT fWeight600 expand-view-head">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                    (click)="getPositions()"></span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-0 col-xs-0">
+
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer" style="color: #1e3465;"
+                  (click)="appComp.toggleManualHideAndShow('position')">
+                  Positions
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pointer"
+                  (click)="appComp.toggleManualHideAndShow('holdings')">
+                  Holdings
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 pointer"
+                  (click)="appComp.toggleManualHideAndShow('orders')">
+                  Orders
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('funds')">
+                  Funds
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 pointer">
+                  <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                    class="glyphicon glyphicon-remove" title="close"></span>
+                </div>
+              </div>
+              <!-- <div style="text-align: center;" class="boderBT fWeight600 expand-view-head">
+                <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                  (click)="getPositions()"></span>
+                Position Detail
+               <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                  class="glyphicon glyphicon-remove" title="close"></span>
+              </div> -->
+              <div style="background: white" class=" btm-container-scroll padd0">
+
+                <table mat-table [dataSource]="position" class="mat-elevation-z8" *ngIf="positionsvisible">
+
+                  <ng-container matColumnDef="Tsym">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tleft" style="width: 15%">Instrument
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tleft" style="width: 15%"> {{element.Tsym}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Bqty">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 textcenter" style="width: 8%">
+                      Bqty/Sqty</th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 textcenter" style="width: 8%">
+                      {{element.Bqty}}/{{element.Sqty}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Netqty">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tcenter" style="width: 8%">Netqty
+                    </th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tcenter" style="width: 8%"> {{element.Netqty}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Pcode">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tcenter">Prod</th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tcenter"> {{element.Pcode}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Exchange">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tcenter">Exchange</th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 textcenter"> {{element.Exchange}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Buyavgprc">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tright"> Buy Avg.Prc </th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Buyavgprc}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Sellavgprc">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tright"> Sell Avg.Prc </th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Sellavgprc}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="BEP">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tright"> BEP </th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.BEP}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="LTP">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tright">LTP</th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.LTP}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="realisedprofitloss">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tright">Realized</th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.realisedprofitloss}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="MtoM">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tright">MTM</th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.MtoM}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight600 fSize12 tcenter"> Actions </th>
+                    <td mat-cell *matCellDef="let element" class="fSize12 textcenter">
+                      <button mat-raised-button class="bgColorBule paddRL9 fSize10 actionBtn inlineH"
+                        (click)="goToPositionAdd(element)"
+                        [class]="element.Netqty != 0 ? 'bgColorBule mat-raised-button' : 'disab mat-raised-button'"
+                        [disabled]="element['Netqty'] == 0 || (element.Pcode == 'CO' || element.Pcode == 'BO')? 'true':'false'">ADD</button>&nbsp;
+                      <button mat-raised-button class="bgColorRed paddRL9 fSize10 actionBtn inlineH"
+                        (click)="goToPositionExit(element)"
+                        [class]="element.Netqty != 0 ? 'bgcolorRed mat-raised-button' : 'disab mat-raised-button'"
+                        [disabled]="element['Netqty'] == 0">EXIT</button>&nbsp;
+                      <button mat-raised-button class="bgcolorConvert paddRL9 fSize10 actionBtn inlineH"
+                        [class]="element.Netqty != 0 ? 'bgcolorConvert mat-raised-button' : 'disab mat-raised-button'"
+                        [disabled]="element['Netqty'] == 0 || (element.Pcode == 'CO' || element.Pcode == 'BO')? 'true':'false'"
+                        (click)="convertPosition(element)">CONVERT</button>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="positionColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: positionColumns;"></tr>
+                </table>
+              </div>
+              <div *ngIf="!positionsvisible" class="textcenter marginTop10">
+                <div>No Positions available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Holdings Detail View -->
+      <div
+        [ngClass]="appComp._isTogglePage == 'holdings' ? 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse in': 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse'"
+        id="holdings" class="w3-container w3-center w3-animate-bottom">
+        <div class="app-tv-chart-btm-container padd1" style="background: white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <!--depth buy-->
+            <div style="background: white" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 vhght">
+              <div style="text-align: center;" class="boderBT fWeight600 expand-view-head">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                    (click)="getPositions()"></span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('position')">
+                  Positions
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer" style="color: #1e3465;"
+                  (click)="appComp.toggleManualHideAndShow('holdings')">
+                  Holdings
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('orders')">
+                  Orders
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('funds')">
+                  Funds
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                    class="glyphicon glyphicon-remove" title="close"></span>
+                </div>
+              </div>
+              <!-- <div style="text-align: center;" class="boderBT marginL50 fWeight600 expand-view-head">
+                <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                  (click)="getHoldings()"></span>
+                Holding Detail
+                <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                  class="glyphicon glyphicon-remove" title="close"></span>
+                <div class="inlineBlock floatR marginR50 fSize12 lGrayColor" *ngIf="holdingvisible">TotalValue
+                  &nbsp;<span class="txt-black">{{holdingtotalvalue}}</span></div>
+              </div> -->
+              <div class="example-table-container">
+                <table mat-table [dataSource]="holdings" class="mat-elevation-z8" *ngIf="holdingvisible">
+                  <ng-container matColumnDef="instrument">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft container-left"
+                      style="width: 25%">Instrument</th>
+                    <td mat-cell *matCellDef="let item" class="fSize12 tleft">
+                      {{item.ExchSeg1 == "NSE" ? item.Nsetsym : item.Bsetsym}}&nbsp;&nbsp;<span
+                        style="font-size: 10.5px;color:gray">({{item.ExchSeg1 == "NSE" ? item.ExchSeg1 : item.ExchSeg2}})</span>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Qty">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright" style="width: 15%">Qty /
+                      Free Qty</th>
+                    <td mat-cell *matCellDef="let item" class="fSize12 tright"> {{item.Holdqty}} / {{item.SellableQty}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="LTP">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright" style="width: 15%">LTP</th>
+                    <td mat-cell *matCellDef="let item" class="fSize12 tright">
+                      {{item.ExchSeg1 == "NSE" ? item.LTnse : item.LTbse}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="TotalValue">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright" style="width: 15%">Total
+                      Value</th>
+                    <td mat-cell *matCellDef="let item" class="fSize12 tright">
+                      {{item.ExchSeg1 == "NSE" ? item.NSEHOldingValue : item.BSEHOldingValue}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="AvgValue">
+                    <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright" style="width: 15%">
+                      collateral Val</th>
+                    <td mat-cell *matCellDef="let item" class="fSize12 tright">
+                      {{item.ExchSeg1 == "NSE" ? (item.NSEHOldingValue - ((item.NSEHOldingValue/100)*item.Haircut)).toFixed(2) : (item.BSEHOldingValue - ((item.BSEHOldingValue/100)*item.Haircut)).toFixed(2)}}
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="Action" class="fSize12">
+                    <th mat-header-cell *matHeaderCellDef class=" fWeight800 fSize12 tcenter" style="width: 15%">Action
+                    </th>
+                    <td mat-cell *matCellDef="let item" class="textcenter">
+                      <button mat-raised-button class="bgColorBule paddRL9 fSize10 actionBtn inlineH"
+                        (click)="goToHoldingAdd(item)">ADD</button>&nbsp;
+                      <button mat-raised-button class="bgColorRed paddRL9 fSize10 actionBtn inlineH"
+                        (click)="goToHoldingExit(item)">SQ.OFF</button>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="holdingColumns;sticky: true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: holdingColumns;"></tr>
+                </table>
+                <div *ngIf="!holdingvisible" class="textcenter margintop50">
+                  <div>No Holdings available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Orders Detail View -->
+      <div
+        [ngClass]="appComp._isTogglePage == 'orders' ? 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse in': 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse'"
+        id="orders" class="w3-container w3-center w3-animate-bottom">
+        <div class="app-tv-chart-btm-container padd1" style="background: white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <!--depth buy-->
+            <div style="background: white" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 vhght">
+              <div style="text-align: center;" class="boderBT fWeight600 expand-view-head">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                    (click)="getPositions()"></span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('position')">
+                  Positions
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('holdings')">
+                  Holdings
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer" style="color: #1e3465;"
+                  (click)="appComp.toggleManualHideAndShow('orders')">
+                  Orders
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('funds')">
+                  Funds
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                    class="glyphicon glyphicon-remove" title="close"></span>
+                </div>
+              </div>
+              <!-- <div class="boderBT fWeight600 expand-view-head">
+                <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                  (click)="getOrders('orders');getTradeBooks()"></span>
+                Order Detail
+                <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                  class="glyphicon glyphicon-remove" title="close"></span>
+              </div> -->
+              <!-- Order Book Table -->
+              <mat-accordion>
+                <mat-expansion-panel [expanded]="step === 0">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Order Book
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <mat-tab-group mat-stretch-tabs>
+                    <mat-tab label="All">
+                      <div class="example-table-container">
+                        <table mat-table [dataSource]="orders" class="mat-elevation-z8" *ngIf="orders.length > 0">
+                          <ng-container matColumnDef="Nstordno">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Order ID </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Nstordno}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trantype">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Buy/Sell </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              <!-- <button mat-raised-button class="bgcolorGreen paddRL6 actionBtn inlineH" [class]="element.Trantype == 'B'? 'odrbuy':'odrsell'">{{element.Trantype}}</button> -->
+                              <span [class]="element.Trantype == 'B'? 'odrbuy':'odrsell'">{{element.Trantype}}</span>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="OrderedTime">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Time </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              {{element['OrderedTime'] == undefined ? '' : element['OrderedTime'].split(" ")[1]}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Pcode">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Prod </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Pcode}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Prctype">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Type </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter"> {{element.Prctype}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trsym">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Instrument </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Trsym}}
+                              <span>({{element.Exchange}})</span></td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Qty">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Qty </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Qty}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Prc">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Exe.Price </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Prc}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trgprc">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Trig.Price </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Trgprc}} </td>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="Status">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Status </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 text-capitalize tright"
+                              matTooltip="{{element.RejReason == '--' ? '':element.RejReason}}">
+                              {{element.Status}}
+                              <!-- <span>
+                              {{element.RejReason}}
+                            </span> -->
+                            </td>
+                          </ng-container>
+
+                          <!--  <ng-container matColumnDef="Status">
+                          <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Status </th>
+                          <td mat-cell *matCellDef="let element" class="fSize12 text-capitalize ctooltip tright" >
+                            {{element.Status}} <span [class]="element.Status == 'Complete' ? '':'tooltiptext'">
+                              {{element.RejReason}}
+                            </span></td>
+                        </ng-container> -->
+
+
+                          <ng-container matColumnDef="Button">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Actions </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              <button mat-raised-button class="bgcolorRed fSize12" (click)="exitBOCOOrder(element)"
+                                title="Exit Order"
+                                [ngClass]="(element.Status == 'open' && element.Pcode == 'CO' || element.Status == 'trigger pending' && element.Pcode == 'CO' || element.Status == 'open' && element.Pcode == 'BO' || element.Status == 'trigger pending' && element.Pcode == 'BO') ? 'displayInherits' : 'displayNone'">E</button>&nbsp;
+                              <!-- <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation(element)"
+                                title="Cancel Order"
+                                [disabled]="(element.Pcode == 'CO' || element.Pcode == 'BO' && element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorRed mat-raised-button' : 'disab mat-raised-button'">C</button>&nbsp; -->
+                              <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation(element)"
+                                title="Cancel Order"
+                                [ngClass]="(element.Status == 'open' && element.Pcode == 'CO' || element.Status == 'trigger pending' && element.Pcode == 'CO' || element.Status == 'open' && element.Pcode == 'BO' || element.Status == 'trigger pending' && element.Pcode == 'BO') ? 'displayNone' : 'displayInherits'"
+                                [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorRed mat-raised-button' : 'disab mat-raised-button'">C</button>&nbsp;
+                              <button mat-raised-button class="bgcolorGreen fSize12"
+                                (click)="scripsPOrd(element,'modify')" title="Modify Order"
+                                [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorGreen mat-raised-button' : 'disab mat-raised-button'">M</button>&nbsp;
+                              <button mat-raised-button class="bgcolorGray fSize12" (click)="openInfoDialog(element)"
+                                title="Order history">i</button>&nbsp;
+                            </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="orderColumns;sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: orderColumns;"></tr>
+                        </table>
+                        <div *ngIf="orders.length == 0" class="textcenter margintop50">
+                          <div>No Orders available</div>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Open">
+                      <div class="example-table-container">
+                        <table mat-table [dataSource]="openOrder" class="mat-elevation-z8" *ngIf="openOrder.length > 0">
+                          <ng-container matColumnDef="Nstordno">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Order ID </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Nstordno}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trantype">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Buy/Sell </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              <!-- <button mat-raised-button class="bgcolorGreen paddRL6 actionBtn inlineH" [class]="element.Trantype == 'B'? 'odrbuy':'odrsell'">{{element.Trantype}}</button> -->
+                              <span [class]="element.Trantype == 'B'? 'odrbuy':'odrsell'">{{element.Trantype}}</span>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="OrderedTime">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Time </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              {{element['OrderedTime'] == undefined ? '' : element['OrderedTime'].split(" ")[1]}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Pcode">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Prod </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Pcode}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Prctype">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Type </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter"> {{element.Prctype}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trsym">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Instrument </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Trsym}}
+                              <span>({{element.Exchange}})</span></td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Qty">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Qty </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Qty}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Prc">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Exe.Price </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Prc}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trgprc">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Trig.Price </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Trgprc}} </td>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="Status">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Status </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 text-capitalize tright"
+                              matTooltip="{{element.RejReason == '--' ? '':element.RejReason}}">
+                              {{element.Status}}
+                              <!-- <span>
+                              {{element.RejReason}}
+                            </span> -->
+                            </td>
+                          </ng-container>
+
+                          <!--  <ng-container matColumnDef="Status">
+                          <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Status </th>
+                          <td mat-cell *matCellDef="let element" class="fSize12 text-capitalize ctooltip tright" >
+                            {{element.Status}} <span [class]="element.Status == 'Complete' ? '':'tooltiptext'">
+                              {{element.RejReason}}
+                            </span></td>
+                        </ng-container> -->
+
+
+                          <ng-container matColumnDef="Button">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Actions </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              <!-- <button mat-raised-button class="bgcolorRed fSize12" (click)="exitBOCOOrder(element)"
+                                title="Exit Order"
+                                [disabled]="(element.Status == 'open' && element.Pcode == 'CO' || element.Status == 'trigger pending' && element.Pcode == 'CO' || element.Status == 'open' && element.Pcode == 'BO' || element.Status == 'trigger pending' && element.Pcode == 'BO') ? 'false' : 'true'">E</button>&nbsp;
+                              <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation(element)"
+                                title="Cancel Order"
+                                [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorRed mat-raised-button' : 'disab mat-raised-button'">C</button>&nbsp; -->
+                              <button mat-raised-button class="bgcolorRed fSize12" (click)="exitBOCOOrder(element)"
+                                title="Exit Order"
+                                [ngClass]="(element.Status == 'open' && element.Pcode == 'CO' || element.Status == 'trigger pending' && element.Pcode == 'CO' || element.Status == 'open' && element.Pcode == 'BO' || element.Status == 'trigger pending' && element.Pcode == 'BO') ? 'displayInherits' : 'displayNone'">E</button>&nbsp;
+                              <!-- <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation(element)"
+                                title="Cancel Order"
+                                [disabled]="(element.Pcode == 'CO' || element.Pcode == 'BO' && element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorRed mat-raised-button' : 'disab mat-raised-button'">C</button>&nbsp; -->
+                              <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation(element)"
+                                title="Cancel Order"
+                                [ngClass]="(element.Status == 'open' && element.Pcode == 'CO' || element.Status == 'trigger pending' && element.Pcode == 'CO' || element.Status == 'open' && element.Pcode == 'BO' || element.Status == 'trigger pending' && element.Pcode == 'BO') ? 'displayNone' : 'displayInherits'"
+                                [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorRed mat-raised-button' : 'disab mat-raised-button'">C</button>&nbsp;
+                              <button mat-raised-button class="bgcolorGreen fSize12"
+                                (click)="scripsPOrd(element,'modify')" title="Modify Order"
+                                [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorGreen mat-raised-button' : 'disab mat-raised-button'">M</button>&nbsp;
+                              <button mat-raised-button class="bgcolorGray fSize12" (click)="openInfoDialog(element)"
+                                title="Order history">i</button>&nbsp;
+                            </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="orderColumns;sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: orderColumns;"></tr>
+                        </table>
+                        <div *ngIf="openOrder.length == 0" class="textcenter margintop50">
+                          <div>No Open Orders available</div>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Completed">
+                      <div class="example-table-container">
+                        <table mat-table [dataSource]="completedOrder" class="mat-elevation-z8"
+                          *ngIf="completedOrder.length > 0">
+                          <ng-container matColumnDef="Nstordno">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Order ID </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Nstordno}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trantype">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Buy/Sell </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              <!-- <button mat-raised-button class="bgcolorGreen paddRL6 actionBtn inlineH" [class]="element.Trantype == 'B'? 'odrbuy':'odrsell'">{{element.Trantype}}</button> -->
+                              <span [class]="element.Trantype == 'B'? 'odrbuy':'odrsell'">{{element.Trantype}}</span>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="OrderedTime">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Time </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              {{element['OrderedTime'] == undefined ? '' : element['OrderedTime'].split(" ")[1]}}</td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Pcode">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Prod </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Pcode}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Prctype">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Type </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter"> {{element.Prctype}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trsym">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Instrument </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Trsym}}
+                              <span>({{element.Exchange}})</span></td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Qty">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Qty </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Qty}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Prc">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Exe.Price </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Prc}} </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Trgprc">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Trig.Price </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Trgprc}} </td>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="Status">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Status </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 text-capitalize tright"
+                              matTooltip="{{element.RejReason == '--' ? '':element.RejReason}}">
+                              {{element.Status}}
+                              <!-- <span>
+                              {{element.RejReason}}
+                            </span> -->
+                            </td>
+                          </ng-container>
+
+                          <!--  <ng-container matColumnDef="Status">
+                          <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Status </th>
+                          <td mat-cell *matCellDef="let element" class="fSize12 text-capitalize ctooltip tright" >
+                            {{element.Status}} <span [class]="element.Status == 'Complete' ? '':'tooltiptext'">
+                              {{element.RejReason}}
+                            </span></td>
+                        </ng-container> -->
+
+
+                          <ng-container matColumnDef="Button">
+                            <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Actions </th>
+                            <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                              <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation(element)"
+                                title="Cancel Order"
+                                [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorRed mat-raised-button' : 'disab mat-raised-button'">C</button>&nbsp;
+                              <button mat-raised-button class="bgcolorGreen fSize12"
+                                (click)="scripsPOrd(element,'modify')" title="Modify Order"
+                                [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                                [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorGreen mat-raised-button' : 'disab mat-raised-button'">M</button>&nbsp;
+                              <button mat-raised-button class="bgcolorGray fSize12" (click)="openInfoDialog(element)"
+                                title="Order history">i</button>&nbsp;
+                            </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="orderColumns;sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: orderColumns;"></tr>
+                        </table>
+                        <div *ngIf="completedOrder.length == 0" class="textcenter margintop50">
+                          <div>No Complete Orders available</div>
+                        </div>
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <!-- Trade Book Table -->
+              <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Trade Book
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="example-table-container">
+                    <table mat-table [dataSource]="tradebook" class="mat-elevation-z8" *ngIf="tradebook.length > 0">
+                      <ng-container matColumnDef="Nstordno">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Order ID </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Nstordno}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="FillId">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Trade ID </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.FillId}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Trantype">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Buy/Sell </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                          <!-- <button mat-raised-button class="bgcolorGreen paddRL6 actionBtn inlineH" [class]="element.Trantype == 'B'? 'odrbuy':'odrsell'">{{element.Trantype}}</button> -->
+                          <span [class]="element.Trantype == 'B'? 'odrbuy':'odrsell'">{{element.Trantype}}</span>
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Filltime">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Time </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                          {{element['Filltime'] == undefined ? '' : element['Filltime']}}</td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Pcode">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Prod </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tleft"> {{element.Pcode}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Prctype">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Type </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tcenter"> {{element.Prctype}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Trsym">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tleft"> Instrument </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tleft">{{element.Tsym}} {{element.Trsym}}
+                          <span>({{element.Exchange}})</span></td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Qty">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Qty/Fill </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tright">
+                          {{element.Qty}}/{{element.Filledqty}} </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Price">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Exe.Price </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Price}} </td>
+                      </ng-container>
+
+                      <!-- <ng-container matColumnDef="Trgprc">
+                          <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Trig.Price </th>
+                          <td mat-cell *matCellDef="let element" class="fSize12 tright"> {{element.Trgprc}} </td>
+                        </ng-container> -->
+
+
+                      <ng-container matColumnDef="Status">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Status </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 text-capitalize tright"
+                          matTooltip="{{element.RejReason == '--' ? '':element.RejReason}}">
+                          <!-- {{element.Status}} -->
+                          Completed
+                          <!-- <span>
+                            {{element.RejReason}}
+                          </span> -->
+                        </td>
+                      </ng-container>
+
+                      <!--  <ng-container matColumnDef="Status">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright"> Status </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 text-capitalize ctooltip tright" >
+                          {{element.Status}} <span [class]="element.Status == 'Complete' ? '':'tooltiptext'">
+                            {{element.RejReason}}
+                          </span></td>
+                      </ng-container> -->
+
+
+                      <!-- <ng-container matColumnDef="Button">
+                        <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tcenter"> Actions </th>
+                        <td mat-cell *matCellDef="let element" class="fSize12 tcenter">
+                          <button mat-raised-button class="bgcolorRed fSize12" (click)="openConfirmation(element)"
+                            title="Cancel Order"
+                            [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                            [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorRed mat-raised-button' : 'disab mat-raised-button'">C</button>&nbsp;
+                          <button mat-raised-button class="bgcolorGreen fSize12" (click)="scripsPOrd(element,'modify')"
+                            title="Modify Order"
+                            [disabled]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'false' : 'true'"
+                            [class]="(element.Status == 'open' || element.Status == 'trigger pending') ? 'bgcolorGreen mat-raised-button' : 'disab mat-raised-button'">M</button>&nbsp;
+                          <button mat-raised-button class="bgcolorGray fSize12" (click)="openInfoDialog(element)"
+                            title="Order history">i</button>&nbsp;
+                        </td>
+                      </ng-container> -->
+
+                      <tr mat-header-row *matHeaderRowDef="TradeColumns;sticky: true"></tr>
+                      <tr mat-row *matRowDef="let row; columns: TradeColumns;"></tr>
+                    </table>
+                    <div *ngIf="tradebook.length == 0" class="textcenter margintop50">
+                      <div>No Orders available</div>
+                    </div>
+                  </div>
+
+                </mat-expansion-panel>
+              </mat-accordion>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Funds Detail View -->
+      <div
+        [ngClass]="appComp._isTogglePage == 'funds' ? 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse in': 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse'"
+        id="funds" class="w3-container w3-center w3-animate-bottom">
+        <div class="app-tv-chart-btm-container padd1" style="background: white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <div style="background: white" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 vhght">
+              <div style="text-align: center;" class="boderBT fWeight600 expand-view-head">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: left;cursor: pointer;" class="glyphicon glyphicon-refresh"
+                    (click)="getPositions()"></span>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('position')">
+                  Position
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('holdings')">
+                  Holdings
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer"
+                  (click)="appComp.toggleManualHideAndShow('orders')">
+                  Orders
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 pointer" style="color: #1e3465;"
+                  (click)="appComp.toggleManualHideAndShow('funds')">
+                  Funds
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                    class="glyphicon glyphicon-remove" title="close"></span>
+                </div>
+              </div>
+              <div style="background: white">
+                <div class="padd0" *ngFor="let data of funds">
+                  <!-- <div class=" bcBtn text-uppercase">
+                      <span class="fSize10 se position-lbl text-uppercase ">
+                        {{data['product']}}</span>
+                      <span class="fSize12 se inst-lbl text-uppercase ">{{data['instrument']}}</span>
+                      <span class="fSize12  inst-lbl text-uppercase ">{{data['strikeprice']}}</span>
+                      <span class="fSize12 inst-lbl text-uppercase ">{{data['option']}}</span>
+                      <span class="fSize12 inst-lbl text-uppercase "> :{{data['pnl_lbl']}}</span>
+                      <span class="fSize10 inst-lbl text-uppercase "> P&L :{{data['pnl']}}</span>
+                      <span class="fSize10 inst-lbl text-uppercase "> CDS : {{data['cds']}}</span>
+                      <span class="fSize10 inst-lbl text-uppercase "> LTP : {{data['ltp']}}</span>
+                      <span class="fSize10 inst-lbl text-uppercase "> QTY : {{data['qty']}}</span>
+                    </div> -->
+                  <div class="row" style="margin: 0px !important;">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="row widthdraw">
+                        <br>
+                        <br>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 padd12">
+                          <p><b>Add Money</b></p>
+                          <br>
+                          <p><b>Withdraw</b></p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 textcenter">
+                          <button mat-stroked-button class="width55 inactiveBtn"
+                            (click)="getPayInPayOutTokenKey('Deposit')">Deposit</button>
+                          <br>
+                          <br>
+                          <button mat-stroked-button class="width55 inactiveBtn"
+                            (click)="getPayInPayOutTokenKey('Withdraw')">Withdraw</button>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="row" style="margin: 15px 0px 0px 0px !important;">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <p><b>Total MTM</b></p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt-end">
+                          <p><b
+                              [style.color]="(+data['unrealizedMtomPrsnt'])+(+data['realizedMtomPrsnt']) < 0 ? 'red' : (+data[unrealizedMtomPrsnt])+(+data['realizedMtomPrsnt']) > 0 ? 'green' : 'black'">{{(+data['unrealizedMtomPrsnt'])+(+data['realizedMtomPrsnt']) | number : '.2'}}</b>
+                          </p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <p><b>Available Margin</b></p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt-end">
+                          <p><b
+                              [style.color]="data['cashmarginavailable'] < 0 ? 'red' : data.net > 0 ? 'green' : 'black'">
+                              {{data['net'] | currency:' '}}</b></p>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                          style="border-bottom: 1px solid #000;margin-bottom: 10px;">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <p>Cash Balance</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt-end">
+                          <p>{{data['cashmarginavailable'] | currency:' '}}</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <p>Collateral Value</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt-end">
+                          <p>{{data['collateralvalue'] | number : '.2'}}</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <p>Margin Utilized</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt-end">
+                          <p>
+                            {{ data['brokeragePrsnt'] != undefined ? ((+data['spanmargin']) + (+data['exposuremargin']) + (+data['scripbasketmargin']) + (+data['brokeragePrsnt'])).toFixed(2) : 'NA'}}
+                          </p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <p>Adhoc</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt-end">
+                          <p> {{ data['adhocMargin'] != undefined ? (+data['adhocMargin']).toFixed(2) : 'NA'}}</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <p>Pay In</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt-end">
+                          <p> {{ data['rmsPayInAmnt'] != undefined ? (+data['rmsPayInAmnt']).toFixed(2) : 'NA'}}</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <p>Pay Out</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 txt-end">
+                          <p> {{(+data['payoutamount']).toFixed(2)}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exchange message detailed view -->
+      <div
+        [ngClass]="appComp._isTogglePage == 'exchMsg' ? 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse in': 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse'"
+        id="exchMsg">
+        <div class="app-tv-chart-btm-container padd1 w3-container w3-center w3-animate-bottom" style="background: white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <div style="background: white" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 vhght">
+              <div style="text-align: center;background: #9f9e9e1f" class="boderBT expand-view-head">Exchange Messages
+                <!-- <span style="float: right;cursor: pointer;" data-toggle="collapse"
+                  (click)="appComp..toggleClose('ExchMessagClose')" data-target="#main,#exchMsg"
+                  class="glyphicon glyphicon-remove" title="close"></span> -->
+                <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                  class="glyphicon glyphicon-remove" title="close"></span>
+              </div>
+              <div *ngFor="let item of exchMessage">
+                <p style="padding: 0 2%">{{item}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Profile Detailed View -->
+      <div
+        [ngClass]="appComp._isTogglePage == 'profile' ? 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse in': 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse'"
+        id="profile">
+        <!-- <app-profile></app-profile> -->
+        <div class="app-tv-chart-btm-container padd1 w3-container w3-center w3-animate-bottom" style="background: white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <div style="background: white" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 vhght">
+              <div style="text-align: center;" class="boderBT fWeight600 expand-view-head">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  PROFILE
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                    class="glyphicon glyphicon-remove" title="close"></span>
+                </div>
+              </div>
+              <!-- <div style="text-align: center;background: #9f9e9e1f" class="boderBT expand-view-head">PROFILE -->
+                <!-- <span style="float: right;cursor: pointer;" id="toggleProfile"
+                  (click)="appComp..toggleClose('profileClose')" data-toggle="collapse" data-target="#main,#profile"
+                  class="glyphicon glyphicon-remove" title="close"></span> -->
+                <!-- <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')" -->
+                  <!-- class="glyphicon glyphicon-remove" title="close"></span> -->
+              <!-- </div> -->
+              <div style="background: white" class="padd0" style="overflow: scroll" *ngFor='let key of userInfo'>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="pro-name">{{key['accountName'] == undefined ? 'NA' : key['accountName']}}</div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="pro col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="pers-head">Personal</div>
+                    <div class="pers-body">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                          <div class="lef">E-mail</div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padd0 pers">
+                          <div class="rig">{{key['emailAddr'] === undefined ? 'NA' : key['emailAddr']}}</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                          <div class="lef">PAN</div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padd0 pers">
+                          <div class="rig">{{key['panNo'] == undefined ? 'NA' : ('*' + (key['panNo']).slice(-4))}}</div>
+                        </div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                          <div class="lef">Phone</div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padd0 pers">
+                          <div class="rig">{{key['cellAddr'] == undefined ? 'NA' : key['cellAddr']}}</div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                          <div class="lef">DP IDs</div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padd0 pers">
+                          <div class="rig">{{key['dpId'] == undefined ? 'NA' : ('*' + (key['dpId']).slice(-4))}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pro col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="pers-head">Account</div>
+                    <div class="acc-body">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                          <div class="lef">Segments</div>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padd0 pers">
+                          <div class="rig">{{exch}}</div>
+                        </div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                          <div class="lef">Products</div>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padd0 pers">
+                          <div class="rig">{{pCode}}</div>
+                        </div>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                          <div class="lef">Order Types</div>
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padd0 pers">
+                          <div class="rig">{{prctyp}}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pro col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                    <div class="pers-head">Bank Accounts</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+                      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                        <div class="lef">Account</div>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padd0 pers">
+                        <div class="rig">
+                          {{key['bankAccountNo'] == undefined ? 'NA' : ('*' + (key['bankAccountNo']).slice(-4))}}</div>
+                      </div>
+                      <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 padd0 pers">
+                        <div class="lef">Bank</div>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padd0 pers">
+                        <div class="rig">{{key['bankName'] == undefined ? 'NA' : key['bankName']}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Settings Detailed View -->
+      <div
+        [ngClass]="appComp._isTogglePage == 'setting' ? 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse in': 'col-lg-9 col-md-9 col-sm-12 col-xs-12 padd1 collapse'"
+        id="setting"> 
+        <div class="app-tv-chart-btm-container padd1 w3-container w3-center w3-animate-bottom" style="background: white">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0">
+            <div style="background: white" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padd0 vhght">
+              <div style="text-align: center;" class="boderBT fWeight600 expand-view-head">
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  SETTINGS
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 pointer">
+                  <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')"
+                    class="glyphicon glyphicon-remove" title="close"></span>
+                </div>
+              </div>
+              
+              <!-- <div style="text-align: center;background: #9f9e9e1f" class="boderBT expand-view-head">SETTINGS -->
+                <!-- <span style="float: right;cursor: pointer;" (click)="appComp..toggleClose('settingsClose')"
+                  data-toggle="collapse" data-target="#main,#setting" class="glyphicon glyphicon-remove"
+                  title="close"></span> -->
+                <!-- <span style="float: right;cursor: pointer;" (click)="appComp.toggleManualHideAndShow('main')" -->
+                  <!-- class="glyphicon glyphicon-remove" title="close"></span> -->
+              <!-- </div> -->
+              <!-- Settings Change Password View -->
+              <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Change Password
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-grid-list cols="4" rowHeight="4:2">
+                    <mat-grid-tile>
+                      <div class="tcenter">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Old Password</mat-label>
+                          <input matInput placeholder="Old Password" [(ngModel)]="oldpwd">
+
+                        </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div class="tcenter">
+                        <mat-form-field appearance="outline">
+                          <mat-label>New Password</mat-label>
+                          <input type="password" matInput placeholder="New Password" [(ngModel)]="newpwd">
+                        </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div class="tcenter">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Confirm New Password</mat-label>
+                          <input type="password" matInput placeholder="Confirm New Password" [(ngModel)]="confnewpwd">
+                        </mat-form-field>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div class="tcenter paddT5">
+                        <button mat-raised-button active class="royalBlueColor"
+                          (click)="goToSaveChangePassword()">Save</button>
+                      </div>
+                    </mat-grid-tile>
+                  </mat-grid-list>
+                  <div>
+                    <p style="font-size: 12px;"><b>Password policy:-</b></p>
+                  </div>
+                  <div style="text-align: left; font-size: 12px;">
+                    <p style="font-size: 12px;">Password should be alphanumeric</p>
+                    <p style="font-size: 12px;">Password should be at least 6 characters and maximum 12 characters</p>
+                    <p style="font-size: 12px;">Password should not be the same as your User/Login ID</p>
+                    <p style="font-size: 12px;">Password should not be the same as your last 3 passwords.</p>
+                    <p style="font-size: 12px;">For extra safety, it is recommended that you use a special character in
+                      the password</p>
+                    <p style="font-size: 12px;">For security purposes, login password will expire every 14 days and will
+                      need to be reset by you.
+                    </p>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+              <!--settings for quick trade settings-->
+
+              <!-- <mat-accordion>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Quick Trade Settings
+                      </mat-panel-title>                    
+                    </mat-expansion-panel-header>
+                    
+                    <mat-grid-list cols="4" rowHeight="4:2">
+                      <div align="right">                         
+                            <mat-slide-toggle color="primary" 
+                                            (change)="toggleChange($event)"  >                                
+                            </mat-slide-toggle>
+                          </div>    
+                          <form [formGroup] = "quickTradeForm">
+                          <table class="quick-trade">
+                          <tbody>
+                            <tr>
+                              <span class="spce"></span>
+                              <th>Segments</th>
+                              <th>Quantity</th>
+
+                              <th>Order Type</th>
+                            </tr>
+                            <tr *ngFor = "let item of exchArray;let i = index" >
+                                <span class="spce"></span>
+                              <th>{{item}}</th>
+                              <td style="width: 25%" >
+                                  <input type="number"  id="quan" formControlName = "qty_{{i}}" min="0" class="q-input" [attr.disabled]="toggleOn">
+                              </td>
+                     
+                                <div>
+                                    <td>    
+                                        
+                                    
+                                      <div class="btn-group btn-group-toggle" data-toggle="buttons"  >
+                                          <label class="btn btn-primary  " for = "lmt_{{i}}"  [attr.disabled]="toggleOn">
+                                            <input type="radio"  value="L"  formControlName = "orderType_{{i}}"  id="lmt_{{i}}" checked>LIMIT
+                                          </label>
+                                          <label style="margin-left:5px" class="btn btn-primary active  " for = "mkt_{{i}}"  [attr.disabled]="toggleOn">
+                                            <input  type="radio" formControlName = "orderType_{{i}}" value="MKT"  id="mkt_{{i}}" > MARKET
+                                          </label>                                                     
+                                      </div>
+                                             
+                                    </td>
+                                  </div>                             
+                                </tr>
+                            </tbody>
+                           </table>
+                          <div></div>
+                          <div>
+                              <button  type="button" class="btn btn-primary pull-right " [attr.disabled]="toggleOn" (click)="saveQuickTradeDetails()">Save</button>
+                          </div>
+                        </form>
+
+                        </mat-grid-list>
+                    </mat-expansion-panel>
+                  </mat-accordion>             -->
+
+
+
+              <!--settings for quick trade settings-->
+
+              <mat-accordion>
+                <mat-expansion-panel (opened)="toggleChange(true)">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Quick Trade Settings
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <mat-grid-list cols="4" rowHeight="40px">
+                    <mat-grid-tile></mat-grid-tile>
+                    <mat-grid-tile></mat-grid-tile>
+                    <mat-grid-tile></mat-grid-tile>
+                    <mat-grid-tile>
+                      <mat-slide-toggle style="float: right !important;" color="primary"
+                        (change)="toggleChange($event)">
+                      </mat-slide-toggle>
+                    </mat-grid-tile>
+                    <mat-grid-tile class="txtcenter fweight600">Exchange</mat-grid-tile>
+                    <mat-grid-tile class="txtcenter fweight600">QTY</mat-grid-tile>
+                    <mat-grid-tile class="txtcenter fweight600">Price Type</mat-grid-tile>
+                    <mat-grid-tile class="txtcenter fweight600">Product Type</mat-grid-tile>
+
+                    <ng-container *ngFor="let item of quickTrades; let i = index">
+                      <mat-grid-tile>
+                        <mat-grid-list cols="1" rowHeight="2:1">
+                          <mat-label>{{item.exchange_seg}}</mat-label>
+                        </mat-grid-list>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile>
+                        <mat-form-field>
+                          <input type="number" value="{{item.qty}}" matInput
+                            style="top:-20px; padding: 7px; font-size: 18px" [disabled]="toggleOn"
+                            (change)="changeTradeQty(item.exchange_seg,$event.target.value)">
+                        </mat-form-field>
+                        <button mat-button (click)="openSnackBar()"></button>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile>
+                        <mat-grid-list cols="2" rowHeight="2:1">
+                          <button mat-stroked-button (click)="priceTypeBtnChanges(item.exchange_seg,'L')"
+                            [ngClass]="item.order_type == 'L' ? 'activeBtn' : 'inactiveBtn'"
+                            [disabled]="toggleOn">LMT</button>&nbsp;&nbsp;
+                          <button mat-stroked-button (click)="priceTypeBtnChanges(item.exchange_seg,'MKT')"
+                            [ngClass]="item.order_type == 'MKT' ? 'activeBtn' : 'inactiveBtn'"
+                            [disabled]="toggleOn">MKT</button>
+                        </mat-grid-list>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile>
+                        <mat-grid-list cols="2" rowHeight="2:1">
+                          <button mat-stroked-button (click)="productTypeBtnChanges(item.exchange_seg,'MIS')"
+                            [ngClass]="item.product_type == 'MIS' ? 'activeBtn' : 'inactiveBtn'"
+                            [disabled]="toggleOn">MIS</button>&nbsp;&nbsp;
+                          <button mat-stroked-button (click)="productTypeBtnChanges(item.exchange_seg,'CNC')"
+                            [ngClass]="item.product_type == 'CNC' ? 'activeBtn' : 'inactiveBtn'"
+                            [disabled]="toggleOn">CNC</button>&nbsp;&nbsp;
+                        </mat-grid-list>
+                      </mat-grid-tile>
+                    </ng-container>
+                  </mat-grid-list>
+
+                  <!-- <mat-grid-list cols="8" rowHeight="40px">
+                    <button mat-flat-button fill="outline" class="quickTradebtn" [disabled]="toggleOn"
+                      style="margin-bottom: 10px; float:right" *ngIf="!updateQuickTrade"
+                      (click)="saveQuickTradeDetails();">SAVE</button>
+                    <button mat-flat-button fill="outline" class="quickTradebtn" [disabled]="toggleOn"
+                      style="margin-bottom: 10px; float:right" *ngIf="updateQuickTrade"
+                      (click)="updateQuickTradeDetails();">UPDATE</button>
+                  </mat-grid-list> -->
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px; padding-right: 45px;">
+                    <button mat-flat-button fill="outline" class="quickTradebtn" [disabled]="toggleOn"
+                      style="height: 36px; float:right" *ngIf="!updateQuickTrade"
+                      (click)="saveQuickTradeDetails();">SAVE</button>
+                    <button mat-flat-button fill="outline" class="quickTradebtn" [disabled]="toggleOn"
+                      style="height: 36px; float:right" *ngIf="updateQuickTrade"
+                      (click)="updateQuickTradeDetails();">UPDATE</button>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

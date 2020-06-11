@@ -1,0 +1,139 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row" style="background: #c7c4c440;">
+    <div class=" col-sm-1 col-md-1 col-lg-1 col-xs-1">
+    </div>
+    <div class="col-lg-7 col-xs-12 col-sm-12 col-md-12 search_scroll" style="background: white !important;"
+        id="mainDiv">
+        <div class="height">
+            <span class="titleText">Login</span>
+            <br><br>
+            <span class="subTitle">URL</span><br>
+            <p>../customer/login</p>
+            <span class="subTitle">Input Parameters</span><br><br>
+            <table>
+                <tr>
+                    <th class="cls_no">S.NO</th>
+                    <th class="cls_key">KEY</th>
+                    <th>VALUE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>userId</code>
+                        <span>string</span>
+                    </td>
+                    <td>User Id</td>
+
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>password</code>
+                        <span>string</span>
+                    </td>
+                    <td>User Password</td>
+
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Example</span><br><br>
+            <pre class="cls_pre login">
+       {{'{'}}
+        userId: 'XY7656',
+        password: abc@123Pass
+       {{'}'}}
+        </pre>
+            <br>
+            <span class="subTitle">Success Response</span><br><br>
+            <table>
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>RESPONSE</th>
+                    <th>DESCRIPTION</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>string</span>
+                    </td>
+                    <td>Ok</td>
+                    <td>Status</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>tdata</code>
+                        <span>string</span>
+                    </td>
+                    <td>1)Answer the Questions<br>2)Please Register the Questions
+                    </td>
+                    <td>message</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        <code>sQuestions</code>
+                        <span>string</span>
+                    </td>
+                    <td>Questions</td>
+                    <td>Contains set of Questions</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        <code>sCount</code>
+                        <span>int</span>
+                    </td>
+                    <td>Question count</td>
+                    <td>Total count of Question</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        <code>sIndex</code>
+                        <span>string</span>
+                    </td>
+                    <td>Index</td>
+                    <td>Index value for Questions</td>
+                </tr>
+            </table>
+            <br>
+            <span class="subTitle">Error</span>
+            <br><br>
+            <table class="cls_error">
+                <tr>
+                    <th>S.NO</th>
+                    <th>PARAMETERS</th>
+                    <th>RESPONSE</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <code>stat</code>
+                        <span>string</span>
+                    </td>
+                    <td>Not_Ok</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        <code>emsg</code>
+                        <span>string</span>
+                    </td>
+                    <td>1)Session Expired<br>2)Not able to Retrieve ValidPwd<br>3)Please Enter Valid
+                        Password<br>4)User Blocked Contact System Administrator<br>5)Permission Denied<br>6)
+                        error occurred
+                    </td>
+                </tr>
+            </table>
+            <br>
+
+        </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-3">
+        <div class="subTitle height height1">Sample JS</div><br>
+        <pre class="cls_pre scrip backnew">WILL BE ADDED</pre>
+    </div>
+</div>

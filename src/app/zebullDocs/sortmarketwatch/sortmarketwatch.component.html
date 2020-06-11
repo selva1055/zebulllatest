@@ -1,0 +1,90 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-xs-1">
+                <span style="font-size:30px;cursor:pointer;position: fixed;" (click)="openNav()">☰</span>
+            </div>
+            <div class="col-xs-8 col-xs-offset-1 col-md-10 col-md-offset-0" id="mainDiv">
+                <div class="row height">
+                    <div class="col-sm-9  margin ">
+                        <span class="titleText">SORT MARKET WATCH</span>
+                        <br><br>
+                        <span class="subTitle">URL</span><br><br>
+                        <p>../MobullService/v1/marketWatch/sortMWScrip</p><br>
+                        <span class="subTitle ">METHOD</span><br><br>
+                        <P class="title "> Post Method</P>
+                        <span class="subTitle">INPUT PARAMETERS</span><br><br>
+                        <table>
+                            <tr>
+                                <th> S.no</th>
+                                <th>Key</th>
+                                <th>Value</th>
+                                <TH>Mandary</TH>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>MwName</th>
+                                <th>MwName</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th>2</th>
+                                <th>list</th>
+                                <th>Exchange</th>
+                                <th></th>
+                            </tr>
+                        </table>
+                        <br>
+                        <span class="subTitle">Example</span><br><br>
+                        <pre class="cls_pre">
+          {{'{'}}
+            "mwName": "abc",
+            "list": "NSE"
+          {{'}'}}
+   </pre>
+                        <br><br>
+                        <span class="subTitle">SUCCESS RESPONSE</span><br><br>
+                        <table>
+                            <tr>
+                                <th>S.NO</th>
+                                <th>PARAMETERS</th>
+                                <th>RESPONSE</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>stat</td>
+                                <td>Ok</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Result</td>
+                                <td>success</td>
+                            </tr>
+                        </table>
+                        <br>
+                        <span class="subTitle">ERROR</span><br><br>
+                        <table>
+                            <tr>
+                                <th>S.NO</th>
+                                <th>PARAMETERS</th>
+                                <th>RESPONSE</th>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>stat</td>
+                                <td>Not_Ok</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>emsg</td>
+                                <td>1. Not able to SortMarketwatchScrips<br>2. failure<br>3. Session Expired
+                                </td>
+                            </tr>
+                        </table>
+                        <br><br>
+                        <span class="subTitle">SAMPLE JS</span><br>
+                        <pre>WILL BE ADDED</pre>
+                    </div>
+                    <div class="col-sm-2">
+                    </div>

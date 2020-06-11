@@ -1,0 +1,256 @@
+<div class="row" style="background: #c7c4c440;">
+    <div class="col-sm-1 col-md-1 col-lg-1 col-xs-1">
+    </div>
+    <div class="col-lg-7 col-xs-12 col-sm-12 col-md-12 search_scroll" style="background: white !important;"
+        id="mainDiv">
+        <div class="height">
+            <div>
+                <span class="titleText">Validate 2FA</span>
+                <br><br>
+                <span class="subTitle">URL</span><br>
+                <p>../MobullService/v1/customer/validAnswer</p><br>
+                <span class="subTitle ">Method</span><br>
+                <P class="title "> Post</P>
+                <span class="subTitle">Input Parameters</span><br><br>
+                <table>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>KEY</th>
+                        <th>VALUE</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <code>userId</code>
+                            <span>string</span>
+                        </td>
+                        <td>User Id</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <code>sCount</code>
+                            <span>string</span>
+                        </td>
+                        <td>Question count</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <code>sIndex</code>
+                            <span>string</span>
+                        </td>
+                        <td>index</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <code>answer1</code>
+                            <span>string</span>
+                        </td>
+                        <td>answer for the question</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <code>answer2</code>
+                            <span>string</span>
+                        </td>
+                        <td>answer for the question</td>
+                    </tr>
+                </table>
+                <br>
+                <span class="subTitle">Example</span><br><br>
+                <pre class="cls_new cls_pre">
+           {{'{'}}
+            "userId":"XY7656"
+            "sCount":"2", 
+            "sIndex": "27|25",
+            "answer1": "abc",
+            "answer2": "xyz" 
+            {{'}'}}
+                                    </pre>
+                <br>
+                <span class="subTitle">Success Response</span><br><br>
+                <table>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>PARAMETERS</th>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <code>stat</code>
+                            <span>string</span>
+                        </td>
+                        <td>Ok</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <code>message</code>
+                            <span>string</span>
+                        </td>
+                        <td>Expiry Message</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <code>tdata</code>
+                            <span>string</span>
+                        </td>
+                        <td>Ok</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <code>userSettingDto</code>
+                            <span>string</span>
+                        </td>
+                        <td>JSON object</td>
+                    </tr>
+                </table>
+                <br>
+                <h5>UserSettingDto JSON object contains below parameters</h5>
+                <table>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>PARAMETERS</th>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>exch</td>
+                        <td>Enabled exchange in a JSON array</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>pCode</td>
+                        <td>Enabled order type in a JSON array</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>prctyp</td>
+                        <td>Enabled product type in a JSON array</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>s_prdt_ali</td>
+                        <td>Product alias</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>sTransFlg</td>
+                        <td>YES/NO<br>YES → both login password and transaction password is enabled in
+                            application<br>NO → only login password is enabled in application</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>default market_watch_name</td>
+                        <td>Default market watch name</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>broker_name</td>
+                        <td>Broker name of user</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>branch_id</td>
+                        <td>Branch id of user</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>market_watch_count</td>
+                        <td>Market watch count ( Only fetched from property file or product level , not user
+                            level)</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>email</td>
+                        <td>Email id of user</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>weblink</td>
+                        <td>It is a JSON array giving information about third party link</td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>account_id</td>
+                        <td>Account id of user</td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td>exchDeatil</td>
+                        <td>JSON object</td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>lots_weight</td>
+                        <td>Lots weight configurable flag</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>password special_character</td>
+                        <td>Password Special character flag</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>accountName</td>
+                        <td>Account name</td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td>userPrivileges</td>
+                        <td>User privilages</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>ySXorderEntry</td>
+                        <td>Flag to display YSX exchange button enable/disable (YES/NO)</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>criteriaAttribute_array</td>
+                        <td>JSONArray containing Set order Criteria flag (place, modify, cancel)</td>
+                    </tr>
+                </table>
+                <br>
+                <span class="subTitle">Error</span><br><br>
+                <table>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>PARAMETERS</th>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <code>start</code>
+                            <span>string</span>
+                        </td>
+                        <td>Not_Ok</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <code>emsg </code>
+                            <span>string</span>
+                        </td>
+                        <td>1) Session Expired<br>2) Not able to Retrieve Valid Ans <br>
+                            3) User Blocked Contact System Administrator<br>
+                            4) No Licence<br>5) Permission Denied
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-12 col-sm-12 col-md-12">
+        <div class="subTitle height height1">Sample JS</div><br>
+        <pre class="cls_pre scrip backnew">WILL BE ADDED</pre>
+    </div>
+</div>

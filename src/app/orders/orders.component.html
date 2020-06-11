@@ -1,0 +1,265 @@
+<div class="container-fluid padd0">
+  <div class="subhead">
+    <div class="container-fluid padd0">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <span><img (click)="goToHomePage()" src="assets/images/zebu.jpg"
+            style="width: 32px; height: 32px;margin-top: 4px; text-align: left;float: left;"></span>&nbsp;
+        <!-- </div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 text-center"> -->
+        <h4 style="color: #fff;display: inline-block;">Zebull Order Generator</h4>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid fullpage margin100">
+
+    <div class="example-container mat-elevation-z8">
+      <mat-table #table [dataSource]="dataSource">
+
+        <!-- Transtype Column -->
+        <ng-container matColumnDef="sno">
+          <mat-header-cell *matHeaderCellDef>S.no</mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index;" data-label="sno">{{i/2+1}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Transtype Column -->
+        <ng-container matColumnDef="transtype">
+          <mat-header-cell *matHeaderCellDef class="paddL15">Buy/Sell</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="transtype" class="paddL15">
+            <span
+              [class]="element.transtype.toLowerCase() == 'buy'? 'odrbuy':'odrsell'">{{element.transtype.toLowerCase() == 'buy' ? 'B' :'S'}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Instrument Column -->
+        <ng-container matColumnDef="instrument">
+          <mat-header-cell *matHeaderCellDef class="paddL15">Instrument</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="instrument" class="paddL15">
+            {{element.trading_symbol}}&nbsp;<span style="font-size: 10px;">({{element.exch}})</span></mat-cell>
+        </ng-container>
+
+        <!-- Exch Column -->
+        <!-- <ng-container matColumnDef="exch">
+          <mat-header-cell *matHeaderCellDef>Exch</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="exch"> <span class="excHead">{{element.exch}}</span>
+          </mat-cell>
+        </ng-container> -->
+
+        <!-- Product Column -->
+        <ng-container matColumnDef="pCode">
+          <mat-header-cell *matHeaderCellDef> Product </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="pCode" class="text-uppercase"> {{element.pCode}} /
+            {{element.prctyp}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Complexty Column -->
+        <!-- <ng-container matColumnDef="complexty">
+          <mat-header-cell *matHeaderCellDef> Complexty</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="complexty" class="text-uppercase">
+            <span class="odrType">{{element.complexty == 'regular' ? 'rglr' : element.complexty}}</span>
+          </mat-cell>
+        </ng-container> -->
+
+        <!-- Qty Column -->
+        <ng-container matColumnDef="qty">
+          <mat-header-cell *matHeaderCellDef class="tright"> Qty </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="qty" class="tright"> {{element.qty == 'null' ? '--' : element.qty}} </mat-cell>
+        </ng-container>
+
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="price"> {{element.price == 'null' ? '--' : element.price}}<span
+              *ngIf="element.trigPrice > 0">/{{element.trigPrice == 'null' ? '--' : element.trigPrice}} .trg</span>
+          </mat-cell>
+        </ng-container>
+
+        <!-- LTP Column -->
+        <ng-container matColumnDef="discqty">
+          <mat-header-cell *matHeaderCellDef class="tright"> LTP </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="discqty" class="tright"> {{element.ltp == 'null' ? '--' : element.ltp}} </mat-cell>
+        </ng-container>
+
+        <!-- StopLoss Column -->
+        <ng-container matColumnDef="stopLoss">
+          <mat-header-cell *matHeaderCellDef class="tright"> SL </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="stopLoss" class="tright">
+            {{element.stopLoss == 'null' ? '--' : element.stopLoss}}</mat-cell>
+        </ng-container>
+
+        <!-- Target Column -->
+        <ng-container matColumnDef="target">
+          <mat-header-cell *matHeaderCellDef class="tright"> Target </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="target" class="tright">
+            {{element.target == 'null' ? '--' : element.target}}</mat-cell>
+        </ng-container>
+
+        <!-- Trailing_stop_loss Column -->
+        <ng-container matColumnDef="trailing_stop_loss">
+          <mat-header-cell *matHeaderCellDef class="tright"> T-SL </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="trailing_stop_loss" class="tright">
+            {{element.trailing_stop_loss == 'null' ? '--' : element.trailing_stop_loss}}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Product Column -->
+        <!-- <ng-container matColumnDef="pCode">
+          <mat-header-cell *matHeaderCellDef> Product </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="pCode" class="text-uppercase"> {{element.pCode}} /
+            {{element.prctyp}}
+          </mat-cell>
+        </ng-container> -->
+
+        <!-- ret Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef [ngClass]="editbtn == false ? 'displayNone tcenter':'displayFlex tcenter'">
+            Action</mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="id"
+            [ngClass]="editbtn == false ? 'displayNone tcenter':'displayFlex tcenter'">
+            <button type="button" class="btn btn-xs" *ngIf="!this.ordreStaus"
+              (click)="editOrder(element['id'],'edit')"><img src="assets/images/edit.svg" style="width: 14px;"></button>
+            <!-- &nbsp; -->
+            <button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#editOrders"
+              data-backdrop="static" data-keyboard="false"></button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-xs" *ngIf="!this.ordreStaus"
+              (click)="editOrder(element['id'],'del')"><img src="assets/images/del.svg" style="width: 14px;"></button>
+          </mat-cell>
+        </ng-container>
+
+        <!-- stat Column -->
+        <ng-container matColumnDef="stat">
+          <mat-header-cell *matHeaderCellDef [ngClass]="editbtn == true ? 'displayNone':'displayFlex'">
+            Status
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="stat"
+            [ngClass]="editbtn == true ? 'displayNone':'displayFlex'">
+            <span style="text-transform: capitalize;"
+              [ngClass]="element.stat == 'Ok' ? 'orderSuc':'orderFail'">{{element.stat}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column -->
+        <ng-container matColumnDef="expandedDetail">
+          <mat-cell *matCellDef="let detail" style="padding-right: 0px;padding-left: 0px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: start;padding: 0px;">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft">
+                <span>Qty</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fright">
+                <span>{{detail.element.qty}}</span>
+              </div>
+              <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft">
+                <span>Product</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fright texttransform ">
+                <span>{{detail.element.pCode}} - {{detail.element.prctyp}}</span>
+              </div> -->
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft">
+                <span>Price</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fright">
+                <span>{{detail.element.price == '--' ? '0.00' : detail.element.price }}<span
+                    *ngIf="detail.element.trigPrice > 0"> /{{detail.element.trigPrice}}
+                    trg.</span></span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft">
+                <span>LTP</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fright">
+                <span>{{detail.element.ltp == '--' ? '0.00' : detail.element.ltp}}</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft">
+                <span>SL</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fright">
+                <span>{{detail.element.stopLoss == '--' ? '0.00' : detail.element.stopLoss}}</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft">
+                <span>Target</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fright">
+                <span>{{detail.element.target == '--' ? '0.00' : detail.element.target}}</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft">
+                <span>T-SL</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fright">
+                <span>{{detail.element.trailing_stop_loss == '--' ? '0.00' : detail.element.trailing_stop_loss}}</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft"
+                [ngClass]="editbtn == false ? 'displayNone':'displayFlex'">
+                <span>Action</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7" style="justify-content: flex-end !important;"
+                [ngClass]="editbtn == false ? 'displayNone fright':'displayFlex fright'">
+                <button type="button" *ngIf="!this.ordreStaus" class="btn btn-xs"
+                  (click)="editOrder(detail.element['id'],'edit')">
+                  <img src="assets/images/edit.svg" style="width: 14px;">
+                </button>
+                &nbsp;&nbsp;
+                <button type="button" class="btn btn-xs" *ngIf="!this.ordreStaus"
+                  (click)="editOrder(detail.element['id'],'del')"><img src="assets/images/del.svg"
+                    style="width: 14px;"></button>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fleft"
+                [ngClass]="editbtn == true ? 'displayNone':'displayFlex'">
+                <span>Status</span>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 paddTB7 fright"
+                [ngClass]="editbtn == true ? 'displayNone':'displayFlex'" style="justify-content: flex-end !important;">
+                <span style="text-transform: capitalize;"
+                  [ngClass]="detail.element.stat == 'Ok' ? 'orderSuc':'orderFail'">{{detail.element.stat}}</span>
+              </div>
+              <!-- <p>
+                <b>Exchange</b><b style="float: right;">{{detail.element.exch}}</b><br>
+                <b>Product</b><b style="float: right;">{{detail.element.pCode}}/{{detail.element.prctyp}}</b><br>
+                <b>Price</b><b style="float: right;">{{detail.element.price}}/{{detail.element.trigPrice}} -
+                  trg.</b><br>
+                <b>LTP</b><b style="float: right;">0.00</b><br>
+                <b>SL</b><b style="float: right;">{{detail.element.stopLoss}}</b><br>
+                <b>Target</b> <b style="float: right;">{{detail.element.target}}</b><br>
+                <b>T-SL</b><b style="float: right;">{{detail.element.trailing_stop_loss}}</b><br>
+                <b>Action</b><b style="float: right;"><button type="button" *ngIf="!this.ordreStaus" class="btn btn-xs"
+                    (click)="editOrder(detail.element['id'],'edit')">Edit</button>
+                  &nbsp;&nbsp;
+                  <button type="button" class="btn btn-xs" *ngIf="!this.ordreStaus"
+                    (click)="editOrder(detail.element['id'],'del')"><img src="assets/images/del.svg"
+                      style="width: 10px;"></button>
+                </b><br>
+                <b>Status</b>
+                <b [ngClass]="editbtn == true ? 'displayNone':'displayFlex'" style="float: right;"><span
+                    style="text-transform: capitalize;"
+                    [ngClass]="detail.element.stat == 'Ok' ? 'orderSuc':'orderFail'">{{detail.element.stat}}</span></b>
+              </p> -->
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
+          [class.expanded]="expandedElement == row" (click)="expandedElement = row"></mat-row>
+        <mat-row class="expendHide" *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+          [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden">
+        </mat-row>
+      </mat-table>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" class="paddLR marginTB">
+      <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 padd0">
+        <!-- <button type="button" class="btn btn-md btn-default" routerLink="/zebuMWLst">Go To MarketWatch</button> -->
+      </div>
+      <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 text-right padd0">
+        <button type="button" class="btn btn-md btngen" *ngIf="this.ordreStaus"
+          (click)="refreshOrders()">Refresh</button>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-md btngen" *ngIf="!this.ordreStaus" [attr.disabled]="ordreStaus"
+          (click)="orderAlreadyPlacedConformation()">Place</button>
+        &nbsp;&nbsp;
+        <button type="button" class="btn btn-md btn-default" [attr.disabled]="ordreStaus" style="border-radius:0%"
+          (click)="closeTab()">Cancel</button>
+        &nbsp;&nbsp;
+        <!-- <button type="button" class="btn btn-md btn-default" *ngIf="ordreStaus" style="border-radius:0%" routerLink="/zebuorderbk">Go To OrderBook</button> -->
+      </div>
+    </div>
+  </div>

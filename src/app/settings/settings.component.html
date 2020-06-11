@@ -1,0 +1,81 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  header">
+  <div class="pers-head">SECURITY SETTINGS</div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="lef">PASSWORD</span>
+  </div>  
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="rig">**********</span>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 marginTop">
+    <span class="lef">
+      <!-- <button mat-button routerLink="passReset"> -->
+        <mat-icon routerLink="/home/passReset" aria-hidden="false">edit</mat-icon>
+      <!-- </button> -->
+    </span>
+  </div>  
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="lef">SECURITY QUESTIONS</span>
+  </div>
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="rig">**********</span>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 marginTop">
+    <span class="lef">
+      <!-- <button mat-button routerLink="/home/passReset"> -->
+          <mat-icon routerLink="/home/passReset" aria-hidden="false">edit</mat-icon>
+      <!-- </button> -->
+    </span>
+  </div>  
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  header">
+  <div class="pers-head">API SETTINGS</div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="lef">KEYS</span>
+  </div>  
+  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 marginTop">
+    <p class="rig">{{apikeys}} </p>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="lef">VALID UPTO</span>
+  </div>  
+  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 marginTop">
+    <span class="rig">{{expriedapi}}</span>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 marginTop">
+    <span class="rig" *ngIf="apiExpried == false || apiExpried == true">
+      <span style="color: red;font-weight: 400 !important;">
+        {{errormessage}}
+      </span>
+    </span>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginTop">
+    <button mat-stroked-button (click)="generateApiKey()" *ngIf="apiAvailble == false">GENERATE API KEY</button>
+    <button mat-stroked-button (click)="getReGenerateAPIKeys()" *ngIf="apiAvailble == true">REGENERATE API KEY</button>
+  </div>
+</div>
+
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  header">
+  <div class="pers-head">CHART SETTINGS</div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginTop">
+    <mat-radio-group class="chartsettings" [(ngModel)]="defaultchart" aria-label="Select an option" (change)="changeCharts($event)">
+      <mat-radio-button value="tradeview">CHART IQ</mat-radio-button>&nbsp;&nbsp;
+      <mat-radio-button value="chartiq">TRADING VIEW</mat-radio-button>
+    </mat-radio-group>
+  </div>  
+</div>
+

@@ -1,0 +1,313 @@
+<!-- Include the plugin //-->
+<script src="./js/irongates_publisher.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script>
+// Only run your custom code once SasPublisher has fully initialised.
+SasPublisher.ready(function() {
+    // Initialize a new sas instance.
+    // You can initialize multiple instances if you need.
+    var sas = new SasPublisher();
+
+    // Add a stock to the basket
+    sas.add({
+        "tradingsymbol": "ASHOKLEY-EQ",
+        "exchange": "NSE",
+        "transaction_type": "buy",
+        "order_type": "L",
+        "product": "mis",
+        "price": "43.60",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "--",
+        "stoploss": "--",
+        "symbol_id":212,
+        "target": "--",
+        "trailing_stoploss": "--"
+    });
+
+     sas.add({
+        "tradingsymbol": "ASHOKLEY-EQ",
+        "exchange": "NSE",
+        "transaction_type": "sell",
+        "order_type": "L",
+        "product": "mis",
+        "price": "43.60",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "--",
+        "stoploss": "--",
+        "symbol_id":212,
+        "target": "--",
+        "trailing_stoploss": "--"
+    });
+
+     sas.add({
+        "tradingsymbol": "ASHOKLEY-EQ",
+        "exchange": "NSE",
+        "transaction_type": "buy",
+        "order_type": "MKT",
+        "product": "mis",
+        "price": "",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "--",
+        "stoploss": "--",
+        "symbol_id":212,
+        "target": "--",
+        "trailing_stoploss": "--"
+    });
+
+    sas.add({
+        "tradingsymbol": "ASHOKLEY-EQ",
+        "exchange": "NSE",
+        "transaction_type": "sell",
+        "order_type": "MKT",
+        "product": "mis",
+        "price": "",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "--",
+        "stoploss": "--",
+        "symbol_id":212,
+        "target": "--",
+        "trailing_stoploss": "--"
+    });
+
+
+    // Add another stock
+    sas.add({
+       "tradingsymbol": "SBIN-EQ",
+        "exchange": "NSE",
+        "transaction_type": "buy",
+        "order_type": "L",
+        "product": "mis",
+        "price": "150.85",
+        "quantity": 1,
+        "complexty": "bo",
+        "trigPrice": "--",
+        "stoploss": "1",
+        "symbol_id":3045,
+        "target": "0.50",
+        "trailing_stoploss": "1",
+    });
+
+     // Add another stock
+    sas.add({
+       "tradingsymbol": "SBIN-EQ",
+        "exchange": "NSE",
+        "transaction_type": "sell",
+        "order_type": "L",
+        "product": "mis",
+        "price": "150.85",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "--",
+        "stoploss": "2",
+        "symbol_id":3045,
+        "target": "1",
+        "trailing_stoploss": "--",
+    });
+
+       // Add another stock
+    sas.add({
+       "tradingsymbol": "SBIN-EQ",
+        "exchange": "NSE",
+        "transaction_type": "buy",
+        "order_type": "SL-M",
+        "product": "mis",
+        "price": "",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "150.50",
+        "stoploss": "2",
+        "symbol_id":3045,
+        "target": "1",
+        "trailing_stoploss": "--",
+    });
+
+       // Add another stock
+    sas.add({
+       "tradingsymbol": "SBIN-EQ",
+        "exchange": "NSE",
+        "transaction_type": "sell",
+        "order_type": "SL-M",
+        "product": "mis",
+        "price": "",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "151.50",
+        "stoploss": "2",
+        "symbol_id":3045,
+        "target": "1",
+        "trailing_stoploss": "--",
+    });
+
+
+       // Add another stock
+    sas.add({
+       "tradingsymbol": "SBIN-EQ",
+        "exchange": "NSE",
+        "transaction_type": "sell",
+        "order_type": "L",
+        "product": "mis",
+        "price": "150.85",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "--",
+        "stoploss": "2",
+        "symbol_id":3045,
+        "target": "1",
+        "trailing_stoploss": "--",
+    });
+
+        // Add another stock
+    sas.add({
+       "tradingsymbol": "SBIN-EQ",
+        "exchange": "NSE",
+        "transaction_type": "buy",
+        "order_type": "SL",
+        "product": "mis",
+        "price": "150.85",
+        "quantity": 1,
+        "complexty": "bo",
+        "trigPrice": "150.55",
+        "stoploss": "1",
+        "symbol_id":3045,
+        "target": "0.80",
+        "trailing_stoploss": "1",
+    });
+
+        // Add another stock
+    sas.add({
+       "tradingsymbol": "SBIN-EQ",
+        "exchange": "NSE",
+        "transaction_type": "sell",
+        "order_type": "SL",
+        "product": "mis",
+        "price": "151.65",
+        "quantity": 1,
+        "complexty": "bo",
+        "trigPrice": "150.80",
+        "stoploss": "1",
+        "symbol_id":3045,
+        "target": "0.80",
+        "trailing_stoploss": "1",
+    });
+
+    // Add a Bracket Order
+    sas.add({
+        "tradingsymbol": "BHEL-EQ",
+        "exchange": "NSE",
+        "transaction_type": "BUY",
+        "order_type": "L",
+        "product": "mis",
+        "price": "24.55",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "--",
+        "stoploss": "--",
+        "symbol_id":438,
+        "target": "--",
+        "trailing_stoploss": "--",
+    });
+
+     sas.add({
+        "tradingsymbol": "BHEL-EQ",
+        "exchange": "NSE",
+        "transaction_type": "buy",
+        "order_type": "SL",
+        "product": "mis",
+        "price": "24.55",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "24.45",
+        "stoploss": "--",
+        "symbol_id":438,
+        "target": "--",
+        "trailing_stoploss": "--",
+    });
+
+    sas.add({
+        "tradingsymbol": "BHEL-EQ",
+        "exchange": "NSE",
+        "transaction_type": "sell",
+        "order_type": "SL",
+        "product": "mis",
+        "price": "25.55",
+        "quantity": 1,
+        "complexty": "regular",
+        "trigPrice": "24.65",
+        "stoploss": "--",
+        "symbol_id":438,
+        "target": "--",
+        "trailing_stoploss": "--",
+    });
+
+     sas.add({
+        "tradingsymbol": "BHEL-EQ",
+        "exchange": "NSE",
+        "transaction_type": "buy",
+        "order_type": "L",
+        "product": "mis",
+        "price": "25.55",
+        "quantity": 1,
+        "complexty": "co",
+        "trigPrice": "24.50",
+        "stoploss": "--",
+        "symbol_id":438,
+        "target": "--",
+        "trailing_stoploss": "--",
+    });
+
+    sas.add({
+        "tradingsymbol": "BHEL-EQ",
+        "exchange": "NSE",
+        "transaction_type": "sell",
+        "order_type": "L",
+        "product": "mis",
+        "price": "25.55",
+        "quantity": 1,
+        "complexty": "co",
+        "trigPrice": "24.50",
+        "stoploss": "--",
+        "symbol_id":438,
+        "target": "--",
+        "trailing_stoploss": "--",
+    });
+
+    // Render the in-built button inside a given target
+    sas.renderButton("#default-button");
+
+    // OR, link the basket to any existing element you want
+    // sas.link("#custom-button");
+});
+</script>
+<script>
+    var cssId = 'myCss';  // you could encode the css path itself to generate id..
+    if (!document.getElementById(cssId))
+    {
+        var head  = document.getElementsByTagName('head')[0];
+        var link  = document.createElement('link');
+        link.id   = cssId;
+        link.rel  = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './css/styles.css';
+        link.media = 'all';
+        head.appendChild(link);
+    }
+     customElements.define('zebu-button', class extends HTMLElement {
+        constructor() {
+            super();
+            this.addEventListener('click', () => {
+               sendToBuy(this);
+             });
+        } 
+    });
+</script>
+<zebu-button data-symbol_id="212" data-exchange="NSE" data-tradingsymbol="ASHOKLEY-EQ" data-transaction_type="buy" data-quantity="1" data-order_type="L" data-variety="regular" data-product="mis" data-price="43.60" data-stoploss="--" data-trailing_stoploss="--" data-trigprice="--" data-ret="day" data-target="--">BUY</zebu-button>
+
+<zebu-button data-symbol_id="212" data-exchange="NSE" data-tradingsymbol="ASHOKLEY-EQ" data-transaction_type="sell" data-quantity="1" data-order_type="L" data-variety="regular" data-product="mis" data-price="43.60" data-stoploss="--" data-trailing_stoploss="--" data-target="--">SELL</zebu-button>
+
+<!-- A sas button will be generated inside this container //-->
+<span id="default-button"> </span>

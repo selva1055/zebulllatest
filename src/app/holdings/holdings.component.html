@@ -1,0 +1,181 @@
+<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 borderB1 paddLR0" *ngIf="emptytable">
+  <mat-tab-group class="holding-segment" (selectedTabChange)="selectHoldingSegment($event)">
+    <mat-tab *ngFor="let tab of holdingsegment">
+      <ng-template mat-tab-label>
+        <span style="margin: 0px -52px;">
+          <img src="{{tab['img']}}" style="width: 13%;">
+        </span>&nbsp;
+        {{tab['tabs']}}</ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div> -->
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  paddRL50" style="padding: 25px 1px 24px 35px;" *ngIf="emptytable">
+  <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+    <span style="font-size: 16px;margin-top: 18px;">HOLDINGS ({{totalHoldStock}})</span>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 example-table-container paddRL50">
+  <!-- <table mat-table [dataSource]="holdings" class="mat-elevation-z8 holdingfwidth effect7 "
+    style="border-top: 0.5px solid rgba(0, 0, 0, 0.05);padding-top: 23px;" *ngIf="emptytable">
+    <ng-container matColumnDef="Token1">
+      <th mat-header-cell *matHeaderCellDef class=" fWeight800 fSize12 tleft container-left" style="width: 3%">
+        &nbsp;
+      </th>
+      <td mat-cell *matCellDef="let item" class="fSize12 tleft">
+        &nbsp;
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="instrument">
+      <th mat-header-cell *matHeaderCellDef class="fWeight800 fsize14 tleft container-left" style="width: 15%">
+        Instrument</th>
+      <td mat-cell *matCellDef="let item" class="fSize12 tleft ">
+        <div class="floatType">
+          <div class="info">
+            {{item.ExchSeg1 == "NSE" ? item.NsetsymTemp : item.Bsetsym}}&nbsp;&nbsp;<span
+              style="font-size: 10px;color:gray">{{item.ExchSeg1 == "NSE" ? item.ExchSeg1 : item.ExchSeg2}}</span>
+          </div>
+          <div class="btn-group btn-group-xs hide-btn-group actions"
+            style="float: right; margin-top: -18px; margin-left: 14%;">
+            <button mat-raised-button class="addbtn" (click)="goToHoldingAdd(item)">ADD</button>&nbsp;&nbsp;
+            <button mat-raised-button class="exitbtn" (click)="goToHoldingExit(item)">EXIT</button>
+          </div>
+        </div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="Qty">
+      <th mat-header-cell *matHeaderCellDef class="fWeight800 fsize14 tright" style="width: 5%">Qty
+      </th>
+      <td mat-cell *matCellDef="let item" class="fSize12 tright">
+        <span>{{item.SellableQty}}</span> &nbsp;<span *ngIf="item.Btst > 0"><span style="font-size: 10px;">T1 </span>:
+          {{item.Btst}}</span>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="LTP">
+      <th mat-header-cell *matHeaderCellDef class="fWeight800 fSize12 tright" style="width: 8%">LTP</th>
+      <td mat-cell *matCellDef="let item" class="fSize12 tright">
+        {{item.ExchSeg1 == "NSE" ? item.LTnse : item.LTbse}} </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="AvgValue">
+      <th mat-header-cell *matHeaderCellDef class="fWeight800 fsize14 tright" style="width: 8%">
+        Avg Price</th>
+      <td mat-cell *matCellDef="let item" class="fSize12 tright">
+        {{item['avgprice']}}
+      </td>
+      <td mat-footer-cell *matFooterCellDef class="tright"> Total</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="TotalValue">
+      <th mat-header-cell *matHeaderCellDef class="fWeight800 fsize14 tright" style="width: 10%">Avg
+        Value</th>
+      <td mat-cell *matCellDef="let item" class="fSize12 tright">
+        <div>
+          {{item.ExchSeg1 == "NSE" ? item.NSEHOldingValue : item.BSEHOldingValue}}
+        </div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef class="tright">
+        <span style="font-size: 13px;">{{totalvaluebefore}}.{{totalvalueafter}}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="MTM">
+      <th mat-header-cell *matHeaderCellDef class="fWeight800 fsize14 tright" style="width: 8%">
+        MTM</th>
+      <td mat-cell *matCellDef="let item" class="fSize12 tright">
+        <span [class]="item['MTM'] > 0 ? 'greenStatus':'redStatus'">{{item['MTM']}}</span>
+      </td>
+      <td mat-footer-cell *matFooterCellDef class="tright">
+        <span style="font-size: 13px;" [class]="totalmtm > 0 ? 'greenStatus':'redStatus'">{{totalmtm.toFixed(2)}}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="LTysx">
+      <th mat-header-cell *matHeaderCellDef class="fWeight800 fsize14 tright" style="width: 4%">&nbsp; </th>
+      <td mat-cell *matCellDef="let item" class="fSize12 tright">&nbsp; </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="holdingColumns;sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: holdingColumns;" class="example-element-row"></tr>
+    <tr mat-footer-row *matFooterRowDef="holdingColumns"></tr>
+  </table> -->
+  <table *ngIf="emptytable">
+    <tr>
+      <th class="fSize12 tleft paddL15">Instrument</th>
+      <th class="fSize12 tright">Qty</th>
+      <th class="fSize12 tright">LTP</th>
+      <th class="fSize12 tright">Avg Price</th>
+      <th class="fSize12 tright">Avg Value</th>
+      <th class="fSize12 tright paddR15">MTM </th>
+    </tr>
+    <tr *ngFor="let item of holdings;" class="bgColor">
+      <td class="fSize12 tleft paddL15">
+        <div class="floatType">
+          <div class="info">
+            {{item.ExchSeg1 == "NSE" ? item.NsetsymTemp : item.Bsetsym}}&nbsp;&nbsp;<span
+              style="font-size: 10px;color:gray">{{item.ExchSeg1 == "NSE" ? item.ExchSeg1 : item.ExchSeg2}}</span>
+          </div>
+          <div class="hide-btn-group actions"
+            style="float: right; margin-top: -18px; margin-left: 14%;">
+            <button mat-raised-button class="addbtn" (click)="goToHoldingAdd(item)">ADD</button>&nbsp;&nbsp;
+            <button mat-raised-button class="exitbtn" (click)="goToHoldingExit(item)">EXIT</button>
+          </div>
+        </div>
+      </td>
+      <td class="fSize12 tright">
+        <span>{{item.SellableQty}}</span> &nbsp;<span *ngIf="item.Btst > 0"><span style="font-size: 10px;">T1 </span>:
+          {{item.Btst}}</span>
+      </td>
+      <td class="fSize12 tright">
+        <span>{{item.ExchSeg1 == "NSE" ? item.LTnse : item.LTbse}}</span>
+      </td>
+      <td class="fSize12 tright">
+        <span>{{item['avgprice']}}</span>
+      </td>
+      <td class="fSize12 tright">
+        <span> {{item['ExchSeg1'] == "NSE" ? item['NSEHOldingValue'] : item['BSEHOldingValue']}}</span>
+      </td>
+      <td class="fSize12 tright paddR15">
+        <span [class]="item['MTM'] > 0 ? 'greenStatus':'redStatus'">{{item['MTM']}}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td class="tright">Total</td>
+      <td class="tright"><span style="font-size: 13px;">{{totalvaluebefore}}.{{totalvalueafter}}</span></td>
+      <td class="tright paddR15"><span style="font-size: 13px;"
+          [class]="totalmtm > 0 ? 'greenStatus':'redStatus'">{{totalmtm.toFixed(2)}}</span></td>
+    </tr>
+  </table>
+  <!-- <div style="height:213px; width:369px;left: 45px;margin-left: 23%;" *ngIf="emptytable">
+    <br>
+    <canvas id="canvas"></canvas>
+  </div> -->
+  <div *ngIf="emptytablemsg" class="textcenter margintop50">
+    <div>No Holdings Available</div>
+  </div>
+</div>
+<div class="co-lg-12 co-md-12 co-sm-12 co-xs-12" style="text-align:center;margin-top: 10%;" *ngIf="showDatafound">
+  <div>
+    <img src="assets/image/noDataInfo.svg" alt="" width="100" height="100">
+    <span style="color: #000000de; font-size: 18px;font-weight: 600;">&nbsp;&nbsp;&nbsp; NO HOLDING FOUND</span>
+  </div>
+  <div style="padding-top: 30px !important;">
+    <span style="color: #000000de; font-size: 14px;">
+      Use CNC order to add scrips to your portfolio.
+      <br>
+      Use regular Buy / Sell OR Quick Buy / Sell to place orders
+    </span>
+  </div>
+</div>
