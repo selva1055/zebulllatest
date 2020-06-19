@@ -1,0 +1,71 @@
+.user-security-container {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  /*Landscape*/
+  @media all and (max-device-height: 400px) {
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  input, button {
+    background-color: transparent;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    color: lightgray;
+    box-sizing: border-box;
+    margin: 10px 0;
+    padding: 10px;
+    transition: all 0.2s ease-in;
+    width: 250px;
+    /*Support iPhone small devices like X*/
+    @media all and (max-width: 400px) {
+      margin: 5px 0;
+    }
+    /*Landscape*/
+    @media all and (max-device-height: 400px) {
+      margin: 5px 0;
+    }
+    &::placeholder {
+      color: darkgray;
+    }
+    &::-moz-placeholder {
+      opacity: 1;
+    }
+    &:hover {
+      color: white;
+      border-color: white;
+      &::placeholder {
+        color: white;
+      }
+    }
+  }
+  .challenge-container {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 250px;
+    /*Support iPhone small devices like X*/
+    @media all and (max-width: 400px), (max-device-height: 400px) {
+      margin: 5px;
+    }
+    .label {
+      color: darkgray;
+      font-size: 10px;
+      text-align: left;
+      line-height: 17px;
+      white-space: inherit;
+      align-self: flex-start;
+      /*Support iPhone small devices like X*/
+      @media all and (max-width: 400px), (max-device-height: 400px) {
+        font-size: 12px;
+      }
+    }
+  }
+  button {
+    border-width: 1px;
+    font-weight: 300;
+    text-transform: uppercase;
+    border-color: lightgray;
+    letter-spacing: 2px;
+  }
+}

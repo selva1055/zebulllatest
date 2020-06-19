@@ -1,0 +1,33 @@
+<form>
+  <div class="input-container">
+    <input
+      autocomplete="username"  
+      type="text"
+      placeholder="Enter User ID"
+      [(ngModel)]="userInfo.userId"
+      name="userId"
+      required
+    />
+    <input
+      type="text"
+      placeholder="Enter pan number"
+      [(ngModel)]="userInfo.pan"
+      name="pan"
+      required 
+    />
+    <input
+      autocomplete="email"
+      type="email"
+      placeholder="Enter email ID"
+      [(ngModel)]="userInfo.email"
+      name="email"
+      required
+    />
+  </div>
+  <button
+    type="button"
+    (click)="handleUnblock()"
+  >
+    Unblock ME
+  </button>
+</form>

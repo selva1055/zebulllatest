@@ -8,7 +8,6 @@ import { ZebuodrGentrComponent } from './zebuodr-gentr/zebuodr-gentr.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ZebuodrGentrService } from 'src/app/services/zebuodr-gentr.service';
 // import { WebSocketService } from 'src/app/services/websocket.service';
-import { ZebuLoginComponent } from './zebu-login/zebu-login.component';
 import { ZebuFauthenComponent } from './zebu-fauthen/zebu-fauthen.component';
 import { OrdersComponent } from './orders/orders.component';
 import { AuthguardGuard } from './guard/authguard.guard';
@@ -114,11 +113,14 @@ import { EncryptionkeyComponent } from './zebullDocs/encryptionkey/encryptionkey
 import { SessionIdComponent } from './zebullDocs/session-id/session-id.component';
 import { PublisherComponent } from './zebullDocs/publisher/publisher.component';
 import { NgxCopyToClipboardModule } from 'ngx-copy-to-clipboard';
+
+/* Feature Module */
+import { ZebuLoginModule } from './zebu-login/zebu-login.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     ZebuodrGentrComponent,
-    ZebuLoginComponent,
     ZebuFauthenComponent,
     OrdersComponent,
     ZebuOrderBookComponent,
@@ -236,6 +238,7 @@ import { NgxCopyToClipboardModule } from 'ngx-copy-to-clipboard';
     MatSidenavModule,
     MatMenuModule,
     MatBadgeModule,
+    ZebuLoginModule
   ],
   entryComponents: [
     CancelExitAllComponent,

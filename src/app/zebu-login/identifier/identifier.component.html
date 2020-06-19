@@ -1,0 +1,31 @@
+<form
+  class="form-container"
+>
+  <input
+    autocomplete="email"
+    class="input-element"
+    type="email"
+    placeholder="E-Mail address"
+    [(ngModel)]="userInfo.userId"
+    name="userId"
+  />
+  <input
+    autocomplete="current-password"
+    class="input-element"
+    type="password"
+    placeholder="Password"
+    [(ngModel)]="userInfo.userId"
+    name="userId"
+    required
+  />
+  <mat-checkbox
+    [(ngModel)]="userInfo.isRemembered"
+    name="isRemembered"
+  >Remember Me</mat-checkbox>
+  <button
+    type="button"
+    (click)="onIdentifierSubmit()"
+  >
+    Login
+  </button>
+</form>

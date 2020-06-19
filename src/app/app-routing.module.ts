@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ZebuodrGentrComponent } from './zebuodr-gentr/zebuodr-gentr.component';
-import { ZebuLoginComponent } from './zebu-login/zebu-login.component';
 import { ZebuFauthenComponent } from './zebu-fauthen/zebu-fauthen.component';
 import { ZebuOrderBookComponent } from './zebu-order-book/zebu-order-book.component';
 import { OrdersComponent } from './orders/orders.component';
@@ -60,7 +59,12 @@ import { CustomersupportComponent } from './customersupport/customersupport.comp
 import { PublisherComponent } from './zebullDocs/publisher/publisher.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: ZebuLoginComponent },
+  {
+    path: 'login',
+    loadChildren: () => import(
+      './zebu-login/zebu-login.module'
+    ).then(m => m.ZebuLoginModule)
+  },
   { path: 'iqchart', component: IqchartComponent },
   { path: 'fauthen', component: ZebuFauthenComponent },
   { path: 'ordergen', component: ZebuodrGentrComponent },
@@ -143,7 +147,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [
+    RouterModule.forRoot(
+      routes,
+      {
+        // enableTracing: true,
+        useHash: true
+      }
+    )
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
