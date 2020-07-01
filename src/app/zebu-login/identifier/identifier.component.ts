@@ -13,34 +13,39 @@ export class IdentifierComponent implements OnInit {
 
   private userInfo: any = {
     userId: "ZA01001",
-    password: "SleepingOwl@004",
-    isRemembered: false,
   };
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private zebuLoginService: ZebuLoginService
-  ) { 
-    console.warn( "ActivatedRoute: ", activatedRoute );
+  ) {
+    console.warn("ActivatedRoute: ", activatedRoute);
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onIdentifierSubmit() {
-    console.warn( "Muje Hindi nahi maalum!" );
+    console.warn("Muje Hindi nahi maalum!");
     this.zebuLoginService.authenticateUser(this.userInfo);
     /* Subscribing to zebuLoginService.isAuthenticatedUser property */
     this.zebuLoginService.isAuthenticatedUser.subscribe(
       (value: boolean) => {
         console.log("isAuthenticatedUser coming: ", value)
-        if( value ) {
+        if (value) {
           this.router.navigate(
             ['/login/challenge'],
             { relativeTo: this.activatedRoute }
           );
         }
       }
+    );
+  }
+
+  navigate(to: string) {
+    this.router.navigate(
+      [to],
+      { relativeTo: this.activatedRoute }
     );
   }
 }

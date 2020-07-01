@@ -1,27 +1,31 @@
 <section class="login-section">
-  <mat-progress-bar
-    class="login-spinner"
-    mode="indeterminate"
-    color="#1f3565"
-    *ngIf="isLoading"
-  ></mat-progress-bar>
-  <section class="header">
-    <img src="../assets/images/zebull_logo.jpeg" alt="image">
+  <mat-progress-bar class="login-spinner" mode="indeterminate" color="#1f3565" *ngIf="isLoading"></mat-progress-bar>
+  <section class="info-section">
+    <section class="title-section">
+      <div class="title">{{ data.title }}</div>
+      <div class="subtitle">{{ data.subtitle }}</div>
+      <div class="version">{{ data.version }}</div>
+    </section>
     <section class="company-info">
       <div class="company-name">{{data.company.name}}</div>
-      <div class="address-container">
-        <div class="address-line" *ngFor="let line of data.company.address">
+      <div class="info-container">
+        <div class="info-line" *ngFor="let line of data.company.info">
           {{ line }}
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="option-container">
+        <div class="item" *ngFor="let option of data.options">
+          {{ option }}
         </div>
       </div>
     </section>
   </section>
   <section class="input-section">
-    <section class="title-section">
-      <div class="title">{{ data.title }}</div>
-      <div class="subtitle">{{ data.subtitle }}</div>
-    </section>
-    <section class="input-router-section">
+    <img src="../assets/images/zebull_logo.jpeg" alt="image">
+    <section class="input-router-section"
+      [@routeAnimations]="lo && lo.activatedRouteData && lo.activatedRouteData['animation']">
       <!--
         Nested routes to handle 
           - login, 
@@ -29,28 +33,7 @@
           - unblock and 
           - forgot password 
       -->
-      <router-outlet></router-outlet>
+      <router-outlet #lo="outlet"></router-outlet>
     </section>
-    <div class="action-link-container">
-      <div
-        class="action-link"
-        *ngFor="let loginOption of loginOptions"
-        (click)="handleActionLink(loginOption)"
-      >
-        {{ loginOption.label }}
-      </div>
-    </div>
-  </section>
-  <section class="footer">
-    <div class="feature-container">
-      <div class="item" *ngFor="let feature of data.features">
-        {{ feature }}
-      </div>
-    </div>
-    <div class="option-container">
-      <div class="item" *ngFor="let option of data.options">
-        {{ option }}
-      </div>
-    </div>
   </section>
 </section>

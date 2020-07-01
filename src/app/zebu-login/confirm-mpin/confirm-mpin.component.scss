@@ -10,10 +10,16 @@
   align-items: center;
   justify-content: space-around;
   .header {
+    color: #1f3565;
+    text-align: center;
     .title {
-      color: #1f3565;
       font-size: 16px;
       font-weight: 600;
+    }
+    .sub-title {
+      font-size: 12px;
+      font-weight: 300;
+      margin: 2px 0;
     }
   }
   .action-container {
@@ -55,7 +61,7 @@
   }
 }
 
-.unblock-container {
+.confirm-mpin-container {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -73,10 +79,9 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      .input-label, .edit-label {
+      .input-label {
         color: #1f3565;
         font-weight: 600;
-        text-transform: uppercase;
       }
     }
     input {
@@ -108,9 +113,6 @@
         &::placeholder {
           color: #1f3565;
         }
-      }
-      &:disabled {
-        background: #ccc;
       }
     }
   }

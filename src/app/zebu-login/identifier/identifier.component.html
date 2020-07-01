@@ -1,31 +1,23 @@
-<form
-  class="form-container"
->
-  <input
-    autocomplete="email"
-    class="input-element"
-    type="email"
-    placeholder="E-Mail address"
-    [(ngModel)]="userInfo.userId"
-    name="userId"
-  />
-  <input
-    autocomplete="current-password"
-    class="input-element"
-    type="password"
-    placeholder="Password"
-    [(ngModel)]="userInfo.userId"
-    name="userId"
-    required
-  />
-  <mat-checkbox
-    [(ngModel)]="userInfo.isRemembered"
-    name="isRemembered"
-  >Remember Me</mat-checkbox>
-  <button
-    type="button"
-    (click)="onIdentifierSubmit()"
-  >
-    Login
-  </button>
-</form>
+<div class="login-container">
+  <div class="header">
+    <div class="title">Login to Zebull</div>
+  </div>
+  <div class="identifier-container">
+    <div class="input-container">
+      <label for="userId" class="label">USER ID</label>
+      <input autocomplete="username" class="input-element" type="text" placeholder="Enter User ID"
+        [(ngModel)]="userInfo.userId" name="userId" />
+    </div>
+  </div>
+  <div class="action-container">
+    <div class="action-link" (click)="navigate('/login/forgot')">Forgot password?</div>
+    <button class="action-button" type="button" (click)="onIdentifierSubmit()">
+      Next
+    </button>
+  </div>
+  <div class="footer">
+    <div class="action-link" (click)="navigate('/login/unblock')">
+      Unblock account
+    </div>
+  </div>
+</div>

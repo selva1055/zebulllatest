@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 /* App Services */
 import { ZebuodrGentrService } from '../../services/zebuodr-gentr.service';
@@ -22,6 +23,8 @@ export class UnblockUserComponent implements OnInit {
   constructor(
     public odgenserv: ZebuodrGentrService,
     private zebuLoginService: ZebuLoginService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -47,6 +50,13 @@ export class UnblockUserComponent implements OnInit {
     // });
   }
 
+  navigate(to: string) {
+    this.router.navigate(
+      [to],
+      { relativeTo: this.activatedRoute }
+    );
+  }
+
   /* Validate unblock fields */
   validateFields() {
     /* TODO: Validate fields as per requriement */
@@ -62,7 +72,7 @@ export class UnblockUserComponent implements OnInit {
       "Handle user unblock: ",
       this.userInfo,
     );
-    if(this.validateFields()) {
+    if (this.validateFields()) {
       /* Calling service to unblock an user */
       this.zebuLoginService.unblockUser(
         this.userInfo

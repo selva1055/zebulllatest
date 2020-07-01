@@ -1,19 +1,21 @@
 :host {
+  background-color: lightgray;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .login-section {
-  background-color: #1f3565;
-  color: white;
+  border: 1px solid lightgray;
+  box-shadow: 0px 0px 15px 5px rgba(204, 202, 204, 0.5);
+  border-radius: 10px;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
   justify-content: space-between;
   position: relative;
-  padding: 10px;
   overflow-y: auto;
   .login-spinner {
     position: absolute;
@@ -26,11 +28,15 @@
   }
 }
 
-.header {
+.info-section {
+  background-color: #1f3565;
+  color: white;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: space-between;
+  padding: 10px;
+  max-width: 240px;
   @media all and (max-width: 400px) {
     flex-direction: column-reverse;
     justify-content: center;
@@ -43,35 +49,37 @@
   }
 }
 
-
 .company-info {
   display: flex;
   flex-flow: column wrap;
   font-size: 10px;
-  color: darkgray;
   /*Support iPhone small devices like X*/
   @media all and (max-width: 400px), (max-device-height: 400px) {
     align-self: flex-end;
     margin: 10px 0;
   }
-  .name {
-    text-align: right;
+  .company-name {
+    font-weight: 600;
+    text-align: center;
   }
-  .address-container {
+  .info-container {
     display: flex;
     flex-flow: column wrap;
-    .address-line {
-      text-align: right;
+    .info-line {
+      text-align: center;
     }
   }
 }
 
 .title-section {
   display: flex;
+  flex: 1;
   flex-flow: column nowrap;
   align-items: center;
-  color: lightgray;
+  justify-content: center;
+  color: white;
   margin: 10px 0;
+  padding: 10px;
   @media all and (max-width: 400px) {
     margin: 5px;
   }
@@ -80,12 +88,13 @@
   }
   .title {
     font-size: 24px;
+    font-weight: 700;
     text-transform: uppercase;
     margin: 5px 0;
   }
-  .subtitle {
-    font-size: 15px;
-    text-transform: capitalize;
+  .subtitle, .version {
+    font-size: 12px;
+    margin: 5px 0;
   }
 }
 
@@ -95,14 +104,13 @@
   align-items: center;
 }
 
-.feature-container, .option-container {
+.option-container {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   margin: 5px 0;
   .item {
     border-right: 1px solid darkgray;
-    color: darkgray;
     font-size: 10px;
     padding: 2px 5px;
     text-transform: uppercase;
@@ -120,53 +128,26 @@
 }
 
 .input-section {
+  background-color: white;
   display: flex;
+  flex: 1;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
+  padding: 20px 10px;
   .input-router-section {
     display: flex;
+    flex: 1;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
-    margin: 20px 10px;
-    min-height: 300px;
-    width: 600px;
+    min-height: 380px;
+    width: 300px;
     overflow-y: auto;
     /*Support iPhone small devices like X*/
     @media all and (max-device-width: 400px), (max-device-height: 400px) {
       margin: 10px;
       min-height: 0;
-    }
-  }
-}
-
-.action-link-container {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-  min-height: 120px;
-  @media all and (max-width: 400px), (max-device-height: 400px) {
-    min-height: 0;
-  }
-  /*Landscape*/
-  @media all and (max-device-height: 400px) {
-    flex-flow: row nowrap;
-  }
-  .action-link {
-    color: darkgray;
-    margin: 10px;
-    text-decoration: underline;
-    text-decoration-color: darkgray;
-    text-transform: uppercase;
-    transition: all 0.2s ease-in;
-    /*Support iPhone small devices like X*/
-    @media all and (max-width: 400px), (max-device-height: 400px) {
-      margin: 5px ;
-    }
-    &:hover {
-      color: white;
-      border-color: white;
     }
   }
 }

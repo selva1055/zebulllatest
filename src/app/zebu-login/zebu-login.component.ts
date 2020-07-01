@@ -4,77 +4,49 @@ import {
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+/* Feature animation */
+import { slideInAnimation } from "./zebu-login-route-animation";
 /* Feature Service */
 import { ZebuLoginService } from './services/zebu-login.service';
 
 @Component({
   selector: 'app-zebu-login',
   templateUrl: './zebu-login.component.html',
-  styleUrls: ['./zebu-login.component.scss']
+  styleUrls: [
+    './zebu-login.component.scss',// Style for main component
+  ],
+  animations: [slideInAnimation]
 })
 export class ZebuLoginComponent implements OnInit {
   data = {
-    title: "zebull",
-    subtitle: "zebu's web trading platform",
+    title: "zebull WEB",
+    subtitle: "Zebu's web trading platform",
+    version: "version 1.0.9",
     company: {
-      name: "Zebu share and wealth managements pvt ltd",
+      name: "Zebu share and wealth managements private limited",
+      info: [
+        "SEBI Registration No: INZ000174634",
+        "CDSL: 12080400 | AMFI ARN: 113118",
+        "Research Analyst: INH200006044"
+      ],
       address: [
         "127, 1st floor, PSK Booshanam Mahal",
         "Velachery, Chennai - 600 042"
       ]
     },
-    loginOptions: [
-      {
-        label: "Back to login",
-        path: "/login/identifier"
-      },
-      {
-        label: "Unblock user",
-        path: "/login/unblock"
-      },
-      {
-        label: "Forgot password",
-        path: "/login/forgot"
-      }
-    ],
-    features: [
-      "Order Generator",
-      "CoEarn",
-      "API Documentation"
-    ],
     options: [
-      "NSE", "BSE", "MCX", "SEBI", "Risk Disclosure", "Security",
-      "Terms and Conditions"
+      "NSE", "BSE", "MCX", "SEBI"
     ],
   };
-  // private isLoading: Boolean = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private zebuLoginService: ZebuLoginService,
-  ) {}
+  ) { }
 
-  ngOnInit() {}
-
-  get loginOptions() {
-    return this.data.loginOptions.filter(
-      loginOption => loginOption.path != this.router.url
-    );    
-  }
+  ngOnInit() { }
 
   get isLoading() {
     return this.zebuLoginService.isLoading;
   }
-
-  handleActionLink( loginOption: LoginOptionInterface ) {
-    this.router.navigate(
-      [loginOption.path],
-      { relativeTo: this.activatedRoute }
-    );
-  }
-}
-
-interface LoginOptionInterface {
-  path: string,
-  label: string;
 }
