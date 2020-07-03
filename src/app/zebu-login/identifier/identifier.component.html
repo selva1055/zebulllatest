@@ -4,9 +4,12 @@
   </div>
   <div class="identifier-container">
     <div class="input-container">
-      <label for="userId" class="label">USER ID</label>
-      <input autocomplete="username" class="input-element" type="text" placeholder="Enter User ID"
-        [(ngModel)]="userInfo.userId" name="userId" />
+      <label for="UserID" class="label">USER ID</label>
+      <input autocomplete="username" class="input-element" type="text" placeholder="Enter User ID" [(ngModel)]="UserID"
+        name="UserID" />
+    </div>
+    <div class="error-msg" *ngIf="zebuLoginService.errorData.IsError">
+      {{zebuLoginService.errorData.ErrorMsg}}
     </div>
   </div>
   <div class="action-container">

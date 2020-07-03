@@ -24,16 +24,14 @@
   </section>
   <section class="input-section">
     <img src="../assets/images/zebull_logo.jpeg" alt="image">
-    <section class="input-router-section"
-      [@routeAnimations]="lo && lo.activatedRouteData && lo.activatedRouteData['animation']">
-      <!--
-        Nested routes to handle 
-          - login, 
-          - security questions, 
-          - unblock and 
-          - forgot password 
+    <section class="input-router-section" [@routeAnimations]="getState(loginRef)">
+      Nested routes to handle
+      - login,
+      - security questions,
+      - unblock and
+      - forgot password
       -->
-      <router-outlet #lo="outlet"></router-outlet>
+      <router-outlet #loginRef="outlet"></router-outlet>
     </section>
   </section>
 </section>

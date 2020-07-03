@@ -1,50 +1,74 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+/* Feature Model */
+import { ROUTEs } from "../models/Route";
 
 /* Feature Service */
-import { ZebuLoginService } from '../services/zebu-login.service';
+import {
+  ZebuLoginService,
+  COLLECT_SECURITY_TYPEs
+} from '../services/zebu-login.service';
 
 @Component({
   selector: 'zebu-login-identifier',
   templateUrl: './identifier.component.html',
   styleUrls: ['./identifier.component.scss']
 })
-export class IdentifierComponent implements OnInit {
+export class IdentifierComponent implements OnInit, OnDestroy {
 
-  private userInfo: any = {
-    userId: "ZA01001",
-  };
+  private UserID: string = "ZA01001"; //ZA01001 || ZEBULL1
+  private collectSecuritySubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private zebuLoginService: ZebuLoginService
-  ) {
-    console.warn("ActivatedRoute: ", activatedRoute);
-  }
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    /* Disabling loader */
+    this.zebuLoginService.disableProgressBar();
 
-  onIdentifierSubmit() {
-    console.warn("Muje Hindi nahi maalum!");
-    this.zebuLoginService.authenticateUser(this.userInfo);
-    /* Subscribing to zebuLoginService.isAuthenticatedUser property */
-    this.zebuLoginService.isAuthenticatedUser.subscribe(
-      (value: boolean) => {
-        console.log("isAuthenticatedUser coming: ", value)
-        if (value) {
+    /* Subscribing to zebuLoginService.collectSecurityState property */
+    this.collectSecuritySubscription = this.zebuLoginService
+      .collectSecurityState
+      .subscribe((value: string) => {
+        if (
+          value === COLLECT_SECURITY_TYPEs.PASSWORD
+          || value === COLLECT_SECURITY_TYPEs.MPIN
+        ) {
+          const path = value === COLLECT_SECURITY_TYPEs.PASSWORD
+            ? ROUTEs.PASSWORD.path
+            : ROUTEs.M_PIN.path;
           this.router.navigate(
-            ['/login/challenge'],
+            [`/${path}`, { userid: this.UserID }],
             { relativeTo: this.activatedRoute }
           );
         }
+      });
+    /* Getting UserID from url params */
+    this.activatedRoute.params.subscribe(params => {
+      /* Validating UserID in query params to update in component property*/
+      const paramUserID = params['userid'];
+      if (paramUserID && paramUserID.length > 0) {
+        this.UserID = paramUserID;
       }
-    );
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.collectSecuritySubscription.unsubscribe();
+  }
+
+  onIdentifierSubmit() {
+    this.zebuLoginService.submitIdentifier(this.UserID);
   }
 
   navigate(to: string) {
     this.router.navigate(
-      [to],
+      [`${to}?userid=${this.UserID}`],
       { relativeTo: this.activatedRoute }
     );
   }

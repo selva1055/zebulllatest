@@ -6,7 +6,7 @@
     <div class="input-container">
       <div class="input-label-container">
         <label for="userId" class="input-label">USER ID</label>
-        <div class="edit-label">Edit</div>
+        <div class="edit-label" (click)="onEditUserID()">Edit</div>
       </div>
       <input autocomplete="username" class="input-element" type="text" placeholder="Enter User ID"
         [(ngModel)]="userInfo.userId" name="userId" disabled />
@@ -17,7 +17,9 @@
       </div>
       <input class="input-element" type="password" placeholder="Enter M-PIN" [(ngModel)]="userInfo.mpin" name="mpin" />
     </div>
-    <div class="error-msg">{{errorMsg}}</div>
+    <div class="error-msg" *ngIf="zebuLoginService.errorData.IsError">
+      {{zebuLoginService.errorData.ErrorMsg}}
+    </div>
   </div>
   <div class="action-container">
     <div class="action-link" (click)="navigate('/login/mpin/forgot')">Forgot mpin?</div>

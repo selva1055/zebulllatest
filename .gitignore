@@ -1,3 +1,6 @@
 # NPM Modules
 node_modules
 package-lock.json
+
+# Local files
+*.local.*

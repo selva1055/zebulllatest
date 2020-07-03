@@ -1,22 +1,22 @@
-<form
-  class="user-security-container"
-  (ngSubmit)="handleChallengeSubmit()"
->
-  <div
-    class="challenge-container" 
-    *ngFor="let challengeQuestion of challengeQuestions"
-  >
-    <div class="label">{{ challengeQuestion }}</div>
-    <input
-      autocomplete="off"
-      type="password"
-      placeholder="Security answer"
-      required
-    />
+<div class="login-container">
+  <div class="header">
+    <div class="title">SECURITY QUESTIONS</div>
   </div>
-  <button
-    type="submit"
-  >
-    Validate
-  </button>
-</form>
+  <div class="challenge-container">
+    <div class="input-container" *ngFor="let challengeQuestion of challengeQuestions; index as i">
+      <div class="input-label-container">
+        <label for="{{'answer_' + i}}" class="input-label">
+          {{ challengeQuestion }}
+        </label>
+      </div>
+      <input autocomplete="off" class="input-element" type="password" placeholder="Security answer"
+        [(ngModel)]="answers[i]" name="{{'answer_' + i}}" />
+    </div>
+  </div>
+  <div class="action-container">
+    <div class="action-link" (click)="navigate('/login/')">Back to login?</div>
+    <button class="action-button" type="button" (click)="handleChallengeSubmission()">
+      SIGN IN
+    </button>
+  </div>
+</div>

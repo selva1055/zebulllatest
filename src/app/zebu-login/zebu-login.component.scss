@@ -60,12 +60,14 @@
   }
   .company-name {
     font-weight: 600;
+    margin: 1px 0;
     text-align: center;
   }
   .info-container {
     display: flex;
     flex-flow: column wrap;
     .info-line {
+      margin: 5px 0;
       text-align: center;
     }
   }
@@ -90,7 +92,7 @@
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
-    margin: 5px 0;
+    margin: 1px 0;
   }
   .subtitle, .version {
     font-size: 12px;
@@ -141,7 +143,8 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
-    min-height: 380px;
+    min-height: 400px;
+    height: 100%;
     width: 300px;
     overflow-y: auto;
     /*Support iPhone small devices like X*/

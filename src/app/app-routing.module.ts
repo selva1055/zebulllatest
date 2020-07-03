@@ -70,11 +70,12 @@ const routes: Routes = [
   { path: 'ordergen', component: ZebuodrGentrComponent },
   { path: 'orders', component: OrdersComponent, canActivate: [AuthguardGuard] },
   { path: 'zebuorderbk', component: ZebuOrderBookComponent, canActivate: [AuthguardGuard] },
- // { path: 'zebuMWLst', component: MktwatchComponent, canActivate: [AuthguardGuard] },
+  // { path: 'zebuMWLst', component: MktwatchComponent, canActivate: [AuthguardGuard] },
   { path: 'payoff', component: PayoffComponent, canActivate: [AuthguardGuard] },
   { path: 'unblock', component: UnblockUserComponent },
   // { path: 'passReset', component: PasswordResetComponent },
-  { path: 'homes', component: MobileviewComponent,
+  {
+    path: 'homes', component: MobileviewComponent,
     children: [
       { path: '', redirectTo: '', pathMatch: 'full' },
       { path: 'marketstatus', component: MarketstatusComponent },
@@ -86,7 +87,8 @@ const routes: Routes = [
     ]
   },
   { path: 'optionchain', component: OptionchainComponent },
-  { path: 'home', component: HomeComponent,
+  {
+    path: 'home', component: HomeComponent,
     children: [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       { path: 'iqchart', component: IqchartComponent },
@@ -141,7 +143,7 @@ const routes: Routes = [
       { path: 'session-id', component: SessionIdComponent },
       { path: 'publisher', component: PublisherComponent },
 
-      
+
     ]
   },
 ];

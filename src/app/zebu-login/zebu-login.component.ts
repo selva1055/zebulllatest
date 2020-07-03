@@ -1,13 +1,15 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
 /* Feature animation */
-import { slideInAnimation } from "./zebu-login-route-animation";
+import { slideInAnimation } from "./route/zebu-login-route-animation";
 /* Feature Service */
 import { ZebuLoginService } from './services/zebu-login.service';
+import { Subscription } from 'rxjs';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-zebu-login',
@@ -17,7 +19,7 @@ import { ZebuLoginService } from './services/zebu-login.service';
   ],
   animations: [slideInAnimation]
 })
-export class ZebuLoginComponent implements OnInit {
+export class ZebuLoginComponent implements OnInit, OnDestroy {
   data = {
     title: "zebull WEB",
     subtitle: "Zebu's web trading platform",
@@ -38,15 +40,26 @@ export class ZebuLoginComponent implements OnInit {
       "NSE", "BSE", "MCX", "SEBI"
     ],
   };
+  private isLoadingSubscription: Subscription;
+  private isLoading: Boolean;
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
     private zebuLoginService: ZebuLoginService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    /* Subscribing to zebuLoginService.isAuthenticatedUser property */
+    this.isLoadingSubscription = this.zebuLoginService.isLoading
+      .subscribe((value: boolean) => {
+        console.warn("isLoading:", value);
+        this.isLoading = value;
+      });
+  }
 
-  get isLoading() {
-    return this.zebuLoginService.isLoading;
+  ngOnDestroy(): void {
+    this.isLoadingSubscription.unsubscribe();
+  }
+
+  getState(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }

@@ -89,6 +89,7 @@ export class ZebuodrGentrService {
   getexitcoorder: string = "placeOrder/exitCoverOrder";
   getexitboorder: string = "placeOrder/exitBracketOrder";
   getIndexList: string = "ScripDetails/getIndexDetails";
+  customerLoginStatusEndpoint: string = "customer/getUserLoggedInStatus";
   customerKey: string = "customer/getEncryptionKey";
   encptLogin: string = "customer/webLogin";
   localLogin: string = "customer/localLogin";
@@ -96,7 +97,7 @@ export class ZebuodrGentrService {
   getIndexDetail: string = "settings/getIndexDetails";
   squreAllPostions: string = "positionAndHoldings/sqrOofPosition";
   generateapikey: string = "api/generateApiKey";
-  getApiKey:string = "api/getApiKey";
+  getApiKey: string = "api/getApiKey";
   regenerateApiKey = "api/regenerateApiKey";
   holdingCloseValue: string = "positionAndHoldings/holdingDetails";
   positionAllSqrOff: string = "positionAndHoldings/positionSqrOff";
@@ -150,24 +151,24 @@ export class ZebuodrGentrService {
   public odrstatusFeed: Subject<any>;
   newarray2: any;
   subscription: any;
-  high : number = 0;
-  low : number = 0;
-  close : number = 0;
-  open : number = 0;
-  _tickopen : any;
-	_tickclose : any;
-	_tickhigh : any;
-  _ticklow : any;
-  _tickvolume : any;
+  high: number = 0;
+  low: number = 0;
+  close: number = 0;
+  open: number = 0;
+  _tickopen: any;
+  _tickclose: any;
+  _tickhigh: any;
+  _ticklow: any;
+  _tickvolume: any;
 
-  _tickopen_sf : any;
-	_tickclose_sf : any;
-	_tickhigh_sf : any;
-	_ticklow_sf : any;
-  _tickvolume_sf : any;
-  
+  _tickopen_sf: any;
+  _tickclose_sf: any;
+  _tickhigh_sf: any;
+  _ticklow_sf: any;
+  _tickvolume_sf: any;
+
   _prev_resolution: any;
-  _trade_time : any;
+  _trade_time: any;
   _last_time: any;
   public optionChainFeed: Subject<any>;
   @Output() onVoted = new EventEmitter<any>();
@@ -185,38 +186,38 @@ export class ZebuodrGentrService {
   }
 
   webSocketConnection() {
-    this.mWatch = <Subject<any>>this.wsService
-      .connect(this.WS_URL)
-      .pipe(map((response: any, i): any => {
-        var data = pako.inflate(atob(response.data));
-        this.newarray = []
-        for (var i = 0; i < data.length; i++) {
-          this.newarray.push(String.fromCharCode(data[i]));
-        }
-        data = this.newarray.join('');
-        if (data) {
-          this.emitNavChangeEvent(data);
-        } else {
-          let jobj = {
-            'stat': 'not_Ok',
-            'time': new Date()
-          };
-          this.emitNavChangeEvent(jobj);
-        }
-        return data;
-      }));
+    // this.mWatch = <Subject<any>>this.wsService
+    //   .connect(this.WS_URL)
+    //   .pipe(map((response: any, i): any => {
+    //     var data = pako.inflate(atob(response.data));
+    //     this.newarray = []
+    //     for (var i = 0; i < data.length; i++) {
+    //       this.newarray.push(String.fromCharCode(data[i]));
+    //     }
+    //     data = this.newarray.join('');
+    //     if (data) {
+    //       this.emitNavChangeEvent(data);
+    //     } else {
+    //       let jobj = {
+    //         'stat': 'not_Ok',
+    //         'time': new Date()
+    //       };
+    //       this.emitNavChangeEvent(jobj);
+    //     }
+    //     return data;
+    //   }));
 
-    this.odrstatusFeed = <Subject<any>>this.statusfeed
-      .connect(this.WS_URL)
-      .pipe(map((response: any, i): any => {
-        var statusdata = pako.inflate(atob(response.data));
-        this.newarray2 = []
-        for (var i = 0; i < statusdata.length; i++) {
-          this.newarray2.push(String.fromCharCode(statusdata[i]));
-        }
-        statusdata = this.newarray2.join('');
-        return statusdata;
-      }));
+    // this.odrstatusFeed = <Subject<any>>this.statusfeed
+    //   .connect(this.WS_URL)
+    //   .pipe(map((response: any, i): any => {
+    //     var statusdata = pako.inflate(atob(response.data));
+    //     this.newarray2 = []
+    //     for (var i = 0; i < statusdata.length; i++) {
+    //       this.newarray2.push(String.fromCharCode(statusdata[i]));
+    //     }
+    //     statusdata = this.newarray2.join('');
+    //     return statusdata;
+    //   }));
   }
 
 
@@ -672,6 +673,16 @@ export class ZebuodrGentrService {
     })
   }
 
+  getUserLoggedInStatus(jsonObj: any): Observable<any> {
+    return this.http.post(
+      this.baseURL + this.customerLoginStatusEndpoint,
+      jsonObj, // JSON body
+      {
+        headers: this.getAuthHeaders()
+      }
+    );
+  }
+
   getEncryptKey(jsonObj): Observable<any> {
     return this.http.post(this.baseURL + this.customerKey, jsonObj, {
       headers: this.getAuthHeaders()
@@ -699,160 +710,160 @@ export class ZebuodrGentrService {
   }
 
   getNavChangeEmitter() {
-      return this.navchange;
+    return this.navchange;
   }
 
   getNavChangeEmitterFromChartIQ() {
     return this.navchange;
   }
 
-  getFeedLiveChartData(){
-    this.getNavChangeEmitterFromChartIQ().subscribe((res)=>{
+  getFeedLiveChartData() {
+    this.getNavChangeEmitterFromChartIQ().subscribe((res) => {
       var tickdata = JSON.parse(res);
       var chartIQSymbol = JSON.parse(localStorage.getItem("_feed_symbol_store"));
       var mwticker = chartIQSymbol['symbol'].split("|")[1];
       var indexticker = chartIQSymbol['symbolid'];
       var resolution = chartIQSymbol['oi'];
-      for(let tik in tickdata){
+      for (let tik in tickdata) {
         if (tickdata[tik]['name'] == 'sf') {
-        	if (tickdata[tik]['ltt'] != undefined && tickdata[tik]['ltt'] != 'NA' &&
-        		tickdata[tik]['tk'] != undefined && tickdata[tik]['tk'] != 'NA' && tickdata[tik]['tk'] == mwticker) {
-              const _isPrevious_sf = tickdata[tik]['op'] != undefined;
-              if(_isPrevious_sf){
-                this._tickopen_sf = Number(tickdata[tik]['op']);
-                this._tickclose_sf = Number(tickdata[tik]['c']);
-                this._tickhigh_sf = Number(tickdata[tik]['h']);
-                this._ticklow_sf = Number(tickdata[tik]['lo']);
-                this._tickvolume_sf = Number(tickdata[tik]['v']);
-              }
-              let tempDate = tickdata[tik]['ltt'].split(" ");
-              const [day, month, year] = tempDate[0].split("/")
-              var date = new Date(month + "/" + day + "/" + year + " " + tempDate[1]);
-              var _current_ms : any = date.getTime() ;
-              
-              // If change call one time resolutions
-              if(resolution != this._prev_resolution || this._prev_resolution == undefined){
-                var _last_bar_data = JSON.parse(localStorage.getItem("_last_trade_time"));  
-                this._last_time = new Date(_last_bar_data['DT']).getTime() + (resolution * 60000);
-                this._prev_resolution = resolution;
-              }
+          if (tickdata[tik]['ltt'] != undefined && tickdata[tik]['ltt'] != 'NA' &&
+            tickdata[tik]['tk'] != undefined && tickdata[tik]['tk'] != 'NA' && tickdata[tik]['tk'] == mwticker) {
+            const _isPrevious_sf = tickdata[tik]['op'] != undefined;
+            if (_isPrevious_sf) {
+              this._tickopen_sf = Number(tickdata[tik]['op']);
+              this._tickclose_sf = Number(tickdata[tik]['c']);
+              this._tickhigh_sf = Number(tickdata[tik]['h']);
+              this._ticklow_sf = Number(tickdata[tik]['lo']);
+              this._tickvolume_sf = Number(tickdata[tik]['v']);
+            }
+            let tempDate = tickdata[tik]['ltt'].split(" ");
+            const [day, month, year] = tempDate[0].split("/")
+            var date = new Date(month + "/" + day + "/" + year + " " + tempDate[1]);
+            var _current_ms: any = date.getTime();
 
-              if(this._last_time <= _current_ms){
-                this._trade_time = this._last_time;
-                this._last_time = _current_ms + (resolution * 60000);
-              }
+            // If change call one time resolutions
+            if (resolution != this._prev_resolution || this._prev_resolution == undefined) {
+              var _last_bar_data = JSON.parse(localStorage.getItem("_last_trade_time"));
+              this._last_time = new Date(_last_bar_data['DT']).getTime() + (resolution * 60000);
+              this._prev_resolution = resolution;
+            }
 
-              var bardata : any;
-              if(resolution == '1D'){
-                if(_current_ms != undefined){
-                  bardata = {
-                    DT : _current_ms,
-                    Open : this._tickopen_sf,
-                    High : this._tickhigh_sf,
-                    Low : this._ticklow_sf,
-                    Close : Number(tickdata[tik]['ltp']),
-                    Volume : this._tickvolume_sf
-                  } 
-                }
-              }else{
-                if(this._trade_time != undefined){
-                  bardata = {
-                    DT : this.formatDate(this._trade_time),
-                    Open : Number(tickdata[tik]['ltp']),
-                    High : Number(tickdata[tik]['ltp']),
-                    Low : Number(tickdata[tik]['ltp']),
-                    Close : Number(tickdata[tik]['ltp']),
-                    Volume : Number(tickdata[tik]['ltp'])
-                  } 
+            if (this._last_time <= _current_ms) {
+              this._trade_time = this._last_time;
+              this._last_time = _current_ms + (resolution * 60000);
+            }
+
+            var bardata: any;
+            if (resolution == '1D') {
+              if (_current_ms != undefined) {
+                bardata = {
+                  DT: _current_ms,
+                  Open: this._tickopen_sf,
+                  High: this._tickhigh_sf,
+                  Low: this._ticklow_sf,
+                  Close: Number(tickdata[tik]['ltp']),
+                  Volume: this._tickvolume_sf
                 }
               }
-            if(bardata != undefined || bardata != null){
-              localStorage.setItem("_feed_bar_data",JSON.stringify(bardata));
+            } else {
+              if (this._trade_time != undefined) {
+                bardata = {
+                  DT: this.formatDate(this._trade_time),
+                  Open: Number(tickdata[tik]['ltp']),
+                  High: Number(tickdata[tik]['ltp']),
+                  Low: Number(tickdata[tik]['ltp']),
+                  Close: Number(tickdata[tik]['ltp']),
+                  Volume: Number(tickdata[tik]['ltp'])
+                }
+              }
             }
-        }
-      }else if(tickdata[tik]['name'] == 'if'){
-        if (tickdata[tik]['tvalue'] != undefined && tickdata[tik]['tvalue'] != 'NA' && tickdata[tik]['tk'] != undefined && tickdata[tik]['tk'] != 'NA' && tickdata[tik]['tk'].toUpperCase() == indexticker) {
-          const _isPrevious = tickdata[tik]['iov'] != undefined;
-          if(_isPrevious){
-            this._tickopen = tickdata[tik]['iov'];
-            this._tickclose = tickdata[tik]['ic'];
-            this._tickhigh = tickdata[tik]['ihv'];
-            this._ticklow = tickdata[tik]['ilv'];
-            this._tickvolume = tickdata[tik]['iv'];
+            if (bardata != undefined || bardata != null) {
+              localStorage.setItem("_feed_bar_data", JSON.stringify(bardata));
+            }
           }
+        } else if (tickdata[tik]['name'] == 'if') {
+          if (tickdata[tik]['tvalue'] != undefined && tickdata[tik]['tvalue'] != 'NA' && tickdata[tik]['tk'] != undefined && tickdata[tik]['tk'] != 'NA' && tickdata[tik]['tk'].toUpperCase() == indexticker) {
+            const _isPrevious = tickdata[tik]['iov'] != undefined;
+            if (_isPrevious) {
+              this._tickopen = tickdata[tik]['iov'];
+              this._tickclose = tickdata[tik]['ic'];
+              this._tickhigh = tickdata[tik]['ihv'];
+              this._ticklow = tickdata[tik]['ilv'];
+              this._tickvolume = tickdata[tik]['iv'];
+            }
 
-          var _current_ms : any = new Date(tickdata[tik]['tvalue']).getTime();
-        
-          // If change call one time resolutions
-          if(resolution != this._prev_resolution || this._prev_resolution == undefined){
-            var _last_bar_data = JSON.parse(localStorage.getItem("_last_trade_time"));  
-            this._last_time = new Date(_last_bar_data['DT']).getTime() + (resolution * 60000);
-            this._prev_resolution = resolution;
-          }
-          // console.log(new Date(this._last_time), new Date(_current_ms))
-          if(this._last_time <= _current_ms){
-            this._trade_time = this._last_time;
-            this._last_time = _current_ms + (resolution * 60000);
-          }
+            var _current_ms: any = new Date(tickdata[tik]['tvalue']).getTime();
 
-          var bardata : any;
-          if(resolution == '1D'){
-            if(tickdata[tik]['tvalue'] != undefined){
-            bardata = {
-                DT : tickdata[tik]['tvalue'],
-                Open : this._tickopen,
-                High : this._tickhigh,
-                Low : this._ticklow,
-                Close : Number(tickdata[tik]['iv']),
-                Volume : this._tickvolume
-              } 
+            // If change call one time resolutions
+            if (resolution != this._prev_resolution || this._prev_resolution == undefined) {
+              var _last_bar_data = JSON.parse(localStorage.getItem("_last_trade_time"));
+              this._last_time = new Date(_last_bar_data['DT']).getTime() + (resolution * 60000);
+              this._prev_resolution = resolution;
             }
-          }else{
-            if(this._trade_time != undefined){
-              bardata = {
-                DT : this.formatDate(this._trade_time),
-                Open : Number(tickdata[tik]['iv']),
-                High : Number(tickdata[tik]['iv']),
-                Low : Number(tickdata[tik]['iv']),
-                Close : Number(tickdata[tik]['iv']),
-                Volume : Number(tickdata[tik]['iv'])
-              } 
+            // console.log(new Date(this._last_time), new Date(_current_ms))
+            if (this._last_time <= _current_ms) {
+              this._trade_time = this._last_time;
+              this._last_time = _current_ms + (resolution * 60000);
             }
-          }
-          if(bardata != undefined || bardata != null){
-            localStorage.setItem("_feed_bar_data",JSON.stringify(bardata));
+
+            var bardata: any;
+            if (resolution == '1D') {
+              if (tickdata[tik]['tvalue'] != undefined) {
+                bardata = {
+                  DT: tickdata[tik]['tvalue'],
+                  Open: this._tickopen,
+                  High: this._tickhigh,
+                  Low: this._ticklow,
+                  Close: Number(tickdata[tik]['iv']),
+                  Volume: this._tickvolume
+                }
+              }
+            } else {
+              if (this._trade_time != undefined) {
+                bardata = {
+                  DT: this.formatDate(this._trade_time),
+                  Open: Number(tickdata[tik]['iv']),
+                  High: Number(tickdata[tik]['iv']),
+                  Low: Number(tickdata[tik]['iv']),
+                  Close: Number(tickdata[tik]['iv']),
+                  Volume: Number(tickdata[tik]['iv'])
+                }
+              }
+            }
+            if (bardata != undefined || bardata != null) {
+              localStorage.setItem("_feed_bar_data", JSON.stringify(bardata));
+            }
           }
         }
       }
-		}
     });
   }
 
   formatDate(date) {
-		var d = new Date(date),
-			month = '' + (d.getMonth() + 1),
-			day = '' + d.getDate(),
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
       year = d.getFullYear();
-    
-      var t = new Date(date),
-			hours = '' + (t.getHours()),
-			minuts = '' + t.getMinutes();
-      // seconds = t.getSeconds();
 
-      if (month.length < 2) 
-        month = '0' + month;
-      if (day.length < 2) 
-        day = '0' + day;
+    var t = new Date(date),
+      hours = '' + (t.getHours()),
+      minuts = '' + t.getMinutes();
+    // seconds = t.getSeconds();
 
-      if (hours.length < 2) 
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
+
+    if (hours.length < 2)
       hours = '0' + hours;
-      if (minuts.length < 2) 
+    if (minuts.length < 2)
       minuts = '0' + minuts;
-    
-    var setdate = [year, month, day].join('-'); 
-    var settime = [hours,minuts].join(':'); 
-		return setdate + " " + settime;
-	}
+
+    var setdate = [year, month, day].join('-');
+    var settime = [hours, minuts].join(':');
+    return setdate + " " + settime;
+  }
 
 
   //Methed to stop market Watch Connection
