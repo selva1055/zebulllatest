@@ -1,23 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ZebuLoginComponent } from '../zebu-login.component';
-import { ConfirmMpinComponent } from '../confirm-mpin/confirm-mpin.component';
-import { ChallengeComponent } from '../challenge/challenge.component';
-import { IdentifierComponent } from '../identifier/identifier.component';
-import { MpinComponent } from '../mpin/mpin.component';
-import { PasswordComponent } from '../password/password.component';
+import { ZebuLoginComponent } from '@zebu-login/zebu-login.component';
+import { ConfirmMpinComponent } from '@zebu-login/components/confirm-mpin/confirm-mpin.component';
+import { ChallengeComponent } from '@zebu-login/components/challenge/challenge.component';
+import { IdentifierComponent } from '@zebu-login/components/identifier/identifier.component';
+import { MpinComponent } from '@zebu-login/components/mpin/mpin.component';
+import { PasswordComponent } from '@zebu-login/components/password/password.component';
 import {
   PasswordForgotComponent
-} from '../password-forgot/password-forgot.component'
+} from '@zebu-login/components/password-forgot/password-forgot.component';
+import {
+  PasswordRenewComponent
+} from '@zebu-login/components/password-renew/password-renew.component';
 import {
   PasswordResetComponent
-} from '../password-reset/password-reset.component';
-import { UnblockUserComponent } from '../unblock-user/unblock-user.component';
+} from '@zebu-login/components/password-reset/password-reset.component';
+import { UnblockUserComponent } from '@zebu-login/components/unblock-user/unblock-user.component';
 
 /* Feature Module */
-import { ROUTEs } from "../models/Route";
+import { ROUTEs } from "@zebu-login/models/Route";
 
+import { LoginGuard } from "./login.guard";
 /**
  * We're loading router-outlet inside a ZebuLoginComponent parent component
  */
@@ -26,6 +30,7 @@ const routes: Routes = [
     path: '',
     component: ZebuLoginComponent,
     data: { animation: ROUTEs.IDENTIFIER.id },
+    canActivateChild: [LoginGuard],
     children: [
       {
         path: ROUTEs.IDENTIFIER.path,
@@ -56,6 +61,11 @@ const routes: Routes = [
         path: ROUTEs.PASSWORD_FORGOT.path,
         component: PasswordForgotComponent,
         data: { animation: ROUTEs.PASSWORD_FORGOT.id },
+      },
+      {
+        path: ROUTEs.PASSWORD_RENEW.path,
+        component: PasswordRenewComponent,
+        data: { animation: ROUTEs.PASSWORD_RENEW.id },
       },
       {
         path: ROUTEs.PASSWORD_RESET.path,

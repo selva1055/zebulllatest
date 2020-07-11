@@ -15,18 +15,21 @@ import { ZebuLoginRoutingModule } from './route/zebu-login-routing.module';
 /* Bootstrap Component */
 import { ZebuLoginComponent } from './zebu-login.component';
 
-/* Feature Component */
-import { IdentifierComponent } from './identifier/identifier.component';
-import { ChallengeComponent } from './challenge/challenge.component';
-import { UnblockUserComponent } from './unblock-user/unblock-user.component';
-
 /* Services only to zebu-login feature module */
 import { ZebuLoginServiceModule } from './services/zebu-login-service.module';
-import { MpinComponent } from './mpin/mpin.component';
-import { PasswordComponent } from './password/password.component';
-import { ConfirmMpinComponent } from './confirm-mpin/confirm-mpin.component';
-import { PasswordResetComponent } from './password-reset/password-reset.component';
-import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
+
+/* Feature Component */
+import { IdentifierComponent } from './components/identifier/identifier.component';
+import { ChallengeComponent } from './components/challenge/challenge.component';
+import { UnblockUserComponent } from './components/unblock-user/unblock-user.component';
+import { MpinComponent } from './components/mpin/mpin.component';
+import { PasswordComponent } from './components/password/password.component';
+import { ConfirmMpinComponent } from './components/confirm-mpin/confirm-mpin.component';
+import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { PasswordForgotComponent } from './components/password-forgot/password-forgot.component';
+import { PasswordRenewComponent } from './components/password-renew/password-renew.component';
+/* Service */
+// import { }
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { PasswordForgotComponent } from './password-forgot/password-forgot.compo
     PasswordComponent,
     ConfirmMpinComponent,
     PasswordResetComponent,
-    PasswordForgotComponent
+    PasswordForgotComponent,
+    PasswordRenewComponent
   ],
   imports: [
     CommonModule,

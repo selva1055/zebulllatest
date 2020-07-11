@@ -4,6 +4,7 @@ import {
 } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ZebuodrGentrService } from '../services/zebuodr-gentr.service';
+import { ApiService as ZebuLoginAPIService } from "./services/api.service";
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import * as CryptoJS from 'crypto-js';
@@ -74,9 +75,10 @@ export class ZebuLoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public formbuilder: FormBuilder,
     public odgenserv: ZebuodrGentrService,
+    public zebuLoginService: ZebuLoginAPIService,
     public router: Router,
     private spinnerService: NgxUiLoaderService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.flag = 0;
@@ -167,7 +169,7 @@ export class ZebuLoginComponent implements OnInit {
       userId: this.zebulogin.value.userId,
       userData: encyptKey
     }
-    this.odgenserv.encrpyUserLogin(JSON.stringify(json)).subscribe(data => {
+    this.zebuLoginService.encrpyUserLogin(JSON.stringify(json)).subscribe(data => {
       if (data['stat'] == "Ok") {
         var remuser = atob(sessionStorage.getItem('currentUser'));
         if (remuser != this.zebulogin.value.userId) {
@@ -207,15 +209,15 @@ export class ZebuLoginComponent implements OnInit {
 
   resetPass() {
     this.spinnerService.start();
-    this.odgenserv.forgotPass(this.forgotPass.value).subscribe((data) => {
+    this.zebuLoginService.forgotPass(this.forgotPass.value).subscribe((data) => {
       this.spinnerService.stop();
-      if(data['stat'] == "Ok"){
+      if (data['stat'] == "Ok") {
         this.forgotemsg = "";
         this.flag = 0;
-      }else if(data['stat'] == "Not_Ok"){
+      } else if (data['stat'] == "Not_Ok") {
         this.forgotemsg = data["emsg"];
       }
-   }, (err) => {
+    }, (err) => {
       this.spinnerService.stop();
     }
     );
@@ -238,7 +240,7 @@ export class ZebuLoginComponent implements OnInit {
     let json = {
       userId: this.zebulogin.value.userId,
     }
-    this.odgenserv.getEncryptKey(JSON.stringify(json)).subscribe((res) => {
+    this.zebuLoginService.getEncryptKey(JSON.stringify(json)).subscribe((res) => {
       console.log(res)
       this.localPublicKey = res['encKey'];
       let encyptKey: any = CryptoJS.AES.encrypt(this.zebulogin.value.password, this.localPublicKey).toString();
@@ -328,7 +330,7 @@ export class ZebuLoginComponent implements OnInit {
 
   // ajax call function
   zebu2faAjax(data) {
-    this.odgenserv.zebuvalidate2fa(data).subscribe(respdata => {
+    this.zebuLoginService.zebuvalidate2fa(data).subscribe(respdata => {
       if (respdata['stat'] == "Ok") {
         this.zebufauthen.value['answer1'] = "";
         this.zebufauthen.value['answer2'] = "";
@@ -441,7 +443,7 @@ export class ZebuLoginComponent implements OnInit {
   // Unblock User
   unblockUser() {
     this.spinnerService.start();
-    this.odgenserv.unblockUser(this.unblock.value).subscribe(data => {
+    this.zebuLoginService.unblockUser(this.unblock.value).subscribe(data => {
       if (data['stat'] == "Ok") {
         // var b3JkIjpud = btoa(JSON.stringify(data));
         // var returnUrl = btoa(this.returnUrl);
@@ -460,12 +462,12 @@ export class ZebuLoginComponent implements OnInit {
       }
     });
   }
-  
+
   /**
    * Unlock User
    * @
    */
-  goToUnblockUser(){
+  goToUnblockUser() {
     this.notOKstat = "";
     this.flag = 5;
     this.zebulogin.value['userId'] = "";
@@ -475,9 +477,9 @@ export class ZebuLoginComponent implements OnInit {
   /**
    * Reset Password 
    */
-  goToResetPassword(){
+  goToResetPassword() {
     this.zebulogin.value['userId'] = "";
     this.zebulogin.value['password'] = "";
     this.flag = 3;
-  }  
+  }
 }

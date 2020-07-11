@@ -28,6 +28,10 @@ const ROUTEs = {
     path: "login/password/forgot",
     id: "passwordForgot",
   },
+  PASSWORD_RENEW: {
+    path: "login/password/renew",
+    id: "passwordRenew",
+  },
   PASSWORD_RESET: {
     path: "login/password/reset",
     id: "passwordReset",
@@ -38,4 +42,9 @@ const ROUTEs = {
   },
 };
 
-export { ROUTEs };
+interface RouteModel {
+  path: string;
+  id: string;
+}
+
+export { ROUTEs, RouteModel };

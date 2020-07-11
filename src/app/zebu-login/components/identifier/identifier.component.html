@@ -1,0 +1,26 @@
+<div class="login-container">
+  <div class="header">
+    <div class="title">Login to Zebull</div>
+  </div>
+  <div class="identifier-container">
+    <div class="input-container">
+      <label for="UserID" class="label">USER ID</label>
+      <input autocomplete="username" class="input-element" type="text" placeholder="Enter User ID" [(ngModel)]="UserID"
+        name="UserID" />
+    </div>
+    <div class="error-msg" *ngIf="errorData.IsError">
+      {{errorData.ErrorMsg}}
+    </div>
+  </div>
+  <div class="action-container">
+    <div class="action-link" (click)="navigate('/login/password/reset')">Forgot password?</div>
+    <button class="action-button" type="button" (click)="onIdentifierSubmit()">
+      Next
+    </button>
+  </div>
+  <div class="footer">
+    <div class="action-link" (click)="navigate('/login/unblock')">
+      Unblock account
+    </div>
+  </div>
+</div>

@@ -22,7 +22,8 @@
     top: 0;
     left: 0;
   }
-  @media all and (max-width: 480px), (max-device-height: 400px) {
+  height: 450px;
+  @media all and (max-width: 400px), (max-device-height: 400px) {
     height: 100vh;
     width: 100vw;
   }
@@ -38,8 +39,7 @@
   padding: 10px;
   max-width: 240px;
   @media all and (max-width: 400px) {
-    flex-direction: column-reverse;
-    justify-content: center;
+    display: none;
   }
   img {
     /*Support iPhone small devices like X*/
@@ -143,14 +143,19 @@
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
-    min-height: 400px;
-    height: 100%;
-    width: 300px;
     overflow-y: auto;
-    /*Support iPhone small devices like X*/
-    @media all and (max-device-width: 400px), (max-device-height: 400px) {
-      margin: 10px;
-      min-height: 0;
+    position: relative;
+    width: 280px;
+    /*Landscape*/
+    @media all and (max-device-height: 400px) {
+      width: 100%;
+    }
+    router-outlet ~ * {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
   }
 }

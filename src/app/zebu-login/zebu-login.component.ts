@@ -3,19 +3,19 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 /* Feature animation */
 import { slideInAnimation } from "./route/zebu-login-route-animation";
 /* Feature Service */
 import { ZebuLoginService } from './services/zebu-login.service';
-import { Subscription } from 'rxjs';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-zebu-login',
   templateUrl: './zebu-login.component.html',
   styleUrls: [
-    './zebu-login.component.scss',// Style for main component
+    './zebu-login.component.scss',
   ],
   animations: [slideInAnimation]
 })
@@ -42,15 +42,12 @@ export class ZebuLoginComponent implements OnInit, OnDestroy {
   };
   private isLoadingSubscription: Subscription;
   private isLoading: Boolean;
-  constructor(
-    private zebuLoginService: ZebuLoginService,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     /* Subscribing to zebuLoginService.isAuthenticatedUser property */
-    this.isLoadingSubscription = this.zebuLoginService.isLoading
+    this.isLoadingSubscription = ZebuLoginService.isLoading
       .subscribe((value: boolean) => {
-        console.warn("isLoading:", value);
         this.isLoading = value;
       });
   }

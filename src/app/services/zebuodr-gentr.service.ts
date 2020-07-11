@@ -56,9 +56,7 @@ export class ZebuodrGentrService {
   getAdvanceSearchDetails: string = "exchange/getScripForSearch";
   login: string = "customer/login";
   logout: string = "customer/logout";
-  validate2fa: string = "customer/validAnswer";
   reset2Fa: string = "customer/saveAns";
-  forgetPass: string = "customer/forgotPassword";
   insertOrders: string = "placeOrder/insertPlaceOrderRecords";
   getOrders: string = "placeOrder/getPlaceOrderRecordsByid";
   placeOrders: string = "placeOrder/executePlaceOrder";
@@ -73,7 +71,6 @@ export class ZebuodrGentrService {
   holdings: string = "positionAndHoldings/holdings";
   funds: string = "limits/getRmsLimits";
   sortmwscrip: string = "marketWatch/sortMWScrip";
-  unblock: string = "customer/unblockUser";
   orderhistory: string = "placeOrder/orderHistory";
   orderMultiplehistory: string = "placeOrder/orderHistory/ordGen";
   cancelorder: string = "placeOrder/cancelOrder";
@@ -89,9 +86,13 @@ export class ZebuodrGentrService {
   getexitcoorder: string = "placeOrder/exitCoverOrder";
   getexitboorder: string = "placeOrder/exitBracketOrder";
   getIndexList: string = "ScripDetails/getIndexDetails";
-  customerLoginStatusEndpoint: string = "customer/getUserLoggedInStatus";
-  customerKey: string = "customer/getEncryptionKey";
-  encptLogin: string = "customer/webLogin";
+  /**
+   * Zebu login API. Most of API moved to feature module.
+   * These two are duplicate as it being used in multiple places
+   **/
+  validate2fa: string = "v2/customer/validAnswer";
+  unblock: string = "v2/customer/unblockUser";
+
   localLogin: string = "customer/localLogin";
   insertIndexDetails: string = "settings/insertIndexDetails";
   getIndexDetail: string = "settings/getIndexDetails";
@@ -250,7 +251,15 @@ export class ZebuodrGentrService {
   }
 
   getAuthHeaders() {
-    return this.headers.append('Authorization', 'Bearer ' + this.getUserId() + ' ' + this.getSessionToken());
+    return this.headers.append(
+      'Authorization',
+      (
+        'Bearer '
+        + this.getUserId()
+        + ' '
+        + this.getSessionToken()
+      )
+    );
   }
 
   unAuth(err) {
@@ -450,12 +459,6 @@ export class ZebuodrGentrService {
   fetchMScrp(jsonObj): Observable<any> {
     return this.http.post(this.baseURL + this.marketScrips, jsonObj, {
       headers: this.getAuthHeaders()
-    })
-  }
-
-  forgotPass(jsonObj): Observable<any> {
-    return this.http.post(this.baseURL + this.forgetPass, jsonObj, {
-      headers: this.headers
     })
   }
 
@@ -669,28 +672,6 @@ export class ZebuodrGentrService {
 
   getIndexDetails(jsonObj): Observable<any> {
     return this.http.post(this.baseURL + this.getIndexList, jsonObj, {
-      headers: this.getAuthHeaders()
-    })
-  }
-
-  getUserLoggedInStatus(jsonObj: any): Observable<any> {
-    return this.http.post(
-      this.baseURL + this.customerLoginStatusEndpoint,
-      jsonObj, // JSON body
-      {
-        headers: this.getAuthHeaders()
-      }
-    );
-  }
-
-  getEncryptKey(jsonObj): Observable<any> {
-    return this.http.post(this.baseURL + this.customerKey, jsonObj, {
-      headers: this.getAuthHeaders()
-    })
-  }
-
-  encrpyUserLogin(jsonObj): Observable<any> {
-    return this.http.post(this.baseURL + this.encptLogin, jsonObj, {
       headers: this.getAuthHeaders()
     })
   }
