@@ -9,7 +9,7 @@
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-around;
-  width: 280px;
+  // width: 280px;
   .header {
     .title {
       color: #1f3565;
@@ -61,13 +61,14 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  width: 100%;
+  // width: 100%;
   .input-container {
     box-sizing: border-box;
     display: flex;
     flex-flow: column nowrap;
     margin: 2px 0;
-    width: 100%;
+    min-width: 250px;
+    max-width: 280px;
     .input-label-container{
       align-self: flex-start;
       display: flex;

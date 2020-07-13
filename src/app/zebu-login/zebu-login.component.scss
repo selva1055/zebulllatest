@@ -27,6 +27,10 @@
     height: 100vh;
     width: 100vw;
   }
+  /*Disabling landscape oreintation*/
+  @media only screen and (orientation: landscape) and (max-width: 400px),(max-device-height: 400px){
+    display:none;
+  }
 }
 
 .info-section {
@@ -137,6 +141,7 @@
   align-items: center;
   justify-content: center;
   padding: 20px 10px;
+  width: 300px;
   .input-router-section {
     display: flex;
     flex: 1;
@@ -145,17 +150,23 @@
     justify-content: center;
     overflow-y: auto;
     position: relative;
-    width: 280px;
-    /*Landscape*/
-    @media all and (max-device-height: 400px) {
-      width: 100%;
-    }
-    router-outlet ~ * {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
+    height: 400px;
+    width: 250px;
+    // router-outlet ~ * {
+    //   position: absolute;
+    //   top: 0;
+    //   // bottom: 0;
+    //   left: 0;
+    //   width: 250px;
+    //   height: 100%;
+    //   // right: 0;
+    // }
+  }
+}
+
+#login-warning-message {
+  display: none;
+  @media only screen and (orientation: landscape) and (max-width: 400px), (max-device-height: 400px){
+    display: flex;
   }
 }

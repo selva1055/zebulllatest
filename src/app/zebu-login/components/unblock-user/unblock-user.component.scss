@@ -1,6 +1,7 @@
 :host{
   flex: 1;
   display: flex;
+  width: 100%;
 }
 
 .login-container {
@@ -9,7 +10,7 @@
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-around;
-  width: 280px;
+  width: 100%;
   .header {
     .title {
       color: #1f3565;

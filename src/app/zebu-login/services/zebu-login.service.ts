@@ -82,9 +82,8 @@ class ZebuLoginService {
       //   /* TODO: Handle invalid */
       // }
     }, (err) => {
-      /* TODO: Handle internet connection error */
       console.warn(err.error)
-      ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+      ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
     })
   }
 
@@ -176,10 +175,9 @@ class ZebuLoginService {
       }
 
       /* If any other status comes then we're marking it as an internal error */
-      ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+      ZebuLoginService.setErrorState(true, ErrorConstant.respdata['emsg']);
     }, (err) => {
-      /* Handling any error response code from server */
-      ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+      ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
     })
   }
 
@@ -196,16 +194,17 @@ class ZebuLoginService {
         console.warn(response);
         if (response['stat'] === ResponseStatus.VALID_STATUS) {
           ZebuLoginService.zebuLoginState.next(LOGIN_STATE.HOME);
-        } else {
-          /* TODO: Handle error internet connection or place common message */
-          ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
-          ZebuLoginService.zebuLoginState.next(LOGIN_STATE.SUBMISSION_ERROR);
+          return;
         }
+
+        /* TODO: Handle error internet connection or place common message */
+        ZebuLoginService.setErrorState(true, ErrorConstant.response['emsg']);
+        ZebuLoginService.zebuLoginState.next(LOGIN_STATE.SUBMISSION_ERROR);
+
       },
       (error) => {
-        /* TODO: Handle error internet connection or place common message */
         console.warn("err in mpin: ", error)
-        ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+        ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
       }
     );
   }
@@ -261,13 +260,12 @@ class ZebuLoginService {
           return;
         }
         /* TODO: Handle error internet connection or place common message */
-        ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+        ZebuLoginService.setErrorState(true, response["emsg"]);
         ZebuLoginService.zebuLoginState.next(LOGIN_STATE.SUBMISSION_ERROR);
       },
       (error) => {
-        /* TODO: Handle error internet connection or place common message */
         console.warn("err in validateMPinAuthentication: ", error)
-        ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+        ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
       }
     );
   }
@@ -337,9 +335,8 @@ class ZebuLoginService {
         ZebuLoginService.setErrorState(true, errorMsg);
       }
     }, (err) => {
-      /* TODO: Handle error internet connection or place common message */
-      console.warn("err", err)
-      ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+      console.warn("zebuAccess err: ", err)
+      ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
     });
   }
 
@@ -365,8 +362,7 @@ class ZebuLoginService {
       /* Sending request to validate credentials with encryption */
       this.zebuAccess(userInfo, encyptKey)
     }, (err) => {
-      /* TODO: Validate internet connection error or place unique error message */
-      ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+      ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
     })
   }
 
@@ -387,10 +383,8 @@ class ZebuLoginService {
         ZebuLoginService.setErrorState(true, emsg);
       },
       (error) => {
-        console.warn(error);
-        /* TODO: Handle error internet connection or place common message */
         console.warn("err in resetPassword: ", error)
-        ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+        ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
       }
     );
   }
@@ -412,9 +406,8 @@ class ZebuLoginService {
         ZebuLoginService.setErrorState(true, emsg);
       },
       (err) => {
-        console.warn(err);
-        /* TODO: Validate internet connection error or place unique error message */
-        ZebuLoginService.setErrorState(true, ErrorConstant.INTERNAL_ERROR);
+        console.warn("unblockUser: ", err);
+        ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
       }
     );
   }

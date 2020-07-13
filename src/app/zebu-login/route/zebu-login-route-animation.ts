@@ -15,7 +15,11 @@ export const slideInAnimation =
         [
           /* Modified the css here so to push the new element on top while its transitioning */
           style({
-            opacity: 0, position: 'absolute', top: 0, left: 0, bottom: 0, right: 0,
+            opacity: 0, position: 'absolute',
+            top: 0, left: 0,
+            bottom: 0, right: 0,
+            // width: "250px",
+            // height: "100%",
           })
         ],
         { optional: true }
@@ -24,7 +28,7 @@ export const slideInAnimation =
       query(':leave',
         [
           style({ opacity: 1 }),
-          animate('0.3s', style({ opacity: 0 }))
+          animate('0.5s', style({ opacity: 0 }))
         ],
         { optional: true }
       ),
@@ -32,7 +36,7 @@ export const slideInAnimation =
       query(':enter',
         [
           style({ opacity: 0 }),
-          animate('0.3s', style({ opacity: 1 }))
+          animate('0.5s', style({ opacity: 1 }))
         ],
         { optional: true }
       )
