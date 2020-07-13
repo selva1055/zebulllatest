@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 /* Feature Service */
 import { ZebuLoginService } from '@zebu-login/services/zebu-login.service';
-import { ErrorModel } from "@zebu-login/models/Error";
+import { ErrorConstant, ErrorModel } from "@zebu-login/models/Error";
 import { LOGIN_STATE } from "@zebu-login/models/Navigation";
 import { ROUTEs } from '@zebu-login/models/Route';
 
@@ -86,9 +86,13 @@ export class PasswordComponent implements OnInit, OnDestroy {
   }
 
   validateUser() {
-    /* Enabling loader */
-    ZebuLoginService.enableProgressBar();
-    this.zebuLoginService.validatePasswordAuthentication(this.userInfo);
+    if (this.userInfo.password.length >= 4) {
+      /* Enabling loader */
+      ZebuLoginService.enableProgressBar();
+      this.zebuLoginService.validatePasswordAuthentication(this.userInfo);
+      return;
+    }
+    ZebuLoginService.setErrorState(true, ErrorConstant.INVALID_CREDENTIALS);
   }
 
   navigate(to: string) {

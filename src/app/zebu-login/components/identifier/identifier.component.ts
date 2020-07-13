@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 /* Feature Model */
-import { ErrorModel } from "@zebu-login/models/Error";
+import { ErrorConstant, ErrorModel } from "@zebu-login/models/Error";
 import { LOGIN_STATE } from "@zebu-login/models/Navigation";
 import { ROUTEs } from "@zebu-login/models/Route";
 
@@ -83,7 +83,13 @@ export class IdentifierComponent implements OnInit, OnDestroy {
   }
 
   onIdentifierSubmit() {
-    this.zebuLoginService.submitIdentifier(this.UserID);
+    const { UserID } = this;
+    if (UserID.length >= 4 && new RegExp("^[a-zA-Z0-9]+$").test(UserID)) {
+      ZebuLoginService.setErrorState(false, "");
+      this.zebuLoginService.submitIdentifier(this.UserID);
+      return;
+    }
+    ZebuLoginService.setErrorState(true, ErrorConstant.INVALID_USER_ID);
   }
 
   navigate(to: string) {

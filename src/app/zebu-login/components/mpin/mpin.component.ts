@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 /* Feature Service */
 import { ZebuLoginService } from '@zebu-login/services/zebu-login.service';
-import { ErrorModel } from "@zebu-login/models/Error";
+import { ErrorConstant, ErrorModel } from "@zebu-login/models/Error";
 import { LOGIN_STATE } from "@zebu-login/models/Navigation";
 import { ROUTEs } from '@zebu-login/models/Route';
 
@@ -99,7 +99,7 @@ export class MpinComponent implements OnInit, OnDestroy {
 
     /* Validate whether user entered input or not */
     if (mpin.length === 0) {
-      /* TODO: Handle error */
+      ZebuLoginService.setErrorState(true, ErrorConstant.INVALID_CREDENTIALS);
       return;
     }
 

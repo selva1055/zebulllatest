@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import * as Moment from 'moment';
 
 /* Feature Service */
 import { ZebuLoginService } from '@zebu-login/services/zebu-login.service';
-import { ErrorModel } from "@zebu-login/models/Error";
+import { ErrorConstant, ErrorModel } from "@zebu-login/models/Error";
 import { LOGIN_STATE } from "@zebu-login/models/Navigation";
 import { ROUTEs } from '@zebu-login/models/Route';
 
@@ -78,9 +79,29 @@ export class PasswordResetComponent implements OnInit, OnDestroy {
   }
 
   handlePasswordReset() {
-    /* TODO; Validate input fields */
-    ZebuLoginService.enableProgressBar();
-    this.zebuLoginService.resetPassword(this.userInfo);
+    /* Validating input fields */
+    const {
+      userId,
+      pan,
+      email,
+      dob,
+    } = this.userInfo;
+    console.warn(this.userInfo)
+    if (
+      userId.length >= 4 && new RegExp("^[a-zA-Z0-9]+$").test(userId)
+      && pan.length >= 4
+      && new RegExp("/^[^\s@]+@[^\s@]+\.[^\s@]+$/").test(email)
+      && Moment(dob, 'YYYY-MM-DD', true).isValid()
+    ) {
+      ZebuLoginService.enableProgressBar();
+      this.zebuLoginService.resetPassword({
+        userId,
+        pan,
+        email,
+        dob: Moment(dob).format('DD-MM-YYYY'),
+      });
+    }
+    ZebuLoginService.setErrorState(true, ErrorConstant.INVALID_CREDENTIALS);
   }
 
 }

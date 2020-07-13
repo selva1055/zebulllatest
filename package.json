@@ -36,6 +36,7 @@
     "jquery": "^3.5.1",
     "material-design-icons": "^3.0.1",
     "material-tooltip": "^1.0.1",
+    "moment": "^2.27.0",
     "ng6-toastr-notifications": "^1.0.4",
     "ngx-copy-to-clipboard": "^2.0.2",
     "ngx-toastr": "^10.0.2",

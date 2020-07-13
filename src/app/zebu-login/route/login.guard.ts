@@ -31,7 +31,10 @@ export class LoginGuard implements CanActivateChild {
     console.warn("child: ", state.url);
     /* Getting current state */
     const currentState: string = ZebuLoginService.zebuLoginState.getValue();
-    /* If there are any error with submission page then we making it stay in the same page */
+    /**
+     * If there are any error with submission page
+     * then we making it stay in the same page
+     * */
     if (currentState === LOGIN_STATE.SUBMISSION_ERROR) {
       return true;
     }

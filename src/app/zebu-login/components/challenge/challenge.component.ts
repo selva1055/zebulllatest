@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 /* Feature Model */
-import { ErrorModel } from "@zebu-login/models/Error";
+import { ErrorConstant, ErrorModel } from "@zebu-login/models/Error";
 import { LOGIN_STATE } from "@zebu-login/models/Navigation";
 import { ROUTEs } from "@zebu-login/models/Route";
 
@@ -100,12 +100,16 @@ export class ChallengeComponent implements OnInit, OnDestroy {
   }
 
   handleChallengeSubmission() {
-    console.warn("Harae kiya hum?");
-    ZebuLoginService.enableProgressBar();
-    this.zebuLoginService.validateTwoFactorAuthentication(
-      this.answers,
-      this.userId,
-    );
+    const { answers } = this;
+    if (answers.length === 2 && answers[0].length >= 1 && answers[1].length >= 1) {
+      ZebuLoginService.enableProgressBar();
+      this.zebuLoginService.validateTwoFactorAuthentication(
+        this.answers,
+        this.userId,
+      );
+      return;
+    }
+    ZebuLoginService.setErrorState(true, ErrorConstant.INVALID_CREDENTIALS);
   }
 
   navigate() {

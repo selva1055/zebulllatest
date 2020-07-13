@@ -187,38 +187,38 @@ export class ZebuodrGentrService {
   }
 
   webSocketConnection() {
-    // this.mWatch = <Subject<any>>this.wsService
-    //   .connect(this.WS_URL)
-    //   .pipe(map((response: any, i): any => {
-    //     var data = pako.inflate(atob(response.data));
-    //     this.newarray = []
-    //     for (var i = 0; i < data.length; i++) {
-    //       this.newarray.push(String.fromCharCode(data[i]));
-    //     }
-    //     data = this.newarray.join('');
-    //     if (data) {
-    //       this.emitNavChangeEvent(data);
-    //     } else {
-    //       let jobj = {
-    //         'stat': 'not_Ok',
-    //         'time': new Date()
-    //       };
-    //       this.emitNavChangeEvent(jobj);
-    //     }
-    //     return data;
-    //   }));
+    this.mWatch = <Subject<any>>this.wsService
+      .connect(this.WS_URL)
+      .pipe(map((response: any, i): any => {
+        var data = pako.inflate(atob(response.data));
+        this.newarray = []
+        for (var i = 0; i < data.length; i++) {
+          this.newarray.push(String.fromCharCode(data[i]));
+        }
+        data = this.newarray.join('');
+        if (data) {
+          this.emitNavChangeEvent(data);
+        } else {
+          let jobj = {
+            'stat': 'not_Ok',
+            'time': new Date()
+          };
+          this.emitNavChangeEvent(jobj);
+        }
+        return data;
+      }));
 
-    // this.odrstatusFeed = <Subject<any>>this.statusfeed
-    //   .connect(this.WS_URL)
-    //   .pipe(map((response: any, i): any => {
-    //     var statusdata = pako.inflate(atob(response.data));
-    //     this.newarray2 = []
-    //     for (var i = 0; i < statusdata.length; i++) {
-    //       this.newarray2.push(String.fromCharCode(statusdata[i]));
-    //     }
-    //     statusdata = this.newarray2.join('');
-    //     return statusdata;
-    //   }));
+    this.odrstatusFeed = <Subject<any>>this.statusfeed
+      .connect(this.WS_URL)
+      .pipe(map((response: any, i): any => {
+        var statusdata = pako.inflate(atob(response.data));
+        this.newarray2 = []
+        for (var i = 0; i < statusdata.length; i++) {
+          this.newarray2.push(String.fromCharCode(statusdata[i]));
+        }
+        statusdata = this.newarray2.join('');
+        return statusdata;
+      }));
   }
 
 

@@ -7,7 +7,7 @@ import { ZebuodrGentrService } from '@app/services/zebuodr-gentr.service';
 
 /* Feature Service */
 import { ZebuLoginService } from '@zebu-login/services/zebu-login.service';
-import { ErrorModel } from "@zebu-login/models/Error";
+import { ErrorConstant, ErrorModel } from "@zebu-login/models/Error";
 import { LOGIN_STATE } from "@zebu-login/models/Navigation";
 import { ROUTEs } from '@zebu-login/models/Route';
 
@@ -65,26 +65,6 @@ export class UnblockUserComponent implements OnInit, OnDestroy {
           this.errorData = value;
         }
       });
-    // this.unblockForm = new FormGroup({
-    //   userId: new FormControl(
-    //     "", [
-    //     Validators.required,
-    //     Validators.minLength(4),
-    //     Validators.pattern('^[a-zA-Z0-9]+$')
-    //   ]),
-    //   pan: new FormControl(
-    //     "", [
-    //     Validators.required,
-    //     Validators.minLength(4),
-    //     Validators.pattern('^[a-zA-Z0-9]+$')
-    //   ]),
-    //   email: new FormControl(
-    //     "", [
-    //     Validators.required,
-    //     Validators.minLength(4),
-    //     Validators.pattern('^[a-zA-Z0-9]+$')
-    //   ]),
-    // });
   }
 
   ngOnDestroy(): void {
@@ -100,25 +80,34 @@ export class UnblockUserComponent implements OnInit, OnDestroy {
 
   /* Validate unblock fields */
   validateFields() {
-    /* TODO: Validate fields as per requriement */
-    return true;
+    const {
+      userId,
+      pan,
+      email,
+    } = this.userInfo;
+    /* Validate fields as per requriement */
+    if (
+      userId.length >= 4 && new RegExp("^[a-zA-Z0-9]+$").test(userId)
+      && pan.length >= 4
+      && new RegExp("/^[^\s@]+@[^\s@]+\.[^\s@]+$/").test(email)
+    ) {
+      return true;
+    }
+    return false;
   }
 
   /**
-   * Collect elements data and pass it as json to the service
-   * @param $event Submit event from form
+   * Collect elements data and pass it as json to the service.
    */
   handleUnblock() {
-    console.warn(
-      "Handle user unblock: ",
-      this.userInfo,
-    );
     if (this.validateFields()) {
+      ZebuLoginService.enableProgressBar();
       /* Calling service to unblock an user */
       this.zebuLoginService.unblockUser(
         this.userInfo
       );
     }
+    ZebuLoginService.setErrorState(true, ErrorConstant.INVALID_CREDENTIALS);
   }
 
 }
