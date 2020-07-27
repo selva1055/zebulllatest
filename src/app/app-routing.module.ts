@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ZebuodrGentrComponent } from './zebuodr-gentr/zebuodr-gentr.component';
-import { ZebuLoginComponent } from './zebu-login/zebu-login.component';
 import { ZebuFauthenComponent } from './zebu-fauthen/zebu-fauthen.component';
 import { ZebuOrderBookComponent } from './zebu-order-book/zebu-order-book.component';
 import { OrdersComponent } from './orders/orders.component';
@@ -60,17 +59,23 @@ import { CustomersupportComponent } from './customersupport/customersupport.comp
 import { PublisherComponent } from './zebullDocs/publisher/publisher.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: ZebuLoginComponent },
+  {
+    path: 'login',
+    loadChildren: () => import(
+      './zebu-login/zebu-login.module'
+    ).then(m => m.ZebuLoginModule)
+  },
   { path: 'iqchart', component: IqchartComponent },
   { path: 'fauthen', component: ZebuFauthenComponent },
   { path: 'ordergen', component: ZebuodrGentrComponent },
   { path: 'orders', component: OrdersComponent, canActivate: [AuthguardGuard] },
   { path: 'zebuorderbk', component: ZebuOrderBookComponent, canActivate: [AuthguardGuard] },
- // { path: 'zebuMWLst', component: MktwatchComponent, canActivate: [AuthguardGuard] },
+  // { path: 'zebuMWLst', component: MktwatchComponent, canActivate: [AuthguardGuard] },
   { path: 'payoff', component: PayoffComponent, canActivate: [AuthguardGuard] },
   { path: 'unblock', component: UnblockUserComponent },
   // { path: 'passReset', component: PasswordResetComponent },
-  { path: 'homes', component: MobileviewComponent,
+  {
+    path: 'homes', component: MobileviewComponent,
     children: [
       { path: '', redirectTo: '', pathMatch: 'full' },
       { path: 'marketstatus', component: MarketstatusComponent },
@@ -82,7 +87,8 @@ const routes: Routes = [
     ]
   },
   { path: 'optionchain', component: OptionchainComponent },
-  { path: 'home', component: HomeComponent,
+  {
+    path: 'home', component: HomeComponent,
     children: [
       { path: '', redirectTo: 'main', pathMatch: 'full' },
       { path: 'iqchart', component: IqchartComponent },
@@ -137,13 +143,21 @@ const routes: Routes = [
       { path: 'session-id', component: SessionIdComponent },
       { path: 'publisher', component: PublisherComponent },
 
-      
+
     ]
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [
+    RouterModule.forRoot(
+      routes,
+      {
+        // enableTracing: true,
+        useHash: true
+      }
+    )
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

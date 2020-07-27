@@ -38,10 +38,3 @@ div, li, span, a {
 	-webkit-tap-highlight-color: rgba(0,0,0,0); /* eliminated annoying flash when tapping screen on ipads */
 	-webkit-tap-highlight-color: transparent; /* For some Androids */
 }
-
-/* You can safely remove or override these */
-input[type="text"], 
-input[type="number"] {
-	border: #ddd solid 1px;
-	padding: 0 5px 0 10px;
-}
