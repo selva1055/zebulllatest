@@ -22,7 +22,7 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
     .action-link {
       color: #1f3565;

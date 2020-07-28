@@ -28,7 +28,6 @@ export class LoginGuard implements CanActivateChild {
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    console.warn("child: ", state.url);
     /* Getting current state */
     const currentState: string = ZebuLoginService.zebuLoginState.getValue();
     /**
@@ -46,7 +45,6 @@ export class LoginGuard implements CanActivateChild {
   }
 
   validatePath(currentPath: string, currentState: string): boolean {
-    console.warn(currentState)
     switch (currentPath) {
       case ROUTEs.PASSWORD.path: {
         if (currentState !== LOGIN_STATE.PASSWORD_SECTION) {

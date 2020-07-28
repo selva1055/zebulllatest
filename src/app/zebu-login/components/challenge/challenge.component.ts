@@ -31,7 +31,6 @@ export class ChallengeComponent implements OnInit, OnDestroy {
     private router: Router,
     private zebuLoginService: ZebuLoginService
   ) {
-    console.warn("ChallengeComponent construction ");
     ZebuLoginService.disableProgressBar();
     /* Getting UserID from service */
     this.userId = ZebuLoginService.loginData.UserID;
@@ -42,8 +41,6 @@ export class ChallengeComponent implements OnInit, OnDestroy {
     this.zebuLoginStateSubscription = ZebuLoginService
       .zebuLoginState
       .subscribe((value: string) => {
-
-        console.warn("challenge, zebuLoginStateSubscription: ", value)
         /**
          * Validating user has to renew their password
          * */
@@ -59,7 +56,6 @@ export class ChallengeComponent implements OnInit, OnDestroy {
 
         /* Validating is user move to setting mpin to move into home */
         if (value === LOGIN_STATE.MPIN_AND_HOME) {
-          console.warn("Moving to mpin...");
           this.router.navigate(
             [`/${ROUTEs.CONFIRM_M_PIN.path}`, { userid: this.userId }],
             { relativeTo: this.activatedRoute }

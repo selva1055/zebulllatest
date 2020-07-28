@@ -61,7 +61,6 @@ class ZebuLoginService {
     this.zebuLoginAPIService.getUserLoggedInStatus(
       JSON.stringify({ userId: userID })
     ).subscribe((res) => {
-      console.warn("identifier response: ", res);
       const { stat, available, login } = res;
       /* TODO: Confirm with gowri about its valid status */
       // if (stat === ResponseStatus.VALID_STATUS) {
@@ -82,7 +81,6 @@ class ZebuLoginService {
       //   /* TODO: Handle invalid */
       // }
     }, (err) => {
-      console.warn(err.error)
       ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
     })
   }
@@ -123,7 +121,6 @@ class ZebuLoginService {
       "sCount": ZebuLoginService.loginData.TwoFactor.sCount,
       "sIndex": ZebuLoginService.loginData.TwoFactor.sIndex,
     }).subscribe(respdata => {
-      console.warn("sResponse", respdata);
       /**
        * If all good then we storing sessionToken and moving to
        * home page or respection page as per our response
@@ -191,7 +188,6 @@ class ZebuLoginService {
       userId: ZebuLoginService.loginData.UserID
     }).subscribe(
       (response) => {
-        console.warn(response);
         if (response['stat'] === ResponseStatus.VALID_STATUS) {
           ZebuLoginService.zebuLoginState.next(LOGIN_STATE.HOME);
           return;
@@ -203,7 +199,6 @@ class ZebuLoginService {
 
       },
       (error) => {
-        console.warn("err in mpin: ", error)
         ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
       }
     );
@@ -223,7 +218,6 @@ class ZebuLoginService {
       userId: userID, mpin: mpin
     }).subscribe(
       (response) => {
-        console.warn(response);
         if (response['stat'] === ResponseStatus.VALID_STATUS) {
           /* Clear if any existing storage values */
           sessionStorage.clear();
@@ -264,14 +258,12 @@ class ZebuLoginService {
         ZebuLoginService.zebuLoginState.next(LOGIN_STATE.SUBMISSION_ERROR);
       },
       (error) => {
-        console.warn("err in validateMPinAuthentication: ", error)
         ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
       }
     );
   }
 
   initTwoFactorModel(data) {
-    console.warn(data)
     const questions = data["sQuestions"];
     ZebuLoginService.loginData.TwoFactor = {
       sIndex: data["sIndex"],
@@ -279,7 +271,6 @@ class ZebuLoginService {
       sQuestions: questions,
       splittedSQuestion: questions.split("|")
     };
-    console.warn("twoFactor", ZebuLoginService.loginData.TwoFactor)
   }
 
   /**
@@ -307,7 +298,6 @@ class ZebuLoginService {
         userData: encyptKey
       })
     ).subscribe(data => {
-      console.warn(data);
       if (data['stat'] === ResponseStatus.VALID_STATUS) {
         const remuser = atob(sessionStorage.getItem('currentUser'));
         if (remuser != userInfo.userId) {
@@ -327,7 +317,6 @@ class ZebuLoginService {
         }, 1000);
       } else {
         /* TODO: Confirm what are all the kinds of error comes here. */
-        console.warn("Response error");
         let errorMsg = ErrorConstant.MIS_MATCHED_CREDENTIALS;
         if (data['emsg'] === ErrorConstant.BLOCKED_USER) {
           errorMsg = ErrorConstant.BLOCKED_USER
@@ -335,7 +324,6 @@ class ZebuLoginService {
         ZebuLoginService.setErrorState(true, errorMsg);
       }
     }, (err) => {
-      console.warn("zebuAccess err: ", err)
       ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
     });
   }
@@ -372,7 +360,6 @@ class ZebuLoginService {
   resetPassword(jsonObj: ResetPasswordModel) {
     this.zebuLoginAPIService.forgotPass(jsonObj).subscribe(
       (response) => {
-        console.warn("forgot: ", response);
         const { stat, emsg } = response;
         if (stat === ResponseStatus.VALID_STATUS) {
           ZebuLoginService.zebuLoginState.next(LOGIN_STATE.PASSWORD_RESET_SUCCESS);
@@ -383,7 +370,6 @@ class ZebuLoginService {
         ZebuLoginService.setErrorState(true, emsg);
       },
       (error) => {
-        console.warn("err in resetPassword: ", error)
         ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
       }
     );
@@ -406,7 +392,6 @@ class ZebuLoginService {
         ZebuLoginService.setErrorState(true, emsg);
       },
       (err) => {
-        console.warn("unblockUser: ", err);
         ZebuLoginService.setErrorState(true, ErrorConstant.STANDARD_ERROR);
       }
     );

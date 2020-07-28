@@ -42,7 +42,6 @@ export class UnblockUserComponent implements OnInit, OnDestroy {
     this.zebuLoginStateSubscription = ZebuLoginService
       .zebuLoginState
       .subscribe((value: string) => {
-        console.warn("PasswordResetComponent, zebuLoginStateSubscription: ", value)
         if (
           value === LOGIN_STATE.UNBLOCK_SUCCESS
         ) {

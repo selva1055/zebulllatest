@@ -41,8 +41,6 @@ export class IdentifierComponent implements OnInit, OnDestroy {
     this.zebuLoginStateSubscription = ZebuLoginService
       .zebuLoginState
       .subscribe((value: string) => {
-        console.warn("identifier, zebuLoginStateSubscription: ", value)
-        console.warn(ZebuLoginService.loginData);
         if (
           value === LOGIN_STATE.PASSWORD_SECTION
           || value === LOGIN_STATE.MPIN_SECTION

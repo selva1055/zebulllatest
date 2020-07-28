@@ -40,7 +40,6 @@ export class PasswordResetComponent implements OnInit, OnDestroy {
     this.zebuLoginStateSubscription = ZebuLoginService
       .zebuLoginState
       .subscribe((value: string) => {
-        console.warn("PasswordResetComponent, zebuLoginStateSubscription: ", value)
         if (
           value === LOGIN_STATE.PASSWORD_RESET_SUCCESS
         ) {
@@ -86,7 +85,6 @@ export class PasswordResetComponent implements OnInit, OnDestroy {
       email,
       dob,
     } = this.userInfo;
-    console.warn(this.userInfo)
     if (
       userId.length >= 4 && new RegExp("^[a-zA-Z0-9]+$").test(userId)
       && pan.length >= 4

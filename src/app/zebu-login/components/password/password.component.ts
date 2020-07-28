@@ -32,8 +32,6 @@ export class PasswordComponent implements OnInit, OnDestroy {
     private router: Router,
     private zebuLoginService: ZebuLoginService,
   ) {
-
-    console.warn(ZebuLoginService.loginData);
     /* Getting UserID from service */
     this.userInfo['userId'] = ZebuLoginService.loginData.UserID;
   }
